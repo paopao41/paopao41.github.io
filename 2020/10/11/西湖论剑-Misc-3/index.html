@@ -215,22 +215,28 @@
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h1 id="零宽字符隐写-bkcrack爆破-Docx-gfxdata隐写-Npiet-编程语言–Barbar"><a href="#零宽字符隐写-bkcrack爆破-Docx-gfxdata隐写-Npiet-编程语言–Barbar" class="headerlink" title="零宽字符隐写 bkcrack爆破 Docx gfxdata隐写 Npiet 编程语言–Barbar"></a>零宽字符隐写 bkcrack爆破 Docx gfxdata隐写 Npiet 编程语言–Barbar</h1><p>分离附件二维码后的压缩包，可以得到一个加密的压缩包，提示密钥32位，无法爆破</p>
-<blockquote>
-<p>附分离压缩包提示</p>
-</blockquote>
+<p> 附分离压缩包提示</p>
 <p><img src="/img/%E5%88%86%E7%A6%BB%E5%8E%8B%E7%BC%A9%E5%8C%85.png" alt="分离压缩包"></p>
-<blockquote>
-<p>附二维码图片</p>
-</blockquote>
+<p> 附二维码图片</p>
 <p><img src="/img/%E4%BA%8C%E7%BB%B4%E7%A0%81.png" alt="二维码图片"></p>
-<blockquote>
-<p>用COR扫描得到</p>
-</blockquote>
+<p> 用COR扫描得到</p>
 <p><img src="/img/%E6%89%AB%E6%8F%8F%E7%BB%93%E6%9E%9C.png" alt="扫描结果"></p>
-<blockquote>
 <p>复制文字</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> 密???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????码是在哪啊</span><br><span class="line">-------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">密‍‌﻿​‍﻿﻿​﻿‎‌​‍‌‏​﻿‎‍​‍‎‌​‌‍‏​‍‌‎​﻿‌﻿​‍﻿‌​‍‌‍​﻿‎‌​﻿‍‏​﻿‍﻿​‍‎﻿​‌‎﻿​‌‍‌​﻿‌‌​‌‏‌​‌‎‎​‍‌﻿​‌‍‏​‌﻿‏​‌‍‎​‍﻿‍​﻿﻿‏​‍‏‌​﻿﻿‏​‍‌‌​‍‎‍​‍‎﻿​‍‎﻿码是在哪啊</span><br></pre></td></tr></table></figure>
+<p> 在线解码得到</p>
+<p><img src="/img/0%E5%AE%BD%E5%AD%97%E7%AC%A6.png" alt="0宽字符"></p>
+<p> 得到压缩包密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">YcfVgMBUraXftwO6Cp92YBGAbyRyWNOO</span><br></pre></td></tr></table></figure>
+<p> 解压得到一个坏了的qrcode和一个word文档，先看word文档，里面内容没有什么隐写的地方，所以想到把后缀改成zip，依次查看里面的文件，在document.xml这个文件里可以发现一大串base64</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">iVBORw0KGgoAAAANSUhEUgAAAGwAAABsCAYAAACPZlfNAAAAAXNSR0IArs4c6QAAAARnQU1BAACx</span><br><span class="line">jwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAckSURBVHhe7ZHRauw6EATv///0uX4QRi7NqtIZ</span><br><span class="line">e5OQFBQL6u5xIP8d/NtpVJtZ8ttzw/bH27VAjWozS357btj+eLsWqFFtZslvzw3bH2/XAjWqzSz5</span><br><span class="line">7blh++PtWjCNtG9079meOSWWE+szp+R4q4uvNNK+0b1ne+aUWE6sz5yS460uvtJI+0b3nu2ZU2I5</span><br><span class="line">sT5zSo63uvhKI+0b3Xu2Z06J5cT6zCk53rSwzQ3uKbGcsJ9Kqs6sYX3mJjnetLDNDe4psZywn0qq</span><br><span class="line">zqxhfeYmOd60sM0N7imxnLCfSqrOrGF95iY53rSwzQ3uKbGcsJ9Kqs6sYX3mJvG/ANjBFLuX5iZJ</span><br><span class="line">81RSdWYNb4D0A4bdS3OTpHkqqTqzhjdA+gHD7qW5SdI8lVSdWcMbIP2AYffS3CRpnkqqzqyhDTto</span><br><span class="line">ObE+c0qqzuzdVN+YJVVnllSdi6P3Eg6I5cT6zCmpOrN3U31jllSdWVJ1Lo7eSzgglhPrM6ek6sze</span><br><span class="line">TfWNWVJ1ZknVuTh6L+GAWE6sz5ySqjN7N9U3ZknVmSVV5+LofRgeuBvep6Tq7Ezp7gnvUSP+C9IP</span><br><span class="line">pPA+JVVnZ0p3T3iPGvFfkH4ghfcpqTo7U7p7wnvUiP+C9AMpvE9J1dmZ0t0T3qOGNtKDXex7zFNJ</span><br><span class="line">NyfWZ07J0hnvL+Hgaex7zFNJNyfWZ07J0hnvL+Hgaex7zFNJNyfWZ07J0hnvL+Hgaex7zFNJNyfW</span><br><span class="line">Z07J0hnvJyykcH+3JM2pYX3LSdony6J9EPu7JWlODetbTtI+WRbtg9jfLUlzaljfcpL2ybJoH8T+</span><br><span class="line">bkmaU8P6lpO0T+IFP0hTqhsdieXG3XuTLJ3x/mGWAzClutGRWG7cvTfJ0hnvH2Y5AFOqGx2J5cbd</span><br><span class="line">e5MsnfH+YZYDMKW60ZFYbty9N8nSGe8nLJA0//OqYf2/f9ibNaz/9w97s4b1//5hb9aw/vF2LZik</span><br><span class="line">6symdPdd7PvMTeMT/evAJFVnNqW772LfZ24an+hfByapOrMp3X0X+z5z0/hE/zowSdWZTenuu9j3</span><br><span class="line">mZtG3B+/J/EB9GmK7Zl3JVVn1rB+Ox+/JzYg7NMU2zPvSqrOrGH9dj5+T2xA2KcptmfelVSdWcP6</span><br><span class="line">7Xz8ntiAsE9TbM+8K6k6s4b1b8j3BcK+mWJ7yw3bM6fvpvgbrg8G+2aK7S03bM+cvpvib7g+GOyb</span><br><span class="line">Kba33LA9c/puir/h+mCwb6bY3nLD9szpu1n+hvF+wgKxnNzd/245Nayv+fg90YHk5O7+d8upYX3N</span><br><span class="line">x++JDiQnd/e/W04N62s+fk90IDm5u//dcmpYX/Px+xI7kGL3urlhe+aUVJ2dxHKijfSgYfe6uWF7</span><br><span class="line">5pRUnZ3EcqKN9KBh97q5YXvmlFSdncRyoo30oGH3urlhe+aUVJ2dxHKyNNIDBu+lkqrTkVjexe5r</span><br><span class="line">Pn5PbJDCe6mk6nQklnex+5qP3xMbpPBeKqk6HYnlXey+5uP3xAYpvJdKqk5HYnkXu/+BXAvbnLDf</span><br><span class="line">9d3Y9y03bM+88PpALCfsd3039n3LDdszL7w+EMsJ+13fjX3fcsP2zAuvD8Rywn7Xd2Pft9ywPfPC</span><br><span class="line">64PBPiWWE/Z/mk9zfCP7IPuUWE7Y/2k+zfGN7IPsU2I5Yf+n+TTHN7IPsk+J5YT9n+bTLF+o/ohZ</span><br><span class="line">Yjnp9rsSy1PsHnOTLC/VaJZYTrr9rsTyFLvH3CTLSzWaJZaTbr8rsTzF7jE3yfJSjWaJ5aTb70os</span><br><span class="line">T7F7zE2yvNggJb3HPjWsz5waT/eN5cLtHwjvsU8N6zOnxtN9Y7lw+wfCe+xTw/rMqfF031gu3P6B</span><br><span class="line">8B771LA+c2o83TeOG9lB9mlKdWOnYf00f1pSdeD1wWCfplQ3dhrWT/OnJVUHXh8M9mlKdWOnYf00</span><br><span class="line">f1pSdeD1wWCfplQ3dhrWT/OnJVXn4uh9GB4g3ZywbxLLifWZd02JF/bBbk7YN4nlxPrMu6bEC/tg</span><br><span class="line">Nyfsm8RyYn3mXVPihX2wmxP2TWI5sT7zrim6sA+kOTWqzaxRbWZTunvCe5ToF/VAmFOj2swa1WY2</span><br><span class="line">pbsnvEeJflEPhDk1qs2sUW1mU7p7wnuU6Bf1QJhTo9rMGtVmNqW7J7xHyfJiA4P71BTbW07YTzWs</span><br><span class="line">r/n4PbGBwX1qiu0tJ+ynGtbXfPye2MDgPjXF9pYT9lMN62s+fk9sYHCfmmJ7ywn7qYb1P5DvC8T6</span><br><span class="line">lhu27+aG7bs5sT7zw+uDYX3LDdt3c8P23ZxYn/nh9cGwvuWG7bu5YftuTqzP/PD6YFjfcsP23dyw</span><br><span class="line">fTcn1md+eH0gzCmpOrOk6sySNKeG9ZlTo9rsJMebFraSqjNLqs4sSXNqWJ85NarNTnK8aWErqTqz</span><br><span class="line">pOrMkjSnhvWZU6Pa7CTHmxa2kqozS6rOLElzalifOTWqzU6yvOgAuUksN57ef3VuLAs7yNwklhtP</span><br><span class="line">7786N5aFHWRuEsuNp/dfnRvLwg4yN4nlxtP7r873/Pv3P5ySkc0n6rmgAAAAAElFTkSuQmCC</span><br></pre></td></tr></table></figure>
+
+<p> 在线编码得到一个png图片–aztec码</p>
+<p><img src="/img/from_base64@the-x.png" alt="aztec"></p>
+<p> 解码得到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">di`f&#123;e1c64e14db14c6bb8faabab5bd7be1dc&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 观察这个损坏的二维码的图案，实际上是一种基于颜色和像素的编程语言：piet<br>这种编程语言有在线的解释器，搜索npiet即可找到：<a href="https://www.bertnase.de/npiet/npiet-execute.php" target="_blank" rel="noopener">https://www.bertnase.de/npiet/npiet-execute.php</a><br>上传图片，选择最下面的那个选项<br>在input string处输入通过aztec码得到的那串和flag极为相似的字符串，点击运行，即可得到flag</p>
+<p><img src="/img/barbarflag.png" alt="barbarflag"></p>
 
 
                 
@@ -247,6 +253,20 @@
         </div>
     </div>
 </article>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
     <!-- Footer -->
     <hr />
