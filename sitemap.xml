@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://请选择协议头www.paopao.com/2021/03/18/%E7%BB%83%E4%B9%A0hello%20world/</loc>
+    
+    <lastmod>2021-03-18</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://请选择协议头www.paopao.com/2020/10/11/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-Misc-3/</loc>
     
     <lastmod>2020-10-13</lastmod>
@@ -25,7 +32,7 @@
 
   <url>
     <loc>https://请选择协议头www.paopao.com/</loc>
-    <lastmod>2020-10-13</lastmod>
+    <lastmod>2021-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>

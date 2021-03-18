@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="泡泡堂"/>
+        <meta property="og:title" content="i春秋 练习 web hello world"/>
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website"/>
+        <meta property="og:type" content="article"/>
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>Archives - 泡泡堂</title>
+    <title>i春秋 练习 web hello world - 泡泡堂</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -178,88 +178,81 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Archives</h1>
+                <div class="post-heading">
+                    <h1>i春秋 练习 web hello world</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2021-03-18
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2021/03/18/练习hello world/">
-        <h1 class="post-title archive">
-            i春秋 练习 web hello world
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2021-03-18
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="？"><a href="#？" class="headerlink" title="？"></a>？</h1><p> 题目给了两个文件 一个是game.pcapng    一个txt文件</p>
+<p><img src="/img/1.png" alt="txt文件"></p>
+<h3 id="？-1"><a href="#？-1" class="headerlink" title="？"></a>？</h3><blockquote>
+<p>此题难度其实不大，但是十分巧妙。考察选手的精细程度。<br>打开流量。可以发现这个题全是usbdata<br>那么先通过usb的接入流量数据首先判断。<br>我们的设备为Xbox360手柄。<br>那么开始分析下面的2.15.2的数据。<br>通过时间可以发现，中间有明显的断电。且xbox的流量在自己测试过程中可知，震动一次会有4个包出现，<br>那么通过肉眼分辨即可。能得到 分别震动<br>1 1 4 5 1 4次。<br>最后取md5<br>得到c4d038b4bed09fdb1471ef51ec3a32cd</p>
+</blockquote>
+<h3 id="？-2"><a href="#？-2" class="headerlink" title="？"></a>？</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tshark -r game.pcapng -T fields -e frame.time -e usb.capdata &gt; data.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/%E5%91%BD%E4%BB%A4.png" alt="提取流量"></p>
+<h3 id="整理流量"><a href="#整理流量" class="headerlink" title="整理流量"></a>整理流量</h3><p><img src="/img/%E6%95%B4%E7%90%86.png" alt="整理流量"></p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2020/10/11/西湖论剑-Misc-3/">
-        <h1 class="post-title archive">
-            西湖论剑-Misc-3
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2020-10-11
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2020/10/11/西湖论剑-Misc-2/">
-        <h1 class="post-title archive">
-            西湖论剑-Misc-2
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2020-10-11
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2020/10/10/西湖论剑-misc-1/">
-        <h1 class="post-title archive">
-            西湖论剑-misc-1
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2020-10-10
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
     <!-- Footer -->
     <hr />

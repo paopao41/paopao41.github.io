@@ -6,7 +6,7 @@
   <link href="https://请选择协议头www.paopao.com/atom.xml" rel="self"/>
   
   <link href="https://请选择协议头www.paopao.com/"/>
-  <updated>2020-10-13T03:08:31.163Z</updated>
+  <updated>2021-03-18T13:21:07.781Z</updated>
   <id>https://请选择协议头www.paopao.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>i春秋 练习 web hello world</title>
+    <link href="https://请选择协议头www.paopao.com/2021/03/18/%E7%BB%83%E4%B9%A0hello%20world/"/>
+    <id>https://请选择协议头www.paopao.com/2021/03/18/%E7%BB%83%E4%B9%A0hello%20world/</id>
+    <published>2021-03-17T16:00:00.000Z</published>
+    <updated>2021-03-18T13:21:07.781Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="？"><a href="#？" class="headerlink" title="？"></a>？</h1><p> 题目给了两个文件 一个是game.pcapng    一个txt文件</p><p><img src="/img/1.png" alt="txt文件"></p><h3 id="？-1"><a href="#？-1" class="headerlink" title="？"></a>？</h3><blockquote><p>此题难度其实不大，但是十分巧妙。考察选手的精细程度。<br>打开流量。可以发现这个题全是usbdata<br>那么先通过usb的接入流量数据首先判断。<br>我们的设备为Xbox360手柄。<br>那么开始分析下面的2.15.2的数据。<br>通过时间可以发现，中间有明显的断电。且xbox的流量在自己测试过程中可知，震动一次会有4个包出现，<br>那么通过肉眼分辨即可。能得到 分别震动<br>1 1 4 5 1 4次。<br>最后取md5<br>得到c4d038b4bed09fdb1471ef51ec3a32cd</p></blockquote><h3 id="？-2"><a href="#？-2" class="headerlink" title="？"></a>？</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tshark -r game.pcapng -T fields -e frame.time -e usb.capdata &gt; data.txt</span><br></pre></td></tr></table></figure><p><img src="/img/%E5%91%BD%E4%BB%A4.png" alt="提取流量"></p><h3 id="整理流量"><a href="#整理流量" class="headerlink" title="整理流量"></a>整理流量</h3><p><img src="/img/%E6%95%B4%E7%90%86.png" alt="整理流量"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;？&quot;&gt;&lt;a href=&quot;#？&quot; class=&quot;headerlink&quot; title=&quot;？&quot;&gt;&lt;/a&gt;？&lt;/h1&gt;&lt;p&gt; 题目给了两个文件 一个是game.pcapng    一个txt文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/1.png&quot; alt=&quot;txt文</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>西湖论剑-Misc-3</title>
