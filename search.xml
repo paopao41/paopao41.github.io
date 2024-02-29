@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>pcie_ltssm</title>
-    <url>/2024/02/28/pcie_ltssm/</url>
+    <url>/pcie_ltssm.html</url>
     <content><![CDATA[<h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h6><p>PCIe LTSSM ，全名为Link Training and Status State Machine，主要是用在PCIe中Physical Layer Link的初始化与设置，让device之间建立起沟通桥梁。整个LTSSM状态机总共有11个state，每个state又可以分为多个substates，所以整个状态机的跳转可以说是非常的错综且复杂且完善。</p>
 <p><img src="/../image/image-20240228141706297.png" alt="image-20240228141706297"></p>
 <h6 id="训练顺序"><a href="#训练顺序" class="headerlink" title="训练顺序"></a>训练顺序</h6><p>Traning Sequences Order Sets主要有两种，分别为TS1和TS2，主要目的是为了建立Bitlock和S ymbol Lock和交换Physical Layer的参数。当Link运作在2.5 GT&#x2F;s(Gen 1)或5 GT&#x2F;s(Gen 2)时，TS1&#x2F;TS2使用8b&#x2F;10b编码，8 GT&#x2F;s则使用128b&#x2F;130b编码。</p>
