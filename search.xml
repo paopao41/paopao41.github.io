@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>X86平台简称</title>
+    <url>/X86%E5%B9%B3%E5%8F%B0%E7%AE%80%E7%A7%B0.html</url>
+    <content><![CDATA[<h6 id="PCH"><a href="#PCH" class="headerlink" title="PCH"></a>PCH</h6><p>Platform Controller Hub，是intel公司的集成南桥，具有ICH（负责连接PCI总线，是Intel南桥芯片系列名称）的全部功能，又具有原来MCH（内存控制中心，负责连接CPU,AGP总线和内存。相当于北桥芯片）。</p>
+<p>从Intel5系列芯片组开始，已经看不到北桥芯片的踪影，几乎均和CPU集成。只剩下PCH的芯片用来支持外设。而PCH芯片部分虽然比与原来的南桥芯片功能上更为丰富，但性质大体相同，与CPU之间不需要交换太多数据，因此连接总线采用DMI技术。</p>
+<p><img src="/../image/image-20240229175828436.png" alt="image-20240229175828436"></p>
+<center>PCH内部框图</center>
+
+<h6 id="SMBUS"><a href="#SMBUS" class="headerlink" title="SMBUS"></a>SMBUS</h6><p>PCH提供系统管理总线SMBus主机控制器以及SMBus接口，主机控制器为处理器提供机制以启动与SMBus外围设备的通信。</p>
+<h6 id="DMI"><a href="#DMI" class="headerlink" title="DMI"></a>DMI</h6><p>直接媒体接口，是CPU和PCH之间芯片到芯片的连接。DMI2.0单通道单向传输速率到达5GT&#x2F;s。</p>
+<p><img src="/../image/image-20240229175620009.png" alt="image-20240229175620009"></p>
+<center>图 典型的系统基于Intel®Core™i7处理器</center>]]></content>
+  </entry>
+  <entry>
     <title>pcie_ltssm</title>
     <url>/pcie_ltssm.html</url>
     <content><![CDATA[<h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h6><p>PCIe LTSSM ，全名为Link Training and Status State Machine，主要是用在PCIe中Physical Layer Link的初始化与设置，让device之间建立起沟通桥梁。整个LTSSM状态机总共有11个state，每个state又可以分为多个substates，所以整个状态机的跳转可以说是非常的错综且复杂且完善。</p>
