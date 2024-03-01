@@ -95,4 +95,26 @@
 </ul>
 ]]></content>
   </entry>
+  <entry>
+    <title>usb和pcie总线对比</title>
+    <url>/usb_pcie_bus.html</url>
+    <content><![CDATA[<h5 id="几种类型usb控制器"><a href="#几种类型usb控制器" class="headerlink" title="几种类型usb控制器"></a>几种类型usb控制器</h5><h6 id="OHCI-Open-Host-Controller-Interface"><a href="#OHCI-Open-Host-Controller-Interface" class="headerlink" title="OHCI(Open Host Controller Interface)"></a>OHCI(Open Host Controller Interface)</h6><p>是支持USB1.1的标准，它不仅是针对USB，还支持一些其它接口，比如Apple的火线接口，与UHCI相比，OHCI的硬件复杂，硬件做的事情更多，所以实现对应的软件驱动的任务，就相对比较简单，主要用于非X86的USB。</p>
+<h6 id="UHCI-Universal-Host-Controller-Interface"><a href="#UHCI-Universal-Host-Controller-Interface" class="headerlink" title="UHCI(Universal Host Controller Interface)"></a>UHCI(Universal Host Controller Interface)</h6><p>是Intel主导的对USB1.0，1.1的接口标准，与OHCI不兼容，UHCI的软件驱动任务重，需要做的比较复杂，但可以使用较便宜的USB控制器，Inter和VIA使用UHCI，其余硬件提供商使用OHCI</p>
+<h6 id="EHCI-Enhanced-Host-Controller-Interface"><a href="#EHCI-Enhanced-Host-Controller-Interface" class="headerlink" title="EHCI(Enhanced Host Controller Interface)"></a>EHCI(Enhanced Host Controller Interface)</h6><p>是Intel主导的对USB2.0的接口标准，仅提供USB2.0的高速功能。</p>
+<h6 id="XHCI-eXtensible-Host-Controller-Interface"><a href="#XHCI-eXtensible-Host-Controller-Interface" class="headerlink" title="XHCI(eXtensible Host Controller Interface)"></a>XHCI(eXtensible Host Controller Interface)</h6><p>是最新最火的USB3.0的接口标准，它在速度、节能、虚拟化等方面都比前面3中有了较大的提高。xHCI 支持所有种类速度的USB设备（USB 3.0 SuperSpeed, USB 2.0 Low-, Full-, and High-speed, USB 1.1 Low- and Full-speed）。xHCI的目的是为了替换前面3中（UHCI&#x2F;OHCI&#x2F;EHCI）。</p>
+<blockquote>
+<p>AHCI (Serial ATA Advanced Host Controller Interface)，串行ATA高级主控接口，允许存储驱动程序启用高级串行ATA功能。AHCI通过包含一个PCI BAR（基址寄存器），来实现原生SATA功能。（ATA是存储设备的标准，AHCI是控制器的接口）</p>
+</blockquote>
+<h5 id="PCI-和-PCIE-比较"><a href="#PCI-和-PCIE-比较" class="headerlink" title="PCI 和 PCIE 比较"></a>PCI 和 PCIE 比较</h5><p>PCI将较于PCIE有两个大的区别。</p>
+<ul>
+<li>PCI的数据是并行的，有32bit数据地址线，典型时钟133MHz，而PCIE的数据线是串行的，没有单独的时钟线（注意，100M参考时钟是给pcie控制器使用的），这样速率可以上GHz。</li>
+<li>PCI是多点共联，通俗讲就是各个器件在物理上共同占用数据线，就会造成时钟频率上不去，延时增加等等，还需要考虑负载因素。而PCIE是point to point，一个口和一个口直接对接，所以负载小，频率高。如果很多设备想像PCI一样挂在一起给CPU用，加入switch即可。</li>
+</ul>
+<h5 id="PCIE-USB"><a href="#PCIE-USB" class="headerlink" title="PCIE &amp;&amp; USB"></a>PCIE &amp;&amp; USB</h5><p>PCIe，USB，以太网。都是串行总线。传输距离逐渐变远。<strong>PCIe 整个组网里网络报文的流动靠的是硬件驱动的</strong>。软件不参与报文的驱动流动。USB，需要软件来参与报文的驱动和流动。所以<strong>USB整个组网里还包括了软件部分</strong>。也就是USB软件协议栈。以太网 整个组网里也是，需要软件协议栈参与以太网组网里的报文流动。</p>
+<p>PCIE是和USB都是高速总线，拓扑都是类似的树形结构，都是以CPU为ROOT，系统中外挂其他的外设作为树的终端节点，给CPU控制和使用，且二者在物理层，数据链路层，速率等各个方面都高度相似。但是USB的作用仅仅是数据的传输的数据线，PCIE想做的事情远远复杂于USB。</p>
+<p>以arm体系架构为例， CPU之外的外设，想要干些什么？除了被CPU访问控制寄存器（被动IO访问），被CPU或DMA访问SRAM（被动MEM访问）之外，还希望能访问系统内存（主动MEM访问），上报中断（中断消息）,流量控制和仲裁（多外设数据流的流量控制），cache一致性（cache等功能）。</p>
+<p>可以看到，功能很多，方向也是多向的，不仅仅是CPU到设备，也可能是设备到DDR及其他设备。这一切PCIE都做进去了，比如你的设备可以通过message包上报中断，PCIE的RC会把中断以物理连线的方式给arm的GIC中断控制器。</p>
+<p>反观USB呢？他的核心仅仅是数据传输，比如BULK transfer是U盘这种大数据传输；INTR transfer是给鼠标这种小数据传输；ISO transfer是给摄像头这种等时传输。数据的搬运通道而已，并不涉及计算体系架构。</p>
+]]></content>
+  </entry>
 </search>
