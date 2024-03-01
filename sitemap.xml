@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://paopao41.github.io/archives/index.html</loc>
+    
+    <lastmod>2024-03-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopao41.github.io/categories/index.html</loc>
+    
+    <lastmod>2024-03-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://paopao41.github.io/usb_pcie_bus.html</loc>
     
     <lastmod>2024-03-01</lastmod>
@@ -13,7 +31,16 @@
   <url>
     <loc>https://paopao41.github.io/X86%E5%B9%B3%E5%8F%B0%E7%AE%80%E7%A7%B0.html</loc>
     
-    <lastmod>2024-02-29</lastmod>
+    <lastmod>2024-03-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopao41.github.io/pcie_ltssm.html</loc>
+    
+    <lastmod>2024-03-01</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -38,34 +65,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/archives/index.html</loc>
-    
-    <lastmod>2024-02-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://paopao41.github.io/categories/index.html</loc>
-    
-    <lastmod>2024-02-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://paopao41.github.io/about/index.html</loc>
-    
-    <lastmod>2024-02-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://paopao41.github.io/pcie_ltssm.html</loc>
     
     <lastmod>2024-02-29</lastmod>
     
@@ -83,5 +83,19 @@
 
   
 
+  
+  <url>
+    <loc>https://paopao41.github.io/categories/server/</loc>
+    <lastmod>2024-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopao41.github.io/categories/pcie/</loc>
+    <lastmod>2024-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>

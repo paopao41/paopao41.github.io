@@ -12,6 +12,9 @@
 <h6 id="DMI"><a href="#DMI" class="headerlink" title="DMI"></a>DMI</h6><p>直接媒体接口，是CPU和PCH之间芯片到芯片的连接。DMI2.0单通道单向传输速率到达5GT&#x2F;s。</p>
 <p><img src="/../image/image-20240229175620009.png" alt="image-20240229175620009"></p>
 <center>图 典型的系统基于Intel®Core™i7处理器</center>]]></content>
+      <categories>
+        <category>server</category>
+      </categories>
   </entry>
   <entry>
     <title>pcie_ltssm</title>
@@ -94,6 +97,9 @@
 </li>
 </ul>
 ]]></content>
+      <categories>
+        <category>pcie</category>
+      </categories>
   </entry>
   <entry>
     <title>usb和pcie总线对比</title>
@@ -116,5 +122,8 @@
 <p>可以看到，功能很多，方向也是多向的，不仅仅是CPU到设备，也可能是设备到DDR及其他设备。这一切PCIE都做进去了，比如你的设备可以通过message包上报中断，PCIE的RC会把中断以物理连线的方式给arm的GIC中断控制器。</p>
 <p>反观USB呢？他的核心仅仅是数据传输，比如BULK transfer是U盘这种大数据传输；INTR transfer是给鼠标这种小数据传输；ISO transfer是给摄像头这种等时传输。数据的搬运通道而已，并不涉及计算体系架构。</p>
 ]]></content>
+      <categories>
+        <category>pcie</category>
+      </categories>
   </entry>
 </search>
