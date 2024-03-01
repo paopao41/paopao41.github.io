@@ -1,3 +1,4 @@
+https://paopao41.github.io/linux-time-Cfun.html
 https://paopao41.github.io/archives/index.html
 https://paopao41.github.io/categories/index.html
 https://paopao41.github.io/usb_pcie_bus.html
@@ -7,5 +8,6 @@ https://paopao41.github.io/tags/index.html
 https://paopao41.github.io/home/index.html
 https://paopao41.github.io/about/index.html
 https://paopao41.github.io/
-https://paopao41.github.io/categories/server/
+https://paopao41.github.io/categories/linux/
 https://paopao41.github.io/categories/pcie/
+https://paopao41.github.io/categories/server/

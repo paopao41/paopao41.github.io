@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://paopao41.github.io/linux-time-Cfun.html</loc>
+    
+    <lastmod>2024-03-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://paopao41.github.io/archives/index.html</loc>
     
     <lastmod>2024-03-01</lastmod>
@@ -85,7 +94,7 @@
 
   
   <url>
-    <loc>https://paopao41.github.io/categories/server/</loc>
+    <loc>https://paopao41.github.io/categories/linux/</loc>
     <lastmod>2024-03-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -93,6 +102,13 @@
   
   <url>
     <loc>https://paopao41.github.io/categories/pcie/</loc>
+    <lastmod>2024-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopao41.github.io/categories/server/</loc>
     <lastmod>2024-03-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
