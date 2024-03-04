@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Category_of_IP_address_ABCDE</title>
+    <url>/Category-of-IP-address-ABCDE.html</url>
+    <content><![CDATA[<h5 id="IP地址类型"><a href="#IP地址类型" class="headerlink" title="IP地址类型"></a>IP地址类型</h5><p>每个IP地址包括两个标识ID，网络ID和主机ID，根据网络ID的不同分为A,B,C,D,E,类地址。</p>
+<p>其中A类、B类、和C类这三类地址用于TCP&#x2F;IP节点，其它两类D类和E类被用于特殊用途。</p>
+<p>A、B、C三类IP地址的特征：当将IP地址写成二进制形式时，A类地址的第一位总是O，B类地址的前两位总是10，C类地址的前三位总是110。</p>
+<h5 id="A类"><a href="#A类" class="headerlink" title="A类"></a>A类</h5><p>一个A类IP地址由1字节的网络地址和3字节主机地址组成，网络地址的最高位必须是“0”， 地址范围从1.0.0.0 到126.0.0.0。可用的A类网络有126个，每个网络能容纳1亿多个主机。</p>
+<p>⑴ A类地址第1字节为网络地址，其它3个字节为主机地址。</p>
+<p>⑵ A类地址范围：1.0.0.1—126.255.255.254</p>
+<p>⑶ A类地址中的私有地址和保留地址：</p>
+<p>​	① 10.X.X.X是私有地址（所谓的私有地址就是在互联网上不使用，而被用在局域网络中的地址）</p>
+<p>​	② 127.X.X.X是保留地址，用做循环测试用的</p>
+<h5 id="B类"><a href="#B类" class="headerlink" title="B类"></a>B类</h5><p>一个B类IP地址由2个字节的网络地址和2个字节的主机地址组成，网络地址的最高位必须是“10”，地址范围从128.0.0.0到191.255.255.255。可用的B类网络有16382个，每个网络能容纳6万多个主机 。</p>
+<p>⑴ B类地址第1字节和第2字节为网络地址，其它2个字节为主机地址。</p>
+<p>⑵ B类地址范围：128.0.0.1—191.255.255.254。</p>
+<p>⑶ B类地址的私有地址和保留地址</p>
+<p>​	① 172.16.0.0—172.31.255.255是私有地址</p>
+<p>​	② 169.254.X.X是保留地址。如果你的IP地址是自动获取IP地址，而你在网络上又没有找到可用的DHCP服务器。就会得到其中一个IP。</p>
+<h5 id="C类"><a href="#C类" class="headerlink" title="C类"></a>C类</h5><p>一个C类IP地址由3字节的网络地址和1字节的主机地址组成，网络地址的最高位必须是“110”。范围从192.0.0.0到223.255.255.255。C类网络可达209万余个，每个网络能容纳254个主机。</p>
+<p>⑴ C类地址第1字节、第2字节和第3个字节为网络地址，第4个个字节为主机地址。另外第1个字节的前三位固定为110。</p>
+<p>⑵ C类地址范围：192.0.0.1—223.255.255.254。</p>
+<p>⑶ C类地址中的私有地址：192.168.X.X是私有地址。</p>
+<h5 id="D类"><a href="#D类" class="headerlink" title="D类"></a>D类</h5><p>D类IP地址第一个字节以“1110”开始，它是一个专门保留的地址。它并不指向特定的网络，目前这一类地址被用在多点广播（Multicast）中。多点广播地址用来一次寻址一组计算机，它标识共享同一协议的一组计算机。</p>
+<p>⑴ D类地址不分网络地址和主机地址，它的第1个字节的前四位固定为1110。</p>
+<p>⑵ D类地址范围：224.0.0.1—239.255.255.254</p>
+<h5 id="E类"><a href="#E类" class="headerlink" title="E类"></a>E类</h5><p>以“11100”开始，为将来使用保留。</p>
+<p>全零（“0．0．0．0”）地址对应于当前主机。全“1”的IP地址（“255．255．255．255”）是当前子网的广播地址。</p>
+<p>⑴ E类地址也不分网络地址和主机地址，它的第1个字节的前五位固定为11110。</p>
+<p>⑵ E类地址范围：240.0.0.1—255.255.255.254</p>
+]]></content>
+      <categories>
+        <category>network</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>X86平台简称</title>
+    <url>/X86%E5%B9%B3%E5%8F%B0%E7%AE%80%E7%A7%B0.html</url>
+    <content><![CDATA[<h6 id="PCH"><a href="#PCH" class="headerlink" title="PCH"></a>PCH</h6><p>Platform Controller Hub，是intel公司的集成南桥，具有ICH（负责连接PCI总线，是Intel南桥芯片系列名称）的全部功能，又具有原来MCH（内存控制中心，负责连接CPU,AGP总线和内存。相当于北桥芯片）。</p>
+<p>从Intel5系列芯片组开始，已经看不到北桥芯片的踪影，几乎均和CPU集成。只剩下PCH的芯片用来支持外设。而PCH芯片部分虽然比与原来的南桥芯片功能上更为丰富，但性质大体相同，与CPU之间不需要交换太多数据，因此连接总线采用DMI技术。</p>
+<p><img src="/../image/image-20240229175828436.png" alt="image-20240229175828436"></p>
+<center>PCH内部框图</center>
+
+<h6 id="SMBUS"><a href="#SMBUS" class="headerlink" title="SMBUS"></a>SMBUS</h6><p>PCH提供系统管理总线SMBus主机控制器以及SMBus接口，主机控制器为处理器提供机制以启动与SMBus外围设备的通信。</p>
+<h6 id="DMI"><a href="#DMI" class="headerlink" title="DMI"></a>DMI</h6><p>直接媒体接口，是CPU和PCH之间芯片到芯片的连接。DMI2.0单通道单向传输速率到达5GT&#x2F;s。</p>
+<p><img src="/../image/image-20240229175620009.png" alt="image-20240229175620009"></p>
+<center>图 典型的系统基于Intel®Core™i7处理器</center>]]></content>
+      <categories>
+        <category>server</category>
+      </categories>
+  </entry>
+  <entry>
     <title>linux_time_Cfun</title>
     <url>/linux-time-Cfun.html</url>
     <content><![CDATA[<h3 id="linux下时间处理"><a href="#linux下时间处理" class="headerlink" title="linux下时间处理"></a>linux下时间处理</h3><h4 id="格林尼治时间"><a href="#格林尼治时间" class="headerlink" title="格林尼治时间"></a>格林尼治时间</h4><ul>
@@ -34,47 +84,6 @@
 ]]></content>
       <categories>
         <category>linux</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>usb和pcie总线对比</title>
-    <url>/usb_pcie_bus.html</url>
-    <content><![CDATA[<h5 id="几种类型usb控制器"><a href="#几种类型usb控制器" class="headerlink" title="几种类型usb控制器"></a>几种类型usb控制器</h5><h6 id="OHCI-Open-Host-Controller-Interface"><a href="#OHCI-Open-Host-Controller-Interface" class="headerlink" title="OHCI(Open Host Controller Interface)"></a>OHCI(Open Host Controller Interface)</h6><p>是支持USB1.1的标准，它不仅是针对USB，还支持一些其它接口，比如Apple的火线接口，与UHCI相比，OHCI的硬件复杂，硬件做的事情更多，所以实现对应的软件驱动的任务，就相对比较简单，主要用于非X86的USB。</p>
-<h6 id="UHCI-Universal-Host-Controller-Interface"><a href="#UHCI-Universal-Host-Controller-Interface" class="headerlink" title="UHCI(Universal Host Controller Interface)"></a>UHCI(Universal Host Controller Interface)</h6><p>是Intel主导的对USB1.0，1.1的接口标准，与OHCI不兼容，UHCI的软件驱动任务重，需要做的比较复杂，但可以使用较便宜的USB控制器，Inter和VIA使用UHCI，其余硬件提供商使用OHCI</p>
-<h6 id="EHCI-Enhanced-Host-Controller-Interface"><a href="#EHCI-Enhanced-Host-Controller-Interface" class="headerlink" title="EHCI(Enhanced Host Controller Interface)"></a>EHCI(Enhanced Host Controller Interface)</h6><p>是Intel主导的对USB2.0的接口标准，仅提供USB2.0的高速功能。</p>
-<h6 id="XHCI-eXtensible-Host-Controller-Interface"><a href="#XHCI-eXtensible-Host-Controller-Interface" class="headerlink" title="XHCI(eXtensible Host Controller Interface)"></a>XHCI(eXtensible Host Controller Interface)</h6><p>是最新最火的USB3.0的接口标准，它在速度、节能、虚拟化等方面都比前面3中有了较大的提高。xHCI 支持所有种类速度的USB设备（USB 3.0 SuperSpeed, USB 2.0 Low-, Full-, and High-speed, USB 1.1 Low- and Full-speed）。xHCI的目的是为了替换前面3中（UHCI&#x2F;OHCI&#x2F;EHCI）。</p>
-<blockquote>
-<p>AHCI (Serial ATA Advanced Host Controller Interface)，串行ATA高级主控接口，允许存储驱动程序启用高级串行ATA功能。AHCI通过包含一个PCI BAR（基址寄存器），来实现原生SATA功能。（ATA是存储设备的标准，AHCI是控制器的接口）</p>
-</blockquote>
-<h5 id="PCI-和-PCIE-比较"><a href="#PCI-和-PCIE-比较" class="headerlink" title="PCI 和 PCIE 比较"></a>PCI 和 PCIE 比较</h5><p>PCI将较于PCIE有两个大的区别。</p>
-<ul>
-<li>PCI的数据是并行的，有32bit数据地址线，典型时钟133MHz，而PCIE的数据线是串行的，没有单独的时钟线（注意，100M参考时钟是给pcie控制器使用的），这样速率可以上GHz。</li>
-<li>PCI是多点共联，通俗讲就是各个器件在物理上共同占用数据线，就会造成时钟频率上不去，延时增加等等，还需要考虑负载因素。而PCIE是point to point，一个口和一个口直接对接，所以负载小，频率高。如果很多设备想像PCI一样挂在一起给CPU用，加入switch即可。</li>
-</ul>
-<h5 id="PCIE-USB"><a href="#PCIE-USB" class="headerlink" title="PCIE &amp;&amp; USB"></a>PCIE &amp;&amp; USB</h5><p>PCIe，USB，以太网。都是串行总线。传输距离逐渐变远。<strong>PCIe 整个组网里网络报文的流动靠的是硬件驱动的</strong>。软件不参与报文的驱动流动。USB，需要软件来参与报文的驱动和流动。所以<strong>USB整个组网里还包括了软件部分</strong>。也就是USB软件协议栈。以太网 整个组网里也是，需要软件协议栈参与以太网组网里的报文流动。</p>
-<p>PCIE是和USB都是高速总线，拓扑都是类似的树形结构，都是以CPU为ROOT，系统中外挂其他的外设作为树的终端节点，给CPU控制和使用，且二者在物理层，数据链路层，速率等各个方面都高度相似。但是USB的作用仅仅是数据的传输的数据线，PCIE想做的事情远远复杂于USB。</p>
-<p>以arm体系架构为例， CPU之外的外设，想要干些什么？除了被CPU访问控制寄存器（被动IO访问），被CPU或DMA访问SRAM（被动MEM访问）之外，还希望能访问系统内存（主动MEM访问），上报中断（中断消息）,流量控制和仲裁（多外设数据流的流量控制），cache一致性（cache等功能）。</p>
-<p>可以看到，功能很多，方向也是多向的，不仅仅是CPU到设备，也可能是设备到DDR及其他设备。这一切PCIE都做进去了，比如你的设备可以通过message包上报中断，PCIE的RC会把中断以物理连线的方式给arm的GIC中断控制器。</p>
-<p>反观USB呢？他的核心仅仅是数据传输，比如BULK transfer是U盘这种大数据传输；INTR transfer是给鼠标这种小数据传输；ISO transfer是给摄像头这种等时传输。数据的搬运通道而已，并不涉及计算体系架构。</p>
-]]></content>
-      <categories>
-        <category>pcie</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>X86平台简称</title>
-    <url>/X86%E5%B9%B3%E5%8F%B0%E7%AE%80%E7%A7%B0.html</url>
-    <content><![CDATA[<h6 id="PCH"><a href="#PCH" class="headerlink" title="PCH"></a>PCH</h6><p>Platform Controller Hub，是intel公司的集成南桥，具有ICH（负责连接PCI总线，是Intel南桥芯片系列名称）的全部功能，又具有原来MCH（内存控制中心，负责连接CPU,AGP总线和内存。相当于北桥芯片）。</p>
-<p>从Intel5系列芯片组开始，已经看不到北桥芯片的踪影，几乎均和CPU集成。只剩下PCH的芯片用来支持外设。而PCH芯片部分虽然比与原来的南桥芯片功能上更为丰富，但性质大体相同，与CPU之间不需要交换太多数据，因此连接总线采用DMI技术。</p>
-<p><img src="/../image/image-20240229175828436.png" alt="image-20240229175828436"></p>
-<center>PCH内部框图</center>
-
-<h6 id="SMBUS"><a href="#SMBUS" class="headerlink" title="SMBUS"></a>SMBUS</h6><p>PCH提供系统管理总线SMBus主机控制器以及SMBus接口，主机控制器为处理器提供机制以启动与SMBus外围设备的通信。</p>
-<h6 id="DMI"><a href="#DMI" class="headerlink" title="DMI"></a>DMI</h6><p>直接媒体接口，是CPU和PCH之间芯片到芯片的连接。DMI2.0单通道单向传输速率到达5GT&#x2F;s。</p>
-<p><img src="/../image/image-20240229175620009.png" alt="image-20240229175620009"></p>
-<center>图 典型的系统基于Intel®Core™i7处理器</center>]]></content>
-      <categories>
-        <category>server</category>
       </categories>
   </entry>
   <entry>
@@ -157,6 +166,31 @@
 </ul>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>pcie</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>usb和pcie总线对比</title>
+    <url>/usb_pcie_bus.html</url>
+    <content><![CDATA[<h5 id="几种类型usb控制器"><a href="#几种类型usb控制器" class="headerlink" title="几种类型usb控制器"></a>几种类型usb控制器</h5><h6 id="OHCI-Open-Host-Controller-Interface"><a href="#OHCI-Open-Host-Controller-Interface" class="headerlink" title="OHCI(Open Host Controller Interface)"></a>OHCI(Open Host Controller Interface)</h6><p>是支持USB1.1的标准，它不仅是针对USB，还支持一些其它接口，比如Apple的火线接口，与UHCI相比，OHCI的硬件复杂，硬件做的事情更多，所以实现对应的软件驱动的任务，就相对比较简单，主要用于非X86的USB。</p>
+<h6 id="UHCI-Universal-Host-Controller-Interface"><a href="#UHCI-Universal-Host-Controller-Interface" class="headerlink" title="UHCI(Universal Host Controller Interface)"></a>UHCI(Universal Host Controller Interface)</h6><p>是Intel主导的对USB1.0，1.1的接口标准，与OHCI不兼容，UHCI的软件驱动任务重，需要做的比较复杂，但可以使用较便宜的USB控制器，Inter和VIA使用UHCI，其余硬件提供商使用OHCI</p>
+<h6 id="EHCI-Enhanced-Host-Controller-Interface"><a href="#EHCI-Enhanced-Host-Controller-Interface" class="headerlink" title="EHCI(Enhanced Host Controller Interface)"></a>EHCI(Enhanced Host Controller Interface)</h6><p>是Intel主导的对USB2.0的接口标准，仅提供USB2.0的高速功能。</p>
+<h6 id="XHCI-eXtensible-Host-Controller-Interface"><a href="#XHCI-eXtensible-Host-Controller-Interface" class="headerlink" title="XHCI(eXtensible Host Controller Interface)"></a>XHCI(eXtensible Host Controller Interface)</h6><p>是最新最火的USB3.0的接口标准，它在速度、节能、虚拟化等方面都比前面3中有了较大的提高。xHCI 支持所有种类速度的USB设备（USB 3.0 SuperSpeed, USB 2.0 Low-, Full-, and High-speed, USB 1.1 Low- and Full-speed）。xHCI的目的是为了替换前面3中（UHCI&#x2F;OHCI&#x2F;EHCI）。</p>
+<blockquote>
+<p>AHCI (Serial ATA Advanced Host Controller Interface)，串行ATA高级主控接口，允许存储驱动程序启用高级串行ATA功能。AHCI通过包含一个PCI BAR（基址寄存器），来实现原生SATA功能。（ATA是存储设备的标准，AHCI是控制器的接口）</p>
+</blockquote>
+<h5 id="PCI-和-PCIE-比较"><a href="#PCI-和-PCIE-比较" class="headerlink" title="PCI 和 PCIE 比较"></a>PCI 和 PCIE 比较</h5><p>PCI将较于PCIE有两个大的区别。</p>
+<ul>
+<li>PCI的数据是并行的，有32bit数据地址线，典型时钟133MHz，而PCIE的数据线是串行的，没有单独的时钟线（注意，100M参考时钟是给pcie控制器使用的），这样速率可以上GHz。</li>
+<li>PCI是多点共联，通俗讲就是各个器件在物理上共同占用数据线，就会造成时钟频率上不去，延时增加等等，还需要考虑负载因素。而PCIE是point to point，一个口和一个口直接对接，所以负载小，频率高。如果很多设备想像PCI一样挂在一起给CPU用，加入switch即可。</li>
+</ul>
+<h5 id="PCIE-USB"><a href="#PCIE-USB" class="headerlink" title="PCIE &amp;&amp; USB"></a>PCIE &amp;&amp; USB</h5><p>PCIe，USB，以太网。都是串行总线。传输距离逐渐变远。<strong>PCIe 整个组网里网络报文的流动靠的是硬件驱动的</strong>。软件不参与报文的驱动流动。USB，需要软件来参与报文的驱动和流动。所以<strong>USB整个组网里还包括了软件部分</strong>。也就是USB软件协议栈。以太网 整个组网里也是，需要软件协议栈参与以太网组网里的报文流动。</p>
+<p>PCIE是和USB都是高速总线，拓扑都是类似的树形结构，都是以CPU为ROOT，系统中外挂其他的外设作为树的终端节点，给CPU控制和使用，且二者在物理层，数据链路层，速率等各个方面都高度相似。但是USB的作用仅仅是数据的传输的数据线，PCIE想做的事情远远复杂于USB。</p>
+<p>以arm体系架构为例， CPU之外的外设，想要干些什么？除了被CPU访问控制寄存器（被动IO访问），被CPU或DMA访问SRAM（被动MEM访问）之外，还希望能访问系统内存（主动MEM访问），上报中断（中断消息）,流量控制和仲裁（多外设数据流的流量控制），cache一致性（cache等功能）。</p>
+<p>可以看到，功能很多，方向也是多向的，不仅仅是CPU到设备，也可能是设备到DDR及其他设备。这一切PCIE都做进去了，比如你的设备可以通过message包上报中断，PCIE的RC会把中断以物理连线的方式给arm的GIC中断控制器。</p>
+<p>反观USB呢？他的核心仅仅是数据传输，比如BULK transfer是U盘这种大数据传输；INTR transfer是给鼠标这种小数据传输；ISO transfer是给摄像头这种等时传输。数据的搬运通道而已，并不涉及计算体系架构。</p>
 ]]></content>
       <categories>
         <category>pcie</category>
