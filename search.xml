@@ -172,6 +172,21 @@
       </categories>
   </entry>
   <entry>
+    <title>syslog</title>
+    <url>/syslog.html</url>
+    <content><![CDATA[<h5 id="syslog-conf介绍"><a href="#syslog-conf介绍" class="headerlink" title="syslog.conf介绍"></a>syslog.conf介绍</h5><p>syslog采用可配置的、统一的系统登记程序，随时从系统各处接受log请求，然后根据**&#x2F;etc&#x2F;syslog.conf**中的预先设定把log信息写入相应文件中、邮寄给特 定用户或者直接以消息的方式发往控制台。ps：不同平台下的文件不一定相同，可以在etc下grep &#x2F;var&#x2F;log&#x2F;messages等来查看文件名。</p>
+<h5 id="具体示例"><a href="#具体示例" class="headerlink" title="具体示例"></a>具体示例</h5><p>*.err;kern.debug;daemon.notice;mail.crit [TAB] &#x2F;var&#x2F;adm&#x2F;messages</p>
+<p>这行中的“action”就是我们常关心的那个&#x2F;var&#x2F;adm&#x2F;messages文件，输出到它的信息源头“selector”是：</p>
+<p>*.err – 所有的一般错误信息；</p>
+<p>kern.debug – 核心产生的调试信息；</p>
+<p>daemon.notice – 守护进程的注意信息；</p>
+<p>mail.crit – 邮件系统的关键警告信息</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title>usb和pcie总线对比</title>
     <url>/usb_pcie_bus.html</url>
     <content><![CDATA[<h5 id="几种类型usb控制器"><a href="#几种类型usb控制器" class="headerlink" title="几种类型usb控制器"></a>几种类型usb控制器</h5><h6 id="OHCI-Open-Host-Controller-Interface"><a href="#OHCI-Open-Host-Controller-Interface" class="headerlink" title="OHCI(Open Host Controller Interface)"></a>OHCI(Open Host Controller Interface)</h6><p>是支持USB1.1的标准，它不仅是针对USB，还支持一些其它接口，比如Apple的火线接口，与UHCI相比，OHCI的硬件复杂，硬件做的事情更多，所以实现对应的软件驱动的任务，就相对比较简单，主要用于非X86的USB。</p>

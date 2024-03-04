@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://paopao41.github.io/syslog.html</loc>
+    
+    <lastmod>2024-03-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://paopao41.github.io/Category-of-IP-address-ABCDE.html</loc>
     
     <lastmod>2024-03-04</lastmod>
