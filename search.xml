@@ -211,4 +211,31 @@
         <category>pcie</category>
       </categories>
   </entry>
+  <entry>
+    <title>git_svn_opt</title>
+    <url>/git-svn-opt.html</url>
+    <content><![CDATA[<h2 id="git-svn常用操作"><a href="#git-svn常用操作" class="headerlink" title="git svn常用操作"></a>git svn常用操作</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add xxx 											// git添加文件</span><br><span class="line"></span><br><span class="line">git commit -m &quot;add syslog &amp;&amp; ipaddress&quot;					// git提交本地</span><br><span class="line"></span><br><span class="line">git push												// git提交远端</span><br></pre></td></tr></table></figure>
+
+<h3 id="svn"><a href="#svn" class="headerlink" title="svn"></a>svn</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">svn merge -r HEAD:12098 .        // svn回退到某个版本</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+  </entry>
+  <entry>
+    <title>makefile</title>
+    <url>/makefile.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>step_motor</title>
+    <url>/step-motor.html</url>
+    <content><![CDATA[<ul>
+<li><strong>相数</strong>：是指电机内部的线圈组数，如4相就是有ABCD四组线圈。</li>
+<li><strong>拍数</strong>：是指完成一个循环的通电次数。例如按照ABCD顺序完成一个循环，就称为单4拍。相邻的两个线圈也可以同时通电，例如可以按照AB-BC-CD-DA方式通电，这种就称为双4拍。注意，对同一个电机来说，单四拍与双四拍每拍转动的角度是相同的。还有一种方式是单个线圈与双个线圈轮流通电，就是A-AB-B-BC-C-CD-D-DA，这样就是四相八拍，这种方式工作时每拍转动的角度是4拍的一半。</li>
+<li><strong>励磁方式</strong>：分为全步励磁和半步励磁，其中全步励磁又有一相励磁（在没每一瞬间步进电机只有一个线圈导通，步进电机旋转1.8度）和二相励磁（在每一瞬间，步进电机有两个线圈同时导通1.8度）；半步励磁又称一二相励磁（线圈交替导通）。</li>
+<li><strong>步距角</strong>：对应一个脉冲信号，电机转子转过的角位移用θ表示。θ&#x3D;360度（转子齿数J*运行拍数），以常规二、四相，转子齿为50齿电机为例。四拍运行时步距角为θ&#x3D;360度&#x2F;（50*4）&#x3D;1.8度（俗称整步），八拍运行时步距角为θ&#x3D;360度&#x2F;（50*8）&#x3D;0.9度（俗称半步）。</li>
+</ul>
+]]></content>
+  </entry>
 </search>
