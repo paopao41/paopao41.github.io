@@ -21,19 +21,22 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="相数：是指电机内部的线圈组数，如4相就是有ABCD四组线圈。  拍数：是指完成一个循环的通电次数。例如按照ABCD顺序完成一个循环，就称为单4拍。相邻的两个线圈也可以同时通电，例如可以按照AB-BC-CD-DA方式通电，这种就称为双4拍。注意，对同一个电机来说，单四拍与双四拍每拍转动的角度是相同的。还有一种方式是单个线圈与双个线圈轮流通电，就是A-AB-B-BC-C-CD-D-DA，这样就是四相">
+    <meta name="description" content="步进电机工作原理本质：靠励磁绕组产生的旋转合磁场带动转子做同步运动。由于励磁绕组通电之后产生的磁通量正比于电流大小，所以只要控制通过流过各个绕组的电流大小和方向就可以控制步进电机各个绕组产生的合磁场大小和方向。  相数：是指电机内部的线圈组数，如4相就是有ABCD四组线圈。  拍数：是指完成一个循环的通电次数。例如按照ABCD顺序完成一个循环，就称为单4拍。相邻的两个线圈也可以同时通电，例如可以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="step_motor">
 <meta property="og:url" content="https://paopao41.github.io/step-motor.html">
 <meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
-<meta property="og:description" content="相数：是指电机内部的线圈组数，如4相就是有ABCD四组线圈。  拍数：是指完成一个循环的通电次数。例如按照ABCD顺序完成一个循环，就称为单4拍。相邻的两个线圈也可以同时通电，例如可以按照AB-BC-CD-DA方式通电，这种就称为双4拍。注意，对同一个电机来说，单四拍与双四拍每拍转动的角度是相同的。还有一种方式是单个线圈与双个线圈轮流通电，就是A-AB-B-BC-C-CD-D-DA，这样就是四相">
+<meta property="og:description" content="步进电机工作原理本质：靠励磁绕组产生的旋转合磁场带动转子做同步运动。由于励磁绕组通电之后产生的磁通量正比于电流大小，所以只要控制通过流过各个绕组的电流大小和方向就可以控制步进电机各个绕组产生的合磁场大小和方向。  相数：是指电机内部的线圈组数，如4相就是有ABCD四组线圈。  拍数：是指完成一个循环的通电次数。例如按照ABCD顺序完成一个循环，就称为单4拍。相邻的两个线圈也可以同时通电，例如可以">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20240328203237016.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20240328203617119.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20240328204102555.png">
 <meta property="og:image" content="https://paopao41.github.io/image/image-20240325084615541.png">
 <meta property="article:published_time" content="2024-03-14T06:37:02.000Z">
-<meta property="article:modified_time" content="2024-03-28T12:03:03.686Z">
+<meta property="article:modified_time" content="2024-03-28T12:49:23.283Z">
 <meta property="article:author" content="paopao">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://paopao41.github.io/image/image-20240325084615541.png">
+<meta name="twitter:image" content="https://paopao41.github.io/image/image-20240328203237016.png">
 
 
 <link rel="canonical" href="https://paopao41.github.io/step-motor.html">
@@ -115,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SPWM"><span class="nav-number">1.</span> <span class="nav-text">SPWM</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#PWM"><span class="nav-number">1.0.1.</span> <span class="nav-text">PWM</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SPWM-%E8%BD%AF%E4%BB%B6%E7%94%9F%E6%88%90"><span class="nav-number">1.1.</span> <span class="nav-text">SPWM 软件生成</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.2.</span> <span class="nav-text">定时器相关</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#DSP%E6%8E%A7%E5%88%B6%E4%B8%89%E7%9B%B8%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E7%94%A8%E4%B8%80%E5%AF%B9%E4%BA%92%E8%A1%A5%E7%9A%84PWM%E6%B3%A2%E5%BD%A2%E6%9D%A5%E6%8E%A7%E5%88%B6%EF%BC%9F"><span class="nav-number">1.1.3.</span> <span class="nav-text">DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SPWM-%E8%84%89%E5%86%B2%E5%AE%BD%E5%BA%A6%E8%B0%83%E5%88%B6%E6%8A%80%E6%9C%AF"><span class="nav-number">1.</span> <span class="nav-text">SPWM 脉冲宽度调制技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PWM"><span class="nav-number">1.1.</span> <span class="nav-text">PWM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%87%E9%99%8D%E9%A2%91%E6%8E%A7%E5%88%B6%E6%8A%80%E6%9C%AF"><span class="nav-number">1.2.</span> <span class="nav-text">升降频控制技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SPWM-%E8%BD%AF%E4%BB%B6%E7%94%9F%E6%88%90"><span class="nav-number">1.3.</span> <span class="nav-text">SPWM 软件生成</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3"><span class="nav-number">1.4.</span> <span class="nav-text">定时器相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DSP%E6%8E%A7%E5%88%B6%E4%B8%89%E7%9B%B8%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E7%94%A8%E4%B8%80%E5%AF%B9%E4%BA%92%E8%A1%A5%E7%9A%84PWM%E6%B3%A2%E5%BD%A2%E6%9D%A5%E6%8E%A7%E5%88%B6%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +131,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -205,7 +208,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-28 20:03:03" itemprop="dateModified" datetime="2024-03-28T20:03:03+08:00">2024-03-28</time>
+      <time title="修改时间：2024-03-28 20:49:23" itemprop="dateModified" datetime="2024-03-28T20:49:23+08:00">2024-03-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -213,7 +216,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/misc/" itemprop="url" rel="index"><span itemprop="name">misc</span></a>
+          <a href="/categories/miscg/" itemprop="url" rel="index"><span itemprop="name">miscg</span></a>
         </span>
     </span>
 
@@ -231,14 +234,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
+      <span>2.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -249,6 +252,8 @@
     
     
     <div class="post-body" itemprop="articleBody"><ul>
+<li><p><strong>步进电机工作原理本质：</strong>靠励磁绕组产生的旋转合磁场带动转子做同步运动。由于励磁绕组通电之后产生的磁通量正比于电流大小，所以只要控制通过流过各个绕组的电流大小和方向就可以控制步进电机各个绕组产生的合磁场大小和方向。</p>
+</li>
 <li><p><strong>相数</strong>：是指电机内部的线圈组数，如4相就是有ABCD四组线圈。</p>
 </li>
 <li><p><strong>拍数</strong>：是指完成一个循环的通电次数。例如按照ABCD顺序完成一个循环，就称为单4拍。相邻的两个线圈也可以同时通电，例如可以按照AB-BC-CD-DA方式通电，这种就称为双4拍。注意，对同一个电机来说，单四拍与双四拍每拍转动的角度是相同的。还有一种方式是单个线圈与双个线圈轮流通电，就是A-AB-B-BC-C-CD-D-DA，这样就是四相八拍，这种方式工作时每拍转动的角度是4拍的一半。</p>
@@ -257,13 +262,25 @@
 </li>
 <li><p><strong>步距角</strong>：对应一个脉冲信号，电机转子转过的角位移用θ表示。θ&#x3D;360度（转子齿数J*运行拍数），以常规二、四相，转子齿为50齿电机为例。四拍运行时步距角为θ&#x3D;360度&#x2F;（50*4）&#x3D;1.8度（俗称整步），八拍运行时步距角为θ&#x3D;360度&#x2F;（50*8）&#x3D;0.9度（俗称半步）。</p>
 </li>
-<li><p><strong>细分：</strong>通过等角度有规律的插入大小相等的电流合成向量，从而减小合成磁势的步距角。力矩越大，步进角越大。</p>
+<li><p><strong>细分：</strong>通过等角度有规律的插入大小相等的电流合成向量，从而减小合成磁势的步距角。力矩越大，步进角越大。正弦细分驱动的本质实际上就是通过绕组A和绕组B的电流分别按照正，余弦规律变化，使得合成电流矢量圆周均匀旋转。</p>
+</li>
+<li><p><strong>升降速控制：</strong>运动速度根据运动参数当中的细分数和步数做选择。细分数约大平均运动速度越慢，反之越快。比如细分1024，相同的步数速度则会很慢。</p>
+</li>
+<li><p><strong>合成电流：</strong>以两相电机为例，如果控制绕组的电流按照正余弦变化，那么绕组合成电流矢量或者磁场矢量将以恒定大小，均匀角度做圆周运动。使得力矩恒定，步距角均匀。</p>
+<p><img src="/../image/image-20240328203237016.png" alt="image-20240328203237016"></p>
 </li>
 </ul>
-<h4 id="SPWM"><a href="#SPWM" class="headerlink" title="SPWM"></a>SPWM</h4><h6 id="PWM"><a href="#PWM" class="headerlink" title="PWM"></a>PWM</h6><p>即pulse width modulation，脉冲宽度调制，实际上就是周期的矩形波，然后每个周期的占空比都可以自己设置就叫做调制。</p>
+<h3 id="SPWM-脉冲宽度调制技术"><a href="#SPWM-脉冲宽度调制技术" class="headerlink" title="SPWM 脉冲宽度调制技术"></a>SPWM 脉冲宽度调制技术</h3><h4 id="PWM"><a href="#PWM" class="headerlink" title="PWM"></a>PWM</h4><p><u>目前一般采用脉冲宽度调制（PWM）技术来精确控制绕组电流的大小。主要是因为冲量相等而形状不同的窄脉冲加在具有惯性的环 节上,效果基本相同。步进电机的绕组由于电流不会突变，具有明显的惯性 环节,因此可以用 PWM 技术来控制电机绕组的电流大小。</u></p>
+<p>如图所示。周期脉冲 信号的导通阶段对绕组进行充电，截止阶段绕组通过续流回路 进行放电。当脉冲的频率和宽度达到一定值时，绕组的电流将基本是一个恒定值， 并带有微小的纹波信号。当脉冲宽度改变时，绕组的电流也将发生变化。所以 PWM 可用来精确控制绕组电流的大小。</p>
+<p><img src="/../image/image-20240328203617119.png" alt="image-20240328203617119"></p>
+<p>即pulse width modulation，脉冲宽度调制，实际上就是周期的矩形波，然后每个周期的占空比都可以自己设置就叫做调制。</p>
 <p>相比SPWM，多加了一个S，即sin，正弦脉宽调制。还是这个周期的矩形波，但不同的是占空比不是固定的，而是按照正弦规律变化的。</p>
 <p>SPWM一般由三角波（载波）和正弦波（调制波）比较而成，硬件生成方法是将三角波和正弦波加入比较器得到，软件是通过定时器或Epwm模块，按照中央计数模式生成三角波，经CCR比较模块动作产生对于高电平，即SPWM。</p>
-<h5 id="SPWM-软件生成"><a href="#SPWM-软件生成" class="headerlink" title="SPWM 软件生成"></a>SPWM 软件生成</h5><p>利用单片机来生成PWM，然后让占空比按照正弦规律变化。</p>
+<h4 id="升降频控制技术"><a href="#升降频控制技术" class="headerlink" title="升降频控制技术"></a>升降频控制技术</h4><p>步进电机从静止启动时，由于惯性和摩擦力矩的作用，如果转动频率突变太 大可能会丢步甚至堵转；当步进电机在高速运转时如果突然停下来，则可能会过 冲，这些情况都会导致运动不平稳以及定位精度不高。所以引出了升降频控制技术。</p>
+<p>由于步进电机升速过程当中输出力矩明显减少，因而步进电机的升速曲线的 设计尤为重要。步进电机的升速过程一般由突变频率和加速曲线过程。</p>
+<p>实际上步进电机转动频率不是连续变化的而是离散的，因而升速曲线一般 是指运行频率与脉冲数的关系曲线。由于步进电机<u>降速过程中输出力矩增大，因而对降速曲线的要求比升速曲线 低得多，只要保证不因为惯性而过冲超步即可</u>。</p>
+<p><img src="/../image/image-20240328204102555.png" alt="image-20240328204102555"></p>
+<h4 id="SPWM-软件生成"><a href="#SPWM-软件生成" class="headerlink" title="SPWM 软件生成"></a>SPWM 软件生成</h4><p>利用单片机来生成PWM，然后让占空比按照正弦规律变化。</p>
 <h6 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h6><ul>
 <li><p>生成载波，比如要生成一个10KHZ的三角波，将计数器设置加减计数、周期设为1&#x2F;10K</p>
 </li>
@@ -274,9 +291,9 @@
 <p>要注意因为是单极性调制，spwm和三角载波都是大于0的。在单相全桥逆变电路中，开关管交替导通时输出电压Ud自然会倒过来为负，Ud经过滤波就是一个正弦波。</p>
 </li>
 </ul>
-<h6 id="定时器相关"><a href="#定时器相关" class="headerlink" title="定时器相关"></a>定时器相关</h6><p>一般电机控制都是边沿对齐模式，FOC电机一般使用中心对齐模式。</p>
+<h4 id="定时器相关"><a href="#定时器相关" class="headerlink" title="定时器相关"></a>定时器相关</h4><p>一般电机控制都是边沿对齐模式，FOC电机一般使用中心对齐模式。</p>
 <p>边沿对齐模式 –&gt; 在递增计数模式下，计数器从0递增到ARR值，然后重新从0开始计数并产生计数器上溢事件。</p>
-<h6 id="DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？"><a href="#DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？" class="headerlink" title="DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？"></a>DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？</h6><p>对于某种特定的电机来说，每一相位都有高位的MOS和低位的MOS，要驱动这两个MOS还不能同时开和同时关，必须上开下关或者下开上关，所以要用互补的PWM来控制。如果是用专门的MOS驱动芯片驱动的话，是可以用一路PWM的。</p>
+<h4 id="DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？"><a href="#DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？" class="headerlink" title="DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？"></a>DSP控制三相步进电机时，为什么会用一对互补的PWM波形来控制？</h4><p>对于某种特定的电机来说，每一相位都有高位的MOS和低位的MOS，要驱动这两个MOS还不能同时开和同时关，必须上开下关或者下开上关，所以要用互补的PWM来控制。如果是用专门的MOS驱动芯片驱动的话，是可以用一路PWM的。</p>
 
     </div>
 
@@ -330,14 +347,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">12k</span>
+    <span title="站点总字数">13k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">21 分钟</span>
+    <span title="站点阅读时长">23 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">

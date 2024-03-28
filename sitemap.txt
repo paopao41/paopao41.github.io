@@ -1,4 +1,5 @@
 https://paopao41.github.io/step-motor.html
+https://paopao41.github.io/linux-udev.html
 https://paopao41.github.io/networkcard-cfg.html
 https://paopao41.github.io/linux-cmd.html
 https://paopao41.github.io/git-svn-opt.html
@@ -19,4 +20,4 @@ https://paopao41.github.io/categories/network/
 https://paopao41.github.io/categories/server/
 https://paopao41.github.io/categories/linux/
 https://paopao41.github.io/categories/pcie/
-https://paopao41.github.io/categories/misc/
+https://paopao41.github.io/categories/miscg/

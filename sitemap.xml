@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://paopao41.github.io/linux-udev.html</loc>
+    
+    <lastmod>2024-03-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://paopao41.github.io/networkcard-cfg.html</loc>
     
     <lastmod>2024-03-28</lastmod>
@@ -185,7 +194,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/categories/misc/</loc>
+    <loc>https://paopao41.github.io/categories/miscg/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
