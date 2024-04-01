@@ -51,6 +51,17 @@
       </categories>
   </entry>
   <entry>
+    <title>git_svn_opt</title>
+    <url>/git-svn-opt.html</url>
+    <content><![CDATA[<h2 id="git-svn常用操作"><a href="#git-svn常用操作" class="headerlink" title="git svn常用操作"></a>git svn常用操作</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add xxx 											// git添加文件</span><br><span class="line"></span><br><span class="line">git commit -m &quot;add syslog &amp;&amp; ipaddress&quot;					// git提交本地</span><br><span class="line"></span><br><span class="line">git push												// git提交远端</span><br></pre></td></tr></table></figure>
+
+<h3 id="svn"><a href="#svn" class="headerlink" title="svn"></a>svn</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">svn merge -r HEAD:12098 .        // svn回退到某个版本</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+  </entry>
+  <entry>
     <title>linux_time_Cfun</title>
     <url>/linux-time-Cfun.html</url>
     <content><![CDATA[<h3 id="linux下时间处理"><a href="#linux下时间处理" class="headerlink" title="linux下时间处理"></a>linux下时间处理</h3><h4 id="格林尼治时间"><a href="#格林尼治时间" class="headerlink" title="格林尼治时间"></a>格林尼治时间</h4><ul>
@@ -81,6 +92,68 @@
 <li>要对特定的时钟设置时间，可以调用clock_settime函数</li>
 <li>我们需要适当的特权来更改时钟值，但是有些时钟是不能修改的</li>
 </ul>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>linux-cmd</title>
+    <url>/linux-cmd.html</url>
+    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
+<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
+<ul>
+<li><p>不允许给目录创建硬链接。	</p>
+</li>
+<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
+</li>
+</ul>
+<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
+<ul>
+<li><p>软链接的链接数目不会增加；</p>
+</li>
+<li><p>可以给目录增加链接。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>linux-udev</title>
+    <url>/linux-udev.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>makefile</title>
+    <url>/makefile.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>networkcard-cfg</title>
+    <url>/networkcard-cfg.html</url>
+    <content><![CDATA[<h4 id="Linux下网卡命名规则"><a href="#Linux下网卡命名规则" class="headerlink" title="Linux下网卡命名规则"></a>Linux下网卡命名规则</h4><h5 id="rename-规则"><a href="#rename-规则" class="headerlink" title="rename 规则"></a>rename 规则</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">step1 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),</span><br><span class="line">是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡；</span><br><span class="line"></span><br><span class="line">step2 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），</span><br><span class="line">且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span><br><span class="line"></span><br><span class="line">step3, 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称;</span><br><span class="line"></span><br><span class="line">step4，udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名;</span><br><span class="line"></span><br><span class="line">强调：这个step顺序是在我们没有自定义自己的rules的前提下，如果用户自定义了自己的rules，则用户自定义为优先级最高</span><br></pre></td></tr></table></figure>
+
+<h5 id="传统命名"><a href="#传统命名" class="headerlink" title="传统命名"></a>传统命名</h5><p>centos6之前采用的都是传统的命名方式，如eth0,1…</p>
+<h5 id="可预测的命名"><a href="#可预测的命名" class="headerlink" title="可预测的命名"></a>可预测的命名</h5><p>cenos7之后提供了可预测性的网卡命名方式。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">如果从BIOS中能够取到可用的，板载网卡的索引号，则使用这个索引号命名，例如: eno1，如不能则尝试2</span><br><span class="line">如果从BIOS中能够取到可以用的，网卡所在的PCI-E热插拔插槽(注：pci槽位号)的索引号，则使用这个索引号命名，例如: ens1，如不能则尝试3</span><br><span class="line">如果能拿到设备所连接的物理位置（PCI总线号+槽位号？）信息，则使用这个信息命名，例如:enp2s0，如不能则尝试4</span><br><span class="line">传统的kernel命名方法，例如: eth0，这种命名方法的结果不可预知的，即可能第二块网卡对应eth0，第一块网卡对应eth1</span><br><span class="line">使用网卡的MAC地址来命名，这个方法一般不使用</span><br></pre></td></tr></table></figure>
+
+<h5 id="自定义规则"><a href="#自定义规则" class="headerlink" title="自定义规则"></a>自定义规则</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在用户没有自定义rules文件前提下，step1中的网卡命名方式也可认为是一种用户自定义的网卡命名，</span><br><span class="line">即在/etc/sysconfig/network-scripts/ifcfg-xx 文件，xx就是这个网卡名称，文件内容中体现MAC_ADDRESS、NAME，</span><br><span class="line">这种情况下，则会按照配置文件中指定的名称来命名网卡</span><br><span class="line"></span><br><span class="line">如果用户自定义了rules文件，放在/etc/udev/rules.d/目录下，则这个优先级是最高的；</span><br><span class="line">比1中ifcfg-xx方式优先级更高，但是如果两者不一致，则在重启network服务时，会依据ifcfg-xx，</span><br><span class="line">所以用户不应该同时采用里两种方式给同一个网卡命不同的名称</span><br></pre></td></tr></table></figure>
+
+<p>udevadm info &#x2F;sys&#x2F;class&#x2F;net&#x2F;网卡名</p>
+<p>可以显示此时这个网卡的pcie信息，vendor_id,idbus等等信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@Bai5gc:/sys/class/net/eth1# udevadm info /sys/class/net/eth1</span><br><span class="line">P: /devices/pci0000:00/0000:00:02.2/0000:03:00.0/net/eth1</span><br><span class="line">E: DEVPATH=/devices/pci0000:00/0000:00:02.2/0000:03:00.0/net/eth1</span><br><span class="line">E: ID_BUS=pci</span><br><span class="line">E: ID_MODEL_FROM_DATABASE=Ethernet Connection X552 10 GbE Backplane</span><br><span class="line">E: ID_MODEL_ID=0x15ab</span><br><span class="line">E: ID_NET_DRIVER=ixgbe</span><br><span class="line">E: ID_NET_LINK_FILE=/lib/systemd/network/99-default.link</span><br><span class="line">E: ID_NET_NAME_MAC=enxb4a9fca897e7</span><br><span class="line">E: ID_NET_NAME_ONBOARD=eno3</span><br><span class="line">E: ID_NET_NAME_PATH=enp3s0f0</span><br><span class="line">E: ID_PATH=pci-0000:03:00.0</span><br><span class="line">E: ID_PATH_TAG=pci-0000_03_00_0</span><br><span class="line">E: ID_PCI_CLASS_FROM_DATABASE=Network controller</span><br><span class="line">E: ID_PCI_SUBCLASS_FROM_DATABASE=Ethernet controller</span><br><span class="line">E: ID_VENDOR_FROM_DATABASE=Intel Corporation</span><br><span class="line">E: ID_VENDOR_ID=0x8086</span><br><span class="line">E: IFINDEX=3</span><br><span class="line">E: INTERFACE=eth1</span><br><span class="line">E: SUBSYSTEM=net</span><br><span class="line">E: SYSTEMD_ALIAS=/sys/subsystem/net/devices/eth1</span><br><span class="line">E: TAGS=:systemd:</span><br><span class="line">E: USEC_INITIALIZED=5061037</span><br><span class="line">E: net.ifnames=0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ps：解释一下pci地址</p>
+<ul>
+<li><code>/pci0000:00</code>：这是根 PCIe 控制器的地址，<code>pci0000:00</code> 表示根控制器。</li>
+<li><code>/0000:00:02.2</code>：这是连接到根控制器的第一个 PCIe 设备的地址。<code>0000:00:02.2</code> 表示这个设备的总线号、设备号和功能号。</li>
+<li><code>/0000:03:00.0</code>：这是连接到第一个 PCIe 设备的下一个 PCIe 设备的地址。<code>0000:03:00.0</code> 表示新设备的总线号、设备号和功能号。</li>
+</ul>
+</blockquote>
+<h5 id="命名rule-d"><a href="#命名rule-d" class="headerlink" title="命名rule.d"></a>命名rule.d</h5><h6 id="biosdevname和net-ifnames两种命名规范"><a href="#biosdevname和net-ifnames两种命名规范" class="headerlink" title="biosdevname和net.ifnames两种命名规范"></a>biosdevname和net.ifnames两种命名规范</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net.ifnames的命名规范为:设备类型+设备位置+数字</span><br><span class="line"></span><br><span class="line">设备类型：</span><br><span class="line"></span><br><span class="line">en 表示Ethernet</span><br><span class="line">wl 表示WLAN</span><br><span class="line">ww 表示无线广域网WWAN</span><br><span class="line"></span><br><span class="line">实际的例子:</span><br><span class="line"></span><br><span class="line">eno1 板载网卡</span><br><span class="line">enp0s2  pci网卡</span><br><span class="line">ens33   pci网卡</span><br><span class="line">wlp3s0  PCI无线网卡</span><br><span class="line">wwp0s29f7u2i2   4G modem</span><br><span class="line">wlp0s2f1u4u1   连接在USB Hub上的无线网卡</span><br><span class="line">enx78e7d1ea46da pci网卡</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">biosdevname的命名规范为: 要么是em开头，要么是p开头</span><br><span class="line">实际的例子:</span><br><span class="line"></span><br><span class="line">em1 板载网卡</span><br><span class="line">p3p4 pci网卡</span><br><span class="line">p3p4_1 虚拟网卡</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>linux</category>
@@ -172,60 +245,26 @@
       </categories>
   </entry>
   <entry>
-    <title>syslog</title>
-    <url>/syslog.html</url>
-    <content><![CDATA[<h5 id="syslog-conf介绍"><a href="#syslog-conf介绍" class="headerlink" title="syslog.conf介绍"></a>syslog.conf介绍</h5><p>syslog采用可配置的、统一的系统登记程序，随时从系统各处接受log请求，然后根据**&#x2F;etc&#x2F;syslog.conf**中的预先设定把log信息写入相应文件中、邮寄给特 定用户或者直接以消息的方式发往控制台。ps：不同平台下的文件不一定相同，可以在etc下grep &#x2F;var&#x2F;log&#x2F;messages等来查看文件名。</p>
-<h5 id="具体示例"><a href="#具体示例" class="headerlink" title="具体示例"></a>具体示例</h5><p>*.err;kern.debug;daemon.notice;mail.crit [TAB] &#x2F;var&#x2F;adm&#x2F;messages</p>
-<p>这行中的“action”就是我们常关心的那个&#x2F;var&#x2F;adm&#x2F;messages文件，输出到它的信息源头“selector”是：</p>
-<p>*.err – 所有的一般错误信息；</p>
-<p>kern.debug – 核心产生的调试信息；</p>
-<p>daemon.notice – 守护进程的注意信息；</p>
-<p>mail.crit – 邮件系统的关键警告信息</p>
+    <title>mcu_cold_restart_question</title>
+    <url>/mcu-cold-restart-question.html</url>
+    <content><![CDATA[<h4 id="转载-–-单片机冷启动下重启问题分析"><a href="#转载-–-单片机冷启动下重启问题分析" class="headerlink" title="转载 –&gt; 单片机冷启动下重启问题分析"></a>转载 –&gt; 单片机冷启动下重启问题分析</h4><h4 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h4><p>客户反馈MCU作为他们产品的控制芯片，在常温下工作是正常的，但是稍微冷冻下就会启动失败，重现率100%，再次加热或者恢复到常温又能正常工作。</p>
+<h4 id="问题分析解决"><a href="#问题分析解决" class="headerlink" title="问题分析解决"></a>问题分析解决</h4><p>从客户描述上来看，猜测很大可能是硬件问题，因此带了一块STM32F030-NUCLEO板过去，想着做个芯片交换测试看下结果。</p>
+<p>到达客户现场，了解到客户只是使用了内部高速晶振HSI。先使用示波器抓下VDD和NRST的启动波形，在常温下发现并没有明显异常。于是做低温测试，为了对比，基于STM32F030-NUCLEO板了写了一个只使用内部高速晶振HSI , 翻转一个LED灯的程序。</p>
+<p>结果显示，STM32F030-NUCLEO板能正常启动，而客户的板子问题重现，再次测量其VDD和NRST的启动波形，发现VDD上电过程中有稍微不规则波形，但感觉不至于导致MCU无法启动。考虑到当前客户板子上的MCU跑的是客户自己的程序，为了统一对比，将客户板子上的MCU烧录成NUCELO板上一样的程序，再次做低温测试，结果显示客户的板子也能正常启动！</p>
+<p>于是可以初步断定，此问题与客户自己的软件有关，而与外围电路无关。</p>
+<p>接下来对比测试代码与客户自己的代码，并再次做低温测试验证结果，最终发现客户的时钟树配置有个参数有问题：</p>
+<p><img src="/../image/image-20240329095021747.png" alt="image-20240329095021747"></p>
+<p>如上红色代码所示，RCC_OSCILLATORTYPE_NONE改成RCC_OSCILLATORTYPE_HSI后。问题现象明显改善，但经过测试，发现偶尔还会启动不正常的时候。但相对于之前100%可以重现的现象，至少说明之前软件的失误至少是一个因素。</p>
+<p>现在问题变成偶尔重现，已经向前迈进一大步。接下来怀疑与硬件有关了，理由是同样的测试软件跑在用户的板子上和跑在NUCELO软件上的结果不一致。</p>
+<p>因此接下来首先对于用户的板子的外围电路与STM32F030-NUCLEO板子的外围电路，发现客户MCU的BOOT0引脚是悬空的，于是加上一个外部10K下拉电阻，再次测试问题不再重现。</p>
+<p>至此，问题解决！</p>
+<h4 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h4><p>回过头来看这个问题，发现客户知道MCU使用的是HSI，可偏偏在代码中配置时钟树时使用的晶振类型却是NONE !这种问题现在看来是非常低级的问题，但在代码量大，或者代码迭代的过程中，之前写代码的人离职，后续接手的工程师又不能全盘了解所有代码的情况下时就会变得束手无策，当碰到此类莫名其妙的问题，特别是无法判断到底是硬件问题还是软件问题的时候，保持清晰的思路是非常重要的。（另外，对于这个现象，<strong>看门狗</strong>也是可能是一种思路。比如说冷启动的时候导致看门狗模块异常不能及时喂狗所导致的重启）。继续补充一下。<strong>在低温环境，要注意晶振负载电容随温度的变化</strong>。</p>
+<p>这里我需要强调的是，最有效的解决方法就是<strong>快速找到一个 “参照物”</strong>，而ST的DEMO板和示例代码就是在硬件上和软件上扮演这样一个参照物的角色。<strong>可以通过MCU交换测试来判断是不是芯片外围电路的问题或者芯片问题</strong>，可以使用Cube库下的示例代码，对比其运行结果来判断是否与软件有关。<mark>先从大方向明确问题到底是与硬件有关还是与软件有关，然后再做下一步分析</mark>，这种方法希望读者能有效掌握。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>转载这篇文章，对思路进行一下开阔，有的问题可能看似与软件无关，实则确实息息相关。遇到异常的时候，首先分析<mark>时钟，电源，复位</mark>是否都是正常，不论是从软件还是从硬件上来确认。</p>
 ]]></content>
       <categories>
-        <category>linux</category>
+        <category>mcu_misc</category>
       </categories>
-  </entry>
-  <entry>
-    <title>usb和pcie总线对比</title>
-    <url>/usb_pcie_bus.html</url>
-    <content><![CDATA[<h5 id="几种类型usb控制器"><a href="#几种类型usb控制器" class="headerlink" title="几种类型usb控制器"></a>几种类型usb控制器</h5><h6 id="OHCI-Open-Host-Controller-Interface"><a href="#OHCI-Open-Host-Controller-Interface" class="headerlink" title="OHCI(Open Host Controller Interface)"></a>OHCI(Open Host Controller Interface)</h6><p>是支持USB1.1的标准，它不仅是针对USB，还支持一些其它接口，比如Apple的火线接口，与UHCI相比，OHCI的硬件复杂，硬件做的事情更多，所以实现对应的软件驱动的任务，就相对比较简单，主要用于非X86的USB。</p>
-<h6 id="UHCI-Universal-Host-Controller-Interface"><a href="#UHCI-Universal-Host-Controller-Interface" class="headerlink" title="UHCI(Universal Host Controller Interface)"></a>UHCI(Universal Host Controller Interface)</h6><p>是Intel主导的对USB1.0，1.1的接口标准，与OHCI不兼容，UHCI的软件驱动任务重，需要做的比较复杂，但可以使用较便宜的USB控制器，Inter和VIA使用UHCI，其余硬件提供商使用OHCI</p>
-<h6 id="EHCI-Enhanced-Host-Controller-Interface"><a href="#EHCI-Enhanced-Host-Controller-Interface" class="headerlink" title="EHCI(Enhanced Host Controller Interface)"></a>EHCI(Enhanced Host Controller Interface)</h6><p>是Intel主导的对USB2.0的接口标准，仅提供USB2.0的高速功能。</p>
-<h6 id="XHCI-eXtensible-Host-Controller-Interface"><a href="#XHCI-eXtensible-Host-Controller-Interface" class="headerlink" title="XHCI(eXtensible Host Controller Interface)"></a>XHCI(eXtensible Host Controller Interface)</h6><p>是最新最火的USB3.0的接口标准，它在速度、节能、虚拟化等方面都比前面3中有了较大的提高。xHCI 支持所有种类速度的USB设备（USB 3.0 SuperSpeed, USB 2.0 Low-, Full-, and High-speed, USB 1.1 Low- and Full-speed）。xHCI的目的是为了替换前面3中（UHCI&#x2F;OHCI&#x2F;EHCI）。</p>
-<blockquote>
-<p>AHCI (Serial ATA Advanced Host Controller Interface)，串行ATA高级主控接口，允许存储驱动程序启用高级串行ATA功能。AHCI通过包含一个PCI BAR（基址寄存器），来实现原生SATA功能。（ATA是存储设备的标准，AHCI是控制器的接口）</p>
-</blockquote>
-<h5 id="PCI-和-PCIE-比较"><a href="#PCI-和-PCIE-比较" class="headerlink" title="PCI 和 PCIE 比较"></a>PCI 和 PCIE 比较</h5><p>PCI将较于PCIE有两个大的区别。</p>
-<ul>
-<li>PCI的数据是并行的，有32bit数据地址线，典型时钟133MHz，而PCIE的数据线是串行的，没有单独的时钟线（注意，100M参考时钟是给pcie控制器使用的），这样速率可以上GHz。</li>
-<li>PCI是多点共联，通俗讲就是各个器件在物理上共同占用数据线，就会造成时钟频率上不去，延时增加等等，还需要考虑负载因素。而PCIE是point to point，一个口和一个口直接对接，所以负载小，频率高。如果很多设备想像PCI一样挂在一起给CPU用，加入switch即可。</li>
-</ul>
-<h5 id="PCIE-USB"><a href="#PCIE-USB" class="headerlink" title="PCIE &amp;&amp; USB"></a>PCIE &amp;&amp; USB</h5><p>PCIe，USB，以太网。都是串行总线。传输距离逐渐变远。<strong>PCIe 整个组网里网络报文的流动靠的是硬件驱动的</strong>。软件不参与报文的驱动流动。USB，需要软件来参与报文的驱动和流动。所以<strong>USB整个组网里还包括了软件部分</strong>。也就是USB软件协议栈。以太网 整个组网里也是，需要软件协议栈参与以太网组网里的报文流动。</p>
-<p>PCIE是和USB都是高速总线，拓扑都是类似的树形结构，都是以CPU为ROOT，系统中外挂其他的外设作为树的终端节点，给CPU控制和使用，且二者在物理层，数据链路层，速率等各个方面都高度相似。但是USB的作用仅仅是数据的传输的数据线，PCIE想做的事情远远复杂于USB。</p>
-<p>以arm体系架构为例， CPU之外的外设，想要干些什么？除了被CPU访问控制寄存器（被动IO访问），被CPU或DMA访问SRAM（被动MEM访问）之外，还希望能访问系统内存（主动MEM访问），上报中断（中断消息）,流量控制和仲裁（多外设数据流的流量控制），cache一致性（cache等功能）。</p>
-<p>可以看到，功能很多，方向也是多向的，不仅仅是CPU到设备，也可能是设备到DDR及其他设备。这一切PCIE都做进去了，比如你的设备可以通过message包上报中断，PCIE的RC会把中断以物理连线的方式给arm的GIC中断控制器。</p>
-<p>反观USB呢？他的核心仅仅是数据传输，比如BULK transfer是U盘这种大数据传输；INTR transfer是给鼠标这种小数据传输；ISO transfer是给摄像头这种等时传输。数据的搬运通道而已，并不涉及计算体系架构。</p>
-]]></content>
-      <categories>
-        <category>pcie</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>git_svn_opt</title>
-    <url>/git-svn-opt.html</url>
-    <content><![CDATA[<h2 id="git-svn常用操作"><a href="#git-svn常用操作" class="headerlink" title="git svn常用操作"></a>git svn常用操作</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add xxx 											// git添加文件</span><br><span class="line"></span><br><span class="line">git commit -m &quot;add syslog &amp;&amp; ipaddress&quot;					// git提交本地</span><br><span class="line"></span><br><span class="line">git push												// git提交远端</span><br></pre></td></tr></table></figure>
-
-<h3 id="svn"><a href="#svn" class="headerlink" title="svn"></a>svn</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">svn merge -r HEAD:12098 .        // svn回退到某个版本</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-  </entry>
-  <entry>
-    <title>makefile</title>
-    <url>/makefile.html</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>step_motor</title>
@@ -283,82 +322,62 @@
       </categories>
   </entry>
   <entry>
-    <title>linux-cmd</title>
-    <url>/linux-cmd.html</url>
-    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
-<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
-<ul>
-<li><p>不允许给目录创建硬链接。	</p>
-</li>
-<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
-</li>
-</ul>
-<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
-<ul>
-<li><p>软链接的链接数目不会增加；</p>
-</li>
-<li><p>可以给目录增加链接。</p>
-</li>
-</ul>
+    <title>syslog</title>
+    <url>/syslog.html</url>
+    <content><![CDATA[<h5 id="syslog-conf介绍"><a href="#syslog-conf介绍" class="headerlink" title="syslog.conf介绍"></a>syslog.conf介绍</h5><p>syslog采用可配置的、统一的系统登记程序，随时从系统各处接受log请求，然后根据**&#x2F;etc&#x2F;syslog.conf**中的预先设定把log信息写入相应文件中、邮寄给特 定用户或者直接以消息的方式发往控制台。ps：不同平台下的文件不一定相同，可以在etc下grep &#x2F;var&#x2F;log&#x2F;messages等来查看文件名。</p>
+<h5 id="具体示例"><a href="#具体示例" class="headerlink" title="具体示例"></a>具体示例</h5><p>*.err;kern.debug;daemon.notice;mail.crit [TAB] &#x2F;var&#x2F;adm&#x2F;messages</p>
+<p>这行中的“action”就是我们常关心的那个&#x2F;var&#x2F;adm&#x2F;messages文件，输出到它的信息源头“selector”是：</p>
+<p>*.err – 所有的一般错误信息；</p>
+<p>kern.debug – 核心产生的调试信息；</p>
+<p>daemon.notice – 守护进程的注意信息；</p>
+<p>mail.crit – 邮件系统的关键警告信息</p>
 ]]></content>
       <categories>
         <category>linux</category>
       </categories>
   </entry>
   <entry>
-    <title>networkcard-cfg</title>
-    <url>/networkcard-cfg.html</url>
-    <content><![CDATA[<h4 id="Linux下网卡命名规则"><a href="#Linux下网卡命名规则" class="headerlink" title="Linux下网卡命名规则"></a>Linux下网卡命名规则</h4><h5 id="rename-规则"><a href="#rename-规则" class="headerlink" title="rename 规则"></a>rename 规则</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">step1 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),</span><br><span class="line">是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡；</span><br><span class="line"></span><br><span class="line">step2 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），</span><br><span class="line">且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span><br><span class="line"></span><br><span class="line">step3, 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称;</span><br><span class="line"></span><br><span class="line">step4，udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名;</span><br><span class="line"></span><br><span class="line">强调：这个step顺序是在我们没有自定义自己的rules的前提下，如果用户自定义了自己的rules，则用户自定义为优先级最高</span><br></pre></td></tr></table></figure>
-
-<h5 id="传统命名"><a href="#传统命名" class="headerlink" title="传统命名"></a>传统命名</h5><p>centos6之前采用的都是传统的命名方式，如eth0,1…</p>
-<h5 id="可预测的命名"><a href="#可预测的命名" class="headerlink" title="可预测的命名"></a>可预测的命名</h5><p>cenos7之后提供了可预测性的网卡命名方式。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">如果从BIOS中能够取到可用的，板载网卡的索引号，则使用这个索引号命名，例如: eno1，如不能则尝试2</span><br><span class="line">如果从BIOS中能够取到可以用的，网卡所在的PCI-E热插拔插槽(注：pci槽位号)的索引号，则使用这个索引号命名，例如: ens1，如不能则尝试3</span><br><span class="line">如果能拿到设备所连接的物理位置（PCI总线号+槽位号？）信息，则使用这个信息命名，例如:enp2s0，如不能则尝试4</span><br><span class="line">传统的kernel命名方法，例如: eth0，这种命名方法的结果不可预知的，即可能第二块网卡对应eth0，第一块网卡对应eth1</span><br><span class="line">使用网卡的MAC地址来命名，这个方法一般不使用</span><br></pre></td></tr></table></figure>
-
-<h5 id="自定义规则"><a href="#自定义规则" class="headerlink" title="自定义规则"></a>自定义规则</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在用户没有自定义rules文件前提下，step1中的网卡命名方式也可认为是一种用户自定义的网卡命名，</span><br><span class="line">即在/etc/sysconfig/network-scripts/ifcfg-xx 文件，xx就是这个网卡名称，文件内容中体现MAC_ADDRESS、NAME，</span><br><span class="line">这种情况下，则会按照配置文件中指定的名称来命名网卡</span><br><span class="line"></span><br><span class="line">如果用户自定义了rules文件，放在/etc/udev/rules.d/目录下，则这个优先级是最高的；</span><br><span class="line">比1中ifcfg-xx方式优先级更高，但是如果两者不一致，则在重启network服务时，会依据ifcfg-xx，</span><br><span class="line">所以用户不应该同时采用里两种方式给同一个网卡命不同的名称</span><br></pre></td></tr></table></figure>
-
-<p>udevadm info &#x2F;sys&#x2F;class&#x2F;net&#x2F;网卡名</p>
-<p>可以显示此时这个网卡的pcie信息，vendor_id,idbus等等信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@Bai5gc:/sys/class/net/eth1# udevadm info /sys/class/net/eth1</span><br><span class="line">P: /devices/pci0000:00/0000:00:02.2/0000:03:00.0/net/eth1</span><br><span class="line">E: DEVPATH=/devices/pci0000:00/0000:00:02.2/0000:03:00.0/net/eth1</span><br><span class="line">E: ID_BUS=pci</span><br><span class="line">E: ID_MODEL_FROM_DATABASE=Ethernet Connection X552 10 GbE Backplane</span><br><span class="line">E: ID_MODEL_ID=0x15ab</span><br><span class="line">E: ID_NET_DRIVER=ixgbe</span><br><span class="line">E: ID_NET_LINK_FILE=/lib/systemd/network/99-default.link</span><br><span class="line">E: ID_NET_NAME_MAC=enxb4a9fca897e7</span><br><span class="line">E: ID_NET_NAME_ONBOARD=eno3</span><br><span class="line">E: ID_NET_NAME_PATH=enp3s0f0</span><br><span class="line">E: ID_PATH=pci-0000:03:00.0</span><br><span class="line">E: ID_PATH_TAG=pci-0000_03_00_0</span><br><span class="line">E: ID_PCI_CLASS_FROM_DATABASE=Network controller</span><br><span class="line">E: ID_PCI_SUBCLASS_FROM_DATABASE=Ethernet controller</span><br><span class="line">E: ID_VENDOR_FROM_DATABASE=Intel Corporation</span><br><span class="line">E: ID_VENDOR_ID=0x8086</span><br><span class="line">E: IFINDEX=3</span><br><span class="line">E: INTERFACE=eth1</span><br><span class="line">E: SUBSYSTEM=net</span><br><span class="line">E: SYSTEMD_ALIAS=/sys/subsystem/net/devices/eth1</span><br><span class="line">E: TAGS=:systemd:</span><br><span class="line">E: USEC_INITIALIZED=5061037</span><br><span class="line">E: net.ifnames=0</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>ps：解释一下pci地址</p>
+    <title>uart-speed</title>
+    <url>/uart-speed.html</url>
+    <content><![CDATA[<h4 id="串口波特率计算补充"><a href="#串口波特率计算补充" class="headerlink" title="串口波特率计算补充"></a>串口波特率计算补充</h4><p>由于单片机内部的RC时钟引起的误差而导致的产品失效，比如 Uart串口通信(常温不可以通信，温度高才行）、Watchdog看门狗复位失灵等等。所以在这里补充一下串口波特率相关计算。“串口波特率的最大偏差多少，对方就不能接收了或出错了？”</p>
+<p>最常见的10位串口的输出时序( 1个起始位 + 8个数据位  + 1个停止位 ）</p>
+<p><img src="/../image/image-20240401172627745.png" alt="image-20240401172627745"></p>
+<p>我们要确保实际波特率对应的 D0 ~ D7 时区段，都分别落在对方波特率的采样点的范围内，</p>
+<p><strong>从多个常见的波特率推送来看，****最大偏差一般在5% 以内都可以正常通信。</strong></p>
+<p>但考虑到不同芯片的采样点的方式有所不同，以及一帧的串口位不同(数据位越长，累计的偏差会更多），建议确保波特率控制在2%以内最好。</p>
+<p><img src="/../image/image-20240401174220374.png" alt="image-20240401174220374"></p>
 <ul>
-<li><code>/pci0000:00</code>：这是根 PCIe 控制器的地址，<code>pci0000:00</code> 表示根控制器。</li>
-<li><code>/0000:00:02.2</code>：这是连接到根控制器的第一个 PCIe 设备的地址。<code>0000:00:02.2</code> 表示这个设备的总线号、设备号和功能号。</li>
-<li><code>/0000:03:00.0</code>：这是连接到第一个 PCIe 设备的下一个 PCIe 设备的地址。<code>0000:03:00.0</code> 表示新设备的总线号、设备号和功能号。</li>
+<li>值得注意的是，每次接收数据采样点均会从第1 bit 数据初始化，这意味着采样偏差并不会累积至下一次数据传输，如图1所示，每次检测到下降沿时将重新开始进行数据采样。</li>
 </ul>
-</blockquote>
-<h5 id="命名rule-d"><a href="#命名rule-d" class="headerlink" title="命名rule.d"></a>命名rule.d</h5><h6 id="biosdevname和net-ifnames两种命名规范"><a href="#biosdevname和net-ifnames两种命名规范" class="headerlink" title="biosdevname和net.ifnames两种命名规范"></a>biosdevname和net.ifnames两种命名规范</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net.ifnames的命名规范为:设备类型+设备位置+数字</span><br><span class="line"></span><br><span class="line">设备类型：</span><br><span class="line"></span><br><span class="line">en 表示Ethernet</span><br><span class="line">wl 表示WLAN</span><br><span class="line">ww 表示无线广域网WWAN</span><br><span class="line"></span><br><span class="line">实际的例子:</span><br><span class="line"></span><br><span class="line">eno1 板载网卡</span><br><span class="line">enp0s2  pci网卡</span><br><span class="line">ens33   pci网卡</span><br><span class="line">wlp3s0  PCI无线网卡</span><br><span class="line">wwp0s29f7u2i2   4G modem</span><br><span class="line">wlp0s2f1u4u1   连接在USB Hub上的无线网卡</span><br><span class="line">enx78e7d1ea46da pci网卡</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">biosdevname的命名规范为: 要么是em开头，要么是p开头</span><br><span class="line">实际的例子:</span><br><span class="line"></span><br><span class="line">em1 板载网卡</span><br><span class="line">p3p4 pci网卡</span><br><span class="line">p3p4_1 虚拟网卡</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>linux-udev</title>
-    <url>/linux-udev.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>mcu_cold_restart_question</title>
-    <url>/mcu-cold-restart-question.html</url>
-    <content><![CDATA[<h4 id="转载-–-单片机冷启动下重启问题分析"><a href="#转载-–-单片机冷启动下重启问题分析" class="headerlink" title="转载 –&gt; 单片机冷启动下重启问题分析"></a>转载 –&gt; 单片机冷启动下重启问题分析</h4><h4 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h4><p>客户反馈MCU作为他们产品的控制芯片，在常温下工作是正常的，但是稍微冷冻下就会启动失败，重现率100%，再次加热或者恢复到常温又能正常工作。</p>
-<h4 id="问题分析解决"><a href="#问题分析解决" class="headerlink" title="问题分析解决"></a>问题分析解决</h4><p>从客户描述上来看，猜测很大可能是硬件问题，因此带了一块STM32F030-NUCLEO板过去，想着做个芯片交换测试看下结果。</p>
-<p>到达客户现场，了解到客户只是使用了内部高速晶振HSI。先使用示波器抓下VDD和NRST的启动波形，在常温下发现并没有明显异常。于是做低温测试，为了对比，基于STM32F030-NUCLEO板了写了一个只使用内部高速晶振HSI , 翻转一个LED灯的程序。</p>
-<p>结果显示，STM32F030-NUCLEO板能正常启动，而客户的板子问题重现，再次测量其VDD和NRST的启动波形，发现VDD上电过程中有稍微不规则波形，但感觉不至于导致MCU无法启动。考虑到当前客户板子上的MCU跑的是客户自己的程序，为了统一对比，将客户板子上的MCU烧录成NUCELO板上一样的程序，再次做低温测试，结果显示客户的板子也能正常启动！</p>
-<p>于是可以初步断定，此问题与客户自己的软件有关，而与外围电路无关。</p>
-<p>接下来对比测试代码与客户自己的代码，并再次做低温测试验证结果，最终发现客户的时钟树配置有个参数有问题：</p>
-<p><img src="/../image/image-20240329095021747.png" alt="image-20240329095021747"></p>
-<p>如上红色代码所示，RCC_OSCILLATORTYPE_NONE改成RCC_OSCILLATORTYPE_HSI后。问题现象明显改善，但经过测试，发现偶尔还会启动不正常的时候。但相对于之前100%可以重现的现象，至少说明之前软件的失误至少是一个因素。</p>
-<p>现在问题变成偶尔重现，已经向前迈进一大步。接下来怀疑与硬件有关了，理由是同样的测试软件跑在用户的板子上和跑在NUCELO软件上的结果不一致。</p>
-<p>因此接下来首先对于用户的板子的外围电路与STM32F030-NUCLEO板子的外围电路，发现客户MCU的BOOT0引脚是悬空的，于是加上一个外部10K下拉电阻，再次测试问题不再重现。</p>
-<p>至此，问题解决！</p>
-<h4 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h4><p>回过头来看这个问题，发现客户知道MCU使用的是HSI，可偏偏在代码中配置时钟树时使用的晶振类型却是NONE !这种问题现在看来是非常低级的问题，但在代码量大，或者代码迭代的过程中，之前写代码的人离职，后续接手的工程师又不能全盘了解所有代码的情况下时就会变得束手无策，当碰到此类莫名其妙的问题，特别是无法判断到底是硬件问题还是软件问题的时候，保持清晰的思路是非常重要的。（另外，对于这个现象，<strong>看门狗</strong>也是可能是一种思路。比如说冷启动的时候导致看门狗模块异常不能及时喂狗所导致的重启）。继续补充一下。<strong>在低温环境，要注意晶振负载电容随温度的变化</strong>。</p>
-<p>这里我需要强调的是，最有效的解决方法就是<strong>快速找到一个 “参照物”</strong>，而ST的DEMO板和示例代码就是在硬件上和软件上扮演这样一个参照物的角色。<strong>可以通过MCU交换测试来判断是不是芯片外围电路的问题或者芯片问题</strong>，可以使用Cube库下的示例代码，对比其运行结果来判断是否与软件有关。<mark>先从大方向明确问题到底是与硬件有关还是与软件有关，然后再做下一步分析</mark>，这种方法希望读者能有效掌握。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>转载这篇文章，对思路进行一下开阔，有的问题可能看似与软件无关，实则确实息息相关。遇到异常的时候，首先分析<mark>时钟，电源，复位</mark>是否都是正常，不论是从软件还是从硬件上来确认。</p>
+<p><img src="/../image/image-20240401174311722.png" alt="image-20240401174311722"></p>
 ]]></content>
       <categories>
         <category>mcu_misc</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>usb和pcie总线对比</title>
+    <url>/usb_pcie_bus.html</url>
+    <content><![CDATA[<h5 id="几种类型usb控制器"><a href="#几种类型usb控制器" class="headerlink" title="几种类型usb控制器"></a>几种类型usb控制器</h5><h6 id="OHCI-Open-Host-Controller-Interface"><a href="#OHCI-Open-Host-Controller-Interface" class="headerlink" title="OHCI(Open Host Controller Interface)"></a>OHCI(Open Host Controller Interface)</h6><p>是支持USB1.1的标准，它不仅是针对USB，还支持一些其它接口，比如Apple的火线接口，与UHCI相比，OHCI的硬件复杂，硬件做的事情更多，所以实现对应的软件驱动的任务，就相对比较简单，主要用于非X86的USB。</p>
+<h6 id="UHCI-Universal-Host-Controller-Interface"><a href="#UHCI-Universal-Host-Controller-Interface" class="headerlink" title="UHCI(Universal Host Controller Interface)"></a>UHCI(Universal Host Controller Interface)</h6><p>是Intel主导的对USB1.0，1.1的接口标准，与OHCI不兼容，UHCI的软件驱动任务重，需要做的比较复杂，但可以使用较便宜的USB控制器，Inter和VIA使用UHCI，其余硬件提供商使用OHCI</p>
+<h6 id="EHCI-Enhanced-Host-Controller-Interface"><a href="#EHCI-Enhanced-Host-Controller-Interface" class="headerlink" title="EHCI(Enhanced Host Controller Interface)"></a>EHCI(Enhanced Host Controller Interface)</h6><p>是Intel主导的对USB2.0的接口标准，仅提供USB2.0的高速功能。</p>
+<h6 id="XHCI-eXtensible-Host-Controller-Interface"><a href="#XHCI-eXtensible-Host-Controller-Interface" class="headerlink" title="XHCI(eXtensible Host Controller Interface)"></a>XHCI(eXtensible Host Controller Interface)</h6><p>是最新最火的USB3.0的接口标准，它在速度、节能、虚拟化等方面都比前面3中有了较大的提高。xHCI 支持所有种类速度的USB设备（USB 3.0 SuperSpeed, USB 2.0 Low-, Full-, and High-speed, USB 1.1 Low- and Full-speed）。xHCI的目的是为了替换前面3中（UHCI&#x2F;OHCI&#x2F;EHCI）。</p>
+<blockquote>
+<p>AHCI (Serial ATA Advanced Host Controller Interface)，串行ATA高级主控接口，允许存储驱动程序启用高级串行ATA功能。AHCI通过包含一个PCI BAR（基址寄存器），来实现原生SATA功能。（ATA是存储设备的标准，AHCI是控制器的接口）</p>
+</blockquote>
+<h5 id="PCI-和-PCIE-比较"><a href="#PCI-和-PCIE-比较" class="headerlink" title="PCI 和 PCIE 比较"></a>PCI 和 PCIE 比较</h5><p>PCI将较于PCIE有两个大的区别。</p>
+<ul>
+<li>PCI的数据是并行的，有32bit数据地址线，典型时钟133MHz，而PCIE的数据线是串行的，没有单独的时钟线（注意，100M参考时钟是给pcie控制器使用的），这样速率可以上GHz。</li>
+<li>PCI是多点共联，通俗讲就是各个器件在物理上共同占用数据线，就会造成时钟频率上不去，延时增加等等，还需要考虑负载因素。而PCIE是point to point，一个口和一个口直接对接，所以负载小，频率高。如果很多设备想像PCI一样挂在一起给CPU用，加入switch即可。</li>
+</ul>
+<h5 id="PCIE-USB"><a href="#PCIE-USB" class="headerlink" title="PCIE &amp;&amp; USB"></a>PCIE &amp;&amp; USB</h5><p>PCIe，USB，以太网。都是串行总线。传输距离逐渐变远。<strong>PCIe 整个组网里网络报文的流动靠的是硬件驱动的</strong>。软件不参与报文的驱动流动。USB，需要软件来参与报文的驱动和流动。所以<strong>USB整个组网里还包括了软件部分</strong>。也就是USB软件协议栈。以太网 整个组网里也是，需要软件协议栈参与以太网组网里的报文流动。</p>
+<p>PCIE是和USB都是高速总线，拓扑都是类似的树形结构，都是以CPU为ROOT，系统中外挂其他的外设作为树的终端节点，给CPU控制和使用，且二者在物理层，数据链路层，速率等各个方面都高度相似。但是USB的作用仅仅是数据的传输的数据线，PCIE想做的事情远远复杂于USB。</p>
+<p>以arm体系架构为例， CPU之外的外设，想要干些什么？除了被CPU访问控制寄存器（被动IO访问），被CPU或DMA访问SRAM（被动MEM访问）之外，还希望能访问系统内存（主动MEM访问），上报中断（中断消息）,流量控制和仲裁（多外设数据流的流量控制），cache一致性（cache等功能）。</p>
+<p>可以看到，功能很多，方向也是多向的，不仅仅是CPU到设备，也可能是设备到DDR及其他设备。这一切PCIE都做进去了，比如你的设备可以通过message包上报中断，PCIE的RC会把中断以物理连线的方式给arm的GIC中断控制器。</p>
+<p>反观USB呢？他的核心仅仅是数据传输，比如BULK transfer是U盘这种大数据传输；INTR transfer是给鼠标这种小数据传输；ISO transfer是给摄像头这种等时传输。数据的搬运通道而已，并不涉及计算体系架构。</p>
+]]></content>
+      <categories>
+        <category>pcie</category>
       </categories>
   </entry>
 </search>

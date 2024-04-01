@@ -1,3 +1,4 @@
+https://paopao41.github.io/uart-speed.html
 https://paopao41.github.io/mcu-cold-restart-question.html
 https://paopao41.github.io/step-motor.html
 https://paopao41.github.io/linux-udev.html
@@ -21,5 +22,5 @@ https://paopao41.github.io/categories/network/
 https://paopao41.github.io/categories/server/
 https://paopao41.github.io/categories/linux/
 https://paopao41.github.io/categories/pcie/
-https://paopao41.github.io/categories/miscg/
 https://paopao41.github.io/categories/mcu-misc/
+https://paopao41.github.io/categories/miscg/
