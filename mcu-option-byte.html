@@ -21,25 +21,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="article">
-<meta property="og:title" content="makefile">
-<meta property="og:url" content="https://paopao41.github.io/makefile.html">
+    <meta name="description" content="option byte介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mcu_option_byte">
+<meta property="og:url" content="https://paopao41.github.io/mcu-option-byte.html">
 <meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
+<meta property="og:description" content="option byte介绍">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-14T01:06:50.000Z">
-<meta property="article:modified_time" content="2024-03-14T07:54:32.643Z">
+<meta property="article:published_time" content="2024-04-07T01:53:01.000Z">
+<meta property="article:modified_time" content="2024-04-07T01:57:09.239Z">
 <meta property="article:author" content="paopao">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://paopao41.github.io/makefile.html">
+<link rel="canonical" href="https://paopao41.github.io/mcu-option-byte.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/makefile.html","path":"makefile.html","title":"makefile"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/mcu-option-byte.html","path":"mcu-option-byte.html","title":"mcu_option_byte"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>makefile | Bubble's little record of knowledge</title>
+<title>mcu_option_byte | Bubble's little record of knowledge</title>
   
 
 
@@ -98,7 +100,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -111,6 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#option-byte%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">option byte介绍</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -164,7 +167,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/makefile.html">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/mcu-option-byte.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -177,12 +180,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="makefile | Bubble's little record of knowledge">
+      <meta itemprop="name" content="mcu_option_byte | Bubble's little record of knowledge">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          makefile
+          mcu_option_byte
         </h1>
 
         <div class="post-meta-container">
@@ -194,7 +197,16 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-03-14 09:06:50 / 修改时间：15:54:32" itemprop="dateCreated datePublished" datetime="2024-03-14T09:06:50+08:00">2024-03-14</time>
+      <time title="创建时间：2024-04-07 09:53:01 / 修改时间：09:57:09" itemprop="dateCreated datePublished" datetime="2024-04-07T09:53:01+08:00">2024-04-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mcu-misc/" itemprop="url" rel="index"><span itemprop="name">mcu_misc</span></a>
+        </span>
     </span>
 
   
@@ -211,7 +223,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
+      <span>12</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -228,7 +240,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><h4 id="option-byte介绍"><a href="#option-byte介绍" class="headerlink" title="option byte介绍"></a>option byte介绍</h4>
     </div>
 
     
@@ -241,13 +253,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/syslog.html" rel="prev" title="syslog">
-                  <i class="fa fa-angle-left"></i> syslog
+                <a href="/uart-speed.html" rel="prev" title="uart-speed">
+                  <i class="fa fa-angle-left"></i> uart-speed
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/step-motor.html" rel="next" title="step_motor">
-                  step_motor <i class="fa fa-angle-right"></i>
+                <a href="/pll.html" rel="next" title="pll">
+                  pll <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

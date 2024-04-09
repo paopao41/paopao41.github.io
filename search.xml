@@ -380,4 +380,27 @@
         <category>pcie</category>
       </categories>
   </entry>
+  <entry>
+    <title>mcu_option_byte</title>
+    <url>/mcu-option-byte.html</url>
+    <content><![CDATA[<h4 id="option-byte介绍"><a href="#option-byte介绍" class="headerlink" title="option byte介绍"></a>option byte介绍</h4>]]></content>
+      <categories>
+        <category>mcu_misc</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>pll</title>
+    <url>/pll.html</url>
+    <content><![CDATA[<h4 id="PLL原理"><a href="#PLL原理" class="headerlink" title="PLL原理"></a>PLL原理</h4><p><img src="/../image/image-20240409175353208.png" alt="image-20240409175353208"></p>
+<p>由一个<strong>基准频率振荡器</strong>（晶体振荡器），<strong>相位频率比较器</strong>，<strong>VCO</strong>（电压控制振荡器），<strong>回路滤波器</strong>组成。晶振产生频率为fr的时钟，与VCO产生的fo的时钟同时传入相位频率比较器中进行比较，产生比较结果以脉冲波的形式传入回路滤波器，回路滤波器通过低频将脉冲波转变为直流低压VR，传入VCO对fo进行控制，形成反馈控制电路。</p>
+<p><img src="/../image/image-20240409175428500.png" alt="image-20240409175428500"></p>
+<p>当fr&gt;fo时产生PD为正脉冲，VR变大，当fr&lt;fo时，PD产生负脉冲波，VR减小，形成对fo的闭环控制，最终目的，是<strong>fo&#x3D;&#x3D;fr</strong>。</p>
+<h3 id="倍频器"><a href="#倍频器" class="headerlink" title="倍频器"></a>倍频器</h3><p>PLL的主要功能还是倍频。倍频的实现其实很简单，只要在VCO的后面加一个分频器，时参与比较的Fvco&#x3D;（1&#x2F;n）fo,fo’是VCO产生的。这样就实现了Fvco&#x3D;n*fr。</p>
+<p><img src="/../image/image-20240409175451397.png" alt="image-20240409175451397"></p>
+<h3 id="分频器原理"><a href="#分频器原理" class="headerlink" title="分频器原理"></a>分频器原理</h3><p>分频器原理就是之前上的简单的数电知识，在这就一块说了。<br>主要就说一个<strong>偶数分频</strong>。<br>偶数分频器的实现简单，用计数器在上升沿或者下降沿计数，当计数器的值等于分频系数的一半或等于分频系数时，信号翻转。<br>电路原理是用一个上升沿计数的计数器，每次计数到2时输出信号clkout翻转一次，每次计数到4时clkout再翻转一次，一直周期重复下去。其他的偶数分频器原理也是一样。</p>
+]]></content>
+      <categories>
+        <category>mcu_misc</category>
+      </categories>
+  </entry>
 </search>
