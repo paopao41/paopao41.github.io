@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://paopao41.github.io/mcu-reset.html</loc>
+    
+    <lastmod>2024-04-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://paopao41.github.io/pll.html</loc>
     
     <lastmod>2024-04-09</lastmod>
@@ -193,7 +202,7 @@
 
   <url>
     <loc>https://paopao41.github.io/</loc>
-    <lastmod>2024-04-09</lastmod>
+    <lastmod>2024-04-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -203,42 +212,42 @@
   
   <url>
     <loc>https://paopao41.github.io/categories/network/</loc>
-    <lastmod>2024-04-09</lastmod>
+    <lastmod>2024-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/server/</loc>
-    <lastmod>2024-04-09</lastmod>
+    <lastmod>2024-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/linux/</loc>
-    <lastmod>2024-04-09</lastmod>
+    <lastmod>2024-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/pcie/</loc>
-    <lastmod>2024-04-09</lastmod>
+    <lastmod>2024-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/mcu-misc/</loc>
-    <lastmod>2024-04-09</lastmod>
+    <lastmod>2024-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/miscg/</loc>
-    <lastmod>2024-04-09</lastmod>
+    <lastmod>2024-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
