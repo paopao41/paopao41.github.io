@@ -436,4 +436,32 @@
         <category>mcu_misc</category>
       </categories>
   </entry>
+  <entry>
+    <title>hisi3519AV200_debug</title>
+    <url>/hisi3519AV200-debug.html</url>
+    <content><![CDATA[<h4 id="hisi常用debug查看"><a href="#hisi常用debug查看" class="headerlink" title="hisi常用debug查看"></a>hisi常用debug查看</h4><ul>
+<li>hiddrs查看ddr占用</li>
+<li>cat &#x2F;dev&#x2F;logmpp 查看设备mpplog</li>
+<li></li>
+</ul>
+<h4 id="媒体处理部分"><a href="#媒体处理部分" class="headerlink" title="媒体处理部分"></a>媒体处理部分</h4>]]></content>
+      <categories>
+        <category>dsp_hisi_misc</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>test_1</title>
+    <url>/test-1.html</url>
+    <content><![CDATA[<h3 id="原码补码反码移码"><a href="#原码补码反码移码" class="headerlink" title="原码补码反码移码"></a>原码补码反码移码</h3><p><strong>反码</strong>：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；<br>        <strong>补码</strong>：解决负数加法运算正负零问题，弥补了反码的不足。</p>
+<p>总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，<strong>不管是正整数还是正小数，原码，反码，补码都全部相同。</strong></p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>正数的原码、补码、反码均为其本身；</li>
+<li>负数（二进制）的原码、补码、反码公式：<br>反码 &#x3D; 原码（除符号位外）每位取反<br>补码 &#x3D; 反码 + 1<br>反码 &#x3D; 补码  - 1<br>移码 &#x3D; 补码符号位取反</li>
+</ul>
+]]></content>
+      <categories>
+        <category>software_test</category>
+      </categories>
+  </entry>
 </search>
