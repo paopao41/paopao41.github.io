@@ -1,3 +1,4 @@
+https://paopao41.github.io/mcu-voltage.html
 https://paopao41.github.io/test-1.html
 https://paopao41.github.io/hisi3519AV200-debug.html
 https://paopao41.github.io/mcu-reset.html
@@ -25,9 +26,9 @@ https://paopao41.github.io/about/index.html
 https://paopao41.github.io/
 https://paopao41.github.io/categories/network/
 https://paopao41.github.io/categories/server/
-https://paopao41.github.io/categories/linux/
-https://paopao41.github.io/categories/pcie/
-https://paopao41.github.io/categories/mcu-misc/
-https://paopao41.github.io/categories/miscg/
 https://paopao41.github.io/categories/dsp-hisi-misc/
+https://paopao41.github.io/categories/linux/
+https://paopao41.github.io/categories/mcu-misc/
+https://paopao41.github.io/categories/pcie/
+https://paopao41.github.io/categories/miscg/
 https://paopao41.github.io/categories/software-test/

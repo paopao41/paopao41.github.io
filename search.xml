@@ -62,6 +62,42 @@
 ]]></content>
   </entry>
   <entry>
+    <title>hisi3519AV200_debug</title>
+    <url>/hisi3519AV200-debug.html</url>
+    <content><![CDATA[<h4 id="hisi常用debug查看"><a href="#hisi常用debug查看" class="headerlink" title="hisi常用debug查看"></a>hisi常用debug查看</h4><ul>
+<li>hiddrs查看ddr占用</li>
+<li>cat &#x2F;dev&#x2F;logmpp 查看设备mpplog</li>
+<li></li>
+</ul>
+<h4 id="媒体处理部分"><a href="#媒体处理部分" class="headerlink" title="媒体处理部分"></a>媒体处理部分</h4>]]></content>
+      <categories>
+        <category>dsp_hisi_misc</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>linux-cmd</title>
+    <url>/linux-cmd.html</url>
+    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
+<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
+<ul>
+<li><p>不允许给目录创建硬链接。	</p>
+</li>
+<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
+</li>
+</ul>
+<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
+<ul>
+<li><p>软链接的链接数目不会增加；</p>
+</li>
+<li><p>可以给目录增加链接。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title>linux_time_Cfun</title>
     <url>/linux-time-Cfun.html</url>
     <content><![CDATA[<h3 id="linux下时间处理"><a href="#linux下时间处理" class="headerlink" title="linux下时间处理"></a>linux下时间处理</h3><h4 id="格林尼治时间"><a href="#格林尼治时间" class="headerlink" title="格林尼治时间"></a>格林尼治时间</h4><ul>
@@ -98,29 +134,6 @@
       </categories>
   </entry>
   <entry>
-    <title>linux-cmd</title>
-    <url>/linux-cmd.html</url>
-    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
-<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
-<ul>
-<li><p>不允许给目录创建硬链接。	</p>
-</li>
-<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
-</li>
-</ul>
-<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
-<ul>
-<li><p>软链接的链接数目不会增加；</p>
-</li>
-<li><p>可以给目录增加链接。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-  </entry>
-  <entry>
     <title>linux-udev</title>
     <url>/linux-udev.html</url>
     <content><![CDATA[]]></content>
@@ -129,6 +142,55 @@
     <title>makefile</title>
     <url>/makefile.html</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>mcu-voltage</title>
+    <url>/mcu-voltage.html</url>
+    <content><![CDATA[<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p>（1）VCC：C&#x3D;circuit 表示电路的意思, 即接入电路的电压</p>
+<p>（2）VDD：D&#x3D;device 表示器件的意思, 即器件内部的工作电压;</p>
+<p>（3）VSS：S&#x3D;series 表示公共连接的意思，通常指电路公共接地端电压</p>
+<p>（4）VEE：负电压供电;场效应管的源极(S)</p>
+<p>（5）VBAT：当使用电池或其他电源连接到VBAT脚上时，当VDD 断电时，可以保存备份寄存器的内容和维持RTC的功能。如果应用中没有使用外部电池，VBAT引脚应接到VDD引脚上。</p>
+<p>（6）VPP：编程&#x2F;擦除电压。</p>
+<p>（7）GND：在电路里常被定为电压参考基点。</p>
+<p>（8）CC与DD的区别是：供电电压与工作电压的区别（通常VCC&gt;VDD）</p>
+<p>（9）V与VA的区别是：数字与模拟的区别</p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- 数字电路供电VCC</span><br><span class="line">- 模拟电路供电VCCA</span><br><span class="line">- VDD是指数字工作电压，就是供电进芯片的</span><br><span class="line">- VDDA是模拟电压或者叫模拟正电源，是从芯片向外供电的</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="应用解释"><a href="#应用解释" class="headerlink" title="应用解释"></a>应用解释</h2><p>1、对于数字电路来说，VCC是电路的供电电压,VDD是芯片的工作电压(通常Vcc&gt;Vdd)，VSS是接地点。例如，对于ARM单片机来说，其供电电压VCC一般为5V，一般经过稳压模块将其转换为单片机工作电压VDD &#x3D; 3.3V</p>
+<p>2、有些IC既带VDD引脚又有VCC引脚，说明这种器件自身带有电压转换功能。</p>
+<p>3、在场效应管(或COMS器件)中，VDD为漏极，VSS为源极，VDD和VSS指的是元件引脚，而不表示供电电压。</p>
+<p>4、一般来说VCC&#x3D;模拟电源,VDD&#x3D;数字电源,VSS&#x3D;数字地,VEE&#x3D;负电源</p>
+<p>5、从电气意义上说，GND分为电源地和信号地。PG是 Power Ground（电源地）的缩写。另一个是 Signal Ground（信号地）。实际上它们可能是连在一起的（不一定是混在一起哦！）。两个名称主要是便于对电路进行分析。</p>
+<p>进一步说，还有因电路形式不同而必须区分的两种“地”：数字地，模拟地。</p>
+<p>数字地和模拟地都有信号地、电源地两种情况。数字地和模拟地之间，某些电路可以直接连接，有些电路要用电抗器连接，有些电路不可连接。</p>
+]]></content>
+      <categories>
+        <category>mcu_misc</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>mcu_cold_restart_question</title>
+    <url>/mcu-cold-restart-question.html</url>
+    <content><![CDATA[<h4 id="转载-–-单片机冷启动下重启问题分析"><a href="#转载-–-单片机冷启动下重启问题分析" class="headerlink" title="转载 –&gt; 单片机冷启动下重启问题分析"></a>转载 –&gt; 单片机冷启动下重启问题分析</h4><h4 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h4><p>客户反馈MCU作为他们产品的控制芯片，在常温下工作是正常的，但是稍微冷冻下就会启动失败，重现率100%，再次加热或者恢复到常温又能正常工作。</p>
+<h4 id="问题分析解决"><a href="#问题分析解决" class="headerlink" title="问题分析解决"></a>问题分析解决</h4><p>从客户描述上来看，猜测很大可能是硬件问题，因此带了一块STM32F030-NUCLEO板过去，想着做个芯片交换测试看下结果。</p>
+<p>到达客户现场，了解到客户只是使用了内部高速晶振HSI。先使用示波器抓下VDD和NRST的启动波形，在常温下发现并没有明显异常。于是做低温测试，为了对比，基于STM32F030-NUCLEO板了写了一个只使用内部高速晶振HSI , 翻转一个LED灯的程序。</p>
+<p>结果显示，STM32F030-NUCLEO板能正常启动，而客户的板子问题重现，再次测量其VDD和NRST的启动波形，发现VDD上电过程中有稍微不规则波形，但感觉不至于导致MCU无法启动。考虑到当前客户板子上的MCU跑的是客户自己的程序，为了统一对比，将客户板子上的MCU烧录成NUCELO板上一样的程序，再次做低温测试，结果显示客户的板子也能正常启动！</p>
+<p>于是可以初步断定，此问题与客户自己的软件有关，而与外围电路无关。</p>
+<p>接下来对比测试代码与客户自己的代码，并再次做低温测试验证结果，最终发现客户的时钟树配置有个参数有问题：</p>
+<p><img src="/../image/image-20240329095021747.png" alt="image-20240329095021747"></p>
+<p>如上红色代码所示，RCC_OSCILLATORTYPE_NONE改成RCC_OSCILLATORTYPE_HSI后。问题现象明显改善，但经过测试，发现偶尔还会启动不正常的时候。但相对于之前100%可以重现的现象，至少说明之前软件的失误至少是一个因素。</p>
+<p>现在问题变成偶尔重现，已经向前迈进一大步。接下来怀疑与硬件有关了，理由是同样的测试软件跑在用户的板子上和跑在NUCELO软件上的结果不一致。</p>
+<p>因此接下来首先对于用户的板子的外围电路与STM32F030-NUCLEO板子的外围电路，发现客户MCU的BOOT0引脚是悬空的，于是加上一个外部10K下拉电阻，再次测试问题不再重现。</p>
+<p>至此，问题解决！</p>
+<h4 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h4><p>回过头来看这个问题，发现客户知道MCU使用的是HSI，可偏偏在代码中配置时钟树时使用的晶振类型却是NONE !这种问题现在看来是非常低级的问题，但在代码量大，或者代码迭代的过程中，之前写代码的人离职，后续接手的工程师又不能全盘了解所有代码的情况下时就会变得束手无策，当碰到此类莫名其妙的问题，特别是无法判断到底是硬件问题还是软件问题的时候，保持清晰的思路是非常重要的。（另外，对于这个现象，<strong>看门狗</strong>也是可能是一种思路。比如说冷启动的时候导致看门狗模块异常不能及时喂狗所导致的重启）。继续补充一下。<strong>在低温环境，要注意晶振负载电容随温度的变化</strong>。</p>
+<p>这里我需要强调的是，最有效的解决方法就是<strong>快速找到一个 “参照物”</strong>，而ST的DEMO板和示例代码就是在硬件上和软件上扮演这样一个参照物的角色。<strong>可以通过MCU交换测试来判断是不是芯片外围电路的问题或者芯片问题</strong>，可以使用Cube库下的示例代码，对比其运行结果来判断是否与软件有关。<mark>先从大方向明确问题到底是与硬件有关还是与软件有关，然后再做下一步分析</mark>，这种方法希望读者能有效掌握。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>转载这篇文章，对思路进行一下开阔，有的问题可能看似与软件无关，实则确实息息相关。遇到异常的时候，首先分析<mark>时钟，电源，复位</mark>是否都是正常，不论是从软件还是从硬件上来确认。</p>
+]]></content>
+      <categories>
+        <category>mcu_misc</category>
+      </categories>
   </entry>
   <entry>
     <title>networkcard-cfg</title>
@@ -157,6 +219,39 @@
 ]]></content>
       <categories>
         <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>mcu_reset</title>
+    <url>/mcu-reset.html</url>
+    <content><![CDATA[<h4 id="单片机复位介绍"><a href="#单片机复位介绍" class="headerlink" title="单片机复位介绍"></a>单片机复位介绍</h4><p>经典的STM32内部复位电路如下</p>
+<p><img src="/../image/image-20240410090253667.png" alt="image-20240410090253667"></p>
+<p>可以看到复位分为两大类：<strong>内部复位和外部复位</strong></p>
+<ul>
+<li><p>内部复位源通过脉冲发生器在 NRST 引脚产生延时至少 20μs 的脉冲，引起 NRST 保持电平产生复位；</p>
+</li>
+<li><p>外部复位源则直接将 NRST 引脚电平拉低产生复 位。</p>
+</li>
+</ul>
+<h5 id="外部复位"><a href="#外部复位" class="headerlink" title="外部复位"></a>外部复位</h5><p>NRST 引脚上的低电平。</p>
+<h5 id="软件复位"><a href="#软件复位" class="headerlink" title="软件复位"></a>软件复位</h5><p>将 Arm® Cortex®-M3 中断应用和复位控制寄存器中的 SYSRESETREQ 置“1” 时，可实现软件复位。JLINK对设备的复位就是控制的这一位。Reset: Reset device via AIRCR.SYSRESETREQ.</p>
+<h6 id="内核复位"><a href="#内核复位" class="headerlink" title="内核复位"></a>内核复位</h6><p>在Cortex-M内核文档中大概有这样的描述：<strong>通过设置 NVIC 中应用程序中断与复位控制寄存器(AIRCR)的VECTRESET 位，可只复位处理器内核而不复位其它片上设施。</strong></p>
+<p>也就是说，这样操作只复位Cortex-M内核，不会复位UART这些片内外设。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">void NVIC_CoreReset(void)</span><br><span class="line">&#123;</span><br><span class="line">  __DSB();</span><br><span class="line">  SCB-&gt;AIRCR  = ((0x5FA &lt;&lt; SCB_AIRCR_VECTKEY_Pos)      |</span><br><span class="line">                 (SCB-&gt;AIRCR &amp; SCB_AIRCR_PRIGROUP_Msk) |</span><br><span class="line">                 SCB_AIRCR_VECTRESET_Msk);       //置位 VECTRESET</span><br><span class="line">  __DSB();</span><br><span class="line">  while(1) &#123; __NOP(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="系统复位"><a href="#系统复位" class="headerlink" title="系统复位"></a>系统复位</h6><p>软件复位中的系统复位操作的寄存器位（SYSRESETREQ）不同，复位的对象为整个芯片（除后备区域）。</p>
+<p>系统复位函数：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">void NVIC_SysReset(void)</span><br><span class="line">&#123;</span><br><span class="line">  __DSB();</span><br><span class="line">  SCB-&gt;AIRCR  = ((0x5FA &lt;&lt; SCB_AIRCR_VECTKEY_Pos)      | </span><br><span class="line">                 (SCB-&gt;AIRCR &amp; SCB_AIRCR_PRIGROUP_Msk) | </span><br><span class="line">                 SCB_AIRCR_SYSRESETREQ_Msk);     //置位 SYSRESETREQ</span><br><span class="line">  __DSB();</span><br><span class="line">  while(1) &#123; __NOP(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="电源复位"><a href="#电源复位" class="headerlink" title="电源复位"></a>电源复位</h5><p>分为上电复位（POR 复位），掉电复位（PDR 复位），从待机模式唤醒。</p>
+<p>依靠单片机内部的电源监控电路，在供电电压达不到设定值时自动进行复位。当检测到 VDD&#x2F;VDDA低于阈值电压 VPOR和 VPDR 时，芯片将会自动保持为复位状 态，上电复位和掉电复位的波形图如下。</p>
+<p><img src="/../image/image-20240410114131548.png" alt="image-20240410114131548"></p>
+<h5 id="低功耗复位"><a href="#低功耗复位" class="headerlink" title="低功耗复位"></a>低功耗复位</h5><p>低功耗管理复位的产生有两种情况，一种是进入待机模式时，另一种是进入停止 模式时。在这两种情况下，如果把用户选择字节中的 RSTSTDB 位（待机模式 时）或 RSTSTOP 位（停止模式时）清零，系统将被复位而不是进入待机模式或 停止模式。</p>
+<h5 id="复位源查看"><a href="#复位源查看" class="headerlink" title="复位源查看"></a>复位源查看</h5><p>可以通过查看 RCM_CSTS（控制&#x2F;状态寄存器）中的复位标志位识别复位事件来源，也可以相应清除标志位。</p>
+<p><img src="/../image/image-20240410114427398.png" alt="image-20240410114427398"></p>
+]]></content>
+      <categories>
+        <category>mcu_misc</category>
       </categories>
   </entry>
   <entry>
@@ -245,22 +340,15 @@
       </categories>
   </entry>
   <entry>
-    <title>mcu_cold_restart_question</title>
-    <url>/mcu-cold-restart-question.html</url>
-    <content><![CDATA[<h4 id="转载-–-单片机冷启动下重启问题分析"><a href="#转载-–-单片机冷启动下重启问题分析" class="headerlink" title="转载 –&gt; 单片机冷启动下重启问题分析"></a>转载 –&gt; 单片机冷启动下重启问题分析</h4><h4 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h4><p>客户反馈MCU作为他们产品的控制芯片，在常温下工作是正常的，但是稍微冷冻下就会启动失败，重现率100%，再次加热或者恢复到常温又能正常工作。</p>
-<h4 id="问题分析解决"><a href="#问题分析解决" class="headerlink" title="问题分析解决"></a>问题分析解决</h4><p>从客户描述上来看，猜测很大可能是硬件问题，因此带了一块STM32F030-NUCLEO板过去，想着做个芯片交换测试看下结果。</p>
-<p>到达客户现场，了解到客户只是使用了内部高速晶振HSI。先使用示波器抓下VDD和NRST的启动波形，在常温下发现并没有明显异常。于是做低温测试，为了对比，基于STM32F030-NUCLEO板了写了一个只使用内部高速晶振HSI , 翻转一个LED灯的程序。</p>
-<p>结果显示，STM32F030-NUCLEO板能正常启动，而客户的板子问题重现，再次测量其VDD和NRST的启动波形，发现VDD上电过程中有稍微不规则波形，但感觉不至于导致MCU无法启动。考虑到当前客户板子上的MCU跑的是客户自己的程序，为了统一对比，将客户板子上的MCU烧录成NUCELO板上一样的程序，再次做低温测试，结果显示客户的板子也能正常启动！</p>
-<p>于是可以初步断定，此问题与客户自己的软件有关，而与外围电路无关。</p>
-<p>接下来对比测试代码与客户自己的代码，并再次做低温测试验证结果，最终发现客户的时钟树配置有个参数有问题：</p>
-<p><img src="/../image/image-20240329095021747.png" alt="image-20240329095021747"></p>
-<p>如上红色代码所示，RCC_OSCILLATORTYPE_NONE改成RCC_OSCILLATORTYPE_HSI后。问题现象明显改善，但经过测试，发现偶尔还会启动不正常的时候。但相对于之前100%可以重现的现象，至少说明之前软件的失误至少是一个因素。</p>
-<p>现在问题变成偶尔重现，已经向前迈进一大步。接下来怀疑与硬件有关了，理由是同样的测试软件跑在用户的板子上和跑在NUCELO软件上的结果不一致。</p>
-<p>因此接下来首先对于用户的板子的外围电路与STM32F030-NUCLEO板子的外围电路，发现客户MCU的BOOT0引脚是悬空的，于是加上一个外部10K下拉电阻，再次测试问题不再重现。</p>
-<p>至此，问题解决！</p>
-<h4 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h4><p>回过头来看这个问题，发现客户知道MCU使用的是HSI，可偏偏在代码中配置时钟树时使用的晶振类型却是NONE !这种问题现在看来是非常低级的问题，但在代码量大，或者代码迭代的过程中，之前写代码的人离职，后续接手的工程师又不能全盘了解所有代码的情况下时就会变得束手无策，当碰到此类莫名其妙的问题，特别是无法判断到底是硬件问题还是软件问题的时候，保持清晰的思路是非常重要的。（另外，对于这个现象，<strong>看门狗</strong>也是可能是一种思路。比如说冷启动的时候导致看门狗模块异常不能及时喂狗所导致的重启）。继续补充一下。<strong>在低温环境，要注意晶振负载电容随温度的变化</strong>。</p>
-<p>这里我需要强调的是，最有效的解决方法就是<strong>快速找到一个 “参照物”</strong>，而ST的DEMO板和示例代码就是在硬件上和软件上扮演这样一个参照物的角色。<strong>可以通过MCU交换测试来判断是不是芯片外围电路的问题或者芯片问题</strong>，可以使用Cube库下的示例代码，对比其运行结果来判断是否与软件有关。<mark>先从大方向明确问题到底是与硬件有关还是与软件有关，然后再做下一步分析</mark>，这种方法希望读者能有效掌握。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>转载这篇文章，对思路进行一下开阔，有的问题可能看似与软件无关，实则确实息息相关。遇到异常的时候，首先分析<mark>时钟，电源，复位</mark>是否都是正常，不论是从软件还是从硬件上来确认。</p>
+    <title>pll</title>
+    <url>/pll.html</url>
+    <content><![CDATA[<h4 id="PLL原理"><a href="#PLL原理" class="headerlink" title="PLL原理"></a>PLL原理</h4><p><img src="/../image/image-20240409175353208.png" alt="image-20240409175353208"></p>
+<p>由一个<strong>基准频率振荡器</strong>（晶体振荡器），<strong>相位频率比较器</strong>，<strong>VCO</strong>（电压控制振荡器），<strong>回路滤波器</strong>组成。晶振产生频率为fr的时钟，与VCO产生的fo的时钟同时传入相位频率比较器中进行比较，产生比较结果以脉冲波的形式传入回路滤波器，回路滤波器通过低频将脉冲波转变为直流低压VR，传入VCO对fo进行控制，形成反馈控制电路。</p>
+<p><img src="/../image/image-20240409175428500.png" alt="image-20240409175428500"></p>
+<p>当fr&gt;fo时产生PD为正脉冲，VR变大，当fr&lt;fo时，PD产生负脉冲波，VR减小，形成对fo的闭环控制，最终目的，是<strong>fo&#x3D;&#x3D;fr</strong>。</p>
+<h3 id="倍频器"><a href="#倍频器" class="headerlink" title="倍频器"></a>倍频器</h3><p>PLL的主要功能还是倍频。倍频的实现其实很简单，只要在VCO的后面加一个分频器，时参与比较的Fvco&#x3D;（1&#x2F;n）fo,fo’是VCO产生的。这样就实现了Fvco&#x3D;n*fr。</p>
+<p><img src="/../image/image-20240409175451397.png" alt="image-20240409175451397"></p>
+<h3 id="分频器原理"><a href="#分频器原理" class="headerlink" title="分频器原理"></a>分频器原理</h3><p>分频器原理就是之前上的简单的数电知识，在这就一块说了。<br>主要就说一个<strong>偶数分频</strong>。<br>偶数分频器的实现简单，用计数器在上升沿或者下降沿计数，当计数器的值等于分频系数的一半或等于分频系数时，信号翻转。<br>电路原理是用一个上升沿计数的计数器，每次计数到2时输出信号clkout翻转一次，每次计数到4时clkout再翻转一次，一直周期重复下去。其他的偶数分频器原理也是一样。</p>
 ]]></content>
       <categories>
         <category>mcu_misc</category>
@@ -319,6 +407,25 @@
 ]]></content>
       <categories>
         <category>miscg</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>test_1</title>
+    <url>/test-1.html</url>
+    <content><![CDATA[<h3 id="原码补码反码移码"><a href="#原码补码反码移码" class="headerlink" title="原码补码反码移码"></a>原码补码反码移码</h3><p><strong>反码</strong>：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；<br>        <strong>补码</strong>：解决负数加法运算正负零问题，弥补了反码的不足。</p>
+<p>总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，<strong>不管是正整数还是正小数，原码，反码，补码都全部相同。</strong></p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>正数的原码、补码、反码均为其本身；</li>
+<li>负数（二进制）的原码、补码、反码公式：<br>反码 &#x3D; 原码（除符号位外）每位取反<br>补码 &#x3D; 反码 + 1<br>反码 &#x3D; 补码  - 1<br>移码 &#x3D; 补码符号位取反</li>
+</ul>
+<h3 id="计算机可靠性模型"><a href="#计算机可靠性模型" class="headerlink" title="计算机可靠性模型"></a>计算机可靠性模型</h3><h5 id="串联系统"><a href="#串联系统" class="headerlink" title="串联系统"></a>串联系统</h5><p>系统可靠性<img src="/../image/image-20240418103809734.png" alt="image-20240418103809734"></p>
+<p>系统失效率<img src="/../image/image-20240418103855822.png" alt="image-20240418103855822"></p>
+<h5 id="并联系统"><a href="#并联系统" class="headerlink" title="并联系统"></a>并联系统</h5><p>系统可靠性<img src="/../image/image-20240418103948295.png" alt="image-20240418103948295"></p>
+<p>系统失效率<img src="/../image/image-20240418104000114.png" alt="image-20240418104000114"></p>
+]]></content>
+      <categories>
+        <category>software_test</category>
       </categories>
   </entry>
   <entry>
@@ -386,82 +493,6 @@
     <content><![CDATA[<h4 id="option-byte介绍"><a href="#option-byte介绍" class="headerlink" title="option byte介绍"></a>option byte介绍</h4>]]></content>
       <categories>
         <category>mcu_misc</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>pll</title>
-    <url>/pll.html</url>
-    <content><![CDATA[<h4 id="PLL原理"><a href="#PLL原理" class="headerlink" title="PLL原理"></a>PLL原理</h4><p><img src="/../image/image-20240409175353208.png" alt="image-20240409175353208"></p>
-<p>由一个<strong>基准频率振荡器</strong>（晶体振荡器），<strong>相位频率比较器</strong>，<strong>VCO</strong>（电压控制振荡器），<strong>回路滤波器</strong>组成。晶振产生频率为fr的时钟，与VCO产生的fo的时钟同时传入相位频率比较器中进行比较，产生比较结果以脉冲波的形式传入回路滤波器，回路滤波器通过低频将脉冲波转变为直流低压VR，传入VCO对fo进行控制，形成反馈控制电路。</p>
-<p><img src="/../image/image-20240409175428500.png" alt="image-20240409175428500"></p>
-<p>当fr&gt;fo时产生PD为正脉冲，VR变大，当fr&lt;fo时，PD产生负脉冲波，VR减小，形成对fo的闭环控制，最终目的，是<strong>fo&#x3D;&#x3D;fr</strong>。</p>
-<h3 id="倍频器"><a href="#倍频器" class="headerlink" title="倍频器"></a>倍频器</h3><p>PLL的主要功能还是倍频。倍频的实现其实很简单，只要在VCO的后面加一个分频器，时参与比较的Fvco&#x3D;（1&#x2F;n）fo,fo’是VCO产生的。这样就实现了Fvco&#x3D;n*fr。</p>
-<p><img src="/../image/image-20240409175451397.png" alt="image-20240409175451397"></p>
-<h3 id="分频器原理"><a href="#分频器原理" class="headerlink" title="分频器原理"></a>分频器原理</h3><p>分频器原理就是之前上的简单的数电知识，在这就一块说了。<br>主要就说一个<strong>偶数分频</strong>。<br>偶数分频器的实现简单，用计数器在上升沿或者下降沿计数，当计数器的值等于分频系数的一半或等于分频系数时，信号翻转。<br>电路原理是用一个上升沿计数的计数器，每次计数到2时输出信号clkout翻转一次，每次计数到4时clkout再翻转一次，一直周期重复下去。其他的偶数分频器原理也是一样。</p>
-]]></content>
-      <categories>
-        <category>mcu_misc</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>mcu_reset</title>
-    <url>/mcu-reset.html</url>
-    <content><![CDATA[<h4 id="单片机复位介绍"><a href="#单片机复位介绍" class="headerlink" title="单片机复位介绍"></a>单片机复位介绍</h4><p>经典的STM32内部复位电路如下</p>
-<p><img src="/../image/image-20240410090253667.png" alt="image-20240410090253667"></p>
-<p>可以看到复位分为两大类：<strong>内部复位和外部复位</strong></p>
-<ul>
-<li><p>内部复位源通过脉冲发生器在 NRST 引脚产生延时至少 20μs 的脉冲，引起 NRST 保持电平产生复位；</p>
-</li>
-<li><p>外部复位源则直接将 NRST 引脚电平拉低产生复 位。</p>
-</li>
-</ul>
-<h5 id="外部复位"><a href="#外部复位" class="headerlink" title="外部复位"></a>外部复位</h5><p>NRST 引脚上的低电平。</p>
-<h5 id="软件复位"><a href="#软件复位" class="headerlink" title="软件复位"></a>软件复位</h5><p>将 Arm® Cortex®-M3 中断应用和复位控制寄存器中的 SYSRESETREQ 置“1” 时，可实现软件复位。JLINK对设备的复位就是控制的这一位。Reset: Reset device via AIRCR.SYSRESETREQ.</p>
-<h6 id="内核复位"><a href="#内核复位" class="headerlink" title="内核复位"></a>内核复位</h6><p>在Cortex-M内核文档中大概有这样的描述：<strong>通过设置 NVIC 中应用程序中断与复位控制寄存器(AIRCR)的VECTRESET 位，可只复位处理器内核而不复位其它片上设施。</strong></p>
-<p>也就是说，这样操作只复位Cortex-M内核，不会复位UART这些片内外设。</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">void NVIC_CoreReset(void)</span><br><span class="line">&#123;</span><br><span class="line">  __DSB();</span><br><span class="line">  SCB-&gt;AIRCR  = ((0x5FA &lt;&lt; SCB_AIRCR_VECTKEY_Pos)      |</span><br><span class="line">                 (SCB-&gt;AIRCR &amp; SCB_AIRCR_PRIGROUP_Msk) |</span><br><span class="line">                 SCB_AIRCR_VECTRESET_Msk);       //置位 VECTRESET</span><br><span class="line">  __DSB();</span><br><span class="line">  while(1) &#123; __NOP(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="系统复位"><a href="#系统复位" class="headerlink" title="系统复位"></a>系统复位</h6><p>软件复位中的系统复位操作的寄存器位（SYSRESETREQ）不同，复位的对象为整个芯片（除后备区域）。</p>
-<p>系统复位函数：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">void NVIC_SysReset(void)</span><br><span class="line">&#123;</span><br><span class="line">  __DSB();</span><br><span class="line">  SCB-&gt;AIRCR  = ((0x5FA &lt;&lt; SCB_AIRCR_VECTKEY_Pos)      | </span><br><span class="line">                 (SCB-&gt;AIRCR &amp; SCB_AIRCR_PRIGROUP_Msk) | </span><br><span class="line">                 SCB_AIRCR_SYSRESETREQ_Msk);     //置位 SYSRESETREQ</span><br><span class="line">  __DSB();</span><br><span class="line">  while(1) &#123; __NOP(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="电源复位"><a href="#电源复位" class="headerlink" title="电源复位"></a>电源复位</h5><p>分为上电复位（POR 复位），掉电复位（PDR 复位），从待机模式唤醒。</p>
-<p>依靠单片机内部的电源监控电路，在供电电压达不到设定值时自动进行复位。当检测到 VDD&#x2F;VDDA低于阈值电压 VPOR和 VPDR 时，芯片将会自动保持为复位状 态，上电复位和掉电复位的波形图如下。</p>
-<p><img src="/../image/image-20240410114131548.png" alt="image-20240410114131548"></p>
-<h5 id="低功耗复位"><a href="#低功耗复位" class="headerlink" title="低功耗复位"></a>低功耗复位</h5><p>低功耗管理复位的产生有两种情况，一种是进入待机模式时，另一种是进入停止 模式时。在这两种情况下，如果把用户选择字节中的 RSTSTDB 位（待机模式 时）或 RSTSTOP 位（停止模式时）清零，系统将被复位而不是进入待机模式或 停止模式。</p>
-<h5 id="复位源查看"><a href="#复位源查看" class="headerlink" title="复位源查看"></a>复位源查看</h5><p>可以通过查看 RCM_CSTS（控制&#x2F;状态寄存器）中的复位标志位识别复位事件来源，也可以相应清除标志位。</p>
-<p><img src="/../image/image-20240410114427398.png" alt="image-20240410114427398"></p>
-]]></content>
-      <categories>
-        <category>mcu_misc</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>hisi3519AV200_debug</title>
-    <url>/hisi3519AV200-debug.html</url>
-    <content><![CDATA[<h4 id="hisi常用debug查看"><a href="#hisi常用debug查看" class="headerlink" title="hisi常用debug查看"></a>hisi常用debug查看</h4><ul>
-<li>hiddrs查看ddr占用</li>
-<li>cat &#x2F;dev&#x2F;logmpp 查看设备mpplog</li>
-<li></li>
-</ul>
-<h4 id="媒体处理部分"><a href="#媒体处理部分" class="headerlink" title="媒体处理部分"></a>媒体处理部分</h4>]]></content>
-      <categories>
-        <category>dsp_hisi_misc</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>test_1</title>
-    <url>/test-1.html</url>
-    <content><![CDATA[<h3 id="原码补码反码移码"><a href="#原码补码反码移码" class="headerlink" title="原码补码反码移码"></a>原码补码反码移码</h3><p><strong>反码</strong>：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；<br>        <strong>补码</strong>：解决负数加法运算正负零问题，弥补了反码的不足。</p>
-<p>总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，<strong>不管是正整数还是正小数，原码，反码，补码都全部相同。</strong></p>
-<p><strong>总结：</strong></p>
-<ul>
-<li>正数的原码、补码、反码均为其本身；</li>
-<li>负数（二进制）的原码、补码、反码公式：<br>反码 &#x3D; 原码（除符号位外）每位取反<br>补码 &#x3D; 反码 + 1<br>反码 &#x3D; 补码  - 1<br>移码 &#x3D; 补码符号位取反</li>
-</ul>
-]]></content>
-      <categories>
-        <category>software_test</category>
       </categories>
   </entry>
 </search>
