@@ -121,13 +121,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -152,6 +152,140 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/Bloom-filter.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Bloom-filter.html" class="post-title-link" itemprop="url">Bloom_filter</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-09 08:32:56 / 修改时间：09:14:23" itemprop="dateCreated datePublished" datetime="2024-05-09T08:32:56+08:00">2024-05-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/misc/" itemprop="url" rel="index"><span itemprop="name">misc</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="布隆过滤器介绍"><a href="#布隆过滤器介绍" class="headerlink" title="布隆过滤器介绍"></a>布隆过滤器介绍</h1><p><strong>基本概念：</strong>它实质上是一个很长的二进制向量和一系列随机映射函数 (Hash函数)。</p>
+<p><strong>作用：</strong>它是一个空间效率高的概率型数据结构，用来告诉你:<strong>一个元素一定不存在或者可能存在</strong>。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li><pre><code>在存储空间和时间都是常数，即hash函数的个数
+</code></pre>
+</li>
+<li><pre><code>Hash 函数相互之间没有关系，方便由硬件并行实现。
+</code></pre>
+</li>
+<li><pre><code>布隆过滤器不需要存储元素本身，在某些对保密要求非常严格的场合有优势。
+</code></pre>
+</li>
+<li><pre><code>布隆过滤器可以表示全集，其它任何数据结构都不能。
+</code></pre>
+</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>有误判率存在</li>
+<li>不支持删除</li>
+</ul>
+<p><strong>适用场景：</strong></p>
+<ul>
+<li>预防缓存穿透：布隆过滤器快速判断数据是否存在，避免通过查询数据库来判断数据是否存在。</li>
+<li>网络爬虫：布隆过滤器可以用来去重已经爬取过的URL。</li>
+<li>邮箱的垃圾邮件过滤。</li>
+<li>黑白名单。</li>
+</ul>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>布隆过滤器实现原理就是<strong>一个超大位数的数组（BitMap）和多个不同Hash算法函数</strong>。与寻常数组不同的是，BitMap一个数组元素占一个bit，这一特性决定了BitMap能够极大地<strong>节省空间</strong>。</p>
+<p><img src="/../image/image-20240509090000811.png" alt="image-20240509090000811"></p>
+<h4 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h4><p>将要添加的元素分别通过k个哈希函数计算得到k个哈希值，这k个hash值对应位数组上的k个位置，然后将这k个位置设置为1。</p>
+<p><img src="/../image/image-20240509090026138.png" alt="image-20240509090026138"></p>
+<p>当不同元素在计算到相同的值后，依旧保持这一位为1即可。</p>
+<p><img src="/../image/image-20240509084931019.png" alt="image-20240509084931019"></p>
+<h4 id="查询元素"><a href="#查询元素" class="headerlink" title="查询元素"></a>查询元素</h4><p>将要查询的元素分别通过k个哈希函数计算得到k个哈希值，这k个hash值对应位数组上的k个位置。如果这k个位置中有一个位置为0，则此元素一定不存在集合中。如果这k个位置全部为1，则这个元素可能存在。</p>
+<h4 id="误判"><a href="#误判" class="headerlink" title="误判"></a>误判</h4><p>需要注意的是，布隆过滤器<strong>无法确定元素存在</strong>，只能确定元素不存在。出现的原因是多个输入经过哈希之后在相同的bit位置1了，这样就无法判断究竟是哪个输入产生的，因此误判的根源在于相同的 bit 位被多次映射且置 1。</p>
+<p>这种情况也造成了布隆过滤器的<strong>删除</strong>问题，即布隆过滤器<strong>不存在删除</strong>操作。因为布隆过滤器的每一个 bit 并不是独占的，很有可能多个元素共享了某一位。如果我们直接删除这一位的话，会影响其他的元素。</p>
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><p><strong>防止缓存穿透</strong>。缓存穿透是指缓存和数据库中都没有的数据，而用户不断发起请求，如发起为id为“-1”的数据或id为特别大不存在的数据。这时的用户很可能是攻击者，攻击会导致数据库压力过大。使用布隆过滤器能够避免频繁查询不存在的数据，减轻数据库的压力。</p>
+<p><strong>业务场景中判断用户是否阅读过某视频或文章</strong>，比如抖音或头条，当然会导致一定的误判，但不会让用户看到重复的内容。</p>
+<p><strong>gun hash表</strong>， 主要是利用 <code>Bloom Filter</code>, 在常量时间内判断, 字符是否存在, 以及对应 <code>.dynsym</code> 的位置. 使用 <code>gcc -g -o hello -Wl,--hash-style=sysv(gnu) hello.c</code> 可以产生旧版本的 <code>hash</code> 表.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -309,7 +443,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-04-18 10:40:02" itemprop="dateModified" datetime="2024-04-18T10:40:02+08:00">2024-04-18</time>
+      <time title="修改时间：2024-04-30 14:40:14" itemprop="dateModified" datetime="2024-04-30T14:40:14+08:00">2024-04-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -627,9 +761,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-04-09 17:50:38 / 修改时间：17:55:10" itemprop="dateCreated datePublished" datetime="2024-04-09T17:50:38+08:00">2024-04-09</time>
+      <time title="创建时间：2024-04-09 17:50:38" itemprop="dateCreated datePublished" datetime="2024-04-09T17:50:38+08:00">2024-04-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-30 14:41:12" itemprop="dateModified" datetime="2024-04-30T14:41:12+08:00">2024-04-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1078,122 +1218,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/networkcard-cfg.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/networkcard-cfg.html" class="post-title-link" itemprop="url">networkcard-cfg</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-03-28 19:25:59 / 修改时间：20:11:43" itemprop="dateCreated datePublished" datetime="2024-03-28T19:25:59+08:00">2024-03-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.7k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="Linux下网卡命名规则"><a href="#Linux下网卡命名规则" class="headerlink" title="Linux下网卡命名规则"></a>Linux下网卡命名规则</h4><h5 id="rename-规则"><a href="#rename-规则" class="headerlink" title="rename 规则"></a>rename 规则</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">step1 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),</span><br><span class="line">是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡；</span><br><span class="line"></span><br><span class="line">step2 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），</span><br><span class="line">且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span><br><span class="line"></span><br><span class="line">step3, 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称;</span><br><span class="line"></span><br><span class="line">step4，udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名;</span><br><span class="line"></span><br><span class="line">强调：这个step顺序是在我们没有自定义自己的rules的前提下，如果用户自定义了自己的rules，则用户自定义为优先级最高</span><br></pre></td></tr></table></figure>
-
-<h5 id="传统命名"><a href="#传统命名" class="headerlink" title="传统命名"></a>传统命名</h5><p>centos6之前采用的都是传统的命名方式，如eth0,1…</p>
-<h5 id="可预测的命名"><a href="#可预测的命名" class="headerlink" title="可预测的命名"></a>可预测的命名</h5><p>cenos7之后提供了可预测性的网卡命名方式。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果从BIOS中能够取到可用的，板载网卡的索引号，则使用这个索引号命名，例如: eno1，如不能则尝试2</span><br><span class="line">如果从BIOS中能够取到可以用的，网卡所在的PCI-E热插拔插槽(注：pci槽位号)的索引号，则使用这个索引号命名，例如: ens1，如不能则尝试3</span><br><span class="line">如果能拿到设备所连接的物理位置（PCI总线号+槽位号？）信息，则使用这个信息命名，例如:enp2s0，如不能则尝试4</span><br><span class="line">传统的kernel命名方法，例如: eth0，这种命名方法的结果不可预知的，即可能第二块网卡对应eth0，第一块网卡对应eth1</span><br><span class="line">使用网卡的MAC地址来命名，这个方法一般不使用</span><br></pre></td></tr></table></figure>
-
-<h5 id="自定义规则"><a href="#自定义规则" class="headerlink" title="自定义规则"></a>自定义规则</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在用户没有自定义rules文件前提下，step1中的网卡命名方式也可认为是一种用户自定义的网卡命名，</span><br><span class="line">即在/etc/sysconfig/network-scripts/ifcfg-xx 文件，xx就是这个网卡名称，文件内容中体现MAC_ADDRESS、NAME，</span><br><span class="line">这种情况下，则会按照配置文件中指定的名称来命名网卡</span><br><span class="line"></span><br><span class="line">如果用户自定义了rules文件，放在/etc/udev/rules.d/目录下，则这个优先级是最高的；</span><br><span class="line">比1中ifcfg-xx方式优先级更高，但是如果两者不一致，则在重启network服务时，会依据ifcfg-xx，</span><br><span class="line">所以用户不应该同时采用里两种方式给同一个网卡命不同的名称</span><br></pre></td></tr></table></figure>
-
-<p>udevadm info &#x2F;sys&#x2F;class&#x2F;net&#x2F;网卡名</p>
-<p>可以显示此时这个网卡的pcie信息，vendor_id,idbus等等信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">root@Bai5gc:/sys/class/net/eth1# udevadm info /sys/class/net/eth1</span><br><span class="line">P: /devices/pci0000:00/0000:00:02.2/0000:03:00.0/net/eth1</span><br><span class="line">E: DEVPATH=/devices/pci0000:00/0000:00:02.2/0000:03:00.0/net/eth1</span><br><span class="line">E: ID_BUS=pci</span><br><span class="line">E: ID_MODEL_FROM_DATABASE=Ethernet Connection X552 10 GbE Backplane</span><br><span class="line">E: ID_MODEL_ID=0x15ab</span><br><span class="line">E: ID_NET_DRIVER=ixgbe</span><br><span class="line">E: ID_NET_LINK_FILE=/lib/systemd/network/99-default.link</span><br><span class="line">E: ID_NET_NAME_MAC=enxb4a9fca897e7</span><br><span class="line">E: ID_NET_NAME_ONBOARD=eno3</span><br><span class="line">E: ID_NET_NAME_PATH=enp3s0f0</span><br><span class="line">E: ID_PATH=pci-0000:03:00.0</span><br><span class="line">E: ID_PATH_TAG=pci-0000_03_00_0</span><br><span class="line">E: ID_PCI_CLASS_FROM_DATABASE=Network controller</span><br><span class="line">E: ID_PCI_SUBCLASS_FROM_DATABASE=Ethernet controller</span><br><span class="line">E: ID_VENDOR_FROM_DATABASE=Intel Corporation</span><br><span class="line">E: ID_VENDOR_ID=0x8086</span><br><span class="line">E: IFINDEX=3</span><br><span class="line">E: INTERFACE=eth1</span><br><span class="line">E: SUBSYSTEM=net</span><br><span class="line">E: SYSTEMD_ALIAS=/sys/subsystem/net/devices/eth1</span><br><span class="line">E: TAGS=:systemd:</span><br><span class="line">E: USEC_INITIALIZED=5061037</span><br><span class="line">E: net.ifnames=0</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>ps：解释一下pci地址</p>
-<ul>
-<li><code>/pci0000:00</code>：这是根 PCIe 控制器的地址，<code>pci0000:00</code> 表示根控制器。</li>
-<li><code>/0000:00:02.2</code>：这是连接到根控制器的第一个 PCIe 设备的地址。<code>0000:00:02.2</code> 表示这个设备的总线号、设备号和功能号。</li>
-<li><code>/0000:03:00.0</code>：这是连接到第一个 PCIe 设备的下一个 PCIe 设备的地址。<code>0000:03:00.0</code> 表示新设备的总线号、设备号和功能号。</li>
-</ul>
-</blockquote>
-<h5 id="命名rule-d"><a href="#命名rule-d" class="headerlink" title="命名rule.d"></a>命名rule.d</h5><h6 id="biosdevname和net-ifnames两种命名规范"><a href="#biosdevname和net-ifnames两种命名规范" class="headerlink" title="biosdevname和net.ifnames两种命名规范"></a>biosdevname和net.ifnames两种命名规范</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">net.ifnames的命名规范为:设备类型+设备位置+数字</span><br><span class="line"></span><br><span class="line">设备类型：</span><br><span class="line"></span><br><span class="line">en 表示Ethernet</span><br><span class="line">wl 表示WLAN</span><br><span class="line">ww 表示无线广域网WWAN</span><br><span class="line"></span><br><span class="line">实际的例子:</span><br><span class="line"></span><br><span class="line">eno1 板载网卡</span><br><span class="line">enp0s2  pci网卡</span><br><span class="line">ens33   pci网卡</span><br><span class="line">wlp3s0  PCI无线网卡</span><br><span class="line">wwp0s29f7u2i2   4G modem</span><br><span class="line">wlp0s2f1u4u1   连接在USB Hub上的无线网卡</span><br><span class="line">enx78e7d1ea46da pci网卡</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">biosdevname的命名规范为: 要么是em开头，要么是p开头</span><br><span class="line">实际的例子:</span><br><span class="line"></span><br><span class="line">em1 板载网卡</span><br><span class="line">p3p4 pci网卡</span><br><span class="line">p3p4_1 虚拟网卡</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -1216,14 +1242,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">17k</span>
+    <span title="站点总字数">19k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">32 分钟</span>
+    <span title="站点阅读时长">34 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
