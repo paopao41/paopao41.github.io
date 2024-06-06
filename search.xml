@@ -544,4 +544,121 @@
         <category>pcie</category>
       </categories>
   </entry>
+  <entry>
+    <title>Photographic_learning</title>
+    <url>/Photographic-learning.html</url>
+    <content><![CDATA[<h1 id="摄影参数介绍"><a href="#摄影参数介绍" class="headerlink" title="摄影参数介绍"></a>摄影参数介绍</h1><ul>
+<li><p>白平衡：通过调整色温尽量保持白色为原本的白色，即平衡白色的颜色。（本质是通过调整色温来调整蓝色&#x2F;红色的互补色 ）<strong>（90%的场景可以使用自动白平衡）</strong></p>
+<ul>
+<li>白色优先&#x2F;氛围优先</li>
+<li>环境中光源很多的时候，自动白平衡可能效果不好，手动不知道设置什么的时候，设置一下白卡校准。延时拍摄需要手动设置，不然会收到忽然出现物体的影响。RAW格式后期可以无损更改白平衡</li>
+</ul>
+</li>
+<li><p>色温：颜色的温度，色温越高 颜色越偏蓝，色温约低，颜色越偏红。  </p>
+</li>
+<li><p>色相：后期修改偏色，颜色发绿等等。</p>
+</li>
+<li><p>对焦：主要依靠镜头来完成。镜头外圈单位为m，内圈单位为inch，AF自动对焦，MF手动对焦 （当环境较暗，色彩很多的时候，自动对焦可能会不准。镜头有最小对焦距离，不得小于此，否则会无法对焦。）</p>
+</li>
+<li><p>AF-S:单次对焦，移动相机对焦距离也不会改变。</p>
+</li>
+<li><p>AF-A:自动检测物体是否移动。</p>
+</li>
+<li><p><strong>AF-C:连续对焦模式。（80%）</strong></p>
+</li>
+<li><p>DMF:自动对焦后，可手动精细对焦调节</p>
+</li>
+<li><p>广域对焦：屏幕范围内任何都可以对焦</p>
+</li>
+<li><p>点对焦SML,小中大。自由选择对焦点。</p>
+</li>
+<li><p>扩展点：点无法对焦的时候在附近找扩展点进行对焦</p>
+</li>
+<li><p>跟踪对焦：选择对焦区域。对焦点会一直跟着指定物体。</p>
+</li>
+<li><p>AF过渡速度：从一个对焦点移动到另一个对焦点的速度</p>
+</li>
+<li><p>AF转移灵敏度：如果焦点前有物体掠过的时候，是否会快速对焦到物体身上。</p>
+</li>
+<li><p>测光模式</p>
+<ul>
+<li><strong>全局测光：分割画面，单独测光，提高焦点附近权重，计算均值。（90%）</strong></li>
+<li>中心测光：对画面中央物体进行测光，比如拍人的时候。</li>
+<li>点测光;顾名思义。</li>
+</ul>
+</li>
+<li><p>曝光补偿：白+黑-，<strong>拍摄人物可以适当增加一点曝光补偿</strong>。因为人体反射率25%左右。相机自动曝光会拉低曝光值，导致人物偏暗。打开直方图也可以。</p>
+</li>
+<li></li>
+<li><p>光圈：F值。数字越大，光圈越小。</p>
+<ul>
+<li>光圈越大，进光亮越多。</li>
+<li>光圈越大，虚化越明显，景深越浅。拍摄人物的时候放大光圈，拍摄风景的时候缩小光圈。</li>
+</ul>
+</li>
+<li><p>快门：单位：s 1&#x2F;100秒。会计算0.01s的进光量到传感器。</p>
+<ul>
+<li>快门速度越慢，进光量越多。</li>
+<li>快门速度还会影响拖影。 运动速度较快的设备使用较快的快门速度。轨迹则用慢速快门。</li>
+<li>一般可以设置快门速度值比焦段数值更高。</li>
+<li>果冻效应：物体运动过快导致每一行图像数据有时间差。导致图片会倾斜。用全域快门来解决。因为全域快门一次读取的是所有的数据。</li>
+<li>电子快门，不用机械快门。但是画质会减少，因为cpu还要处理电子快门逻辑。</li>
+<li>电子前lian快门。</li>
+<li><strong>拍摄视频的时候的快门。和帧数相关。快门速度越快，每一帧记录物体移动时间越少。动态模糊越少。</strong></li>
+<li>设置相机的快门速度一般为帧数的2倍数。</li>
+</ul>
+</li>
+<li><p>ISO：ISO越高，画面越亮，噪点越多。增加增益，通电量。<strong>一般情况通过光圈和快门来控制曝光，实在没办法了，才会通过ISO提高。</strong>增加ISO的时候信噪比会提高。会放大本底噪声。主要是由于进光量不足，被迫只能放大信号，导致噪点被放大变得可见了。</p>
+</li>
+</ul>
+<h1 id="挡位介绍"><a href="#挡位介绍" class="headerlink" title="挡位介绍"></a>挡位介绍</h1><ul>
+<li>auto：全自动</li>
+<li>P：程序自动曝光+手动曝光补偿</li>
+<li>A：光圈优先，相机自动调整快门和ISO。 拍摄人像的时候，大光圈优先</li>
+<li>S：快门优先挡位，相机自动调整光圈ISO。拍摄运动物体的时候。</li>
+<li>C1:C2 C3，自定义挡位。</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>bakeup_region</title>
+    <url>/bakeup-region.html</url>
+    <content><![CDATA[<h1 id="备份区域以及RTC介绍"><a href="#备份区域以及RTC介绍" class="headerlink" title="备份区域以及RTC介绍"></a>备份区域以及RTC介绍</h1>]]></content>
+      <categories>
+        <category>mcu_misc</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>python_parser</title>
+    <url>/python-parser.html</url>
+    <content><![CDATA[<h1 id="argparse介绍"><a href="#argparse介绍" class="headerlink" title="argparse介绍"></a>argparse介绍</h1><blockquote>
+<p>argparse 模块是 Python 内置的一个用于&#x3D;&#x3D;命令项选项与参数解析&#x3D;&#x3D;的模块，argparse 模块可以让人轻松编写用户友好的命令行接口。通过在程序中定义好我们需要的参数，然后 argparse 将会从 sys.argv 解析出这些参数。argparse 模块还会自动生成帮助和使用手册，并在用户给程序传入无效参数时报出错误信息。</p>
+<p>官方地址：<a href="https://docs.python.org/zh-cn/3/library/argparse.html#argumentparser-objects">https://docs.python.org/zh-cn/3/library/argparse.html#argumentparser-objects</a></p>
+</blockquote>
+<h1 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个解析器。创建argumentparser对象</span></span><br><span class="line"><span class="comment">#大多数对argumentparser构造方法的调用都会使用description=关键词参数。这个参数简要描述</span></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用add_argument方法添加参数信息是通过调用add_argument方法完成的。</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--sparse&#x27;</span>, action=<span class="string">&#x27;store_true&#x27;</span>, default=<span class="literal">False</span>, <span class="built_in">help</span>=<span class="string">&#x27;GAT with sparse version or not.&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--seed&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">72</span>, <span class="built_in">help</span>=<span class="string">&#x27;Random seed.&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--epochs&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">10000</span>, <span class="built_in">help</span>=<span class="string">&#x27;Number of epochs to train.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用parse_args解析添加的参数</span></span><br><span class="line">args = parser.parse_args()</span><br><span class="line"><span class="built_in">print</span>(args.sparse)</span><br><span class="line"><span class="built_in">print</span>(args.seed)</span><br><span class="line"><span class="built_in">print</span>(args.epochs)</span><br></pre></td></tr></table></figure>
+
+<h4 id="add-argument（）"><a href="#add-argument（）" class="headerlink" title="add_argument（）"></a>add_argument（）</h4><p>其中，这个方法定义了如何解析命令行参数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ArgumentParser.add_argument(name <span class="keyword">or</span> flags...[, action][, nargs][, const][, default][, <span class="built_in">type</span>][, choices][, required][, <span class="built_in">help</span>][, metavar][, dest])</span><br><span class="line"></span><br><span class="line">name <span class="keyword">or</span> flags:选项字符串的名字或者列表，例如foo或者-f，--foo</span><br><span class="line">avtion:命令行遇到参数时的动作。默认值是store </span><br><span class="line">（action=storce_true命令行遇到参数时的动作，默认是store，只要运行该变量有传参就将该变量设置为true）</span><br><span class="line">store_const:表示赋值为const</span><br><span class="line">append：将遇到的值存储成列表，如果参数重复会保存多个值。</span><br><span class="line">append_const，将参数规范中定义的一个值保存到一个列表；</span><br><span class="line">count，存储遇到的次数；此外，也可以继承 argparse.Action 自定义参数解析；</span><br><span class="line">nargs - 应该读取的命令行参数个数，可以是具体的数字，或者是?号，当不指定值时对于 Positional argument 使用 default，对于 <span class="type">Optional</span> argument 使用 const；或者是 * 号，表示 <span class="number">0</span> 或多个参数；或者是 + 号表示 <span class="number">1</span> 或多个参数。</span><br><span class="line">const - action 和 nargs 所需要的常量值。</span><br><span class="line">default - 不指定参数时的默认值。</span><br><span class="line"><span class="built_in">type</span> - 命令行参数应该被转换成的类型。</span><br><span class="line">choices - 参数可允许的值的一个容器。</span><br><span class="line">required - 可选参数是否可以省略 (仅针对可选参数)。</span><br><span class="line"><span class="built_in">help</span> - 参数的帮助信息，当指定为 argparse.SUPPRESS 时表示不显示该参数的帮助信息.</span><br><span class="line">metavar - 在 usage 说明中的参数名称，对于必选参数默认就是参数名称，对于可选参数默认是全大写的参数名称.</span><br><span class="line">dest - 解析后的参数名称，默认情况下，对于可选参数选取最长的名称，中划线转换为下划线.</span><br></pre></td></tr></table></figure>
+
+<p>命令行下单点调试的方式，python -m pdb xxx.py</p>
+<h1 id="补充串口库"><a href="#补充串口库" class="headerlink" title="补充串口库"></a>补充串口库</h1><p>pyserical库可以非常方便和串口的通讯</p>
+<p>官方文档</p>
+<p><a href="https://pyserial.readthedocs.io/en/latest/pyserial.html">https://pyserial.readthedocs.io/en/latest/pyserial.html</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> serial.tools.list_ports</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出当前连接的串口设备</span></span><br><span class="line">ports_list = <span class="built_in">list</span>(serial.tools.list_ports.comports())</span><br><span class="line"><span class="keyword">for</span> comport <span class="keyword">in</span> ports_list:</span><br><span class="line">    <span class="built_in">print</span>(comport[<span class="number">0</span>], comport[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>打开串口，参数说明</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__init__(port=None, baudrate=9600, bytesize=EIGHTBITS, parity=PARITY_NONE, stopbits=STOPBITS_ONE, timeout=None, xonxoff=False, rtscts=False, write_timeout=None, dsrdtr=False, inter_byte_timeout=None, exclusive=None)</span><br></pre></td></tr></table></figure>
+
+<p><strong>bytesize :</strong> 数据位，可取值five six seven eight等等</p>
+<p><strong>parity :</strong> 校验位，可取值none，even，odd，mask，spcae等等。</p>
+<p><strong>stop：</strong>停止位，one，two，five等等</p>
+<p><strong>timeout：</strong>超时时间，读超时时间，可取值为 None, 0 或者其他具体数值（支持小数）。当设置为 None 时，表示阻塞式读取，一直读到期望的所有数据才返回；当设置为 0 时，表示非阻塞式读取，无论读取到多少数据都立即返回；当设置为其他数值时，表示设置具体的超时时间（以秒为单位），如果在该时间内没有读取到所有数据，则直接返回</p>
+<p><strong>xonxoff：</strong>软件流控。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#举例 </span></span><br><span class="line"><span class="keyword">import</span> serial.tools.list_ports </span><br><span class="line">s = serial.Serial(<span class="string">&#x27;COM75&#x27;</span>, <span class="number">115200</span>, timeout=<span class="number">0.5</span>) </span><br><span class="line"><span class="built_in">print</span>(s.isOpen())  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#发送数据 发送数据使用write方法，发送的数据只能是byte类型，因此需要对发送的字符串进行编码操作</span></span><br><span class="line">cmd = <span class="string">&#x27;ifconfig\r\n&#x27;</span>  <span class="comment"># 命令带换行符</span></span><br><span class="line">length = s.write(cmd.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="comment"># 发送字符串</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&quot;serial&quot;</span></span><br><span class="line">ser.write(<span class="built_in">str</span>.encode())</span><br><span class="line"><span class="comment"># 发送 bytes</span></span><br><span class="line">data = [<span class="number">0x55</span>,<span class="number">0xAA</span>,<span class="number">0x5A</span>]</span><br><span class="line">ser.write(data)</span><br><span class="line"><span class="comment"># 发送数字</span></span><br><span class="line">num = <span class="number">100</span></span><br><span class="line">ser.write(num.to_bytes(<span class="number">1</span>,<span class="string">&quot;little&quot;</span>)) <span class="comment"># 长度1，小端模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#读取数据 可以使用read readall readlines...</span></span><br><span class="line"><span class="comment">#read默认读取一个字节，可以通过传入参数指定每次读取的字节数，返回值bytes类型</span></span><br><span class="line"><span class="comment">#readall读取串口接收的全部数据，返回bytes类型</span></span><br><span class="line"><span class="comment">#readlines读取多行数据，返回list类型，列表元素类型为bytes类型</span></span><br><span class="line"><span class="built_in">print</span>(s.read(<span class="number">1024</span>))</span><br><span class="line">s.read()[<span class="number">0</span>] --》 读取一个字节</span><br><span class="line"><span class="built_in">print</span>(s.readlines())</span><br><span class="line"><span class="built_in">print</span>(s.readall())</span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭串口 直接调用close方法即可</span></span><br><span class="line">s.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#其他方法</span></span><br><span class="line">in_waiting():返回接收缓存中的字节数</span><br><span class="line">flush():等待所有数据写出</span><br><span class="line">flushinput():丢弃接收缓存中的所有数据</span><br><span class="line">flushOutput():终止当前写操作，并丢弃发送缓存中的数据。</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>python_misc</category>
+      </categories>
+  </entry>
 </search>

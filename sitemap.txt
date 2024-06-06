@@ -1,3 +1,6 @@
+https://paopao41.github.io/python-parser.html
+https://paopao41.github.io/bakeup-region.html
+https://paopao41.github.io/Photographic-learning.html
 https://paopao41.github.io/Bloom-filter.html
 https://paopao41.github.io/pll.html
 https://paopao41.github.io/test-1.html
@@ -34,3 +37,4 @@ https://paopao41.github.io/categories/mcu-misc/
 https://paopao41.github.io/categories/pcie/
 https://paopao41.github.io/categories/miscg/
 https://paopao41.github.io/categories/software-test/
+https://paopao41.github.io/categories/python-misc/
