@@ -1,3 +1,6 @@
+https://paopao41.github.io/spi.html
+https://paopao41.github.io/padmux.html
+https://paopao41.github.io/emmc-partation.html
 https://paopao41.github.io/netlink.html
 https://paopao41.github.io/device-tree.html
 https://paopao41.github.io/mma.html
@@ -38,6 +41,6 @@ https://paopao41.github.io/categories/mcu-misc/
 https://paopao41.github.io/categories/dsp-hisi-misc/
 https://paopao41.github.io/categories/linux/
 https://paopao41.github.io/categories/pcie/
-https://paopao41.github.io/categories/miscg/
 https://paopao41.github.io/categories/python-misc/
+https://paopao41.github.io/categories/miscg/
 https://paopao41.github.io/categories/software-test/

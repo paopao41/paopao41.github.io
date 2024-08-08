@@ -189,6 +189,47 @@
     <content><![CDATA[<h1 id="设备树"><a href="#设备树" class="headerlink" title="设备树"></a>设备树</h1>]]></content>
   </entry>
   <entry>
+    <title>emmc_partation</title>
+    <url>/emmc-partation.html</url>
+    <content><![CDATA[<h1 id="emmc分区"><a href="#emmc分区" class="headerlink" title="emmc分区"></a>emmc分区</h1><p>emmc有默认四个物理分区。是出场即默认存在的。</p>
+<p><img src="/../image/image-20240807190154285.png" alt="image-20240807190154285"></p>
+<p>各个分区有独立的地址，都是从0x00开始的。Boot1，Boot2和RPMB的大小会在出厂的时候就设定好。两个boot的大小是完全一致的。由Extended CSD register的BOOT_SIZE_MULT Filed决定。大小的计算公式如下：</p>
+<p><img src="/../image/image-20240807191047225.png" alt="image-20240807191047225"></p>
+<p>一般情况下，Boot Area Partition 的大小都为 4 MB，即 BOOT_SIZE_MULT 为 32，部分芯片厂家会提供改写 BOOT_SIZE_MULT 的功能来改变 Boot Area Partition 的容量大小。BOOT_SIZE_MULT 最大可以为 255，即 Boot Area Partition 的最大容量大小可以为 255 x 128 KB &#x3D; 32640 KB &#x3D; 31.875 MB。</p>
+<h2 id="分区编制"><a href="#分区编制" class="headerlink" title="分区编制"></a>分区编制</h2><p>具体的数据读写访问操作实际访问哪一个硬件分区。是由EMMC 的 Extended CSC register的PARTITION_CONFIG Field 中 的 Bit[2:0]: PARTITION_ACCESS 决定的，用户可以通过配置来切换硬件分区的访问。</p>
+<p>也就是说，用户在访问特定的分区前，需要先发送命令，配置 PARTITION_ACCESS，然后再发送相关的数据访问请求。</p>
+<h2 id="从Boot-area启动"><a href="#从Boot-area启动" class="headerlink" title="从Boot area启动"></a>从Boot area启动</h2><p>eMMC 中定义了 Boot State，在 Power-up、HW reset 或者 SW reset 后，如果满足一定的条件，eMMC 就会进入该 State。进入 Boot State 的条件如下：</p>
+<p><strong>Original Boot Operation</strong><br>CMD 信号保持低电平不少于 74 个时钟周期，会触发 Original Boot Operation，进入 Boot State。</p>
+<p><strong>Alternative Boot Operation</strong><br>在 74 个时钟周期后，在 CMD 信号首次拉低或者 Host 发送 CMD1 之前，Host 发送参数为 0xFFFFFFFA 的 COM0时，会触发 Alternative Boot Operation，进入 Boot State。</p>
+<p>在 Boot State 下，如果有配置 BOOT_ACK，eMMC 会先发送 “010” 的 ACK 包，接着 eMMC 会将最大为 128Kbytes x BOOT_SIZE_MULT 的 Boot Data 发送给 Host。传输过程中，Host 可以通过拉高 CMD 信号 (Original Boot 中)，或者发送 Reset 命令 (Alternative Boot 中) 来中断 eMMC 的数据发送，完成 Boot Data 传输。</p>
+<p>Boot Data 根据 Extended CSD register 的 PARTITION_CONFIG Field 的 Bit[5:3]:BOOT_PARTITION_ENABLE 的设定，可以从 Boot Area Partition 1、Boot Area Partition 2 或者 User Data Area 读出。</p>
+<blockquote>
+<p>Boot Data 存储在 Boot Area 比在 User Data Area 中要更加的安全，可以减少意外修改导致系统无法启动，同时无法更新系统的情况出现。</p>
+</blockquote>
+<p><a href="http://www.wowotech.net/basic_tech/emmc_partitions.html">http://www.wowotech.net/basic_tech/emmc_partitions.html</a></p>
+<h2 id="RPMB-Partition"><a href="#RPMB-Partition" class="headerlink" title="RPMB Partition"></a>RPMB Partition</h2><p>Replay Protected Memory Block Partition是emmc中一个具有安全特性的分区。eMMC 在写入数据到 RPMB 时，会校验数据的合法性，只有指定的 Host 才能够写入，同时在读数据时，也提供了签名机制，保证 Host 读取到的数据是 RPMB 内部数据，而不是攻击者伪造的数据。</p>
+<p>RPMB 在实际应用中，通常用于存储一些有防止非法篡改需求的数据，例如手机上指纹支付相关的公钥、序列号等。RPMB 可以对写入操作进行鉴权，但是读取并不需要鉴权，任何人都可以进行读取的操作，因此存储到 RPMB 的数据通常会进行加密后再存储。</p>
+<h4 id="容量大小"><a href="#容量大小" class="headerlink" title="容量大小"></a>容量大小</h4><p>两个 RPMB Partition 的大小是由 Extended CSD register 的 BOOT_SIZE_MULT Field 决定，大小的计算公式如下：</p>
+<p><strong>Size &#x3D; 128Kbytes x BOOT_SIZE_MULT</strong></p>
+<p>一般情况下，Boot Area Partition 的大小为 4 MB，即 RPMB_SIZE_MULT 为 32，部分芯片厂家会提供改写 RPMB_SIZE_MULT 的功能来改变 RPMB Partition 的容量大小。RPMB_SIZE_MULT 最大可以为 128，即 Boot Area Partition 的最大容量大小可以为 128 x 128 KB &#x3D; 16384 KB &#x3D; 16 MB。</p>
+<h4 id="Replay-Protected-原理"><a href="#Replay-Protected-原理" class="headerlink" title="Replay Protected 原理"></a>Replay Protected 原理</h4><p>使用 eMMC 的产品，在产线生产时，会为每一个产品生产一个唯一的 256 bits 的 Secure Key，烧写到 eMMC 的 OTP 区域（只能烧写一次的区域），同时 Host 在安全区域中（例如：TEE）也会保留该 Secure Key。</p>
+<p>在 eMMC 内部，还有一个RPMB Write Counter。RPMB 每进行一次合法的写入操作时，Write Counter 就会自动加一 。</p>
+<p>通过 Secure Key 和 Write Counter 的应用，RMPB 可以实现数据读取和写入的 Replay Protect。</p>
+<h2 id="User-Data-Area"><a href="#User-Data-Area" class="headerlink" title="User Data Area"></a>User Data Area</h2><p>通常是EMMC分区中最大的一个。在实际产品中共，是主要区域。</p>
+<h4 id="容量大小-1"><a href="#容量大小-1" class="headerlink" title="容量大小"></a>容量大小</h4><p>容量大小不需要设置，在配置完其他区域之后，扣除Enhanced attribute损耗的容量，剩余的就是UDA的容量。</p>
+<h4 id="区域属性"><a href="#区域属性" class="headerlink" title="区域属性"></a>区域属性</h4><p>eMMC 标准中，支持为 UDA 中一个特定大小的区域设定 Enhanced attribute。与 GPP 中的 Enhanced attribute 相同，eMMC 标准也没有定义该区域设定 Enhanced attribute 后对 eMMC 的影响。Enhanced attribute 的具体作用，由芯片制造商定义、</p>
+<ul>
+<li>Default, 未设定 Enhanced attribute。</li>
+<li>Enhanced storage media， 设定该区域为 Enhanced storage media。</li>
+</ul>
+<p>在实际的产品中，UDA 区域设定为 Enhanced storage media 后，一般是把该区域的存储介质从 MLC 改变为 SLC。通常，产品中可以将某一个 SW Partition 设定为 Enhanced storage media，以获得更好的性能和健壮性。</p>
+<h2 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h2><h5 id="mmc-dev-dev-part"><a href="#mmc-dev-dev-part" class="headerlink" title="mmc dev [dev] [part]"></a>mmc dev [dev] [part]</h5><p>切换物理分区。mmc 设备编号，第一个为 0 part： 0 表示不访问引导分区 1 表示访问引导分区 1（boot0） 2 表示访问引导分区 2（boot1）</p>
+<p>eg：切换到引导分区 1  –&gt;         mmc dev 0 1</p>
+<h5 id="mmc-bootbus-dev-boot-bus-width-reset-boot-bus-width-boot-mode"><a href="#mmc-bootbus-dev-boot-bus-width-reset-boot-bus-width-boot-mode" class="headerlink" title="mmc bootbus [dev] [boot_bus_width] [reset_boot_bus_width] [boot_mode]"></a>mmc bootbus [dev] [boot_bus_width] [reset_boot_bus_width] [boot_mode]</h5><p>设置总线位宽。</p>
+<h5 id="mmc-partconf-dev-boot-ack-boot-partition-partition-access"><a href="#mmc-partconf-dev-boot-ack-boot-partition-partition-access" class="headerlink" title="mmc partconf  [dev ] [boot_ack ] [boot_partition ] [partition_access]"></a>mmc partconf  [dev ] [boot_ack ] [boot_partition ] [partition_access]</h5><p>设置启动分区，dev 为mmc设备编号。boot_ack为是否应答。boot_partition用户选择发送到主机的引导数据。partition_access用户选择要访问的分区。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>git_svn_opt</title>
     <url>/git-svn-opt.html</url>
     <content><![CDATA[<h2 id="git-svn常用操作"><a href="#git-svn常用操作" class="headerlink" title="git svn常用操作"></a>git svn常用操作</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add xxx 											// git添加文件</span><br><span class="line"></span><br><span class="line">git commit -m &quot;add syslog &amp;&amp; ipaddress&quot;					// git提交本地</span><br><span class="line"></span><br><span class="line">git push												// git提交远端</span><br></pre></td></tr></table></figure>
@@ -210,29 +251,6 @@
 <h4 id="媒体处理部分"><a href="#媒体处理部分" class="headerlink" title="媒体处理部分"></a>媒体处理部分</h4>]]></content>
       <categories>
         <category>dsp_hisi_misc</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>linux-cmd</title>
-    <url>/linux-cmd.html</url>
-    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
-<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
-<ul>
-<li><p>不允许给目录创建硬链接。	</p>
-</li>
-<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
-</li>
-</ul>
-<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
-<ul>
-<li><p>软链接的链接数目不会增加；</p>
-</li>
-<li><p>可以给目录增加链接。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>linux</category>
       </categories>
   </entry>
   <entry>
@@ -275,6 +293,29 @@
     <title>linux-udev</title>
     <url>/linux-udev.html</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>linux-cmd</title>
+    <url>/linux-cmd.html</url>
+    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
+<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
+<ul>
+<li><p>不允许给目录创建硬链接。	</p>
+</li>
+<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
+</li>
+</ul>
+<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
+<ul>
+<li><p>软链接的链接数目不会增加；</p>
+</li>
+<li><p>可以给目录增加链接。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
   </entry>
   <entry>
     <title>makefile</title>
@@ -448,6 +489,24 @@
       </categories>
   </entry>
   <entry>
+    <title>padmux</title>
+    <url>/padmux.html</url>
+    <content><![CDATA[<h1 id="padmux引脚复用"><a href="#padmux引脚复用" class="headerlink" title="padmux引脚复用"></a>padmux引脚复用</h1><p>对于sstar芯片。</p>
+<p>pad mux dtsi文件路径为kernel&#x2F;arch&#x2F;arm&#x2F;boot&#x2F;dts&#x2F;xxx-padmux.dtsi。根据项目需求，修改该文件即可设置pin脚的复用模式。</p>
+<p><img src="/../image/image-20240808142459883.png" alt="image-20240808142459883"></p>
+<p>第一列为pin脚名称，第二列为pin脚复用模式，参考m_stPadMuxTbl 数组中的mode选项，第三列为复用功能中具体的pin脚作用，参考<code>mdrv_puse.h</code>。</p>
+<h5 id="gpio映射表"><a href="#gpio映射表" class="headerlink" title="gpio映射表"></a>gpio映射表</h5><p>每一个chip都有一个gpio-mapping-table.xlx文件，里面有相关gpio设置。</p>
+<h5 id="padmux表"><a href="#padmux表" class="headerlink" title="padmux表"></a>padmux表</h5><p>每个pin脚具体的复用功能也可以见mhal_pinmux.c的m_stPadMuxTbl数组。复用关系优先级从高到低，gpio功能的优先级最低。<strong>复用某个pin脚的某个功能前要确认高优先级复用是关闭的。</strong></p>
+<p><img src="/../image/image-20240808142923826.png" alt="image-20240808142923826"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PAD_FUART_TX：        引脚</span><br><span class="line">CHIPTOP_BANK：        寄存器地址</span><br><span class="line">REG_SR_PCK_MODE：     偏移地址</span><br><span class="line">REG_PWM0_MODE_MASK    mask位</span><br><span class="line">BIT1|BIT0             对应的设置bit位</span><br><span class="line">PINMUX_FOR_PWM0_MODE_3： 模式</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置gpio9为gpio模式"><a href="#设置gpio9为gpio模式" class="headerlink" title="设置gpio9为gpio模式"></a>设置gpio9为gpio模式</h5><p><img src="/../image/image-20240808143130176.png" alt="image-20240808143130176"></p>
+<p>通过读取寄存器来确认复用是否成功</p>
+<h5 id="设置i2cs0为pwm模式"><a href="#设置i2cs0为pwm模式" class="headerlink" title="设置i2cs0为pwm模式"></a>设置i2cs0为pwm模式</h5><p><img src="/../image/image-20240808143231127.png" alt="image-20240808143231127"></p>
+<p><img src="/../image/image-20240808143325826.png" alt="image-20240808143325826"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>pcie_ltssm</title>
     <url>/pcie_ltssm.html</url>
     <content><![CDATA[<h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h6><p>PCIe LTSSM ，全名为Link Training and Status State Machine，主要是用在PCIe中Physical Layer Link的初始化与设置，让device之间建立起沟通桥梁。整个LTSSM状态机总共有11个state，每个state又可以分为多个substates，所以整个状态机的跳转可以说是非常的错综且复杂且完善。</p>
@@ -548,6 +607,48 @@
       </categories>
   </entry>
   <entry>
+    <title>spi</title>
+    <url>/spi.html</url>
+    <content><![CDATA[<h1 id="标准spi-双线-三线-四线spi"><a href="#标准spi-双线-三线-四线spi" class="headerlink" title="标准spi,双线,三线,四线spi"></a>标准spi,双线,三线,四线spi</h1><h4 id="标准spi"><a href="#标准spi" class="headerlink" title="标准spi"></a>标准spi</h4><p>CLK,CS,MOSI,MISO,WP,Hold。在标准spi下，spi是全双工的，MOSI,MISO分别负责不同方向的传输。<strong>大多数单个SPI串行吞吐速率达到10Mbps左右。</strong></p>
+<h4 id="双线spi"><a href="#双线spi" class="headerlink" title="双线spi"></a>双线spi</h4><p>CLK,CS,IO0,IO1,WP,Hold，双线spi是Dual SPI就是MOSI,MISO同时朝一个方向发数据，单词可以同时传输2bit，此时MOSI 和 MISO则被改称为IO0和IO1。在双线spi下，spi是<strong>双线半双工</strong>。串行吞吐量速率达到<strong>20Mbps</strong>左右。</p>
+<h4 id="三线spi"><a href="#三线spi" class="headerlink" title="三线spi"></a>三线spi</h4><p>SCLK, MOSI,CS。数据收发只有一根线，适用于单工通讯，主机只发送或者只接收从机的数据。spi是半双工的。</p>
+<h4 id="四线spi"><a href="#四线spi" class="headerlink" title="四线spi"></a>四线spi</h4><p>CLK,CS,IO0,IO1,IO2,IO3,Wp,Hold。Quad Spi，IO0,IO1,IO2,IO3被用于同一个方向传输数据。单次可传输4bit。此时MOSI和MISO为IO0,IO1,而WP,HOLD被用作IO2,IO3，CS和CLK不变。<strong>半双工40Mbps</strong></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>python_parser</title>
+    <url>/python-parser.html</url>
+    <content><![CDATA[<h1 id="argparse介绍"><a href="#argparse介绍" class="headerlink" title="argparse介绍"></a>argparse介绍</h1><blockquote>
+<p>argparse 模块是 Python 内置的一个用于&#x3D;&#x3D;命令项选项与参数解析&#x3D;&#x3D;的模块，argparse 模块可以让人轻松编写用户友好的命令行接口。通过在程序中定义好我们需要的参数，然后 argparse 将会从 sys.argv 解析出这些参数。argparse 模块还会自动生成帮助和使用手册，并在用户给程序传入无效参数时报出错误信息。</p>
+<p>官方地址：<a href="https://docs.python.org/zh-cn/3/library/argparse.html#argumentparser-objects">https://docs.python.org/zh-cn/3/library/argparse.html#argumentparser-objects</a></p>
+</blockquote>
+<h1 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个解析器。创建argumentparser对象</span></span><br><span class="line"><span class="comment">#大多数对argumentparser构造方法的调用都会使用description=关键词参数。这个参数简要描述</span></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用add_argument方法添加参数信息是通过调用add_argument方法完成的。</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--sparse&#x27;</span>, action=<span class="string">&#x27;store_true&#x27;</span>, default=<span class="literal">False</span>, <span class="built_in">help</span>=<span class="string">&#x27;GAT with sparse version or not.&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--seed&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">72</span>, <span class="built_in">help</span>=<span class="string">&#x27;Random seed.&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--epochs&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">10000</span>, <span class="built_in">help</span>=<span class="string">&#x27;Number of epochs to train.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用parse_args解析添加的参数</span></span><br><span class="line">args = parser.parse_args()</span><br><span class="line"><span class="built_in">print</span>(args.sparse)</span><br><span class="line"><span class="built_in">print</span>(args.seed)</span><br><span class="line"><span class="built_in">print</span>(args.epochs)</span><br></pre></td></tr></table></figure>
+
+<h4 id="add-argument（）"><a href="#add-argument（）" class="headerlink" title="add_argument（）"></a>add_argument（）</h4><p>其中，这个方法定义了如何解析命令行参数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ArgumentParser.add_argument(name <span class="keyword">or</span> flags...[, action][, nargs][, const][, default][, <span class="built_in">type</span>][, choices][, required][, <span class="built_in">help</span>][, metavar][, dest])</span><br><span class="line"></span><br><span class="line">name <span class="keyword">or</span> flags:选项字符串的名字或者列表，例如foo或者-f，--foo</span><br><span class="line">avtion:命令行遇到参数时的动作。默认值是store </span><br><span class="line">（action=storce_true命令行遇到参数时的动作，默认是store，只要运行该变量有传参就将该变量设置为true）</span><br><span class="line">store_const:表示赋值为const</span><br><span class="line">append：将遇到的值存储成列表，如果参数重复会保存多个值。</span><br><span class="line">append_const，将参数规范中定义的一个值保存到一个列表；</span><br><span class="line">count，存储遇到的次数；此外，也可以继承 argparse.Action 自定义参数解析；</span><br><span class="line">nargs - 应该读取的命令行参数个数，可以是具体的数字，或者是?号，当不指定值时对于 Positional argument 使用 default，对于 <span class="type">Optional</span> argument 使用 const；或者是 * 号，表示 <span class="number">0</span> 或多个参数；或者是 + 号表示 <span class="number">1</span> 或多个参数。</span><br><span class="line">const - action 和 nargs 所需要的常量值。</span><br><span class="line">default - 不指定参数时的默认值。</span><br><span class="line"><span class="built_in">type</span> - 命令行参数应该被转换成的类型。</span><br><span class="line">choices - 参数可允许的值的一个容器。</span><br><span class="line">required - 可选参数是否可以省略 (仅针对可选参数)。</span><br><span class="line"><span class="built_in">help</span> - 参数的帮助信息，当指定为 argparse.SUPPRESS 时表示不显示该参数的帮助信息.</span><br><span class="line">metavar - 在 usage 说明中的参数名称，对于必选参数默认就是参数名称，对于可选参数默认是全大写的参数名称.</span><br><span class="line">dest - 解析后的参数名称，默认情况下，对于可选参数选取最长的名称，中划线转换为下划线.</span><br></pre></td></tr></table></figure>
+
+<p>命令行下单点调试的方式，python -m pdb xxx.py</p>
+<h1 id="补充串口库"><a href="#补充串口库" class="headerlink" title="补充串口库"></a>补充串口库</h1><p>pyserical库可以非常方便和串口的通讯</p>
+<p>官方文档</p>
+<p><a href="https://pyserial.readthedocs.io/en/latest/pyserial.html">https://pyserial.readthedocs.io/en/latest/pyserial.html</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> serial.tools.list_ports</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出当前连接的串口设备</span></span><br><span class="line">ports_list = <span class="built_in">list</span>(serial.tools.list_ports.comports())</span><br><span class="line"><span class="keyword">for</span> comport <span class="keyword">in</span> ports_list:</span><br><span class="line">    <span class="built_in">print</span>(comport[<span class="number">0</span>], comport[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>打开串口，参数说明</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__init__(port=None, baudrate=9600, bytesize=EIGHTBITS, parity=PARITY_NONE, stopbits=STOPBITS_ONE, timeout=None, xonxoff=False, rtscts=False, write_timeout=None, dsrdtr=False, inter_byte_timeout=None, exclusive=None)</span><br></pre></td></tr></table></figure>
+
+<p><strong>bytesize :</strong> 数据位，可取值five six seven eight等等</p>
+<p><strong>parity :</strong> 校验位，可取值none，even，odd，mask，spcae等等。</p>
+<p><strong>stop：</strong>停止位，one，two，five等等</p>
+<p><strong>timeout：</strong>超时时间，读超时时间，可取值为 None, 0 或者其他具体数值（支持小数）。当设置为 None 时，表示阻塞式读取，一直读到期望的所有数据才返回；当设置为 0 时，表示非阻塞式读取，无论读取到多少数据都立即返回；当设置为其他数值时，表示设置具体的超时时间（以秒为单位），如果在该时间内没有读取到所有数据，则直接返回</p>
+<p><strong>xonxoff：</strong>软件流控。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#举例 </span></span><br><span class="line"><span class="keyword">import</span> serial.tools.list_ports </span><br><span class="line">s = serial.Serial(<span class="string">&#x27;COM75&#x27;</span>, <span class="number">115200</span>, timeout=<span class="number">0.5</span>) </span><br><span class="line"><span class="built_in">print</span>(s.isOpen())  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#发送数据 发送数据使用write方法，发送的数据只能是byte类型，因此需要对发送的字符串进行编码操作</span></span><br><span class="line">cmd = <span class="string">&#x27;ifconfig\r\n&#x27;</span>  <span class="comment"># 命令带换行符</span></span><br><span class="line">length = s.write(cmd.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="comment"># 发送字符串</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&quot;serial&quot;</span></span><br><span class="line">ser.write(<span class="built_in">str</span>.encode())</span><br><span class="line"><span class="comment"># 发送 bytes</span></span><br><span class="line">data = [<span class="number">0x55</span>,<span class="number">0xAA</span>,<span class="number">0x5A</span>]</span><br><span class="line">ser.write(data)</span><br><span class="line"><span class="comment"># 发送数字</span></span><br><span class="line">num = <span class="number">100</span></span><br><span class="line">ser.write(num.to_bytes(<span class="number">1</span>,<span class="string">&quot;little&quot;</span>)) <span class="comment"># 长度1，小端模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#读取数据 可以使用read readall readlines...</span></span><br><span class="line"><span class="comment">#read默认读取一个字节，可以通过传入参数指定每次读取的字节数，返回值bytes类型</span></span><br><span class="line"><span class="comment">#readall读取串口接收的全部数据，返回bytes类型</span></span><br><span class="line"><span class="comment">#readlines读取多行数据，返回list类型，列表元素类型为bytes类型</span></span><br><span class="line"><span class="built_in">print</span>(s.read(<span class="number">1024</span>))</span><br><span class="line">s.read()[<span class="number">0</span>] --》 读取一个字节</span><br><span class="line"><span class="built_in">print</span>(s.readlines())</span><br><span class="line"><span class="built_in">print</span>(s.readall())</span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭串口 直接调用close方法即可</span></span><br><span class="line">s.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#其他方法</span></span><br><span class="line">in_waiting():返回接收缓存中的字节数</span><br><span class="line">flush():等待所有数据写出</span><br><span class="line">flushinput():丢弃接收缓存中的所有数据</span><br><span class="line">flushOutput():终止当前写操作，并丢弃发送缓存中的数据。</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>python_misc</category>
+      </categories>
+  </entry>
+  <entry>
     <title>step_motor</title>
     <url>/step-motor.html</url>
     <content><![CDATA[<ul>
@@ -603,54 +704,6 @@
       </categories>
   </entry>
   <entry>
-    <title>python_parser</title>
-    <url>/python-parser.html</url>
-    <content><![CDATA[<h1 id="argparse介绍"><a href="#argparse介绍" class="headerlink" title="argparse介绍"></a>argparse介绍</h1><blockquote>
-<p>argparse 模块是 Python 内置的一个用于&#x3D;&#x3D;命令项选项与参数解析&#x3D;&#x3D;的模块，argparse 模块可以让人轻松编写用户友好的命令行接口。通过在程序中定义好我们需要的参数，然后 argparse 将会从 sys.argv 解析出这些参数。argparse 模块还会自动生成帮助和使用手册，并在用户给程序传入无效参数时报出错误信息。</p>
-<p>官方地址：<a href="https://docs.python.org/zh-cn/3/library/argparse.html#argumentparser-objects">https://docs.python.org/zh-cn/3/library/argparse.html#argumentparser-objects</a></p>
-</blockquote>
-<h1 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个解析器。创建argumentparser对象</span></span><br><span class="line"><span class="comment">#大多数对argumentparser构造方法的调用都会使用description=关键词参数。这个参数简要描述</span></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用add_argument方法添加参数信息是通过调用add_argument方法完成的。</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--sparse&#x27;</span>, action=<span class="string">&#x27;store_true&#x27;</span>, default=<span class="literal">False</span>, <span class="built_in">help</span>=<span class="string">&#x27;GAT with sparse version or not.&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--seed&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">72</span>, <span class="built_in">help</span>=<span class="string">&#x27;Random seed.&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--epochs&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">10000</span>, <span class="built_in">help</span>=<span class="string">&#x27;Number of epochs to train.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用parse_args解析添加的参数</span></span><br><span class="line">args = parser.parse_args()</span><br><span class="line"><span class="built_in">print</span>(args.sparse)</span><br><span class="line"><span class="built_in">print</span>(args.seed)</span><br><span class="line"><span class="built_in">print</span>(args.epochs)</span><br></pre></td></tr></table></figure>
-
-<h4 id="add-argument（）"><a href="#add-argument（）" class="headerlink" title="add_argument（）"></a>add_argument（）</h4><p>其中，这个方法定义了如何解析命令行参数。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ArgumentParser.add_argument(name <span class="keyword">or</span> flags...[, action][, nargs][, const][, default][, <span class="built_in">type</span>][, choices][, required][, <span class="built_in">help</span>][, metavar][, dest])</span><br><span class="line"></span><br><span class="line">name <span class="keyword">or</span> flags:选项字符串的名字或者列表，例如foo或者-f，--foo</span><br><span class="line">avtion:命令行遇到参数时的动作。默认值是store </span><br><span class="line">（action=storce_true命令行遇到参数时的动作，默认是store，只要运行该变量有传参就将该变量设置为true）</span><br><span class="line">store_const:表示赋值为const</span><br><span class="line">append：将遇到的值存储成列表，如果参数重复会保存多个值。</span><br><span class="line">append_const，将参数规范中定义的一个值保存到一个列表；</span><br><span class="line">count，存储遇到的次数；此外，也可以继承 argparse.Action 自定义参数解析；</span><br><span class="line">nargs - 应该读取的命令行参数个数，可以是具体的数字，或者是?号，当不指定值时对于 Positional argument 使用 default，对于 <span class="type">Optional</span> argument 使用 const；或者是 * 号，表示 <span class="number">0</span> 或多个参数；或者是 + 号表示 <span class="number">1</span> 或多个参数。</span><br><span class="line">const - action 和 nargs 所需要的常量值。</span><br><span class="line">default - 不指定参数时的默认值。</span><br><span class="line"><span class="built_in">type</span> - 命令行参数应该被转换成的类型。</span><br><span class="line">choices - 参数可允许的值的一个容器。</span><br><span class="line">required - 可选参数是否可以省略 (仅针对可选参数)。</span><br><span class="line"><span class="built_in">help</span> - 参数的帮助信息，当指定为 argparse.SUPPRESS 时表示不显示该参数的帮助信息.</span><br><span class="line">metavar - 在 usage 说明中的参数名称，对于必选参数默认就是参数名称，对于可选参数默认是全大写的参数名称.</span><br><span class="line">dest - 解析后的参数名称，默认情况下，对于可选参数选取最长的名称，中划线转换为下划线.</span><br></pre></td></tr></table></figure>
-
-<p>命令行下单点调试的方式，python -m pdb xxx.py</p>
-<h1 id="补充串口库"><a href="#补充串口库" class="headerlink" title="补充串口库"></a>补充串口库</h1><p>pyserical库可以非常方便和串口的通讯</p>
-<p>官方文档</p>
-<p><a href="https://pyserial.readthedocs.io/en/latest/pyserial.html">https://pyserial.readthedocs.io/en/latest/pyserial.html</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> serial.tools.list_ports</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出当前连接的串口设备</span></span><br><span class="line">ports_list = <span class="built_in">list</span>(serial.tools.list_ports.comports())</span><br><span class="line"><span class="keyword">for</span> comport <span class="keyword">in</span> ports_list:</span><br><span class="line">    <span class="built_in">print</span>(comport[<span class="number">0</span>], comport[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-
-<p>打开串口，参数说明</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__init__(port=None, baudrate=9600, bytesize=EIGHTBITS, parity=PARITY_NONE, stopbits=STOPBITS_ONE, timeout=None, xonxoff=False, rtscts=False, write_timeout=None, dsrdtr=False, inter_byte_timeout=None, exclusive=None)</span><br></pre></td></tr></table></figure>
-
-<p><strong>bytesize :</strong> 数据位，可取值five six seven eight等等</p>
-<p><strong>parity :</strong> 校验位，可取值none，even，odd，mask，spcae等等。</p>
-<p><strong>stop：</strong>停止位，one，two，five等等</p>
-<p><strong>timeout：</strong>超时时间，读超时时间，可取值为 None, 0 或者其他具体数值（支持小数）。当设置为 None 时，表示阻塞式读取，一直读到期望的所有数据才返回；当设置为 0 时，表示非阻塞式读取，无论读取到多少数据都立即返回；当设置为其他数值时，表示设置具体的超时时间（以秒为单位），如果在该时间内没有读取到所有数据，则直接返回</p>
-<p><strong>xonxoff：</strong>软件流控。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#举例 </span></span><br><span class="line"><span class="keyword">import</span> serial.tools.list_ports </span><br><span class="line">s = serial.Serial(<span class="string">&#x27;COM75&#x27;</span>, <span class="number">115200</span>, timeout=<span class="number">0.5</span>) </span><br><span class="line"><span class="built_in">print</span>(s.isOpen())  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#发送数据 发送数据使用write方法，发送的数据只能是byte类型，因此需要对发送的字符串进行编码操作</span></span><br><span class="line">cmd = <span class="string">&#x27;ifconfig\r\n&#x27;</span>  <span class="comment"># 命令带换行符</span></span><br><span class="line">length = s.write(cmd.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="comment"># 发送字符串</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&quot;serial&quot;</span></span><br><span class="line">ser.write(<span class="built_in">str</span>.encode())</span><br><span class="line"><span class="comment"># 发送 bytes</span></span><br><span class="line">data = [<span class="number">0x55</span>,<span class="number">0xAA</span>,<span class="number">0x5A</span>]</span><br><span class="line">ser.write(data)</span><br><span class="line"><span class="comment"># 发送数字</span></span><br><span class="line">num = <span class="number">100</span></span><br><span class="line">ser.write(num.to_bytes(<span class="number">1</span>,<span class="string">&quot;little&quot;</span>)) <span class="comment"># 长度1，小端模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#读取数据 可以使用read readall readlines...</span></span><br><span class="line"><span class="comment">#read默认读取一个字节，可以通过传入参数指定每次读取的字节数，返回值bytes类型</span></span><br><span class="line"><span class="comment">#readall读取串口接收的全部数据，返回bytes类型</span></span><br><span class="line"><span class="comment">#readlines读取多行数据，返回list类型，列表元素类型为bytes类型</span></span><br><span class="line"><span class="built_in">print</span>(s.read(<span class="number">1024</span>))</span><br><span class="line">s.read()[<span class="number">0</span>] --》 读取一个字节</span><br><span class="line"><span class="built_in">print</span>(s.readlines())</span><br><span class="line"><span class="built_in">print</span>(s.readall())</span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭串口 直接调用close方法即可</span></span><br><span class="line">s.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#其他方法</span></span><br><span class="line">in_waiting():返回接收缓存中的字节数</span><br><span class="line">flush():等待所有数据写出</span><br><span class="line">flushinput():丢弃接收缓存中的所有数据</span><br><span class="line">flushOutput():终止当前写操作，并丢弃发送缓存中的数据。</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>python_misc</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>syslog</title>
-    <url>/syslog.html</url>
-    <content><![CDATA[<h5 id="syslog-conf介绍"><a href="#syslog-conf介绍" class="headerlink" title="syslog.conf介绍"></a>syslog.conf介绍</h5><p>syslog采用可配置的、统一的系统登记程序，随时从系统各处接受log请求，然后根据**&#x2F;etc&#x2F;syslog.conf**中的预先设定把log信息写入相应文件中、邮寄给特 定用户或者直接以消息的方式发往控制台。ps：不同平台下的文件不一定相同，可以在etc下grep &#x2F;var&#x2F;log&#x2F;messages等来查看文件名。</p>
-<h5 id="具体示例"><a href="#具体示例" class="headerlink" title="具体示例"></a>具体示例</h5><p>*.err;kern.debug;daemon.notice;mail.crit [TAB] &#x2F;var&#x2F;adm&#x2F;messages</p>
-<p>这行中的“action”就是我们常关心的那个&#x2F;var&#x2F;adm&#x2F;messages文件，输出到它的信息源头“selector”是：</p>
-<p>*.err – 所有的一般错误信息；</p>
-<p>kern.debug – 核心产生的调试信息；</p>
-<p>daemon.notice – 守护进程的注意信息；</p>
-<p>mail.crit – 邮件系统的关键警告信息</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-  </entry>
-  <entry>
     <title>test_1</title>
     <url>/test-1.html</url>
     <content><![CDATA[<h3 id="原码补码反码移码"><a href="#原码补码反码移码" class="headerlink" title="原码补码反码移码"></a>原码补码反码移码</h3><p><strong>反码</strong>：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；<br>        <strong>补码</strong>：解决负数加法运算正负零问题，弥补了反码的不足。</p>
@@ -667,6 +720,21 @@
 ]]></content>
       <categories>
         <category>software_test</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>syslog</title>
+    <url>/syslog.html</url>
+    <content><![CDATA[<h5 id="syslog-conf介绍"><a href="#syslog-conf介绍" class="headerlink" title="syslog.conf介绍"></a>syslog.conf介绍</h5><p>syslog采用可配置的、统一的系统登记程序，随时从系统各处接受log请求，然后根据**&#x2F;etc&#x2F;syslog.conf**中的预先设定把log信息写入相应文件中、邮寄给特 定用户或者直接以消息的方式发往控制台。ps：不同平台下的文件不一定相同，可以在etc下grep &#x2F;var&#x2F;log&#x2F;messages等来查看文件名。</p>
+<h5 id="具体示例"><a href="#具体示例" class="headerlink" title="具体示例"></a>具体示例</h5><p>*.err;kern.debug;daemon.notice;mail.crit [TAB] &#x2F;var&#x2F;adm&#x2F;messages</p>
+<p>这行中的“action”就是我们常关心的那个&#x2F;var&#x2F;adm&#x2F;messages文件，输出到它的信息源头“selector”是：</p>
+<p>*.err – 所有的一般错误信息；</p>
+<p>kern.debug – 核心产生的调试信息；</p>
+<p>daemon.notice – 守护进程的注意信息；</p>
+<p>mail.crit – 邮件系统的关键警告信息</p>
+]]></content>
+      <categories>
+        <category>linux</category>
       </categories>
   </entry>
   <entry>

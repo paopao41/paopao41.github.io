@@ -21,23 +21,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Bubble&#39;s little record of knowledge">
-<meta property="og:url" content="https://paopao41.github.io/archives/2024/07/index.html">
+    <meta name="description" content="padmux引脚复用对于sstar芯片。 pad mux dtsi文件路径为kernel&#x2F;arch&#x2F;arm&#x2F;boot&#x2F;dts&#x2F;xxx-padmux.dtsi。根据项目需求，修改该文件即可设置pin脚的复用模式。  第一列为pin脚名称，第二列为pin脚复用模式，参考m_stPadMuxTbl 数组中的mode选项，第三列为复用功能中具体的pin脚作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="padmux">
+<meta property="og:url" content="https://paopao41.github.io/padmux.html">
 <meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
+<meta property="og:description" content="padmux引脚复用对于sstar芯片。 pad mux dtsi文件路径为kernel&#x2F;arch&#x2F;arm&#x2F;boot&#x2F;dts&#x2F;xxx-padmux.dtsi。根据项目需求，修改该文件即可设置pin脚的复用模式。  第一列为pin脚名称，第二列为pin脚复用模式，参考m_stPadMuxTbl 数组中的mode选项，第三列为复用功能中具体的pin脚作">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20240808142459883.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20240808142923826.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20240808143130176.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20240808143231127.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20240808143325826.png">
+<meta property="article:published_time" content="2024-08-08T06:20:05.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:56:46.796Z">
 <meta property="article:author" content="paopao">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://paopao41.github.io/image/image-20240808142459883.png">
 
 
-<link rel="canonical" href="https://paopao41.github.io/archives/2024/07/">
+<link rel="canonical" href="https://paopao41.github.io/padmux.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2024/07/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/padmux.html","path":"padmux.html","title":"padmux"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | Bubble's little record of knowledge</title>
+<title>padmux | Bubble's little record of knowledge</title>
   
 
 
@@ -70,7 +80,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Bubble's little record of knowledge</h1>
+      <p class="site-title">Bubble's little record of knowledge</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -96,7 +106,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -109,6 +119,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#padmux%E5%BC%95%E8%84%9A%E5%A4%8D%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">padmux引脚复用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gpio%E6%98%A0%E5%B0%84%E8%A1%A8"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">gpio映射表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#padmux%E8%A1%A8"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">padmux表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEgpio9%E4%B8%BAgpio%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.0.0.0.3.</span> <span class="nav-text">设置gpio9为gpio模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEi2cs0%E4%B8%BApwm%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.0.0.0.4.</span> <span class="nav-text">设置i2cs0为pwm模式</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -151,70 +162,124 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 30 篇日志。 继续努力。</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/padmux.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="padmux | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          padmux
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
+
+      <time title="创建时间：2024-08-08 14:20:05 / 修改时间：19:56:46" itemprop="dateCreated datePublished" datetime="2024-08-08T14:20:05+08:00">2024-08-08</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>540</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="padmux引脚复用"><a href="#padmux引脚复用" class="headerlink" title="padmux引脚复用"></a>padmux引脚复用</h1><p>对于sstar芯片。</p>
+<p>pad mux dtsi文件路径为kernel&#x2F;arch&#x2F;arm&#x2F;boot&#x2F;dts&#x2F;xxx-padmux.dtsi。根据项目需求，修改该文件即可设置pin脚的复用模式。</p>
+<p><img src="/../image/image-20240808142459883.png" alt="image-20240808142459883"></p>
+<p>第一列为pin脚名称，第二列为pin脚复用模式，参考m_stPadMuxTbl 数组中的mode选项，第三列为复用功能中具体的pin脚作用，参考<code>mdrv_puse.h</code>。</p>
+<h5 id="gpio映射表"><a href="#gpio映射表" class="headerlink" title="gpio映射表"></a>gpio映射表</h5><p>每一个chip都有一个gpio-mapping-table.xlx文件，里面有相关gpio设置。</p>
+<h5 id="padmux表"><a href="#padmux表" class="headerlink" title="padmux表"></a>padmux表</h5><p>每个pin脚具体的复用功能也可以见mhal_pinmux.c的m_stPadMuxTbl数组。复用关系优先级从高到低，gpio功能的优先级最低。<strong>复用某个pin脚的某个功能前要确认高优先级复用是关闭的。</strong></p>
+<p><img src="/../image/image-20240808142923826.png" alt="image-20240808142923826"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PAD_FUART_TX：        引脚</span><br><span class="line">CHIPTOP_BANK：        寄存器地址</span><br><span class="line">REG_SR_PCK_MODE：     偏移地址</span><br><span class="line">REG_PWM0_MODE_MASK    mask位</span><br><span class="line">BIT1|BIT0             对应的设置bit位</span><br><span class="line">PINMUX_FOR_PWM0_MODE_3： 模式</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置gpio9为gpio模式"><a href="#设置gpio9为gpio模式" class="headerlink" title="设置gpio9为gpio模式"></a>设置gpio9为gpio模式</h5><p><img src="/../image/image-20240808143130176.png" alt="image-20240808143130176"></p>
+<p>通过读取寄存器来确认复用是否成功</p>
+<h5 id="设置i2cs0为pwm模式"><a href="#设置i2cs0为pwm模式" class="headerlink" title="设置i2cs0为pwm模式"></a>设置i2cs0为pwm模式</h5><p><img src="/../image/image-20240808143231127.png" alt="image-20240808143231127"></p>
+<p><img src="/../image/image-20240808143325826.png" alt="image-20240808143325826"></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-07-25T10:14:19+08:00"
-              content="2024-07-25">
-          07-25
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/device-tree.html" itemprop="url">
-          <span itemprop="name">device_tree</span>
-        </a>
-      </div>
+    <footer class="post-footer">
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/spi.html" rel="prev" title="spi">
+                  <i class="fa fa-angle-left"></i> spi
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-07-22T09:34:08+08:00"
-              content="2024-07-22">
-          07-22
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/mma.html" itemprop="url">
-          <span itemprop="name">mma</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
 
+
+
+
+    <div class="comments utterances-container"></div>
 </div>
   </main>
 
