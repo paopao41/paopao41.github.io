@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,6 +152,96 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/shc.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/shc.html" class="post-title-link" itemprop="url">shc</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-08-09 09:20:59 / 修改时间：09:31:21" itemprop="dateCreated datePublished" datetime="2024-08-09T09:20:59+08:00">2024-08-09</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>685</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="shc加密脚本"><a href="#shc加密脚本" class="headerlink" title="shc加密脚本"></a>shc加密脚本</h1><p>当shell脚本中包含密码，不希望其他人查看到shell脚本中的密码等信息，可以安装使用SHC工具进行加密。</p>
+<p>Shc可以用来对shell脚本进行加密，可以将shell脚本转换为一个<strong>可执行的二进制文件</strong>。经过shc对shell脚本进行加密后，会同时生成两种个新的文件，一个是加密后的可执行的二进制文件（文件名以.x结束），另一个是C语言的原文件（文件名以.x.c结束）。</p>
+<h5 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-e date （指定过期日期）</span><br><span class="line">-m message （指定过期提示的信息） </span><br><span class="line">-f script_name（指定要编译的shell的路径及文件名）</span><br><span class="line">-r   Relax security. （可以相同操作系统的不同系统中执行）</span><br><span class="line">-v   Verbose compilation（编译的详细情况）</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># shc -v -f abc.sh</span><br><span class="line">-v 是现实加密过程</span><br><span class="line">-f 后面跟需要加密的文件  </span><br><span class="line">运行后会生成两个文件: </span><br><span class="line">abc.sh.x 和 abc.sh.x.c</span><br><span class="line">abc.sh.x为二进制文件，赋予执行权限后，可直接执行。更改名字mv abc.sh.x a.sh </span><br><span class="line">abc.sh.x.c 是c源文件。基本没用，可以删除</span><br><span class="line"></span><br><span class="line">另shc还提供了一种设定有效执行期限的方法，过期时间，如：</span><br><span class="line"># shc -e 28/01/2012 -m &quot;过期了&quot; -f abc.sh</span><br><span class="line">选项“-e”指定过期时间，格式为“日/月/年”；选项“-m”指定过期后执行此shell程序的提示信息。</span><br><span class="line">如果在过期后执行，则会有如下提示：</span><br><span class="line"></span><br><span class="line"># ./abc.sh.x  </span><br><span class="line">./abc.sh.x: has expired!</span><br><span class="line">过期了</span><br></pre></td></tr></table></figure>
+
+<h6 id="使用unshc可以解密shc加密的文件"><a href="#使用unshc可以解密shc加密的文件" class="headerlink" title="使用unshc可以解密shc加密的文件"></a>使用unshc可以解密shc加密的文件</h6>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -286,9 +376,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-08-08 09:26:24 / 修改时间：21:05:19" itemprop="dateCreated datePublished" datetime="2024-08-08T09:26:24+08:00">2024-08-08</time>
+      <time title="创建时间：2024-08-08 09:26:24" itemprop="dateCreated datePublished" datetime="2024-08-08T09:26:24+08:00">2024-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-08-09 09:24:19" itemprop="dateModified" datetime="2024-08-09T09:24:19+08:00">2024-08-09</time>
     </span>
 
   
@@ -1125,142 +1221,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/Bloom-filter.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Bloom-filter.html" class="post-title-link" itemprop="url">Bloom_filter</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-05-09 08:32:56 / 修改时间：09:14:23" itemprop="dateCreated datePublished" datetime="2024-05-09T08:32:56+08:00">2024-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/misc/" itemprop="url" rel="index"><span itemprop="name">misc</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="布隆过滤器介绍"><a href="#布隆过滤器介绍" class="headerlink" title="布隆过滤器介绍"></a>布隆过滤器介绍</h1><p><strong>基本概念：</strong>它实质上是一个很长的二进制向量和一系列随机映射函数 (Hash函数)。</p>
-<p><strong>作用：</strong>它是一个空间效率高的概率型数据结构，用来告诉你:<strong>一个元素一定不存在或者可能存在</strong>。</p>
-<p><strong>优点：</strong></p>
-<ul>
-<li><pre><code>在存储空间和时间都是常数，即hash函数的个数
-</code></pre>
-</li>
-<li><pre><code>Hash 函数相互之间没有关系，方便由硬件并行实现。
-</code></pre>
-</li>
-<li><pre><code>布隆过滤器不需要存储元素本身，在某些对保密要求非常严格的场合有优势。
-</code></pre>
-</li>
-<li><pre><code>布隆过滤器可以表示全集，其它任何数据结构都不能。
-</code></pre>
-</li>
-</ul>
-<p><strong>缺点：</strong></p>
-<ul>
-<li>有误判率存在</li>
-<li>不支持删除</li>
-</ul>
-<p><strong>适用场景：</strong></p>
-<ul>
-<li>预防缓存穿透：布隆过滤器快速判断数据是否存在，避免通过查询数据库来判断数据是否存在。</li>
-<li>网络爬虫：布隆过滤器可以用来去重已经爬取过的URL。</li>
-<li>邮箱的垃圾邮件过滤。</li>
-<li>黑白名单。</li>
-</ul>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>布隆过滤器实现原理就是<strong>一个超大位数的数组（BitMap）和多个不同Hash算法函数</strong>。与寻常数组不同的是，BitMap一个数组元素占一个bit，这一特性决定了BitMap能够极大地<strong>节省空间</strong>。</p>
-<p><img src="/../image/image-20240509090000811.png" alt="image-20240509090000811"></p>
-<h4 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h4><p>将要添加的元素分别通过k个哈希函数计算得到k个哈希值，这k个hash值对应位数组上的k个位置，然后将这k个位置设置为1。</p>
-<p><img src="/../image/image-20240509090026138.png" alt="image-20240509090026138"></p>
-<p>当不同元素在计算到相同的值后，依旧保持这一位为1即可。</p>
-<p><img src="/../image/image-20240509084931019.png" alt="image-20240509084931019"></p>
-<h4 id="查询元素"><a href="#查询元素" class="headerlink" title="查询元素"></a>查询元素</h4><p>将要查询的元素分别通过k个哈希函数计算得到k个哈希值，这k个hash值对应位数组上的k个位置。如果这k个位置中有一个位置为0，则此元素一定不存在集合中。如果这k个位置全部为1，则这个元素可能存在。</p>
-<h4 id="误判"><a href="#误判" class="headerlink" title="误判"></a>误判</h4><p>需要注意的是，布隆过滤器<strong>无法确定元素存在</strong>，只能确定元素不存在。出现的原因是多个输入经过哈希之后在相同的bit位置1了，这样就无法判断究竟是哪个输入产生的，因此误判的根源在于相同的 bit 位被多次映射且置 1。</p>
-<p>这种情况也造成了布隆过滤器的<strong>删除</strong>问题，即布隆过滤器<strong>不存在删除</strong>操作。因为布隆过滤器的每一个 bit 并不是独占的，很有可能多个元素共享了某一位。如果我们直接删除这一位的话，会影响其他的元素。</p>
-<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><p><strong>防止缓存穿透</strong>。缓存穿透是指缓存和数据库中都没有的数据，而用户不断发起请求，如发起为id为“-1”的数据或id为特别大不存在的数据。这时的用户很可能是攻击者，攻击会导致数据库压力过大。使用布隆过滤器能够避免频繁查询不存在的数据，减轻数据库的压力。</p>
-<p><strong>业务场景中判断用户是否阅读过某视频或文章</strong>，比如抖音或头条，当然会导致一定的误判，但不会让用户看到重复的内容。</p>
-<p><strong>gun hash表</strong>， 主要是利用 <code>Bloom Filter</code>, 在常量时间内判断, 字符是否存在, 以及对应 <code>.dynsym</code> 的位置. 使用 <code>gcc -g -o hello -Wl,--hash-style=sysv(gnu) hello.c</code> 可以产生旧版本的 <code>hash</code> 表.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -1290,7 +1252,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">54 分钟</span>
+    <span title="站点阅读时长">55 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">

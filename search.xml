@@ -254,6 +254,29 @@
       </categories>
   </entry>
   <entry>
+    <title>linux-cmd</title>
+    <url>/linux-cmd.html</url>
+    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
+<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
+<ul>
+<li><p>不允许给目录创建硬链接。	</p>
+</li>
+<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
+</li>
+</ul>
+<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
+<ul>
+<li><p>软链接的链接数目不会增加；</p>
+</li>
+<li><p>可以给目录增加链接。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title>linux_time_Cfun</title>
     <url>/linux-time-Cfun.html</url>
     <content><![CDATA[<h3 id="linux下时间处理"><a href="#linux下时间处理" class="headerlink" title="linux下时间处理"></a>linux下时间处理</h3><h4 id="格林尼治时间"><a href="#格林尼治时间" class="headerlink" title="格林尼治时间"></a>格林尼治时间</h4><ul>
@@ -293,29 +316,6 @@
     <title>linux-udev</title>
     <url>/linux-udev.html</url>
     <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>linux-cmd</title>
-    <url>/linux-cmd.html</url>
-    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
-<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
-<ul>
-<li><p>不允许给目录创建硬链接。	</p>
-</li>
-<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
-</li>
-</ul>
-<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
-<ul>
-<li><p>软链接的链接数目不会增加；</p>
-</li>
-<li><p>可以给目录增加链接。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
   </entry>
   <entry>
     <title>makefile</title>
@@ -607,15 +607,6 @@
       </categories>
   </entry>
   <entry>
-    <title>spi</title>
-    <url>/spi.html</url>
-    <content><![CDATA[<h1 id="标准spi-双线-三线-四线spi"><a href="#标准spi-双线-三线-四线spi" class="headerlink" title="标准spi,双线,三线,四线spi"></a>标准spi,双线,三线,四线spi</h1><h4 id="标准spi"><a href="#标准spi" class="headerlink" title="标准spi"></a>标准spi</h4><p>CLK,CS,MOSI,MISO,WP,Hold。在标准spi下，spi是全双工的，MOSI,MISO分别负责不同方向的传输。<strong>大多数单个SPI串行吞吐速率达到10Mbps左右。</strong></p>
-<h4 id="双线spi"><a href="#双线spi" class="headerlink" title="双线spi"></a>双线spi</h4><p>CLK,CS,IO0,IO1,WP,Hold，双线spi是Dual SPI就是MOSI,MISO同时朝一个方向发数据，单词可以同时传输2bit，此时MOSI 和 MISO则被改称为IO0和IO1。在双线spi下，spi是<strong>双线半双工</strong>。串行吞吐量速率达到<strong>20Mbps</strong>左右。</p>
-<h4 id="三线spi"><a href="#三线spi" class="headerlink" title="三线spi"></a>三线spi</h4><p>SCLK, MOSI,CS。数据收发只有一根线，适用于单工通讯，主机只发送或者只接收从机的数据。spi是半双工的。</p>
-<h4 id="四线spi"><a href="#四线spi" class="headerlink" title="四线spi"></a>四线spi</h4><p>CLK,CS,IO0,IO1,IO2,IO3,Wp,Hold。Quad Spi，IO0,IO1,IO2,IO3被用于同一个方向传输数据。单次可传输4bit。此时MOSI和MISO为IO0,IO1,而WP,HOLD被用作IO2,IO3，CS和CLK不变。<strong>半双工40Mbps</strong></p>
-]]></content>
-  </entry>
-  <entry>
     <title>python_parser</title>
     <url>/python-parser.html</url>
     <content><![CDATA[<h1 id="argparse介绍"><a href="#argparse介绍" class="headerlink" title="argparse介绍"></a>argparse介绍</h1><blockquote>
@@ -647,6 +638,26 @@
       <categories>
         <category>python_misc</category>
       </categories>
+  </entry>
+  <entry>
+    <title>shc</title>
+    <url>/shc.html</url>
+    <content><![CDATA[<h1 id="shc加密脚本"><a href="#shc加密脚本" class="headerlink" title="shc加密脚本"></a>shc加密脚本</h1><p>当shell脚本中包含密码，不希望其他人查看到shell脚本中的密码等信息，可以安装使用SHC工具进行加密。</p>
+<p>Shc可以用来对shell脚本进行加密，可以将shell脚本转换为一个<strong>可执行的二进制文件</strong>。经过shc对shell脚本进行加密后，会同时生成两种个新的文件，一个是加密后的可执行的二进制文件（文件名以.x结束），另一个是C语言的原文件（文件名以.x.c结束）。</p>
+<h5 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-e date （指定过期日期）</span><br><span class="line">-m message （指定过期提示的信息） </span><br><span class="line">-f script_name（指定要编译的shell的路径及文件名）</span><br><span class="line">-r   Relax security. （可以相同操作系统的不同系统中执行）</span><br><span class="line">-v   Verbose compilation（编译的详细情况）</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># shc -v -f abc.sh</span><br><span class="line">-v 是现实加密过程</span><br><span class="line">-f 后面跟需要加密的文件  </span><br><span class="line">运行后会生成两个文件: </span><br><span class="line">abc.sh.x 和 abc.sh.x.c</span><br><span class="line">abc.sh.x为二进制文件，赋予执行权限后，可直接执行。更改名字mv abc.sh.x a.sh </span><br><span class="line">abc.sh.x.c 是c源文件。基本没用，可以删除</span><br><span class="line"></span><br><span class="line">另shc还提供了一种设定有效执行期限的方法，过期时间，如：</span><br><span class="line"># shc -e 28/01/2012 -m &quot;过期了&quot; -f abc.sh</span><br><span class="line">选项“-e”指定过期时间，格式为“日/月/年”；选项“-m”指定过期后执行此shell程序的提示信息。</span><br><span class="line">如果在过期后执行，则会有如下提示：</span><br><span class="line"></span><br><span class="line"># ./abc.sh.x  </span><br><span class="line">./abc.sh.x: has expired!</span><br><span class="line">过期了</span><br></pre></td></tr></table></figure>
+
+<h6 id="使用unshc可以解密shc加密的文件"><a href="#使用unshc可以解密shc加密的文件" class="headerlink" title="使用unshc可以解密shc加密的文件"></a>使用unshc可以解密shc加密的文件</h6>]]></content>
+  </entry>
+  <entry>
+    <title>spi</title>
+    <url>/spi.html</url>
+    <content><![CDATA[<h1 id="标准spi-双线-三线-四线spi"><a href="#标准spi-双线-三线-四线spi" class="headerlink" title="标准spi,双线,三线,四线spi"></a>标准spi,双线,三线,四线spi</h1><h4 id="标准spi"><a href="#标准spi" class="headerlink" title="标准spi"></a>标准spi</h4><p>CLK,CS,MOSI,MISO,WP,Hold。在标准spi下，spi是全双工的，MOSI,MISO分别负责不同方向的传输。<strong>大多数单个SPI串行吞吐速率达到10Mbps左右。</strong></p>
+<h4 id="双线spi"><a href="#双线spi" class="headerlink" title="双线spi"></a>双线spi</h4><p>CLK,CS,IO0,IO1,WP,Hold，双线spi是Dual SPI就是MOSI,MISO同时朝一个方向发数据，单词可以同时传输2bit，此时MOSI 和 MISO则被改称为IO0和IO1。在双线spi下，spi是<strong>双线半双工</strong>。串行吞吐量速率达到<strong>20Mbps</strong>左右。</p>
+<h4 id="三线spi"><a href="#三线spi" class="headerlink" title="三线spi"></a>三线spi</h4><p>SCLK, MOSI,CS。数据收发只有一根线，适用于单工通讯，主机只发送或者只接收从机的数据。spi是半双工的。</p>
+<h4 id="四线spi"><a href="#四线spi" class="headerlink" title="四线spi"></a>四线spi</h4><p>CLK,CS,IO0,IO1,IO2,IO3,Wp,Hold。Quad Spi，IO0,IO1,IO2,IO3被用于同一个方向传输数据。单次可传输4bit。此时MOSI和MISO为IO0,IO1,而WP,HOLD被用作IO2,IO3，CS和CLK不变。<strong>半双工40Mbps</strong></p>
+]]></content>
   </entry>
   <entry>
     <title>step_motor</title>
@@ -704,25 +715,6 @@
       </categories>
   </entry>
   <entry>
-    <title>test_1</title>
-    <url>/test-1.html</url>
-    <content><![CDATA[<h3 id="原码补码反码移码"><a href="#原码补码反码移码" class="headerlink" title="原码补码反码移码"></a>原码补码反码移码</h3><p><strong>反码</strong>：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；<br>        <strong>补码</strong>：解决负数加法运算正负零问题，弥补了反码的不足。</p>
-<p>总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，<strong>不管是正整数还是正小数，原码，反码，补码都全部相同。</strong></p>
-<p><strong>总结：</strong></p>
-<ul>
-<li>正数的原码、补码、反码均为其本身；</li>
-<li>负数（二进制）的原码、补码、反码公式：<br>反码 &#x3D; 原码（除符号位外）每位取反<br>补码 &#x3D; 反码 + 1<br>反码 &#x3D; 补码  - 1<br>移码 &#x3D; 补码符号位取反</li>
-</ul>
-<h3 id="计算机可靠性模型"><a href="#计算机可靠性模型" class="headerlink" title="计算机可靠性模型"></a>计算机可靠性模型</h3><h5 id="串联系统"><a href="#串联系统" class="headerlink" title="串联系统"></a>串联系统</h5><p>系统可靠性<img src="/../image/image-20240418103809734.png" alt="image-20240418103809734"></p>
-<p>系统失效率<img src="/../image/image-20240418103855822.png" alt="image-20240418103855822"></p>
-<h5 id="并联系统"><a href="#并联系统" class="headerlink" title="并联系统"></a>并联系统</h5><p>系统可靠性<img src="/../image/image-20240418103948295.png" alt="image-20240418103948295"></p>
-<p>系统失效率<img src="/../image/image-20240418104000114.png" alt="image-20240418104000114"></p>
-]]></content>
-      <categories>
-        <category>software_test</category>
-      </categories>
-  </entry>
-  <entry>
     <title>syslog</title>
     <url>/syslog.html</url>
     <content><![CDATA[<h5 id="syslog-conf介绍"><a href="#syslog-conf介绍" class="headerlink" title="syslog.conf介绍"></a>syslog.conf介绍</h5><p>syslog采用可配置的、统一的系统登记程序，随时从系统各处接受log请求，然后根据**&#x2F;etc&#x2F;syslog.conf**中的预先设定把log信息写入相应文件中、邮寄给特 定用户或者直接以消息的方式发往控制台。ps：不同平台下的文件不一定相同，可以在etc下grep &#x2F;var&#x2F;log&#x2F;messages等来查看文件名。</p>
@@ -754,6 +746,25 @@
 ]]></content>
       <categories>
         <category>mcu_misc</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>test_1</title>
+    <url>/test-1.html</url>
+    <content><![CDATA[<h3 id="原码补码反码移码"><a href="#原码补码反码移码" class="headerlink" title="原码补码反码移码"></a>原码补码反码移码</h3><p><strong>反码</strong>：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；<br>        <strong>补码</strong>：解决负数加法运算正负零问题，弥补了反码的不足。</p>
+<p>总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，<strong>不管是正整数还是正小数，原码，反码，补码都全部相同。</strong></p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>正数的原码、补码、反码均为其本身；</li>
+<li>负数（二进制）的原码、补码、反码公式：<br>反码 &#x3D; 原码（除符号位外）每位取反<br>补码 &#x3D; 反码 + 1<br>反码 &#x3D; 补码  - 1<br>移码 &#x3D; 补码符号位取反</li>
+</ul>
+<h3 id="计算机可靠性模型"><a href="#计算机可靠性模型" class="headerlink" title="计算机可靠性模型"></a>计算机可靠性模型</h3><h5 id="串联系统"><a href="#串联系统" class="headerlink" title="串联系统"></a>串联系统</h5><p>系统可靠性<img src="/../image/image-20240418103809734.png" alt="image-20240418103809734"></p>
+<p>系统失效率<img src="/../image/image-20240418103855822.png" alt="image-20240418103855822"></p>
+<h5 id="并联系统"><a href="#并联系统" class="headerlink" title="并联系统"></a>并联系统</h5><p>系统可靠性<img src="/../image/image-20240418103948295.png" alt="image-20240418103948295"></p>
+<p>系统失效率<img src="/../image/image-20240418104000114.png" alt="image-20240418104000114"></p>
+]]></content>
+      <categories>
+        <category>software_test</category>
       </categories>
   </entry>
   <entry>

@@ -21,23 +21,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Bubble&#39;s little record of knowledge">
-<meta property="og:url" content="https://paopao41.github.io/archives/2024/02/index.html">
+    <meta name="description" content="shc加密脚本当shell脚本中包含密码，不希望其他人查看到shell脚本中的密码等信息，可以安装使用SHC工具进行加密。 Shc可以用来对shell脚本进行加密，可以将shell脚本转换为一个可执行的二进制文件。经过shc对shell脚本进行加密后，会同时生成两种个新的文件，一个是加密后的可执行的二进制文件（文件名以.x结束），另一个是C语言的原文件（文件名以.x.c结束）。 常用参数12345">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shc">
+<meta property="og:url" content="https://paopao41.github.io/shc.html">
 <meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
+<meta property="og:description" content="shc加密脚本当shell脚本中包含密码，不希望其他人查看到shell脚本中的密码等信息，可以安装使用SHC工具进行加密。 Shc可以用来对shell脚本进行加密，可以将shell脚本转换为一个可执行的二进制文件。经过shc对shell脚本进行加密后，会同时生成两种个新的文件，一个是加密后的可执行的二进制文件（文件名以.x结束），另一个是C语言的原文件（文件名以.x.c结束）。 常用参数12345">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-09T01:20:59.000Z">
+<meta property="article:modified_time" content="2024-08-09T01:31:21.989Z">
 <meta property="article:author" content="paopao">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://paopao41.github.io/archives/2024/02/">
+<link rel="canonical" href="https://paopao41.github.io/shc.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2024/02/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/shc.html","path":"shc.html","title":"shc"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | Bubble's little record of knowledge</title>
+<title>shc | Bubble's little record of knowledge</title>
   
 
 
@@ -70,7 +74,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Bubble's little record of knowledge</h1>
+      <p class="site-title">Bubble's little record of knowledge</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -96,7 +100,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -109,6 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shc%E5%8A%A0%E5%AF%86%E8%84%9A%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">shc加密脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8unshc%E5%8F%AF%E4%BB%A5%E8%A7%A3%E5%AF%86shc%E5%8A%A0%E5%AF%86%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.0.0.2.1.</span> <span class="nav-text">使用unshc可以解密shc加密的文件</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -151,71 +156,117 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/shc.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="shc | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          shc
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-08-09 09:20:59 / 修改时间：09:31:21" itemprop="dateCreated datePublished" datetime="2024-08-09T09:20:59+08:00">2024-08-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>685</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="shc加密脚本"><a href="#shc加密脚本" class="headerlink" title="shc加密脚本"></a>shc加密脚本</h1><p>当shell脚本中包含密码，不希望其他人查看到shell脚本中的密码等信息，可以安装使用SHC工具进行加密。</p>
+<p>Shc可以用来对shell脚本进行加密，可以将shell脚本转换为一个<strong>可执行的二进制文件</strong>。经过shc对shell脚本进行加密后，会同时生成两种个新的文件，一个是加密后的可执行的二进制文件（文件名以.x结束），另一个是C语言的原文件（文件名以.x.c结束）。</p>
+<h5 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-e date （指定过期日期）</span><br><span class="line">-m message （指定过期提示的信息） </span><br><span class="line">-f script_name（指定要编译的shell的路径及文件名）</span><br><span class="line">-r   Relax security. （可以相同操作系统的不同系统中执行）</span><br><span class="line">-v   Verbose compilation（编译的详细情况）</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># shc -v -f abc.sh</span><br><span class="line">-v 是现实加密过程</span><br><span class="line">-f 后面跟需要加密的文件  </span><br><span class="line">运行后会生成两个文件: </span><br><span class="line">abc.sh.x 和 abc.sh.x.c</span><br><span class="line">abc.sh.x为二进制文件，赋予执行权限后，可直接执行。更改名字mv abc.sh.x a.sh </span><br><span class="line">abc.sh.x.c 是c源文件。基本没用，可以删除</span><br><span class="line"></span><br><span class="line">另shc还提供了一种设定有效执行期限的方法，过期时间，如：</span><br><span class="line"># shc -e 28/01/2012 -m &quot;过期了&quot; -f abc.sh</span><br><span class="line">选项“-e”指定过期时间，格式为“日/月/年”；选项“-m”指定过期后执行此shell程序的提示信息。</span><br><span class="line">如果在过期后执行，则会有如下提示：</span><br><span class="line"></span><br><span class="line"># ./abc.sh.x  </span><br><span class="line">./abc.sh.x: has expired!</span><br><span class="line">过期了</span><br></pre></td></tr></table></figure>
+
+<h6 id="使用unshc可以解密shc加密的文件"><a href="#使用unshc可以解密shc加密的文件" class="headerlink" title="使用unshc可以解密shc加密的文件"></a>使用unshc可以解密shc加密的文件</h6>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
         
-        <span class="collection-header">还行! 目前共计 31 篇日志。 继续努力。</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-02-29T18:08:29+08:00"
-              content="2024-02-29">
-          02-29
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/X86%E5%B9%B3%E5%8F%B0%E7%AE%80%E7%A7%B0.html" itemprop="url">
-          <span itemprop="name">X86平台简称</span>
-        </a>
-      </div>
-
-      
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/padmux.html" rel="prev" title="padmux">
+                  <i class="fa fa-angle-left"></i> padmux
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-02-28T11:08:29+08:00"
-              content="2024-02-28">
-          02-28
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/pcie_ltssm.html" itemprop="url">
-          <span itemprop="name">pcie_ltssm</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
 
+
+
+
+    <div class="comments utterances-container"></div>
 </div>
   </main>
 
