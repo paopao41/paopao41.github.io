@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,6 +152,300 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/uart-speed.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/uart-speed.html" class="post-title-link" itemprop="url">uart-speed</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-01 17:15:42 / 修改时间：20:55:41" itemprop="dateCreated datePublished" datetime="2024-04-01T17:15:42+08:00">2024-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mcu-misc/" itemprop="url" rel="index"><span itemprop="name">mcu_misc</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>380</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="串口波特率计算补充"><a href="#串口波特率计算补充" class="headerlink" title="串口波特率计算补充"></a>串口波特率计算补充</h4><p>由于单片机内部的RC时钟引起的误差而导致的产品失效，比如 Uart串口通信(常温不可以通信，温度高才行）、Watchdog看门狗复位失灵等等。所以在这里补充一下串口波特率相关计算。“串口波特率的最大偏差多少，对方就不能接收了或出错了？”</p>
+<p>最常见的10位串口的输出时序( 1个起始位 + 8个数据位  + 1个停止位 ）</p>
+<p><img src="/../image/image-20240401172627745.png" alt="image-20240401172627745"></p>
+<p>我们要确保实际波特率对应的 D0 ~ D7 时区段，都分别落在对方波特率的采样点的范围内，</p>
+<p><strong>从多个常见的波特率推送来看，****最大偏差一般在5% 以内都可以正常通信。</strong></p>
+<p>但考虑到不同芯片的采样点的方式有所不同，以及一帧的串口位不同(数据位越长，累计的偏差会更多），建议确保波特率控制在2%以内最好。</p>
+<p><img src="/../image/image-20240401174220374.png" alt="image-20240401174220374"></p>
+<ul>
+<li>值得注意的是，每次接收数据采样点均会从第1 bit 数据初始化，这意味着采样偏差并不会累积至下一次数据传输，如图1所示，每次检测到下降沿时将重新开始进行数据采样。</li>
+</ul>
+<p><img src="/../image/image-20240401174311722.png" alt="image-20240401174311722"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/mcu-cold-restart-question.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/mcu-cold-restart-question.html" class="post-title-link" itemprop="url">mcu_cold_restart_question</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 09:48:00 / 修改时间：09:58:12" itemprop="dateCreated datePublished" datetime="2024-03-29T09:48:00+08:00">2024-03-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mcu-misc/" itemprop="url" rel="index"><span itemprop="name">mcu_misc</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="转载-–-单片机冷启动下重启问题分析"><a href="#转载-–-单片机冷启动下重启问题分析" class="headerlink" title="转载 –&gt; 单片机冷启动下重启问题分析"></a>转载 –&gt; 单片机冷启动下重启问题分析</h4><h4 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h4><p>客户反馈MCU作为他们产品的控制芯片，在常温下工作是正常的，但是稍微冷冻下就会启动失败，重现率100%，再次加热或者恢复到常温又能正常工作。</p>
+<h4 id="问题分析解决"><a href="#问题分析解决" class="headerlink" title="问题分析解决"></a>问题分析解决</h4><p>从客户描述上来看，猜测很大可能是硬件问题，因此带了一块STM32F030-NUCLEO板过去，想着做个芯片交换测试看下结果。</p>
+<p>到达客户现场，了解到客户只是使用了内部高速晶振HSI。先使用示波器抓下VDD和NRST的启动波形，在常温下发现并没有明显异常。于是做低温测试，为了对比，基于STM32F030-NUCLEO板了写了一个只使用内部高速晶振HSI , 翻转一个LED灯的程序。</p>
+<p>结果显示，STM32F030-NUCLEO板能正常启动，而客户的板子问题重现，再次测量其VDD和NRST的启动波形，发现VDD上电过程中有稍微不规则波形，但感觉不至于导致MCU无法启动。考虑到当前客户板子上的MCU跑的是客户自己的程序，为了统一对比，将客户板子上的MCU烧录成NUCELO板上一样的程序，再次做低温测试，结果显示客户的板子也能正常启动！</p>
+<p>于是可以初步断定，此问题与客户自己的软件有关，而与外围电路无关。</p>
+<p>接下来对比测试代码与客户自己的代码，并再次做低温测试验证结果，最终发现客户的时钟树配置有个参数有问题：</p>
+<p><img src="/../image/image-20240329095021747.png" alt="image-20240329095021747"></p>
+<p>如上红色代码所示，RCC_OSCILLATORTYPE_NONE改成RCC_OSCILLATORTYPE_HSI后。问题现象明显改善，但经过测试，发现偶尔还会启动不正常的时候。但相对于之前100%可以重现的现象，至少说明之前软件的失误至少是一个因素。</p>
+<p>现在问题变成偶尔重现，已经向前迈进一大步。接下来怀疑与硬件有关了，理由是同样的测试软件跑在用户的板子上和跑在NUCELO软件上的结果不一致。</p>
+<p>因此接下来首先对于用户的板子的外围电路与STM32F030-NUCLEO板子的外围电路，发现客户MCU的BOOT0引脚是悬空的，于是加上一个外部10K下拉电阻，再次测试问题不再重现。</p>
+<p>至此，问题解决！</p>
+<h4 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h4><p>回过头来看这个问题，发现客户知道MCU使用的是HSI，可偏偏在代码中配置时钟树时使用的晶振类型却是NONE !这种问题现在看来是非常低级的问题，但在代码量大，或者代码迭代的过程中，之前写代码的人离职，后续接手的工程师又不能全盘了解所有代码的情况下时就会变得束手无策，当碰到此类莫名其妙的问题，特别是无法判断到底是硬件问题还是软件问题的时候，保持清晰的思路是非常重要的。（另外，对于这个现象，<strong>看门狗</strong>也是可能是一种思路。比如说冷启动的时候导致看门狗模块异常不能及时喂狗所导致的重启）。继续补充一下。<strong>在低温环境，要注意晶振负载电容随温度的变化</strong>。</p>
+<p>这里我需要强调的是，最有效的解决方法就是<strong>快速找到一个 “参照物”</strong>，而ST的DEMO板和示例代码就是在硬件上和软件上扮演这样一个参照物的角色。<strong>可以通过MCU交换测试来判断是不是芯片外围电路的问题或者芯片问题</strong>，可以使用Cube库下的示例代码，对比其运行结果来判断是否与软件有关。<mark>先从大方向明确问题到底是与硬件有关还是与软件有关，然后再做下一步分析</mark>，这种方法希望读者能有效掌握。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>转载这篇文章，对思路进行一下开阔，有的问题可能看似与软件无关，实则确实息息相关。遇到异常的时候，首先分析<mark>时钟，电源，复位</mark>是否都是正常，不论是从软件还是从硬件上来确认。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux-udev.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-udev.html" class="post-title-link" itemprop="url">linux-udev</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-28 20:15:04" itemprop="dateCreated datePublished" datetime="2024-03-28T20:15:04+08:00">2024-03-28</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>0</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -920,344 +1214,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux-time-Cfun.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-time-Cfun.html" class="post-title-link" itemprop="url">linux_time_Cfun</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-03-01 16:24:20 / 修改时间：17:23:51" itemprop="dateCreated datePublished" datetime="2024-03-01T16:24:20+08:00">2024-03-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>953</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="linux下时间处理"><a href="#linux下时间处理" class="headerlink" title="linux下时间处理"></a>linux下时间处理</h3><h4 id="格林尼治时间"><a href="#格林尼治时间" class="headerlink" title="格林尼治时间"></a>格林尼治时间</h4><ul>
-<li>所有的UNIX系统都使用同一个时间和日期的起点：格林尼治时间（GMT）1970年1月1 日午夜（0点）。这是“UNIX纪元的起点”，Linux也不例外。Linux系统中所有的时间都以从那时起经过的秒数来衡量。</li>
-</ul>
-<h4 id="时间转换关系"><a href="#时间转换关系" class="headerlink" title="时间转换关系"></a>时间转换关系</h4><p><img src="/../image/image-20240301170335842.png" alt="image-20240301170335842"></p>
-<p>其中，虚线表示的三个函数localtime,mktime,strftime受到环境变量TZ的影响，如果定义了TZ，则使用其，如果没有，则使用协调统一时间UTC。</p>
-<h4 id="timespec结构体"><a href="#timespec结构体" class="headerlink" title="timespec结构体"></a>timespec结构体</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct timespec</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    time_t tv_sec;  秒数</span><br><span class="line">    long tv_nsec;   纳秒</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="time函数"><a href="#time函数" class="headerlink" title="time函数"></a>time函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;time.h&gt;</span><br><span class="line">time_t time(time_t *t);</span><br><span class="line"> </span><br><span class="line">//返回值：成功返回时间值；出错返回-1</span><br></pre></td></tr></table></figure>
-
-<p>调用time函数得到底层的时间值，它<strong>返回的是从格林尼治时间****开始至今的秒数</strong></p>
-<p>time函数还会把返回值写入t指针指向的位置</p>
-<h4 id="difftime函数"><a href="#difftime函数" class="headerlink" title="difftime函数"></a>difftime函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;time.h&gt;</span><br><span class="line"> </span><br><span class="line">double difftime(time_t time1, time_t time0);</span><br></pre></td></tr></table></figure>
-
-<p>该函数用<strong>来计算两个time_t值之间的秒数并以double类型返回它</strong>。</p>
-<h4 id="时钟接口函数（clock-gettime、clock-getres、clock-settime）"><a href="#时钟接口函数（clock-gettime、clock-getres、clock-settime）" class="headerlink" title="时钟接口函数（clock_gettime、clock_getres、clock_settime）"></a>时钟接口函数（clock_gettime、clock_getres、clock_settime）</h4><p>时钟通过clockid_t类型进行标识，下面给出了标准值</p>
-<p><img src="/../image/image-20240301171937859.png" alt="image-20240301171937859"></p>
-<h5 id="clock-gettime函数"><a href="#clock-gettime函数" class="headerlink" title="clock_gettime函数"></a>clock_gettime函数</h5><ul>
-<li>该函数可用于获取指定时钟的时间，将获取的时钟时间存放在参数2中</li>
-<li>当时钟ID设置为<strong>CLOCK_REALTIME时</strong>，clock_gettime函数提供了<strong>与time函数类似的功能</strong>，不过在系统支持高精度时间值的情况下，clock_gettime可能比time函数得到<strong>更高精度的时间值</strong></li>
-</ul>
-<h5 id="clock-getres函数"><a href="#clock-getres函数" class="headerlink" title="clock_getres函数"></a>clock_getres函数</h5><ul>
-<li>该函数把参数把参数tsp指向的timespec结构初始化为与clock_id参数对应的时钟精度</li>
-<li>例如：如果精度为1毫秒，则timespec结构体的tv_sec字段就被设置为0，tv_nsec字段就被设置为1000000</li>
-</ul>
-<h5 id="clock-settime函数"><a href="#clock-settime函数" class="headerlink" title="clock_settime函数"></a>clock_settime函数</h5><ul>
-<li>要对特定的时钟设置时间，可以调用clock_settime函数</li>
-<li>我们需要适当的特权来更改时钟值，但是有些时钟是不能修改的</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/usb_pcie_bus.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/usb_pcie_bus.html" class="post-title-link" itemprop="url">usb和pcie总线对比</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-03-01 09:08:29 / 修改时间：11:31:36" itemprop="dateCreated datePublished" datetime="2024-03-01T09:08:29+08:00">2024-03-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/pcie/" itemprop="url" rel="index"><span itemprop="name">pcie</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.7k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h5 id="几种类型usb控制器"><a href="#几种类型usb控制器" class="headerlink" title="几种类型usb控制器"></a>几种类型usb控制器</h5><h6 id="OHCI-Open-Host-Controller-Interface"><a href="#OHCI-Open-Host-Controller-Interface" class="headerlink" title="OHCI(Open Host Controller Interface)"></a>OHCI(Open Host Controller Interface)</h6><p>是支持USB1.1的标准，它不仅是针对USB，还支持一些其它接口，比如Apple的火线接口，与UHCI相比，OHCI的硬件复杂，硬件做的事情更多，所以实现对应的软件驱动的任务，就相对比较简单，主要用于非X86的USB。</p>
-<h6 id="UHCI-Universal-Host-Controller-Interface"><a href="#UHCI-Universal-Host-Controller-Interface" class="headerlink" title="UHCI(Universal Host Controller Interface)"></a>UHCI(Universal Host Controller Interface)</h6><p>是Intel主导的对USB1.0，1.1的接口标准，与OHCI不兼容，UHCI的软件驱动任务重，需要做的比较复杂，但可以使用较便宜的USB控制器，Inter和VIA使用UHCI，其余硬件提供商使用OHCI</p>
-<h6 id="EHCI-Enhanced-Host-Controller-Interface"><a href="#EHCI-Enhanced-Host-Controller-Interface" class="headerlink" title="EHCI(Enhanced Host Controller Interface)"></a>EHCI(Enhanced Host Controller Interface)</h6><p>是Intel主导的对USB2.0的接口标准，仅提供USB2.0的高速功能。</p>
-<h6 id="XHCI-eXtensible-Host-Controller-Interface"><a href="#XHCI-eXtensible-Host-Controller-Interface" class="headerlink" title="XHCI(eXtensible Host Controller Interface)"></a>XHCI(eXtensible Host Controller Interface)</h6><p>是最新最火的USB3.0的接口标准，它在速度、节能、虚拟化等方面都比前面3中有了较大的提高。xHCI 支持所有种类速度的USB设备（USB 3.0 SuperSpeed, USB 2.0 Low-, Full-, and High-speed, USB 1.1 Low- and Full-speed）。xHCI的目的是为了替换前面3中（UHCI&#x2F;OHCI&#x2F;EHCI）。</p>
-<blockquote>
-<p>AHCI (Serial ATA Advanced Host Controller Interface)，串行ATA高级主控接口，允许存储驱动程序启用高级串行ATA功能。AHCI通过包含一个PCI BAR（基址寄存器），来实现原生SATA功能。（ATA是存储设备的标准，AHCI是控制器的接口）</p>
-</blockquote>
-<h5 id="PCI-和-PCIE-比较"><a href="#PCI-和-PCIE-比较" class="headerlink" title="PCI 和 PCIE 比较"></a>PCI 和 PCIE 比较</h5><p>PCI将较于PCIE有两个大的区别。</p>
-<ul>
-<li>PCI的数据是并行的，有32bit数据地址线，典型时钟133MHz，而PCIE的数据线是串行的，没有单独的时钟线（注意，100M参考时钟是给pcie控制器使用的），这样速率可以上GHz。</li>
-<li>PCI是多点共联，通俗讲就是各个器件在物理上共同占用数据线，就会造成时钟频率上不去，延时增加等等，还需要考虑负载因素。而PCIE是point to point，一个口和一个口直接对接，所以负载小，频率高。如果很多设备想像PCI一样挂在一起给CPU用，加入switch即可。</li>
-</ul>
-<h5 id="PCIE-USB"><a href="#PCIE-USB" class="headerlink" title="PCIE &amp;&amp; USB"></a>PCIE &amp;&amp; USB</h5><p>PCIe，USB，以太网。都是串行总线。传输距离逐渐变远。<strong>PCIe 整个组网里网络报文的流动靠的是硬件驱动的</strong>。软件不参与报文的驱动流动。USB，需要软件来参与报文的驱动和流动。所以<strong>USB整个组网里还包括了软件部分</strong>。也就是USB软件协议栈。以太网 整个组网里也是，需要软件协议栈参与以太网组网里的报文流动。</p>
-<p>PCIE是和USB都是高速总线，拓扑都是类似的树形结构，都是以CPU为ROOT，系统中外挂其他的外设作为树的终端节点，给CPU控制和使用，且二者在物理层，数据链路层，速率等各个方面都高度相似。但是USB的作用仅仅是数据的传输的数据线，PCIE想做的事情远远复杂于USB。</p>
-<p>以arm体系架构为例， CPU之外的外设，想要干些什么？除了被CPU访问控制寄存器（被动IO访问），被CPU或DMA访问SRAM（被动MEM访问）之外，还希望能访问系统内存（主动MEM访问），上报中断（中断消息）,流量控制和仲裁（多外设数据流的流量控制），cache一致性（cache等功能）。</p>
-<p>可以看到，功能很多，方向也是多向的，不仅仅是CPU到设备，也可能是设备到DDR及其他设备。这一切PCIE都做进去了，比如你的设备可以通过message包上报中断，PCIE的RC会把中断以物理连线的方式给arm的GIC中断控制器。</p>
-<p>反观USB呢？他的核心仅仅是数据传输，比如BULK transfer是U盘这种大数据传输；INTR transfer是给鼠标这种小数据传输；ISO transfer是给摄像头这种等时传输。数据的搬运通道而已，并不涉及计算体系架构。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/X86%E5%B9%B3%E5%8F%B0%E7%AE%80%E7%A7%B0.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/X86%E5%B9%B3%E5%8F%B0%E7%AE%80%E7%A7%B0.html" class="post-title-link" itemprop="url">X86平台简称</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-29 18:08:29" itemprop="dateCreated datePublished" datetime="2024-02-29T18:08:29+08:00">2024-02-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-01 11:31:33" itemprop="dateModified" datetime="2024-03-01T11:31:33+08:00">2024-03-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/server/" itemprop="url" rel="index"><span itemprop="name">server</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>391</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h6 id="PCH"><a href="#PCH" class="headerlink" title="PCH"></a>PCH</h6><p>Platform Controller Hub，是intel公司的集成南桥，具有ICH（负责连接PCI总线，是Intel南桥芯片系列名称）的全部功能，又具有原来MCH（内存控制中心，负责连接CPU,AGP总线和内存。相当于北桥芯片）。</p>
-<p>从Intel5系列芯片组开始，已经看不到北桥芯片的踪影，几乎均和CPU集成。只剩下PCH的芯片用来支持外设。而PCH芯片部分虽然比与原来的南桥芯片功能上更为丰富，但性质大体相同，与CPU之间不需要交换太多数据，因此连接总线采用DMI技术。</p>
-<p><img src="/../image/image-20240229175828436.png" alt="image-20240229175828436"></p>
-<center>PCH内部框图</center>
-
-<h6 id="SMBUS"><a href="#SMBUS" class="headerlink" title="SMBUS"></a>SMBUS</h6><p>PCH提供系统管理总线SMBus主机控制器以及SMBus接口，主机控制器为处理器提供机制以启动与SMBus外围设备的通信。</p>
-<h6 id="DMI"><a href="#DMI" class="headerlink" title="DMI"></a>DMI</h6><p>直接媒体接口，是CPU和PCH之间芯片到芯片的连接。DMI2.0单通道单向传输速率到达5GT&#x2F;s。</p>
-<p><img src="/../image/image-20240229175620009.png" alt="image-20240229175620009"></p>
-<center>图 典型的系统基于Intel®Core™i7处理器</center>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1282,14 +1238,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">30k</span>
+    <span title="站点总字数">34k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">55 分钟</span>
+    <span title="站点阅读时长">1:02</span>
   </span>
 </div>
 <div class="busuanzi-count">
