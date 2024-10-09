@@ -1,3 +1,4 @@
+https://paopao41.github.io/linux-phy-reg.html
 https://paopao41.github.io/kdump-mmc.html
 https://paopao41.github.io/cma-mma.html
 https://paopao41.github.io/cache-arm-x86.html
@@ -51,5 +52,5 @@ https://paopao41.github.io/categories/dsp-hisi-misc/
 https://paopao41.github.io/categories/linux/
 https://paopao41.github.io/categories/pcie/
 https://paopao41.github.io/categories/python-misc/
-https://paopao41.github.io/categories/miscg/
 https://paopao41.github.io/categories/software-test/
+https://paopao41.github.io/categories/miscg/

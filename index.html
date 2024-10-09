@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,6 +152,123 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux-phy-reg.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-phy-reg.html" class="post-title-link" itemprop="url">linux_phy_reg</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-10-09 08:52:28 / 修改时间：10:02:30" itemprop="dateCreated datePublished" datetime="2024-10-09T08:52:28+08:00">2024-10-09</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>本文章介绍linux下应用层访问phy寄存器的几种方式 便于开发者开发</p>
+</blockquote>
+<h1 id="厂家提供节点"><a href="#厂家提供节点" class="headerlink" title="厂家提供节点"></a>厂家提供节点</h1><p>一些厂家会直接提供类似&#x2F;dev&#x2F;mdio类似的节点，可以find -name 搜索一下看看。通过操作节点可以直接操作phy寄存器</p>
+<h1 id="uboot"><a href="#uboot" class="headerlink" title="uboot"></a>uboot</h1><p>uboot下可以通过mii cmd来实现读写phy寄存器</p>
+<h1 id="ioctl"><a href="#ioctl" class="headerlink" title="ioctl"></a>ioctl</h1><h4 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h4><h5 id="API"><a href="#API" class="headerlink" title="API"></a>API</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*	成功时返回文件描述符，失败时返回-1</span></span><br><span class="line"><span class="comment">	domain: 套接字中使用的协议族（Protocol Family）</span></span><br><span class="line"><span class="comment">	type: 套接字数据传输的类型信息</span></span><br><span class="line"><span class="comment">	protocol: 计算机间通信中使用的协议信息</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">socket</span><span class="params">(<span class="type">int</span> domain, <span class="type">int</span> type, <span class="type">int</span> protocol)</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="协议族"><a href="#协议族" class="headerlink" title="协议族"></a>协议族</h6><p><img src="/../image/image-20241009093230037.png" alt="image-20241009093230037"></p>
+<h6 id="套接字类型"><a href="#套接字类型" class="headerlink" title="套接字类型"></a>套接字类型</h6><p>常用：</p>
+<ul>
+<li><p><strong>SOCK_STREAM</strong>：</p>
+<p>流，TCP。面向连接。</p>
+<ul>
+<li>传输过程中数据不会消失。</li>
+<li>按序传输数据。</li>
+<li>传输的数据不存在数据边界（Boundary）。</li>
+<li>缓冲区不会因为满而丢失数据，因为有滑动窗口控制，能接收多少都会告诉对端。</li>
+</ul>
+</li>
+<li><p><strong>SOCK_DGRAM</strong></p>
+<p>面向消息的，不可靠的。</p>
+<ul>
+<li>强调快速传输而非传输有序。</li>
+<li>传输的数据可能丢失也可能损毁。</li>
+<li>传输的数据有边界。</li>
+<li>限制每次传输数据的大小。</li>
+</ul>
+</li>
+</ul>
+<h2 id="ioctl实现"><a href="#ioctl实现" class="headerlink" title="ioctl实现"></a>ioctl实现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">LONG skfd = -1;</span><br><span class="line">struct mii_data *data;</span><br><span class="line">struct ifreq ifr;</span><br><span class="line"></span><br><span class="line">skfd = socket(PF_UNIX, SOCK_STREAM, 0);			// #define PF_UNIX	AF_UNIX --&gt; Unix domain sockets 常用于本地连接</span><br><span class="line">data = (struct mii_data *)&amp;ifr.ifr_data;</span><br><span class="line">data-&gt;phy_id  = (unsigned short)ucMiiAddr;		//phy地址</span><br><span class="line">data-&gt;reg_num = (unsigned short)ucRegAddr;		//寄存器地址</span><br><span class="line"></span><br><span class="line">ioctl(skfd, SIOCGMIIREG, &amp;ifr);</span><br><span class="line">*pusData = data-&gt;val_out;</span><br><span class="line"></span><br><span class="line">// include/uapi/linux/socketios.h中</span><br><span class="line">#define SIOCGMIIREG	0x8948		/* Read MII PHY register.	*/</span><br><span class="line">#define SIOCSMIIREG	0x8949		/* Write MII PHY register.	*/</span><br></pre></td></tr></table></figure>
+
+<h4 id="底层调用实现"><a href="#底层调用实现" class="headerlink" title="底层调用实现"></a>底层调用实现</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 内核通用框架</span><br><span class="line">dev_ioctl --&gt; dev_ifsioc --&gt; dev_do_ioctl --&gt; ndo_do_ioctl </span><br><span class="line"></span><br><span class="line">// 底层芯片厂商驱动实现</span><br><span class="line">mstar_emac_drv_init_module --&gt; Mstar_emac_driver --&gt; mstar_emac_drv_probe --&gt; MDev_EMAC_init --&gt; MDev_EMAC_setup --&gt; dev-&gt;do_ioctl           = MDev_EMAC_ioctl;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1042,103 +1159,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/padmux.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/padmux.html" class="post-title-link" itemprop="url">padmux</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-08-08 14:20:05 / 修改时间：19:56:46" itemprop="dateCreated datePublished" datetime="2024-08-08T14:20:05+08:00">2024-08-08</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>540</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="padmux引脚复用"><a href="#padmux引脚复用" class="headerlink" title="padmux引脚复用"></a>padmux引脚复用</h1><p>对于sstar芯片。</p>
-<p>pad mux dtsi文件路径为kernel&#x2F;arch&#x2F;arm&#x2F;boot&#x2F;dts&#x2F;xxx-padmux.dtsi。根据项目需求，修改该文件即可设置pin脚的复用模式。</p>
-<p><img src="/../image/image-20240808142459883.png" alt="image-20240808142459883"></p>
-<p>第一列为pin脚名称，第二列为pin脚复用模式，参考m_stPadMuxTbl 数组中的mode选项，第三列为复用功能中具体的pin脚作用，参考<code>mdrv_puse.h</code>。</p>
-<h5 id="gpio映射表"><a href="#gpio映射表" class="headerlink" title="gpio映射表"></a>gpio映射表</h5><p>每一个chip都有一个gpio-mapping-table.xlx文件，里面有相关gpio设置。</p>
-<h5 id="padmux表"><a href="#padmux表" class="headerlink" title="padmux表"></a>padmux表</h5><p>每个pin脚具体的复用功能也可以见mhal_pinmux.c的m_stPadMuxTbl数组。复用关系优先级从高到低，gpio功能的优先级最低。<strong>复用某个pin脚的某个功能前要确认高优先级复用是关闭的。</strong></p>
-<p><img src="/../image/image-20240808142923826.png" alt="image-20240808142923826"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PAD_FUART_TX：        引脚</span><br><span class="line">CHIPTOP_BANK：        寄存器地址</span><br><span class="line">REG_SR_PCK_MODE：     偏移地址</span><br><span class="line">REG_PWM0_MODE_MASK    mask位</span><br><span class="line">BIT1|BIT0             对应的设置bit位</span><br><span class="line">PINMUX_FOR_PWM0_MODE_3： 模式</span><br></pre></td></tr></table></figure>
-
-<h5 id="设置gpio9为gpio模式"><a href="#设置gpio9为gpio模式" class="headerlink" title="设置gpio9为gpio模式"></a>设置gpio9为gpio模式</h5><p><img src="/../image/image-20240808143130176.png" alt="image-20240808143130176"></p>
-<p>通过读取寄存器来确认复用是否成功</p>
-<h5 id="设置i2cs0为pwm模式"><a href="#设置i2cs0为pwm模式" class="headerlink" title="设置i2cs0为pwm模式"></a>设置i2cs0为pwm模式</h5><p><img src="/../image/image-20240808143231127.png" alt="image-20240808143231127"></p>
-<p><img src="/../image/image-20240808143325826.png" alt="image-20240808143325826"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1163,14 +1183,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">40k</span>
+    <span title="站点总字数">41k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:12</span>
+    <span title="站点阅读时长">1:15</span>
   </span>
 </div>
 <div class="busuanzi-count">

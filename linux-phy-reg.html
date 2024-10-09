@@ -21,27 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="备份区域以及RTC介绍">
+    <meta name="description" content="本文章介绍linux下应用层访问phy寄存器的几种方式 便于开发者开发  厂家提供节点一些厂家会直接提供类似&#x2F;dev&#x2F;mdio类似的节点，可以find -name 搜索一下看看。通过操作节点可以直接操作phy寄存器 ubootuboot下可以通过mii cmd来实现读写phy寄存器 ioctl套接字API1234567&#x2F;*	成功时返回文件描述符，失败时返回-1	domain:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bakeup_region">
-<meta property="og:url" content="https://paopao41.github.io/bakeup-region.html">
+<meta property="og:title" content="linux_phy_reg">
+<meta property="og:url" content="https://paopao41.github.io/linux-phy-reg.html">
 <meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
-<meta property="og:description" content="备份区域以及RTC介绍">
+<meta property="og:description" content="本文章介绍linux下应用层访问phy寄存器的几种方式 便于开发者开发  厂家提供节点一些厂家会直接提供类似&#x2F;dev&#x2F;mdio类似的节点，可以find -name 搜索一下看看。通过操作节点可以直接操作phy寄存器 ubootuboot下可以通过mii cmd来实现读写phy寄存器 ioctl套接字API1234567&#x2F;*	成功时返回文件描述符，失败时返回-1	domain:">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-06T01:27:55.000Z">
-<meta property="article:modified_time" content="2024-06-06T03:02:27.816Z">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20241009093230037.png">
+<meta property="article:published_time" content="2024-10-09T00:52:28.000Z">
+<meta property="article:modified_time" content="2024-10-09T02:02:30.842Z">
 <meta property="article:author" content="paopao">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://paopao41.github.io/image/image-20241009093230037.png">
 
 
-<link rel="canonical" href="https://paopao41.github.io/bakeup-region.html">
+<link rel="canonical" href="https://paopao41.github.io/linux-phy-reg.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/bakeup-region.html","path":"bakeup-region.html","title":"bakeup_region"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/linux-phy-reg.html","path":"linux-phy-reg.html","title":"linux_phy_reg"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>bakeup_region | Bubble's little record of knowledge</title>
+<title>linux_phy_reg | Bubble's little record of knowledge</title>
   
 
 
@@ -113,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E5%8C%BA%E5%9F%9F%E4%BB%A5%E5%8F%8ARTC%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">备份区域以及RTC介绍</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%82%E5%AE%B6%E6%8F%90%E4%BE%9B%E8%8A%82%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">厂家提供节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uboot"><span class="nav-number">2.</span> <span class="nav-text">uboot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ioctl"><span class="nav-number">3.</span> <span class="nav-text">ioctl</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">套接字</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#API"><span class="nav-number">3.0.0.1.1.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="nav-number">3.0.0.1.1.1.</span> <span class="nav-text">协议族</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A5%97%E6%8E%A5%E5%AD%97%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.0.0.1.1.2.</span> <span class="nav-text">套接字类型</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ioctl%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.</span> <span class="nav-text">ioctl实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%95%E5%B1%82%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">底层调用实现</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -167,7 +169,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/bakeup-region.html">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux-phy-reg.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,12 +182,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="bakeup_region | Bubble's little record of knowledge">
+      <meta itemprop="name" content="linux_phy_reg | Bubble's little record of knowledge">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          bakeup_region
+          linux_phy_reg
         </h1>
 
         <div class="post-meta-container">
@@ -197,16 +199,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-06-06 09:27:55 / 修改时间：11:02:27" itemprop="dateCreated datePublished" datetime="2024-06-06T09:27:55+08:00">2024-06-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/mcu-misc/" itemprop="url" rel="index"><span itemprop="name">mcu_misc</span></a>
-        </span>
+      <time title="创建时间：2024-10-09 08:52:28 / 修改时间：10:02:30" itemprop="dateCreated datePublished" datetime="2024-10-09T08:52:28+08:00">2024-10-09</time>
     </span>
 
   
@@ -223,14 +216,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>11</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -240,7 +233,40 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="备份区域以及RTC介绍"><a href="#备份区域以及RTC介绍" class="headerlink" title="备份区域以及RTC介绍"></a>备份区域以及RTC介绍</h1>
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>本文章介绍linux下应用层访问phy寄存器的几种方式 便于开发者开发</p>
+</blockquote>
+<h1 id="厂家提供节点"><a href="#厂家提供节点" class="headerlink" title="厂家提供节点"></a>厂家提供节点</h1><p>一些厂家会直接提供类似&#x2F;dev&#x2F;mdio类似的节点，可以find -name 搜索一下看看。通过操作节点可以直接操作phy寄存器</p>
+<h1 id="uboot"><a href="#uboot" class="headerlink" title="uboot"></a>uboot</h1><p>uboot下可以通过mii cmd来实现读写phy寄存器</p>
+<h1 id="ioctl"><a href="#ioctl" class="headerlink" title="ioctl"></a>ioctl</h1><h4 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h4><h5 id="API"><a href="#API" class="headerlink" title="API"></a>API</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*	成功时返回文件描述符，失败时返回-1</span></span><br><span class="line"><span class="comment">	domain: 套接字中使用的协议族（Protocol Family）</span></span><br><span class="line"><span class="comment">	type: 套接字数据传输的类型信息</span></span><br><span class="line"><span class="comment">	protocol: 计算机间通信中使用的协议信息</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">socket</span><span class="params">(<span class="type">int</span> domain, <span class="type">int</span> type, <span class="type">int</span> protocol)</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="协议族"><a href="#协议族" class="headerlink" title="协议族"></a>协议族</h6><p><img src="/../image/image-20241009093230037.png" alt="image-20241009093230037"></p>
+<h6 id="套接字类型"><a href="#套接字类型" class="headerlink" title="套接字类型"></a>套接字类型</h6><p>常用：</p>
+<ul>
+<li><p><strong>SOCK_STREAM</strong>：</p>
+<p>流，TCP。面向连接。</p>
+<ul>
+<li>传输过程中数据不会消失。</li>
+<li>按序传输数据。</li>
+<li>传输的数据不存在数据边界（Boundary）。</li>
+<li>缓冲区不会因为满而丢失数据，因为有滑动窗口控制，能接收多少都会告诉对端。</li>
+</ul>
+</li>
+<li><p><strong>SOCK_DGRAM</strong></p>
+<p>面向消息的，不可靠的。</p>
+<ul>
+<li>强调快速传输而非传输有序。</li>
+<li>传输的数据可能丢失也可能损毁。</li>
+<li>传输的数据有边界。</li>
+<li>限制每次传输数据的大小。</li>
+</ul>
+</li>
+</ul>
+<h2 id="ioctl实现"><a href="#ioctl实现" class="headerlink" title="ioctl实现"></a>ioctl实现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">LONG skfd = -1;</span><br><span class="line">struct mii_data *data;</span><br><span class="line">struct ifreq ifr;</span><br><span class="line"></span><br><span class="line">skfd = socket(PF_UNIX, SOCK_STREAM, 0);			// #define PF_UNIX	AF_UNIX --&gt; Unix domain sockets 常用于本地连接</span><br><span class="line">data = (struct mii_data *)&amp;ifr.ifr_data;</span><br><span class="line">data-&gt;phy_id  = (unsigned short)ucMiiAddr;		//phy地址</span><br><span class="line">data-&gt;reg_num = (unsigned short)ucRegAddr;		//寄存器地址</span><br><span class="line"></span><br><span class="line">ioctl(skfd, SIOCGMIIREG, &amp;ifr);</span><br><span class="line">*pusData = data-&gt;val_out;</span><br><span class="line"></span><br><span class="line">// include/uapi/linux/socketios.h中</span><br><span class="line">#define SIOCGMIIREG	0x8948		/* Read MII PHY register.	*/</span><br><span class="line">#define SIOCSMIIREG	0x8949		/* Write MII PHY register.	*/</span><br></pre></td></tr></table></figure>
+
+<h4 id="底层调用实现"><a href="#底层调用实现" class="headerlink" title="底层调用实现"></a>底层调用实现</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 内核通用框架</span><br><span class="line">dev_ioctl --&gt; dev_ifsioc --&gt; dev_do_ioctl --&gt; ndo_do_ioctl </span><br><span class="line"></span><br><span class="line">// 底层芯片厂商驱动实现</span><br><span class="line">mstar_emac_drv_init_module --&gt; Mstar_emac_driver --&gt; mstar_emac_drv_probe --&gt; MDev_EMAC_init --&gt; MDev_EMAC_setup --&gt; dev-&gt;do_ioctl           = MDev_EMAC_ioctl;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -253,14 +279,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Photographic-learning.html" rel="prev" title="Photographic_learning">
-                  <i class="fa fa-angle-left"></i> Photographic_learning
+                <a href="/kdump-mmc.html" rel="prev" title="kdump_mmc">
+                  <i class="fa fa-angle-left"></i> kdump_mmc
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/python-parser.html" rel="next" title="python_parser">
-                  python_parser <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

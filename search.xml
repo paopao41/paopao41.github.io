@@ -184,22 +184,6 @@
       </categories>
   </entry>
   <entry>
-    <title>cache_arm_x86</title>
-    <url>/cache-arm-x86.html</url>
-    <content><![CDATA[<h1 id="ARM架构"><a href="#ARM架构" class="headerlink" title="ARM架构"></a>ARM架构</h1><h5 id="cache多级相连"><a href="#cache多级相连" class="headerlink" title="cache多级相连"></a>cache多级相连</h5><p>cache是多级的，在一个系统中会有多级cache。</p>
-<p><img src="/../image/image-20240910090615943.png" alt="image-20240910090615943"></p>
-<p>一般来说，在bit-little中，L1在core中，且L1缓存又分为 I-cache指令环境和 D-cache数据缓存。L2 cache在cluster中，L3则在BUS总线上。</p>
-<p>当CPU计算时，首先去L1去寻找需要的数据，如果没有则去L2寻找，接着从L3中寻找，如果都没有，则从内存中读取数据。所以，如果某些数据需要经常被访问，那么这些数据存放在L1中的效率会最高。</p>
-<h5 id="计算机缓存行cache-line"><a href="#计算机缓存行cache-line" class="headerlink" title="计算机缓存行cache line"></a>计算机缓存行cache line</h5><p>高速缓存其实就是一组称之为缓存行cache line的固定大小数据块。其大小是以突发写或者突发读的周期大小为基础的。</p>
-<p>即使处理器只存取一个字节的存储器，高速缓存控制器也启动整个存取器访问周期并请求整个数据块。缓存行第一个字节的地址总是突发周期尺寸的倍数。缓存行的起始位置总是与突发周期的开头保持一致。</p>
-<p>当从内存中取单元到cache中时，会一次取一个cacheline大小的内存区域到cache中，然后存进相应的cacheline中。</p>
-<h5 id="cache一般和MMU结合使用"><a href="#cache一般和MMU结合使用" class="headerlink" title="cache一般和MMU结合使用"></a>cache一般和MMU结合使用</h5><p>很多时候cache都是和MMU一起使用的（即同时开启或关闭）。因为MMU的页表entry属性中控制着内存权限和cache缓存策略等等。</p>
-<p><img src="/../image/image-20240910091751607.png" alt="image-20240910091751607"></p>
-<p>在ARM架构中，L1 cache都是VIPT（virtual index physical tag 虚拟地址做索引，物理地址做tag）的，也就是当有一个虚拟地址送进来，MMU在开始进行地址翻译的时候，Virtual Index就可以去L1 cache中查询了，MMU查询和L1 cache的index查询是同时进行的。如果L1 Miss了，则再去查询L2，L2还找不到则再去查询L3。 注意在arm架构中，仅仅L1是VIPT，L2和L3都是PIPT。</p>
-<p><img src="/../image/image-20240910094036583.png" alt="image-20240910094036583"></p>
-]]></content>
-  </entry>
-  <entry>
     <title>cma_mma</title>
     <url>/cma-mma.html</url>
     <content><![CDATA[<h1 id="cma以及mma内存分配介绍"><a href="#cma以及mma内存分配介绍" class="headerlink" title="cma以及mma内存分配介绍"></a>cma以及mma内存分配介绍</h1><p>mstar平台为例子。</p>
@@ -225,9 +209,30 @@
 ]]></content>
   </entry>
   <entry>
+    <title>cache_arm_x86</title>
+    <url>/cache-arm-x86.html</url>
+    <content><![CDATA[<h1 id="ARM架构"><a href="#ARM架构" class="headerlink" title="ARM架构"></a>ARM架构</h1><h5 id="cache多级相连"><a href="#cache多级相连" class="headerlink" title="cache多级相连"></a>cache多级相连</h5><p>cache是多级的，在一个系统中会有多级cache。</p>
+<p><img src="/../image/image-20240910090615943.png" alt="image-20240910090615943"></p>
+<p>一般来说，在bit-little中，L1在core中，且L1缓存又分为 I-cache指令环境和 D-cache数据缓存。L2 cache在cluster中，L3则在BUS总线上。</p>
+<p>当CPU计算时，首先去L1去寻找需要的数据，如果没有则去L2寻找，接着从L3中寻找，如果都没有，则从内存中读取数据。所以，如果某些数据需要经常被访问，那么这些数据存放在L1中的效率会最高。</p>
+<h5 id="计算机缓存行cache-line"><a href="#计算机缓存行cache-line" class="headerlink" title="计算机缓存行cache line"></a>计算机缓存行cache line</h5><p>高速缓存其实就是一组称之为缓存行cache line的固定大小数据块。其大小是以突发写或者突发读的周期大小为基础的。</p>
+<p>即使处理器只存取一个字节的存储器，高速缓存控制器也启动整个存取器访问周期并请求整个数据块。缓存行第一个字节的地址总是突发周期尺寸的倍数。缓存行的起始位置总是与突发周期的开头保持一致。</p>
+<p>当从内存中取单元到cache中时，会一次取一个cacheline大小的内存区域到cache中，然后存进相应的cacheline中。</p>
+<h5 id="cache一般和MMU结合使用"><a href="#cache一般和MMU结合使用" class="headerlink" title="cache一般和MMU结合使用"></a>cache一般和MMU结合使用</h5><p>很多时候cache都是和MMU一起使用的（即同时开启或关闭）。因为MMU的页表entry属性中控制着内存权限和cache缓存策略等等。</p>
+<p><img src="/../image/image-20240910091751607.png" alt="image-20240910091751607"></p>
+<p>在ARM架构中，L1 cache都是VIPT（virtual index physical tag 虚拟地址做索引，物理地址做tag）的，也就是当有一个虚拟地址送进来，MMU在开始进行地址翻译的时候，Virtual Index就可以去L1 cache中查询了，MMU查询和L1 cache的index查询是同时进行的。如果L1 Miss了，则再去查询L2，L2还找不到则再去查询L3。 注意在arm架构中，仅仅L1是VIPT，L2和L3都是PIPT。</p>
+<p><img src="/../image/image-20240910094036583.png" alt="image-20240910094036583"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>device_tree</title>
     <url>/device-tree.html</url>
     <content><![CDATA[<h1 id="设备树"><a href="#设备树" class="headerlink" title="设备树"></a>设备树</h1>]]></content>
+  </entry>
+  <entry>
+    <title>env</title>
+    <url>/env.html</url>
+    <content><![CDATA[<h1 id="env小记"><a href="#env小记" class="headerlink" title="env小记"></a>env小记</h1>]]></content>
   </entry>
   <entry>
     <title>emmc_partation</title>
@@ -271,11 +276,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>env</title>
-    <url>/env.html</url>
-    <content><![CDATA[<h1 id="env小记"><a href="#env小记" class="headerlink" title="env小记"></a>env小记</h1>]]></content>
-  </entry>
-  <entry>
     <title>file_operation_poll</title>
     <url>/file-operation-poll.html</url>
     <content><![CDATA[<h1 id="poll机制-使用方法"><a href="#poll机制-使用方法" class="headerlink" title="poll机制 使用方法"></a>poll机制 使用方法</h1><p>使用非阻塞IO的应用程序通常会使用select和poll系统调用查询是否可对设备进行无阻塞的访问，这两个系统调用最终会引发设备驱动中poll函数被执行。</p>
@@ -288,6 +288,17 @@
 <h6 id="poll-wait-file-msg-wait-wait-介绍"><a href="#poll-wait-file-msg-wait-wait-介绍" class="headerlink" title="poll_wait(file, &amp;msg_wait, wait);介绍"></a>poll_wait(file, &amp;msg_wait, wait);介绍</h6><p>将当前进程mgs_wait添加到指定的等待队列中。</p>
 <p>poll函数返回事件的状态。</p>
 <p><img src="/../image/image-20240812150319868.png" alt="image-20240812150319868"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>git_svn_opt</title>
+    <url>/git-svn-opt.html</url>
+    <content><![CDATA[<h2 id="git-svn常用操作"><a href="#git-svn常用操作" class="headerlink" title="git svn常用操作"></a>git svn常用操作</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add xxx 											// git添加文件</span><br><span class="line"></span><br><span class="line">git commit -m &quot;add syslog &amp;&amp; ipaddress&quot;					// git提交本地</span><br><span class="line"></span><br><span class="line">git push												// git提交远端</span><br></pre></td></tr></table></figure>
+
+<h3 id="svn"><a href="#svn" class="headerlink" title="svn"></a>svn</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">svn merge -r HEAD:12098 .        // svn回退到某个版本</span><br></pre></td></tr></table></figure>
+
+
+
 ]]></content>
   </entry>
   <entry>
@@ -314,17 +325,6 @@
 </li>
 </ul>
 <h1 id="gdb调试使用方式"><a href="#gdb调试使用方式" class="headerlink" title="gdb调试使用方式"></a>gdb调试使用方式</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -g  main.c                      //在目标文件加入源代码的信息</span><br><span class="line">gdb a.out       </span><br><span class="line"> </span><br><span class="line">(gdb) start                         //开始调试</span><br><span class="line">(gdb) n                             //一条一条执行</span><br><span class="line">(gdb) step/s                        //执行下一条，如果函数进入函数</span><br><span class="line">(gdb) backtrace/bt                  //查看函数调用栈帧</span><br><span class="line">(gdb) info/i locals                 //查看当前栈帧局部变量</span><br><span class="line">(gdb) frame/f                       //选择栈帧，再查看局部变量</span><br><span class="line">(gdb) print/p                       //打印变量的值</span><br><span class="line">(gdb) finish                        //运行到当前函数返回</span><br><span class="line">(gdb) set var sum=0                 //修改变量值</span><br><span class="line">(gdb) list/l 行号或函数名             //列出源码</span><br><span class="line">(gdb) display/undisplay sum         //每次停下显示变量的值/取消跟踪</span><br><span class="line">(gdb) break/b  行号或函数名           //设置断点</span><br><span class="line">(gdb) continue/c                    //连续运行</span><br><span class="line">(gdb) info/i breakpoints            //查看已经设置的断点</span><br><span class="line">(gdb) delete breakpoints 2          //删除某个断点</span><br><span class="line">(gdb) disable/enable breakpoints 3  //禁用/启用某个断点</span><br><span class="line">(gdb) break 9 if sum != 0           //满足条件才激活断点</span><br><span class="line">(gdb) run/r                         //重新从程序开头连续执行</span><br><span class="line">(gdb) watch input[4]                //设置观察点</span><br><span class="line">(gdb) info/i watchpoints            //查看设置的观察点</span><br><span class="line">(gdb) x/7b input                    //打印存储器内容，b--每个字节一组，7--7组</span><br><span class="line">(gdb) disassemble                   //反汇编当前函数或指定函数</span><br><span class="line">(gdb) si                            // 一条指令一条指令调试 而 s 是一行一行代码</span><br><span class="line">(gdb) info registers                // 显示所有寄存器的当前值</span><br><span class="line">(gdb) x/20 $esp                     //查看内存中开始的20个数</span><br></pre></td></tr></table></figure>
-
-]]></content>
-  </entry>
-  <entry>
-    <title>git_svn_opt</title>
-    <url>/git-svn-opt.html</url>
-    <content><![CDATA[<h2 id="git-svn常用操作"><a href="#git-svn常用操作" class="headerlink" title="git svn常用操作"></a>git svn常用操作</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add xxx 											// git添加文件</span><br><span class="line"></span><br><span class="line">git commit -m &quot;add syslog &amp;&amp; ipaddress&quot;					// git提交本地</span><br><span class="line"></span><br><span class="line">git push												// git提交远端</span><br></pre></td></tr></table></figure>
-
-<h3 id="svn"><a href="#svn" class="headerlink" title="svn"></a>svn</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">svn merge -r HEAD:12098 .        // svn回退到某个版本</span><br></pre></td></tr></table></figure>
-
-
 
 ]]></content>
   </entry>
@@ -365,6 +365,67 @@
 ]]></content>
   </entry>
   <entry>
+    <title>linux-cmd</title>
+    <url>/linux-cmd.html</url>
+    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
+<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
+<ul>
+<li><p>不允许给目录创建硬链接。	</p>
+</li>
+<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
+</li>
+</ul>
+<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
+<ul>
+<li><p>软链接的链接数目不会增加；</p>
+</li>
+<li><p>可以给目录增加链接。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>linux_phy_reg</title>
+    <url>/linux-phy-reg.html</url>
+    <content><![CDATA[<blockquote>
+<p>本文章介绍linux下应用层访问phy寄存器的几种方式 便于开发者开发</p>
+</blockquote>
+<h1 id="厂家提供节点"><a href="#厂家提供节点" class="headerlink" title="厂家提供节点"></a>厂家提供节点</h1><p>一些厂家会直接提供类似&#x2F;dev&#x2F;mdio类似的节点，可以find -name 搜索一下看看。通过操作节点可以直接操作phy寄存器</p>
+<h1 id="uboot"><a href="#uboot" class="headerlink" title="uboot"></a>uboot</h1><p>uboot下可以通过mii cmd来实现读写phy寄存器</p>
+<h1 id="ioctl"><a href="#ioctl" class="headerlink" title="ioctl"></a>ioctl</h1><h4 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h4><h5 id="API"><a href="#API" class="headerlink" title="API"></a>API</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*	成功时返回文件描述符，失败时返回-1</span></span><br><span class="line"><span class="comment">	domain: 套接字中使用的协议族（Protocol Family）</span></span><br><span class="line"><span class="comment">	type: 套接字数据传输的类型信息</span></span><br><span class="line"><span class="comment">	protocol: 计算机间通信中使用的协议信息</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">socket</span><span class="params">(<span class="type">int</span> domain, <span class="type">int</span> type, <span class="type">int</span> protocol)</span>;</span><br></pre></td></tr></table></figure>
+
+<h6 id="协议族"><a href="#协议族" class="headerlink" title="协议族"></a>协议族</h6><p><img src="/../image/image-20241009093230037.png" alt="image-20241009093230037"></p>
+<h6 id="套接字类型"><a href="#套接字类型" class="headerlink" title="套接字类型"></a>套接字类型</h6><p>常用：</p>
+<ul>
+<li><p><strong>SOCK_STREAM</strong>：</p>
+<p>流，TCP。面向连接。</p>
+<ul>
+<li>传输过程中数据不会消失。</li>
+<li>按序传输数据。</li>
+<li>传输的数据不存在数据边界（Boundary）。</li>
+<li>缓冲区不会因为满而丢失数据，因为有滑动窗口控制，能接收多少都会告诉对端。</li>
+</ul>
+</li>
+<li><p><strong>SOCK_DGRAM</strong></p>
+<p>面向消息的，不可靠的。</p>
+<ul>
+<li>强调快速传输而非传输有序。</li>
+<li>传输的数据可能丢失也可能损毁。</li>
+<li>传输的数据有边界。</li>
+<li>限制每次传输数据的大小。</li>
+</ul>
+</li>
+</ul>
+<h2 id="ioctl实现"><a href="#ioctl实现" class="headerlink" title="ioctl实现"></a>ioctl实现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">LONG skfd = -1;</span><br><span class="line">struct mii_data *data;</span><br><span class="line">struct ifreq ifr;</span><br><span class="line"></span><br><span class="line">skfd = socket(PF_UNIX, SOCK_STREAM, 0);			// #define PF_UNIX	AF_UNIX --&gt; Unix domain sockets 常用于本地连接</span><br><span class="line">data = (struct mii_data *)&amp;ifr.ifr_data;</span><br><span class="line">data-&gt;phy_id  = (unsigned short)ucMiiAddr;		//phy地址</span><br><span class="line">data-&gt;reg_num = (unsigned short)ucRegAddr;		//寄存器地址</span><br><span class="line"></span><br><span class="line">ioctl(skfd, SIOCGMIIREG, &amp;ifr);</span><br><span class="line">*pusData = data-&gt;val_out;</span><br><span class="line"></span><br><span class="line">// include/uapi/linux/socketios.h中</span><br><span class="line">#define SIOCGMIIREG	0x8948		/* Read MII PHY register.	*/</span><br><span class="line">#define SIOCSMIIREG	0x8949		/* Write MII PHY register.	*/</span><br></pre></td></tr></table></figure>
+
+<h4 id="底层调用实现"><a href="#底层调用实现" class="headerlink" title="底层调用实现"></a>底层调用实现</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 内核通用框架</span><br><span class="line">dev_ioctl --&gt; dev_ifsioc --&gt; dev_do_ioctl --&gt; ndo_do_ioctl </span><br><span class="line"></span><br><span class="line">// 底层芯片厂商驱动实现</span><br><span class="line">mstar_emac_drv_init_module --&gt; Mstar_emac_driver --&gt; mstar_emac_drv_probe --&gt; MDev_EMAC_init --&gt; MDev_EMAC_setup --&gt; dev-&gt;do_ioctl           = MDev_EMAC_ioctl;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
     <title>kdump_mmc</title>
     <url>/kdump-mmc.html</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>当内存发生panic的时候，需要把panic的内容以日志的方式记录下来。目前有几种方式，kdump，mtdoops，crashlog（openwrt特有），以及pstore。</p>
@@ -395,29 +456,6 @@
 
 <h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><p>以上几种方案都使用到了kmsg_dump的注册机制。 注册很简单，就是把一个全局变量结构挂到一个全局list中。 kmsg_dump是oops时进入kmsg_dump的入口。由panic,die,oops_exit等函数调用。它会一一调用回调函数。 每一个回调函数都会用到kmsg_dump_get_buffer。它先是计算dump还有多少空间，然后把kmsg中最后的一部分写进去。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>linux-cmd</title>
-    <url>/linux-cmd.html</url>
-    <content><![CDATA[<h4 id="硬链接-软链接-符号链接"><a href="#硬链接-软链接-符号链接" class="headerlink" title="硬链接 软链接 符号链接"></a>硬链接 软链接 符号链接</h4><h6 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h6><p>简单来说是文件共享的方式。</p>
-<h6 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h6><p>具有同样的索引节点和文件属性，只有链接数&#x3D;0的时候，才会用磁盘删除内容。</p>
-<ul>
-<li><p>不允许给目录创建硬链接。	</p>
-</li>
-<li><p>不可以给不同文件系统的文件间建立连接。因为 inode节点 是这个文件在当前分区中的索引值，是相对于这个分区的，当然不能跨越文件系统了。</p>
-</li>
-</ul>
-<h6 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h6><h6 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h6><p>软链接也叫做符号链接。没有文件系统限制。软链接原文件&#x2F;链接文件拥有不同的inode号，表明他们是两个不同的文件；建立软链接就是建立了一个新文件。当访问链接文件时，系统就会发现他是个链接文件，它读取链接文件找到真正要访问的文件。</p>
-<ul>
-<li><p>软链接的链接数目不会增加；</p>
-</li>
-<li><p>可以给目录增加链接。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
   </entry>
   <entry>
     <title>linux_time_Cfun</title>
@@ -650,6 +688,21 @@
 ]]></content>
   </entry>
   <entry>
+    <title>pll</title>
+    <url>/pll.html</url>
+    <content><![CDATA[<h4 id="PLL原理"><a href="#PLL原理" class="headerlink" title="PLL原理"></a>PLL原理</h4><p><img src="/../image/image-20240409175353208.png" alt="image-20240409175353208"></p>
+<p>由一个<strong>基准频率振荡器</strong>（晶体振荡器），<strong>相位频率比较器</strong>，<strong>VCO</strong>（电压控制振荡器），<strong>回路滤波器</strong>组成。晶振产生频率为fr的时钟，与VCO产生的fo的时钟同时传入相位频率比较器中进行比较，产生比较结果以脉冲波的形式传入回路滤波器，回路滤波器通过低频将脉冲波转变为直流低压VR，传入VCO对fo进行控制，形成反馈控制电路。</p>
+<p><img src="/../image/image-20240409175428500.png" alt="image-20240409175428500"></p>
+<p>当fr&gt;fo时产生PD为正脉冲，VR变大，当fr&lt;fo时，PD产生负脉冲波，VR减小，形成对fo的闭环控制，最终目的，是<strong>fo&#x3D;&#x3D;fr</strong>。</p>
+<h3 id="倍频器"><a href="#倍频器" class="headerlink" title="倍频器"></a>倍频器</h3><p>PLL的主要功能还是倍频。倍频的实现其实很简单，只要在VCO的后面加一个分频器，时参与比较的Fvco&#x3D;（1&#x2F;n）fo,fo’是VCO产生的。这样就实现了Fvco&#x3D;n*fr。</p>
+<p><img src="/../image/image-20240409175451397.png" alt="image-20240409175451397"></p>
+<h3 id="分频器原理"><a href="#分频器原理" class="headerlink" title="分频器原理"></a>分频器原理</h3><p>分频器原理就是之前上的简单的数电知识，在这就一块说了。<br>主要就说一个<strong>偶数分频</strong>。<br>偶数分频器的实现简单，用计数器在上升沿或者下降沿计数，当计数器的值等于分频系数的一半或等于分频系数时，信号翻转。<br>电路原理是用一个上升沿计数的计数器，每次计数到2时输出信号clkout翻转一次，每次计数到4时clkout再翻转一次，一直周期重复下去。其他的偶数分频器原理也是一样。</p>
+]]></content>
+      <categories>
+        <category>mcu_misc</category>
+      </categories>
+  </entry>
+  <entry>
     <title>pcie_ltssm</title>
     <url>/pcie_ltssm.html</url>
     <content><![CDATA[<h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h6><p>PCIe LTSSM ，全名为Link Training and Status State Machine，主要是用在PCIe中Physical Layer Link的初始化与设置，让device之间建立起沟通桥梁。整个LTSSM状态机总共有11个state，每个state又可以分为多个substates，所以整个状态机的跳转可以说是非常的错综且复杂且完善。</p>
@@ -735,19 +788,15 @@
       </categories>
   </entry>
   <entry>
-    <title>pll</title>
-    <url>/pll.html</url>
-    <content><![CDATA[<h4 id="PLL原理"><a href="#PLL原理" class="headerlink" title="PLL原理"></a>PLL原理</h4><p><img src="/../image/image-20240409175353208.png" alt="image-20240409175353208"></p>
-<p>由一个<strong>基准频率振荡器</strong>（晶体振荡器），<strong>相位频率比较器</strong>，<strong>VCO</strong>（电压控制振荡器），<strong>回路滤波器</strong>组成。晶振产生频率为fr的时钟，与VCO产生的fo的时钟同时传入相位频率比较器中进行比较，产生比较结果以脉冲波的形式传入回路滤波器，回路滤波器通过低频将脉冲波转变为直流低压VR，传入VCO对fo进行控制，形成反馈控制电路。</p>
-<p><img src="/../image/image-20240409175428500.png" alt="image-20240409175428500"></p>
-<p>当fr&gt;fo时产生PD为正脉冲，VR变大，当fr&lt;fo时，PD产生负脉冲波，VR减小，形成对fo的闭环控制，最终目的，是<strong>fo&#x3D;&#x3D;fr</strong>。</p>
-<h3 id="倍频器"><a href="#倍频器" class="headerlink" title="倍频器"></a>倍频器</h3><p>PLL的主要功能还是倍频。倍频的实现其实很简单，只要在VCO的后面加一个分频器，时参与比较的Fvco&#x3D;（1&#x2F;n）fo,fo’是VCO产生的。这样就实现了Fvco&#x3D;n*fr。</p>
-<p><img src="/../image/image-20240409175451397.png" alt="image-20240409175451397"></p>
-<h3 id="分频器原理"><a href="#分频器原理" class="headerlink" title="分频器原理"></a>分频器原理</h3><p>分频器原理就是之前上的简单的数电知识，在这就一块说了。<br>主要就说一个<strong>偶数分频</strong>。<br>偶数分频器的实现简单，用计数器在上升沿或者下降沿计数，当计数器的值等于分频系数的一半或等于分频系数时，信号翻转。<br>电路原理是用一个上升沿计数的计数器，每次计数到2时输出信号clkout翻转一次，每次计数到4时clkout再翻转一次，一直周期重复下去。其他的偶数分频器原理也是一样。</p>
-]]></content>
-      <categories>
-        <category>mcu_misc</category>
-      </categories>
+    <title>shc</title>
+    <url>/shc.html</url>
+    <content><![CDATA[<h1 id="shc加密脚本"><a href="#shc加密脚本" class="headerlink" title="shc加密脚本"></a>shc加密脚本</h1><p>当shell脚本中包含密码，不希望其他人查看到shell脚本中的密码等信息，可以安装使用SHC工具进行加密。</p>
+<p>Shc可以用来对shell脚本进行加密，可以将shell脚本转换为一个<strong>可执行的二进制文件</strong>。经过shc对shell脚本进行加密后，会同时生成两种个新的文件，一个是加密后的可执行的二进制文件（文件名以.x结束），另一个是C语言的原文件（文件名以.x.c结束）。</p>
+<h5 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-e date （指定过期日期）</span><br><span class="line">-m message （指定过期提示的信息） </span><br><span class="line">-f script_name（指定要编译的shell的路径及文件名）</span><br><span class="line">-r   Relax security. （可以相同操作系统的不同系统中执行）</span><br><span class="line">-v   Verbose compilation（编译的详细情况）</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># shc -v -f abc.sh</span><br><span class="line">-v 是现实加密过程</span><br><span class="line">-f 后面跟需要加密的文件  </span><br><span class="line">运行后会生成两个文件: </span><br><span class="line">abc.sh.x 和 abc.sh.x.c</span><br><span class="line">abc.sh.x为二进制文件，赋予执行权限后，可直接执行。更改名字mv abc.sh.x a.sh </span><br><span class="line">abc.sh.x.c 是c源文件。基本没用，可以删除</span><br><span class="line"></span><br><span class="line">另shc还提供了一种设定有效执行期限的方法，过期时间，如：</span><br><span class="line"># shc -e 28/01/2012 -m &quot;过期了&quot; -f abc.sh</span><br><span class="line">选项“-e”指定过期时间，格式为“日/月/年”；选项“-m”指定过期后执行此shell程序的提示信息。</span><br><span class="line">如果在过期后执行，则会有如下提示：</span><br><span class="line"></span><br><span class="line"># ./abc.sh.x  </span><br><span class="line">./abc.sh.x: has expired!</span><br><span class="line">过期了</span><br></pre></td></tr></table></figure>
+
+<h6 id="使用unshc可以解密shc加密的文件"><a href="#使用unshc可以解密shc加密的文件" class="headerlink" title="使用unshc可以解密shc加密的文件"></a>使用unshc可以解密shc加密的文件</h6>]]></content>
   </entry>
   <entry>
     <title>python_parser</title>
@@ -783,17 +832,6 @@
       </categories>
   </entry>
   <entry>
-    <title>shc</title>
-    <url>/shc.html</url>
-    <content><![CDATA[<h1 id="shc加密脚本"><a href="#shc加密脚本" class="headerlink" title="shc加密脚本"></a>shc加密脚本</h1><p>当shell脚本中包含密码，不希望其他人查看到shell脚本中的密码等信息，可以安装使用SHC工具进行加密。</p>
-<p>Shc可以用来对shell脚本进行加密，可以将shell脚本转换为一个<strong>可执行的二进制文件</strong>。经过shc对shell脚本进行加密后，会同时生成两种个新的文件，一个是加密后的可执行的二进制文件（文件名以.x结束），另一个是C语言的原文件（文件名以.x.c结束）。</p>
-<h5 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-e date （指定过期日期）</span><br><span class="line">-m message （指定过期提示的信息） </span><br><span class="line">-f script_name（指定要编译的shell的路径及文件名）</span><br><span class="line">-r   Relax security. （可以相同操作系统的不同系统中执行）</span><br><span class="line">-v   Verbose compilation（编译的详细情况）</span><br></pre></td></tr></table></figure>
-
-<h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># shc -v -f abc.sh</span><br><span class="line">-v 是现实加密过程</span><br><span class="line">-f 后面跟需要加密的文件  </span><br><span class="line">运行后会生成两个文件: </span><br><span class="line">abc.sh.x 和 abc.sh.x.c</span><br><span class="line">abc.sh.x为二进制文件，赋予执行权限后，可直接执行。更改名字mv abc.sh.x a.sh </span><br><span class="line">abc.sh.x.c 是c源文件。基本没用，可以删除</span><br><span class="line"></span><br><span class="line">另shc还提供了一种设定有效执行期限的方法，过期时间，如：</span><br><span class="line"># shc -e 28/01/2012 -m &quot;过期了&quot; -f abc.sh</span><br><span class="line">选项“-e”指定过期时间，格式为“日/月/年”；选项“-m”指定过期后执行此shell程序的提示信息。</span><br><span class="line">如果在过期后执行，则会有如下提示：</span><br><span class="line"></span><br><span class="line"># ./abc.sh.x  </span><br><span class="line">./abc.sh.x: has expired!</span><br><span class="line">过期了</span><br></pre></td></tr></table></figure>
-
-<h6 id="使用unshc可以解密shc加密的文件"><a href="#使用unshc可以解密shc加密的文件" class="headerlink" title="使用unshc可以解密shc加密的文件"></a>使用unshc可以解密shc加密的文件</h6>]]></content>
-  </entry>
-  <entry>
     <title>spi</title>
     <url>/spi.html</url>
     <content><![CDATA[<h1 id="标准spi-双线-三线-四线spi"><a href="#标准spi-双线-三线-四线spi" class="headerlink" title="标准spi,双线,三线,四线spi"></a>标准spi,双线,三线,四线spi</h1><h4 id="标准spi"><a href="#标准spi" class="headerlink" title="标准spi"></a>标准spi</h4><p>CLK,CS,MOSI,MISO,WP,Hold。在标准spi下，spi是全双工的，MOSI,MISO分别负责不同方向的传输。<strong>大多数单个SPI串行吞吐速率达到10Mbps左右。</strong></p>
@@ -801,6 +839,25 @@
 <h4 id="三线spi"><a href="#三线spi" class="headerlink" title="三线spi"></a>三线spi</h4><p>SCLK, MOSI,CS。数据收发只有一根线，适用于单工通讯，主机只发送或者只接收从机的数据。spi是半双工的。</p>
 <h4 id="四线spi"><a href="#四线spi" class="headerlink" title="四线spi"></a>四线spi</h4><p>CLK,CS,IO0,IO1,IO2,IO3,Wp,Hold。Quad Spi，IO0,IO1,IO2,IO3被用于同一个方向传输数据。单次可传输4bit。此时MOSI和MISO为IO0,IO1,而WP,HOLD被用作IO2,IO3，CS和CLK不变。<strong>半双工40Mbps</strong></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>test_1</title>
+    <url>/test-1.html</url>
+    <content><![CDATA[<h3 id="原码补码反码移码"><a href="#原码补码反码移码" class="headerlink" title="原码补码反码移码"></a>原码补码反码移码</h3><p><strong>反码</strong>：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；<br>        <strong>补码</strong>：解决负数加法运算正负零问题，弥补了反码的不足。</p>
+<p>总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，<strong>不管是正整数还是正小数，原码，反码，补码都全部相同。</strong></p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>正数的原码、补码、反码均为其本身；</li>
+<li>负数（二进制）的原码、补码、反码公式：<br>反码 &#x3D; 原码（除符号位外）每位取反<br>补码 &#x3D; 反码 + 1<br>反码 &#x3D; 补码  - 1<br>移码 &#x3D; 补码符号位取反</li>
+</ul>
+<h3 id="计算机可靠性模型"><a href="#计算机可靠性模型" class="headerlink" title="计算机可靠性模型"></a>计算机可靠性模型</h3><h5 id="串联系统"><a href="#串联系统" class="headerlink" title="串联系统"></a>串联系统</h5><p>系统可靠性<img src="/../image/image-20240418103809734.png" alt="image-20240418103809734"></p>
+<p>系统失效率<img src="/../image/image-20240418103855822.png" alt="image-20240418103855822"></p>
+<h5 id="并联系统"><a href="#并联系统" class="headerlink" title="并联系统"></a>并联系统</h5><p>系统可靠性<img src="/../image/image-20240418103948295.png" alt="image-20240418103948295"></p>
+<p>系统失效率<img src="/../image/image-20240418104000114.png" alt="image-20240418104000114"></p>
+]]></content>
+      <categories>
+        <category>software_test</category>
+      </categories>
   </entry>
   <entry>
     <title>step_motor</title>
@@ -858,40 +915,6 @@
       </categories>
   </entry>
   <entry>
-    <title>syslog</title>
-    <url>/syslog.html</url>
-    <content><![CDATA[<h5 id="syslog-conf介绍"><a href="#syslog-conf介绍" class="headerlink" title="syslog.conf介绍"></a>syslog.conf介绍</h5><p>syslog采用可配置的、统一的系统登记程序，随时从系统各处接受log请求，然后根据**&#x2F;etc&#x2F;syslog.conf**中的预先设定把log信息写入相应文件中、邮寄给特 定用户或者直接以消息的方式发往控制台。ps：不同平台下的文件不一定相同，可以在etc下grep &#x2F;var&#x2F;log&#x2F;messages等来查看文件名。</p>
-<h5 id="具体示例"><a href="#具体示例" class="headerlink" title="具体示例"></a>具体示例</h5><p>*.err;kern.debug;daemon.notice;mail.crit [TAB] &#x2F;var&#x2F;adm&#x2F;messages</p>
-<p>这行中的“action”就是我们常关心的那个&#x2F;var&#x2F;adm&#x2F;messages文件，输出到它的信息源头“selector”是：</p>
-<p>*.err – 所有的一般错误信息；</p>
-<p>kern.debug – 核心产生的调试信息；</p>
-<p>daemon.notice – 守护进程的注意信息；</p>
-<p>mail.crit – 邮件系统的关键警告信息</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>test_1</title>
-    <url>/test-1.html</url>
-    <content><![CDATA[<h3 id="原码补码反码移码"><a href="#原码补码反码移码" class="headerlink" title="原码补码反码移码"></a>原码补码反码移码</h3><p><strong>反码</strong>：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；<br>        <strong>补码</strong>：解决负数加法运算正负零问题，弥补了反码的不足。</p>
-<p>总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，<strong>不管是正整数还是正小数，原码，反码，补码都全部相同。</strong></p>
-<p><strong>总结：</strong></p>
-<ul>
-<li>正数的原码、补码、反码均为其本身；</li>
-<li>负数（二进制）的原码、补码、反码公式：<br>反码 &#x3D; 原码（除符号位外）每位取反<br>补码 &#x3D; 反码 + 1<br>反码 &#x3D; 补码  - 1<br>移码 &#x3D; 补码符号位取反</li>
-</ul>
-<h3 id="计算机可靠性模型"><a href="#计算机可靠性模型" class="headerlink" title="计算机可靠性模型"></a>计算机可靠性模型</h3><h5 id="串联系统"><a href="#串联系统" class="headerlink" title="串联系统"></a>串联系统</h5><p>系统可靠性<img src="/../image/image-20240418103809734.png" alt="image-20240418103809734"></p>
-<p>系统失效率<img src="/../image/image-20240418103855822.png" alt="image-20240418103855822"></p>
-<h5 id="并联系统"><a href="#并联系统" class="headerlink" title="并联系统"></a>并联系统</h5><p>系统可靠性<img src="/../image/image-20240418103948295.png" alt="image-20240418103948295"></p>
-<p>系统失效率<img src="/../image/image-20240418104000114.png" alt="image-20240418104000114"></p>
-]]></content>
-      <categories>
-        <category>software_test</category>
-      </categories>
-  </entry>
-  <entry>
     <title>uart-speed</title>
     <url>/uart-speed.html</url>
     <content><![CDATA[<h4 id="串口波特率计算补充"><a href="#串口波特率计算补充" class="headerlink" title="串口波特率计算补充"></a>串口波特率计算补充</h4><p>由于单片机内部的RC时钟引起的误差而导致的产品失效，比如 Uart串口通信(常温不可以通信，温度高才行）、Watchdog看门狗复位失灵等等。所以在这里补充一下串口波特率相关计算。“串口波特率的最大偏差多少，对方就不能接收了或出错了？”</p>
@@ -908,6 +931,21 @@
 ]]></content>
       <categories>
         <category>mcu_misc</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>syslog</title>
+    <url>/syslog.html</url>
+    <content><![CDATA[<h5 id="syslog-conf介绍"><a href="#syslog-conf介绍" class="headerlink" title="syslog.conf介绍"></a>syslog.conf介绍</h5><p>syslog采用可配置的、统一的系统登记程序，随时从系统各处接受log请求，然后根据**&#x2F;etc&#x2F;syslog.conf**中的预先设定把log信息写入相应文件中、邮寄给特 定用户或者直接以消息的方式发往控制台。ps：不同平台下的文件不一定相同，可以在etc下grep &#x2F;var&#x2F;log&#x2F;messages等来查看文件名。</p>
+<h5 id="具体示例"><a href="#具体示例" class="headerlink" title="具体示例"></a>具体示例</h5><p>*.err;kern.debug;daemon.notice;mail.crit [TAB] &#x2F;var&#x2F;adm&#x2F;messages</p>
+<p>这行中的“action”就是我们常关心的那个&#x2F;var&#x2F;adm&#x2F;messages文件，输出到它的信息源头“selector”是：</p>
+<p>*.err – 所有的一般错误信息；</p>
+<p>kern.debug – 核心产生的调试信息；</p>
+<p>daemon.notice – 守护进程的注意信息；</p>
+<p>mail.crit – 邮件系统的关键警告信息</p>
+]]></content>
+      <categories>
+        <category>linux</category>
       </categories>
   </entry>
   <entry>
