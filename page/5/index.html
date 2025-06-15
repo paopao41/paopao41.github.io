@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,6 +152,133 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux-time-Cfun.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-time-Cfun.html" class="post-title-link" itemprop="url">linux_time_Cfun</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-01 16:24:20" itemprop="dateCreated datePublished" datetime="2024-03-01T16:24:20+08:00">2024-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-11-03 17:53:03" itemprop="dateModified" datetime="2024-11-03T17:53:03+08:00">2024-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>988</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="linux下时间处理"><a href="#linux下时间处理" class="headerlink" title="linux下时间处理"></a>linux下时间处理</h3><h4 id="格林尼治时间"><a href="#格林尼治时间" class="headerlink" title="格林尼治时间"></a>格林尼治时间</h4><ul>
+<li>所有的UNIX系统都使用同一个时间和日期的起点：格林尼治时间（GMT）1970年1月1 日午夜（0点）。这是“UNIX纪元的起点”，Linux也不例外。Linux系统中所有的时间都以从那时起经过的秒数来衡量。</li>
+</ul>
+<h4 id="时间转换关系"><a href="#时间转换关系" class="headerlink" title="时间转换关系"></a>时间转换关系</h4><p><img src="/../image/image-20240301170335842.png" alt="image-20240301170335842"></p>
+<p>其中，虚线表示的三个函数localtime,mktime,strftime受到环境变量TZ的影响，如果定义了TZ，则使用其，如果没有，则使用协调统一时间UTC。</p>
+<h4 id="timespec结构体"><a href="#timespec结构体" class="headerlink" title="timespec结构体"></a>timespec结构体</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct timespec</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    time_t tv_sec;  秒数</span><br><span class="line">    long tv_nsec;   纳秒</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="time函数"><a href="#time函数" class="headerlink" title="time函数"></a>time函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;time.h&gt;</span><br><span class="line">time_t time(time_t *t);</span><br><span class="line"> </span><br><span class="line">//返回值：成功返回时间值；出错返回-1</span><br></pre></td></tr></table></figure>
+
+<p>调用time函数得到底层的时间值，它<strong>返回的是从格林尼治时间****开始至今的秒数</strong></p>
+<p>time函数还会把返回值写入t指针指向的位置</p>
+<h4 id="difftime函数"><a href="#difftime函数" class="headerlink" title="difftime函数"></a>difftime函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;time.h&gt;</span><br><span class="line"> </span><br><span class="line">double difftime(time_t time1, time_t time0);</span><br></pre></td></tr></table></figure>
+
+<p>该函数用<strong>来计算两个time_t值之间的秒数并以double类型返回它</strong>。</p>
+<h4 id="时钟接口函数（clock-gettime、clock-getres、clock-settime）"><a href="#时钟接口函数（clock-gettime、clock-getres、clock-settime）" class="headerlink" title="时钟接口函数（clock_gettime、clock_getres、clock_settime）"></a>时钟接口函数（clock_gettime、clock_getres、clock_settime）</h4><p>时钟通过clockid_t类型进行标识，下面给出了标准值</p>
+<p><img src="/../image/image-20240301171937859.png" alt="image-20240301171937859"></p>
+<h5 id="clock-gettime函数"><a href="#clock-gettime函数" class="headerlink" title="clock_gettime函数"></a>clock_gettime函数</h5><ul>
+<li>该函数可用于获取指定时钟的时间，将获取的时钟时间存放在参数2中</li>
+<li>当时钟ID设置为<strong>CLOCK_REALTIME时</strong>，clock_gettime函数提供了<strong>与time函数类似的功能</strong>，不过在系统支持高精度时间值的情况下，clock_gettime可能比time函数得到<strong>更高精度的时间值</strong></li>
+</ul>
+<h5 id="clock-getres函数"><a href="#clock-getres函数" class="headerlink" title="clock_getres函数"></a>clock_getres函数</h5><ul>
+<li>该函数把参数把参数tsp指向的timespec结构初始化为与clock_id参数对应的时钟精度</li>
+<li>例如：如果精度为1毫秒，则timespec结构体的tv_sec字段就被设置为0，tv_nsec字段就被设置为1000000</li>
+</ul>
+<h5 id="clock-settime函数"><a href="#clock-settime函数" class="headerlink" title="clock_settime函数"></a>clock_settime函数</h5><ul>
+<li>要对特定的时钟设置时间，可以调用clock_settime函数</li>
+<li>我们需要适当的特权来更改时钟值，但是有些时钟是不能修改的</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -576,14 +703,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">45k</span>
+    <span title="站点总字数">52k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:35</span>
   </span>
 </div>
 <div class="busuanzi-count">
