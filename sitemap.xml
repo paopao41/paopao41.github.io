@@ -2,9 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://paopao41.github.io/linux_platform.html</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopao41.github.io/algorithm.html</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopao41.github.io/linux_irq.html</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://paopao41.github.io/linux-network-1.html</loc>
     
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -56,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/home/index.html</loc>
+    <loc>https://paopao41.github.io/categories/index.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -65,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/categories/index.html</loc>
+    <loc>https://paopao41.github.io/home/index.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -128,15 +155,6 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/shc.html</loc>
-    
-    <lastmod>2024-11-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://paopao41.github.io/python-parser.html</loc>
     
     <lastmod>2024-11-03</lastmod>
@@ -146,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/spi.html</loc>
+    <loc>https://paopao41.github.io/shc.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -156,6 +174,15 @@
   
   <url>
     <loc>https://paopao41.github.io/step-motor.html</loc>
+    
+    <lastmod>2024-11-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopao41.github.io/spi.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -209,7 +236,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/mcu-voltage.html</loc>
+    <loc>https://paopao41.github.io/mma.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -218,7 +245,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/mma.html</loc>
+    <loc>https://paopao41.github.io/mcu-voltage.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -236,25 +263,16 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/linux-udev.html</loc>
-    
-    <lastmod>2024-11-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://paopao41.github.io/makefile.html</loc>
-    
-    <lastmod>2024-11-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://paopao41.github.io/mcu-option-byte.html</loc>
+    
+    <lastmod>2024-11-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopao41.github.io/linux-udev.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -272,6 +290,15 @@
   </url>
   
   <url>
+    <loc>https://paopao41.github.io/makefile.html</loc>
+    
+    <lastmod>2024-11-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://paopao41.github.io/linux-cmd.html</loc>
     
     <lastmod>2024-11-03</lastmod>
@@ -281,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/linux-time-Cfun.html</loc>
+    <loc>https://paopao41.github.io/linux-phy-reg.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -290,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/linux-phy-reg.html</loc>
+    <loc>https://paopao41.github.io/linux-time-Cfun.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -317,6 +344,15 @@
   </url>
   
   <url>
+    <loc>https://paopao41.github.io/initramfs.html</loc>
+    
+    <lastmod>2024-11-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://paopao41.github.io/kdump-mmc.html</loc>
     
     <lastmod>2024-11-03</lastmod>
@@ -326,7 +362,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/initramfs.html</loc>
+    <loc>https://paopao41.github.io/file-operation-poll.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -345,15 +381,6 @@
   
   <url>
     <loc>https://paopao41.github.io/emmc-partation.html</loc>
-    
-    <lastmod>2024-11-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://paopao41.github.io/file-operation-poll.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -389,7 +416,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/device-tree.html</loc>
+    <loc>https://paopao41.github.io/create-sys.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -398,7 +425,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/create-sys.html</loc>
+    <loc>https://paopao41.github.io/device-tree.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -454,7 +481,7 @@
 
   <url>
     <loc>https://paopao41.github.io/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -464,70 +491,70 @@
   
   <url>
     <loc>https://paopao41.github.io/categories/network/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/misc/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/server/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/mcu-misc/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/dsp-hisi-misc/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/linux/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/pcie/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/python-misc/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/miscg/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://paopao41.github.io/categories/software-test/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
