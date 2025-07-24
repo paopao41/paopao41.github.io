@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,6 +152,89 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/os_lock.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/os_lock.html" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-07-24 10:01:39" itemprop="dateCreated datePublished" datetime="2025-07-24T10:01:39+08:00">2025-07-24</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>0</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -394,6 +477,13 @@
 
       <time title="创建时间：2025-07-21 23:17:17" itemprop="dateCreated datePublished" datetime="2025-07-21T23:17:17+08:00">2025-07-21</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-07-24 10:01:39" itemprop="dateModified" datetime="2025-07-24T10:01:39+08:00">2025-07-24</time>
+    </span>
 
   
     <span class="post-meta-break"></span>
@@ -402,14 +492,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.6k</span>
+      <span>5.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>10 分钟</span>
+      <span>11 分钟</span>
     </span>
 </div>
 
@@ -461,6 +551,11 @@
 <h3 id="中断控制器code"><a href="#中断控制器code" class="headerlink" title="中断控制器code"></a>中断控制器code</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">IRQCHIP_DECLARE(gic_v3, &quot;arm,gic-v3&quot;, gicv3_of_init);  //初始化一个struct of_device_id的静态常量，并放置在__irqchip_of_table中</span><br><span class="line"></span><br><span class="line">drivers/irqchip/irq-gic.c </span><br><span class="line">IRQCHIP_DECLARE(cortex_a7_gic, &quot;arm,cortex-a7-gic&quot;, gic_of_init);</span><br><span class="line">--&gt; gic_of_init</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">init/main.c asmlinkage __visible void __init __no_sanitize_address start_kernel(void)</span><br><span class="line">    --&gt; early_irq_init(); init_IRQ();</span><br><span class="line">      --&gt; arch/arm64/kernel/irq.c --&gt; irqchip_init();</span><br><span class="line">          --&gt; driver/irqchip/irqchip.c --&gt; of_irq_init(__irqchip_of_table);</span><br><span class="line">            --&gt; drivers/of/irq.c ????</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://doc.embedfire.com/linux/rk356x/driver/zh/latest/linux_driver/subsystem_interrupt.html</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="中断上下部分的处理手段"><a href="#中断上下部分的处理手段" class="headerlink" title="中断上下部分的处理手段"></a>中断上下部分的处理手段</h2><p>运行在进程上下文的内核代码是可抢占的，但中断上下文会一直运行到结束，不会被抢占。所以中断处理程序代码要受到一些限制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">中断代码不能：</span><br><span class="line">睡眠/放弃CPU，因为内核在进入中断前会 关闭进程调度，一旦睡眠/放弃CPU，这时内核无法调度别的进程来执行，系统就会死掉。</span><br><span class="line">尝试获得信号量，如果获得不到信号量，代码就会睡眠，导致如上的结果。</span><br><span class="line">执行耗时的任务，中断处理应该尽可能快，如果一个处理程序是IRQF_DISABLE类型，它执行的时候会禁止所有中断。</span><br><span class="line">访问用户空间的虚拟地址，因为中断允许在内核空间。</span><br></pre></td></tr></table></figure>
 
 
       
@@ -524,7 +619,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-13 18:33:57" itemprop="dateModified" datetime="2025-07-13T18:33:57+08:00">2025-07-13</time>
+      <time title="修改时间：2025-07-24 12:21:56" itemprop="dateModified" datetime="2025-07-24T12:21:56+08:00">2025-07-24</time>
     </span>
 
   
@@ -534,14 +629,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>9.6k</span>
+      <span>9.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>17 分钟</span>
+      <span>18 分钟</span>
     </span>
 </div>
 
@@ -571,7 +666,7 @@
 <h2 id="阻塞-非阻塞"><a href="#阻塞-非阻塞" class="headerlink" title="阻塞 非阻塞"></a>阻塞 非阻塞</h2><p>阻塞指的是进程因为等待某个事件而主动让出CPU挂起的操作。在网络IO中。当进程等待socket上的数据时，如果数据还没有到来，那就把当前状态从TASK_RUNNING修改为TASK_INTERRUPTIBLE。然后主动让出CPU，由调度器来调度下一个就绪状态的进程来执行。</p>
 <p>所以，以后分析是否阻塞就看是否让出CPU。</p>
 <h1 id="内核是如何发送网络包的？"><a href="#内核是如何发送网络包的？" class="headerlink" title="内核是如何发送网络包的？"></a>内核是如何发送网络包的？</h1><h2 id="网络包发送过程总览"><a href="#网络包发送过程总览" class="headerlink" title="网络包发送过程总览"></a>网络包发送过程总览</h2><p>用户进程在用户态通过send系统调用接口进入内核态，send通过内存拷贝skb，进程协议处理进入驱动ring buffer，通过pci总线发送后，产生中断通知发送完成，并清理ring buffer。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">send </span><br><span class="line">--&gt; SYSCALL_DEFINE6 sendto</span><br><span class="line"> --&gt; sock_sendmsg 															系统调用</span><br><span class="line">  --&gt; sock-&gt;ops-&gt;sendmsg</span><br><span class="line">    --&gt; sk-&gt;sk_prot-&gt;sendmsg									 			 协议栈</span><br><span class="line">     --&gt; tcp_send_msg- 封装tcp头，调用网络层发送接口 queue_xmit        			  传输层</span><br><span class="line">      --&gt; ip_local_out(skb) 									 			 网络层</span><br><span class="line">       --&gt; dst_ngigh_output</span><br><span class="line">        --&gt; dev_queue_xmit(skb) 调用网卡驱动中俄发送回调函数 将数据包传递给网卡设备   网络设备子系统--&gt; 硬件</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">send </span><br><span class="line">--&gt; SYSCALL_DEFINE6 sendto</span><br><span class="line"> --&gt; sock_sendmsg 															系统调用</span><br><span class="line">  --&gt; sock-&gt;ops-&gt;sendmsg</span><br><span class="line">    --&gt; sk-&gt;sk_prot-&gt;sendmsg									 			 协议栈</span><br><span class="line">     --&gt; tcp_send_msg- 封装tcp头，调用网络层发送接口 queue_xmit        		  	   传输层</span><br><span class="line">      --&gt; ip_local_out(skb) 									 			 网络层</span><br><span class="line">       --&gt; dst_ngigh_output</span><br><span class="line">        --&gt; dev_queue_xmit(skb) 调用网卡驱动中的发送回调函数 将数据包传递给网卡设备   网络设备子系统--&gt; 硬件</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
 
 <p>数据发送完毕后，释放缓存 队列等内存。在网卡发送完毕后，给CPU发送一个硬中断来通知cpu。实际是触发了 NET_RX_SOFTIRQ 。所以服务器中proc softirqs里面NET_TX要比RX大很多。</p>
 <h2 id="网卡启动准备"><a href="#网卡启动准备" class="headerlink" title="网卡启动准备"></a>网卡启动准备</h2><p>网卡启动最重要的任务之一就是分配和初始化RingBuffer。在对应的驱动程序的open函数中，对于ringbuffer进行分配。</p>
@@ -634,7 +729,7 @@
 
 <p>调用tcp_push_one &#x2F; __tcp_push_pending_frames 将数据包发送出去。</p>
 <p>最终会调用到。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Send _single_ skb sitting at the send head. This function requires</span></span><br><span class="line"><span class="comment"> * true push pending frames to setup probe timer etc.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">tcp_push_one</span><span class="params">(<span class="keyword">struct</span> sock *sk, <span class="type">unsigned</span> <span class="type">int</span> mss_now)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sk_buff</span> *<span class="title">skb</span> =</span> tcp_send_head(sk);</span><br><span class="line"></span><br><span class="line">	BUG_ON(!skb || skb-&gt;len &lt; mss_now);</span><br><span class="line"></span><br><span class="line">	tcp_write_xmit(sk, mss_now, TCP_NAGLE_PUSH, <span class="number">1</span>, sk-&gt;sk_allocation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Send _single_ s</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">kb sitting at the send head. This function requires</span></span><br><span class="line"><span class="comment"> * true push pending frames to setup probe timer etc.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">tcp_push_one</span><span class="params">(<span class="keyword">struct</span> sock *sk, <span class="type">unsigned</span> <span class="type">int</span> mss_now)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sk_buff</span> *<span class="title">skb</span> =</span> tcp_send_head(sk);</span><br><span class="line"></span><br><span class="line">	BUG_ON(!skb || skb-&gt;len &lt; mss_now);</span><br><span class="line"></span><br><span class="line">	tcp_write_xmit(sk, mss_now, TCP_NAGLE_PUSH, <span class="number">1</span>, sk-&gt;sk_allocation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="网络层发送处理"><a href="#网络层发送处理" class="headerlink" title="网络层发送处理"></a>网络层发送处理</h3><p>tcp_write_xmit内部处理了传输层的拥塞控制，滑动窗口相关的工作，满足窗口要求的时候，设置TCP头然后将skb传到更低的网络层进行处理。</p>
 <p>tcp_transmit_skb开启真正的发送函数。clone新的tcp出来，封装tcp的头.</p>
@@ -648,12 +743,19 @@
 <p>调用 neigh_resolve_output 发出,有可能触发arp请求.</p>
 <p>最后调用 dev_queue_xmit 将skb传递给Linux网络设备子系统</p>
 <h3 id="linux网络设备子系统"><a href="#linux网络设备子系统" class="headerlink" title="linux网络设备子系统"></a>linux网络设备子系统</h3><p>__dev_queue_xmit()<br>    └── __dev_queue_xmit_xmit()<br>           └── dev_hard_start_xmit()<br>                  └── xmit_one()<br>                         └── dev-&gt;netdev_ops-&gt;ndo_start_xmit()</p>
-<h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><h3 id="TX"><a href="#TX" class="headerlink" title="TX"></a>TX</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">// 1.分配 sk_buff，复制用户数据</span><br><span class="line">// net/ipv4/ip_output.c</span><br><span class="line">struct sk_buff *ip_make_skb(struct sock *sk,</span><br><span class="line">			    struct flowi4 *fl4,</span><br><span class="line">			    int getfrag(void *from, char *to, int offset,</span><br><span class="line">					int len, int odd, struct sk_buff *skb),</span><br><span class="line">			    void *from, int length, int transhdrlen,</span><br><span class="line">			    struct ipcm_cookie *ipc, struct rtable **rtp,</span><br><span class="line">			    struct inet_cork *cork, unsigned int flags)</span><br><span class="line">&#123;</span><br><span class="line">	// 管理 sk_buff 双链表</span><br><span class="line">	struct sk_buff_head queue;</span><br><span class="line">	__skb_queue_head_init(&amp;queue);</span><br><span class="line">	// ...</span><br><span class="line">	// NOTE: 具体分配sk_buffer的地方</span><br><span class="line">	err = __ip_append_data(sk, fl4, &amp;queue, cork,</span><br><span class="line">			       &amp;current-&gt;task_frag, getfrag,</span><br><span class="line">			       from, length, transhdrlen, flags);</span><br><span class="line">	// 给IP协议头赋值</span><br><span class="line">	return __ip_make_skb(sk, fl4, &amp;queue, cork);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 具体分配sk_buffer</span><br><span class="line">static int __ip_append_data(struct sock *sk,</span><br><span class="line">			    struct flowi4 *fl4,</span><br><span class="line">			    struct sk_buff_head *queue,</span><br><span class="line">			    struct inet_cork *cork,</span><br><span class="line">			    struct page_frag *pfrag,</span><br><span class="line">			    int getfrag(void *from, char *to, int offset,</span><br><span class="line">					int len, int odd, struct sk_buff *skb),</span><br><span class="line">			    void *from, int length, int transhdrlen,</span><br><span class="line">			    unsigned int flags)</span><br><span class="line">&#123;</span><br><span class="line">		// 拿到队列尾部的skb</span><br><span class="line">		skb = skb_peek_tail(queue);</span><br><span class="line">		// 分配 sk_buff</span><br><span class="line">		if (!skb)</span><br><span class="line">			goto alloc_new_skb;</span><br><span class="line">		//...</span><br><span class="line">alloc_new_skb:</span><br><span class="line">		//...</span><br><span class="line">		// 分配新 sk_buff</span><br><span class="line">		skb = sock_alloc_send_skb(sk, alloclen,</span><br><span class="line">				(flags &amp; MSG_DONTWAIT), &amp;err);</span><br><span class="line">		//...</span><br><span class="line">		// ip 协议头长度</span><br><span class="line">		fragheaderlen = sizeof(struct iphdr) + (opt ? opt-&gt;optlen : 0);</span><br><span class="line">		//...</span><br><span class="line">		// sk_buff 放入数据的地方，设置了网络层头、传输层头</span><br><span class="line">		// L3层链路层的协议头，在后续处理</span><br><span class="line">		data = skb_put(skb, fraglen + exthdrlen - pagedlen);</span><br><span class="line">		skb_set_network_header(skb, exthdrlen);</span><br><span class="line">		skb-&gt;transport_header = (skb-&gt;network_header +</span><br><span class="line">					 fragheaderlen);</span><br><span class="line">		// ...</span><br><span class="line">		// 从 from 复制copy数量的数据到 data+transhdrlen</span><br><span class="line">		// transhdrlen 是在调用ip_make_skb是计算的udp协议头大小</span><br><span class="line">		// 也就是说把用户数据复制到udp数据报的数据部分</span><br><span class="line">		if (copy &gt; 0 &amp;&amp; getfrag(from, data + transhdrlen, offset, copy, fraggap, skb) &lt; 0) &#123;</span><br><span class="line">		// ...</span><br><span class="line">		// NOTE: 将 sk_buff 放入队列</span><br><span class="line">		__skb_queue_tail(queue, skb);</span><br><span class="line">		// ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 设置ip协议头</span><br><span class="line">struct sk_buff *__ip_make_skb(struct sock *sk,</span><br><span class="line">			      struct flowi4 *fl4,</span><br><span class="line">			      struct sk_buff_head *queue,</span><br><span class="line">			      struct inet_cork *cork)</span><br><span class="line">&#123;</span><br><span class="line">	// ... </span><br><span class="line">	skb = __skb_dequeue(queue); // NOTE: 从队列中获取一个skb</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line">	// NOTE: 设置 IP协议头：版本、源IP地址、目标IP地址</span><br><span class="line">	iph = ip_hdr(skb);</span><br><span class="line">	iph-&gt;version = 4;</span><br><span class="line">	//...</span><br><span class="line">	ip_copy_addrs(iph, fl4); // NOTE: 设置ip地址</span><br><span class="line">	//...</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2. 给协议头复制，发往下一层</span><br><span class="line">// net/ipv4/udp.c</span><br><span class="line">// NOTE: 这里获取了skb 的 UDP 协议头，进行赋值</span><br><span class="line">static int udp_send_skb(struct sk_buff *skb, struct flowi4 *fl4,</span><br><span class="line">			struct inet_cork *cork)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	struct udphdr *uh;</span><br><span class="line">	uh = udp_hdr(skb); </span><br><span class="line">	// NOTE 设置udp协议头：源端口、目标端口</span><br><span class="line">	uh-&gt;source = inet-&gt;inet_sport;</span><br><span class="line">	uh-&gt;dest = fl4-&gt;fl4_dport;</span><br><span class="line"></span><br><span class="line">	// 往下一层发送 skb</span><br><span class="line">	err = ip_send_skb(sock_net(sk), skb);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// include/net/neighbour.h</span><br><span class="line">static inline int neigh_output(struct neighbour *n, struct sk_buff *skb,</span><br><span class="line">			       bool skip_cache)</span><br><span class="line">&#123;</span><br><span class="line">	// ...</span><br><span class="line">	return neigh_hh_output(hh, skb); // NOTE: 使用缓存的硬件地址发送，也就是mac地址，hh里包含协议头</span><br><span class="line">	// ...</span><br><span class="line">&#125;</span><br><span class="line">static inline int neigh_hh_output(const struct hh_cache *hh, struct sk_buff *skb)</span><br><span class="line">&#123;</span><br><span class="line">	// ...</span><br><span class="line">		hh_len = READ_ONCE(hh-&gt;hh_len); // NOTE: 获取头长度</span><br><span class="line">		memcpy(skb-&gt;data - HH_DATA_MOD, hh-&gt;hh_data,</span><br><span class="line">		       HH_DATA_MOD);            // NOTE: skb-&gt;data 指针上移，放置 hh-&gt;hh_data 协议头</span><br><span class="line">	// ...</span><br><span class="line">	return dev_queue_xmit(skb);             // NOTE: 发往网络设备子系统处理</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><p>TX</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">// 1.分配 sk_buff，复制用户数据</span><br><span class="line">// net/ipv4/ip_output.c</span><br><span class="line">struct sk_buff *ip_make_skb(struct sock *sk,</span><br><span class="line">			    struct flowi4 *fl4,</span><br><span class="line">			    int getfrag(void *from, char *to, int offset,</span><br><span class="line">					int len, int odd, struct sk_buff *skb),</span><br><span class="line">			    void *from, int length, int transhdrlen,</span><br><span class="line">			    struct ipcm_cookie *ipc, struct rtable **rtp,</span><br><span class="line">			    struct inet_cork *cork, unsigned int flags)</span><br><span class="line">&#123;</span><br><span class="line">	// 管理 sk_buff 双链表</span><br><span class="line">	struct sk_buff_head queue;</span><br><span class="line">	__skb_queue_head_init(&amp;queue);</span><br><span class="line">	// ...</span><br><span class="line">	// NOTE: 具体分配sk_buffer的地方</span><br><span class="line">	err = __ip_append_data(sk, fl4, &amp;queue, cork,</span><br><span class="line">			       &amp;current-&gt;task_frag, getfrag,</span><br><span class="line">			       from, length, transhdrlen, flags);</span><br><span class="line">	// 给IP协议头赋值</span><br><span class="line">	return __ip_make_skb(sk, fl4, &amp;queue, cork);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 具体分配sk_buffer</span><br><span class="line">static int __ip_append_data(struct sock *sk,</span><br><span class="line">			    struct flowi4 *fl4,</span><br><span class="line">			    struct sk_buff_head *queue,</span><br><span class="line">			    struct inet_cork *cork,</span><br><span class="line">			    struct page_frag *pfrag,</span><br><span class="line">			    int getfrag(void *from, char *to, int offset,</span><br><span class="line">					int len, int odd, struct sk_buff *skb),</span><br><span class="line">			    void *from, int length, int transhdrlen,</span><br><span class="line">			    unsigned int flags)</span><br><span class="line">&#123;</span><br><span class="line">		// 拿到队列尾部的skb</span><br><span class="line">		skb = skb_peek_tail(queue);</span><br><span class="line">		// 分配 sk_buff</span><br><span class="line">		if (!skb)</span><br><span class="line">			goto alloc_new_skb;</span><br><span class="line">		//...</span><br><span class="line">alloc_new_skb:</span><br><span class="line">		//...</span><br><span class="line">		// 分配新 sk_buff</span><br><span class="line">		skb = sock_alloc_send_skb(sk, alloclen,</span><br><span class="line">				(flags &amp; MSG_DONTWAIT), &amp;err);</span><br><span class="line">		//...</span><br><span class="line">		// ip 协议头长度</span><br><span class="line">		fragheaderlen = sizeof(struct iphdr) + (opt ? opt-&gt;optlen : 0);</span><br><span class="line">		//...</span><br><span class="line">		// sk_buff 放入数据的地方，设置了网络层头、传输层头</span><br><span class="line">		// L3层链路层的协议头，在后续处理</span><br><span class="line">		data = skb_put(skb, fraglen + exthdrlen - pagedlen);</span><br><span class="line">		skb_set_network_header(skb, exthdrlen);</span><br><span class="line">		skb-&gt;transport_header = (skb-&gt;network_header +</span><br><span class="line">					 fragheaderlen);</span><br><span class="line">		// ...</span><br><span class="line">		// 从 from 复制copy数量的数据到 data+transhdrlen</span><br><span class="line">		// transhdrlen 是在调用ip_make_skb是计算的udp协议头大小</span><br><span class="line">		// 也就是说把用户数据复制到udp数据报的数据部分</span><br><span class="line">		if (copy &gt; 0 &amp;&amp; getfrag(from, data + transhdrlen, offset, copy, fraggap, skb) &lt; 0) &#123;</span><br><span class="line">		// ...</span><br><span class="line">		// NOTE: 将 sk_buff 放入队列</span><br><span class="line">		__skb_queue_tail(queue, skb);</span><br><span class="line">		// ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 设置ip协议头</span><br><span class="line">struct sk_buff *__ip_make_skb(struct sock *sk,</span><br><span class="line">			      struct flowi4 *fl4,</span><br><span class="line">			      struct sk_buff_head *queue,</span><br><span class="line">			      struct inet_cork *cork)</span><br><span class="line">&#123;</span><br><span class="line">	// ... </span><br><span class="line">	skb = __skb_dequeue(queue); // NOTE: 从队列中获取一个skb</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line">	// NOTE: 设置 IP协议头：版本、源IP地址、目标IP地址</span><br><span class="line">	iph = ip_hdr(skb);</span><br><span class="line">	iph-&gt;version = 4;</span><br><span class="line">	//...</span><br><span class="line">	ip_copy_addrs(iph, fl4); // NOTE: 设置ip地址</span><br><span class="line">	//...</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2. 给协议头复制，发往下一层</span><br><span class="line">// net/ipv4/udp.c</span><br><span class="line">// NOTE: 这里获取了skb 的 UDP 协议头，进行赋值</span><br><span class="line">static int udp_send_skb(struct sk_buff *skb, struct flowi4 *fl4,</span><br><span class="line">			struct inet_cork *cork)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	struct udphdr *uh;</span><br><span class="line">	uh = udp_hdr(skb); </span><br><span class="line">	// NOTE 设置udp协议头：源端口、目标端口</span><br><span class="line">	uh-&gt;source = inet-&gt;inet_sport;</span><br><span class="line">	uh-&gt;dest = fl4-&gt;fl4_dport;</span><br><span class="line"></span><br><span class="line">	// 往下一层发送 skb</span><br><span class="line">	err = ip_send_skb(sock_net(sk), skb);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// include/net/neighbour.h</span><br><span class="line">static inline int neigh_output(struct neighbour *n, struct sk_buff *skb,</span><br><span class="line">			       bool skip_cache)</span><br><span class="line">&#123;</span><br><span class="line">	// ...</span><br><span class="line">	return neigh_hh_output(hh, skb); // NOTE: 使用缓存的硬件地址发送，也就是mac地址，hh里包含协议头</span><br><span class="line">	// ...</span><br><span class="line">&#125;</span><br><span class="line">static inline int neigh_hh_output(const struct hh_cache *hh, struct sk_buff *skb)</span><br><span class="line">&#123;</span><br><span class="line">	// ...</span><br><span class="line">		hh_len = READ_ONCE(hh-&gt;hh_len); // NOTE: 获取头长度</span><br><span class="line">		memcpy(skb-&gt;data - HH_DATA_MOD, hh-&gt;hh_data,</span><br><span class="line">		       HH_DATA_MOD);            // NOTE: skb-&gt;data 指针上移，放置 hh-&gt;hh_data 协议头</span><br><span class="line">	// ...</span><br><span class="line">	return dev_queue_xmit(skb);             // NOTE: 发往网络设备子系统处理</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="RX"><a href="#RX" class="headerlink" title="RX"></a>RX</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">1. 软中断</span><br><span class="line">// net/core/dev.c</span><br><span class="line">__napi_poll(n-&gt;poll,网卡初始化时注册的igb_poll)</span><br><span class="line">// drivers/net/ethernet/intel/igb/igb_main.c</span><br><span class="line">igb_poll -&gt; igb_clean_rx_irq -&gt; napi_gro_receive(skb 结构体已包含可用的 L2 数据)</span><br><span class="line"></span><br><span class="line">2. gro: Generic Receive Offloading</span><br><span class="line">// net/core/gro.c</span><br><span class="line">napi_gro_receive -&gt; napi_skb_finish -&gt; gro_normal_one</span><br><span class="line">// include/net/gro.h</span><br><span class="line">gro_normal_one -&gt; gro_normal_list -&gt; netif_receive_skb_list_internal</span><br><span class="line"></span><br><span class="line">// net/core/dev.c</span><br><span class="line">netif_receive_skb_list_internal -&gt; __netif_receive_skb_list -&gt; __netif_receive_skb_list_core -&gt; __netif_receive_skb_core</span><br><span class="line">-&gt; deliver_ptype_list_skb -&gt; deliver_skb(pt_prev-&gt;func指向ip_rcv,通过dev_add_pack注册ip_packet_type)</span><br><span class="line"></span><br><span class="line">// NOTE: 再进行Linux网络栈处理</span><br><span class="line"></span><br><span class="line">// 1. IP 网络层</span><br><span class="line">// net/ipv4/ip_input.c</span><br><span class="line">ip_rcv -&gt; ip_rcv_finish -&gt; dst_input</span><br><span class="line">// 1.1 路由</span><br><span class="line">// include/net/dst.h</span><br><span class="line">dst_input -&gt; ip_local_deliver</span><br><span class="line">// net/ipv4/ip_input.c</span><br><span class="line">ip_local_deliver -&gt; ip_local_deliver_finish -&gt; ip_protocol_deliver_rcu -&gt; udp_rcv</span><br><span class="line"></span><br><span class="line">// 2. 传输层</span><br><span class="line">// net/ipv4/udp.c</span><br><span class="line">udp_rcv -&gt; __udp4_lib_rcv -&gt; udp_unicast_rcv_skb -&gt; udp_queue_rcv_skb -&gt; udp_queue_rcv_one_skb -&gt; __udp_queue_rcv_skb </span><br><span class="line">-&gt; __udp_enqueue_schedule_skb -k __skb_queue_tail -&gt; sk_data_ready/sock_def_readable</span><br><span class="line"></span><br><span class="line">// 3. 用户/系统调用层</span><br><span class="line">// net/core/sock.c</span><br><span class="line">sock_def_readable -&gt; sk_wake_async_rcu</span><br><span class="line">// include/net/sock.h</span><br><span class="line">sk_wake_async_rcu -&gt; sock_wake_async</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>RX</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">1. 软中断</span><br><span class="line">// net/core/dev.c</span><br><span class="line">__napi_poll(n-&gt;poll,网卡初始化时注册的igb_poll)</span><br><span class="line">// drivers/net/ethernet/intel/igb/igb_main.c</span><br><span class="line">igb_poll -&gt; igb_clean_rx_irq -&gt; napi_gro_receive(skb 结构体已包含可用的 L2 数据)</span><br><span class="line"></span><br><span class="line">2. gro: Generic Receive Offloading</span><br><span class="line">// net/core/gro.c</span><br><span class="line">napi_gro_receive -&gt; napi_skb_finish -&gt; gro_normal_one</span><br><span class="line">// include/net/gro.h</span><br><span class="line">gro_normal_one -&gt; gro_normal_list -&gt; netif_receive_skb_list_internal</span><br><span class="line"></span><br><span class="line">// net/core/dev.c</span><br><span class="line">netif_receive_skb_list_internal -&gt; __netif_receive_skb_list -&gt; __netif_receive_skb_list_core -&gt; __netif_receive_skb_core</span><br><span class="line">-&gt; deliver_ptype_list_skb -&gt; deliver_skb(pt_prev-&gt;func指向ip_rcv,通过dev_add_pack注册ip_packet_type)</span><br><span class="line"></span><br><span class="line">// NOTE: 再进行Linux网络栈处理</span><br><span class="line"></span><br><span class="line">// 1. IP 网络层</span><br><span class="line">// net/ipv4/ip_input.c</span><br><span class="line">ip_rcv -&gt; ip_rcv_finish -&gt; dst_input</span><br><span class="line">// 1.1 路由</span><br><span class="line">// include/net/dst.h</span><br><span class="line">dst_input -&gt; ip_local_deliver</span><br><span class="line">// net/ipv4/ip_input.c</span><br><span class="line">ip_local_deliver -&gt; ip_local_deliver_finish -&gt; ip_protocol_deliver_rcu -&gt; udp_rcv</span><br><span class="line"></span><br><span class="line">// 2. 传输层</span><br><span class="line">// net/ipv4/udp.c</span><br><span class="line">udp_rcv -&gt; __udp4_lib_rcv -&gt; udp_unicast_rcv_skb -&gt; udp_queue_rcv_skb -&gt; udp_queue_rcv_one_skb -&gt; __udp_queue_rcv_skb </span><br><span class="line">-&gt; __udp_enqueue_schedule_skb -k __skb_queue_tail -&gt; sk_data_ready/sock_def_readable</span><br><span class="line"></span><br><span class="line">// 3. 用户/系统调用层</span><br><span class="line">// net/core/sock.c</span><br><span class="line">sock_def_readable -&gt; sk_wake_async_rcu</span><br><span class="line">// include/net/sock.h</span><br><span class="line">sk_wake_async_rcu -&gt; sock_wake_async</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>参考资料 </p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44260459/article/details/121480230">https://blog.csdn.net/weixin_44260459/article/details/121480230</a></p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250724115436779.png" alt="image-20250724115436779"></p>
+<h2 id="tcpdump抓包？"><a href="#tcpdump抓包？" class="headerlink" title="tcpdump抓包？"></a>tcpdump抓包？</h2><p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250724115825198.png" alt="image-20250724115825198"></p>
+<p>主要通过libpcap库实现，内部通过BPF技术实现数据过滤。将用户定义的过滤条件以字节码的形式注入内核， 由内核层筛选网络包后，将满足条件的包交给用户态处理。</p>
+<p>tcpdump通过 AF_PACKET socket 接收以太网帧；工作在链路层。</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250724122117449.png" alt="image-20250724122117449"></p>
 
       
     </div>
@@ -1261,123 +1363,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/kdump-mmc.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/kdump-mmc.html" class="post-title-link" itemprop="url">kdump_mmc</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-24 08:45:42" itemprop="dateCreated datePublished" datetime="2024-09-24T08:45:42+08:00">2024-09-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-03 17:53:03" itemprop="dateModified" datetime="2024-11-03T17:53:03+08:00">2024-11-03</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>当内存发生panic的时候，需要把panic的内容以日志的方式记录下来。目前有几种方式，kdump，mtdoops，crashlog（openwrt特有），以及pstore。</p>
-<p>kdump主要用在x86系统上，因为它使用大量的内存和硬盘信息。</p>
-<p>mtdoops和crashlog主要用于嵌入式系统。记录文本日志。</p>
-<h2 id="mtdoops"><a href="#mtdoops" class="headerlink" title="mtdoops"></a>mtdoops</h2><p>mtdoop功能在发生oops时,把msg区写入特定的mt分区。写入过程，不支持文件系统。<strong>直接二进制文本写</strong>。 它需要由mtd驱动的支持，就是mtd驱动支持mtd_panic_write。也就是原子式写入。不能被中断。一般flash不支持。 在mtdoops.c文件，并在标准内核的drivers&#x2F;mtd&#x2F;mtdcore中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mtd_panic_write</span><br><span class="line">	--&gt; _panic_write</span><br><span class="line">		---&gt; mtd-&gt;_panic_write = panic_nand_write / onenand_panic_write / concat_panic_write 在具体驱动实现</span><br></pre></td></tr></table></figure>
-
-<p>在初始化过程中，需要指定写入哪个分区，对应的分区名&#x2F;号，可以写入的size是多少。使用kmsg_dump_register注册一个cxt-&gt;dump.dump绑定的回调函数 (eg:mmcoops_do_dump)，此函数主要是读取kmsg区的内容，直接调用mtd-&gt;write的驱动进行写操作。</p>
-<h2 id="crashlog"><a href="#crashlog" class="headerlink" title="crashlog"></a>crashlog</h2><p>在linux内核启动的时候，保留一块64K的内存，用于记录panic日志，crashlog发生在oop时候，把msg写入之前分配好的MEM区域，并加上magic，再重启后，check magic ok，则把上次日志放入到&#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;crashlog。</p>
-<h2 id="pstore"><a href="#pstore" class="headerlink" title="pstore"></a>pstore</h2><p>pstore最初是用于系统发生oops或panic时，自动保存内核log buffer中的日志。不过在当前内核版本中，其已经支持了更多的功能，如保存console日志、ftrace消息和用户空间日志。同时，它还支持将这些消息保存在不同的存储设备中，如内存、块设备或mtd设备。 为了提高灵活性和可扩展性，pstore将以上功能分别抽象为前端和后端，其中像dmesg、console等为pstore提供数据的模块称为前端，而内存设备、块设备等用于存储数据的模块称为后端，pstore core则分别为它们提供相关的注册接口。</p>
-<p>通过模块化的设计，实现了前端和后端的解耦，因此若某些模块需要利用pstore保存信息，就可以方便地向pstore添加新的前端。而若需要将pstore数据保存到新的存储设备上，也可以通过向其添加后端设备的方式完成。</p>
-<p><img src="/../image/image-20240924102113713.png" alt="image-20240924102113713"></p>
-<p>除此之外，pstore还设计了一套pstore文件系统，用于查询和操作上一次重启时已经保存的pstore数据。当该文件系统被挂载时，保存在backend中的数据将被读取到pstore fs中，并以文件的形式显示。</p>
-<p>源码在&#x2F;fs&#x2F;pstore&#x2F;ram_core.c</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fs/pstore/</span><br><span class="line">├── ftrace.c		# ftrace 前端的实现</span><br><span class="line">├── inode.c		# pstore 文件系统的注册与操作</span><br><span class="line">├── internal.h</span><br><span class="line">├── Kconfig</span><br><span class="line">├── Makefile</span><br><span class="line">├── platform.c		# pstore 前后端功能的核心</span><br><span class="line">├── pmsg.c		# pmsg 前端的实现</span><br><span class="line">├── ram.c			# pstore/ram 后端的实现,dram空间分配与管理</span><br><span class="line">├── ram_core.c		# pstore/ram 后端的实现,dram的读写操作</span><br></pre></td></tr></table></figure>
-
-<p>oops&#x2F;panic日志位于 pstore 目录下的dmesg-ramoops-x文件中，根据缓冲区大小可以有多个文件，x从0开始。<br>函数调用序列日志位于 pstore 目录下的ftrace-ramoops文件中。</p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h4 id="内核配置"><a href="#内核配置" class="headerlink" title="内核配置"></a>内核配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_PSTORE=y</span><br><span class="line">CONFIG_PSTORE_CONSOLE=y</span><br><span class="line">CONFIG_PSTORE_PMSG=y</span><br><span class="line">CONFIG_PSTORE_RAM=y</span><br><span class="line">CONFIG_PANIC_TIMEOUT=-1</span><br><span class="line"></span><br><span class="line">由于log数据存放于DDR，不能掉电，只能依靠自动重启机制来查看，故而要配置：CONFIG_PANIC_TIMEOUT，让系统在 panic 后能自动重启。</span><br><span class="line"></span><br><span class="line">mtdoops：</span><br><span class="line">CONFIG_PSTORE=y</span><br><span class="line">CONFIG_PSTORE_CONSOLE=y</span><br><span class="line">CONFIG_PSTORE_PMSG=y</span><br><span class="line">CONFIG_MTD_OOPS=y</span><br><span class="line">CONFIG_MAGIC_SYSRQ=y</span><br><span class="line"></span><br><span class="line">blkoops：</span><br><span class="line">CONFIG_PSTORE=y</span><br><span class="line">CONFIG_PSTORE_CONSOLE=y</span><br><span class="line">CONFIG_PSTORE_PMSG=y</span><br><span class="line">CONFIG_PSTORE_BLK=y</span><br><span class="line">CONFIG_MTD_PSTORE=y</span><br><span class="line">CONFIG_MAGIC_SYSRQ=y</span><br></pre></td></tr></table></figure>
-
-<h4 id="设备树配置"><a href="#设备树配置" class="headerlink" title="设备树配置"></a>设备树配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ramoops_mem: ramoops_mem &#123;</span><br><span class="line">    reg = &lt;0x0 0x110000 0x0 0xf0000&gt;;</span><br><span class="line">    reg-names = &quot;ramoops_mem&quot;;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">ramoops &#123;</span><br><span class="line">    compatible = &quot;ramoops&quot;;</span><br><span class="line">    record-size = &lt;0x0 0x20000&gt;;</span><br><span class="line">    console-size = &lt;0x0 0x80000&gt;;</span><br><span class="line">    ftrace-size = &lt;0x0 0x00000&gt;;</span><br><span class="line">    pmsg-size = &lt;0x0 0x50000&gt;;</span><br><span class="line">    memory-region = &lt;&amp;ramoops_mem&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="bootargs分区配置"><a href="#bootargs分区配置" class="headerlink" title="bootargs分区配置"></a>bootargs分区配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">方案1：</span><br><span class="line">bootargs = &quot;console=ttyS1,115200 loglevel=8 rootwait root=/dev/mtdblock5 rootfstype=squashfs mtdoops.mtddev=pstore&quot;; </span><br><span class="line">（blk则为 pstore_blk.blkdev=pstore）</span><br><span class="line"> </span><br><span class="line">blkparts = &quot;mtdparts=spi0.0:64k(spl)ro,256k(uboot)ro,64k(dtb)ro,128k(pstore),3m(kernel)ro,4m(rootfs)ro,-(data)&quot;;</span><br><span class="line"></span><br><span class="line">方案2:</span><br><span class="line">bootargs = &quot;console=ttyS1,115200 loglevel=8 rootwait root=/dev/mtdblock5 rootfstype=squashfs mtdoops.mtddev=pstore&quot;;</span><br><span class="line">在设备树中</span><br><span class="line">partition@60000 &#123;</span><br><span class="line">    label = &quot;pstore&quot;;</span><br><span class="line">    reg = &lt;0x60000 0x20000&gt;;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="挂载pstore文件系统"><a href="#挂载pstore文件系统" class="headerlink" title="挂载pstore文件系统"></a>挂载pstore文件系统</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t pstore pstore /sys/fs/pstore</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><p>以上几种方案都使用到了kmsg_dump的注册机制。 注册很简单，就是把一个全局变量结构挂到一个全局list中。 kmsg_dump是oops时进入kmsg_dump的入口。由panic,die,oops_exit等函数调用。它会一一调用回调函数。 每一个回调函数都会用到kmsg_dump_get_buffer。它先是计算dump还有多少空间，然后把kmsg中最后的一部分写进去。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1409,7 +1394,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:05</span>
+    <span title="站点阅读时长">2:06</span>
   </span>
 </div>
 <div class="busuanzi-count">
