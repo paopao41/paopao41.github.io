@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="linux的密码管理在linux内核中，密码相关的头文件在 include crypto下，相关概念大致有加密 块加密 异步块加密 哈希 分组加密模式等等。 加密算法算法： AEAD算法：一种带有认证功能的加密方式。拆分为认证和加密两部分。常见的有GCM和CCM， 对称加密算法： 使用同一个密钥进行加密和解密。这意味着加密方和解密方必须事先共享同一个密钥，并且保证这个密钥的安全。  AES：AES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bubble&#39;s little record of knowledge">
+<meta property="og:url" content="https://paopao41.github.io/Device%20Mapper.html">
+<meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
+<meta property="og:description" content="linux的密码管理在linux内核中，密码相关的头文件在 include crypto下，相关概念大致有加密 块加密 异步块加密 哈希 分组加密模式等等。 加密算法算法： AEAD算法：一种带有认证功能的加密方式。拆分为认证和加密两部分。常见的有GCM和CCM， 对称加密算法： 使用同一个密钥进行加密和解密。这意味着加密方和解密方必须事先共享同一个密钥，并且保证这个密钥的安全。  AES：AES">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\29696\AppData\Roaming\Typora\typora-user-images\image-20250525215259675.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602154216621.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602154231248.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602154153605.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602155551995.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602155732212.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602155855933.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602160216800.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602160352833.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602160644257.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602160847088-1748851727344-1.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602202550464.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602203227874.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602161801953.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602203532882.png">
+<meta property="og:image" content="d:\%E6%A1%8C%E9%9D%A2\hexo-blog-bak\ppblog\source\image\image-20250602204408109.png">
+<meta property="article:published_time" content="2025-05-26T00:40:00.733Z">
+<meta property="article:modified_time" content="2025-06-20T00:30:51.614Z">
+<meta property="article:author" content="paopao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\29696\AppData\Roaming\Typora\typora-user-images\image-20250525215259675.png">
+
+
+<link rel="canonical" href="https://paopao41.github.io/Device%20Mapper.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/Device%20Mapper.html","path":"Device Mapper.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Bubble's little record of knowledge</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Bubble's little record of knowledge</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E7%9A%84%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">linux的密码管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">加密算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E5%9C%A8%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">加密算法在内核中的形式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Device-Mapper"><span class="nav-number">2.</span> <span class="nav-text">Device Mapper</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E9%83%A8%E5%88%86"><span class="nav-number">2.1.</span> <span class="nav-text">内核部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E9%83%A8%E5%88%86"><span class="nav-number">2.2.</span> <span class="nav-text">用户空间部分</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LUKS%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">LUKS介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LUKS%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">LUKS结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dm-crypt"><span class="nav-number">4.</span> <span class="nav-text">dm crypt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cryptsetup"><span class="nav-number">5.</span> <span class="nav-text">cryptsetup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E5%8A%A0%E5%AF%86%E6%A1%86%E6%9E%B6"><span class="nav-number">6.</span> <span class="nav-text">linux加密框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#kernel-space"><span class="nav-number">6.1.</span> <span class="nav-text">kernel space.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crypto-API-User-space-interface"><span class="nav-number">6.2.</span> <span class="nav-text">Crypto API User space interface</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crypt-dev"><span class="nav-number">6.2.1.</span> <span class="nav-text">crypt dev</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ioctl"><span class="nav-number">6.2.2.</span> <span class="nav-text">ioctl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#af-alg"><span class="nav-number">6.2.3.</span> <span class="nav-text">af_alg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#netlink"><span class="nav-number">6.2.4.</span> <span class="nav-text">netlink</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Space%E5%AF%86%E7%A0%81%E5%AD%A6%E5%BA%93"><span class="nav-number">6.3.</span> <span class="nav-text">User Space密码学库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PART-ONE-Crypyo-Subsystem-of-Kernel"><span class="nav-number">7.</span> <span class="nav-text">PART ONE Crypyo Subsystem of Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">7.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cryptodev-engine"><span class="nav-number">7.2.</span> <span class="nav-text">cryptodev engine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-kernel-crypto-subsystem"><span class="nav-number">7.3.</span> <span class="nav-text">linux kernel crypto subsystem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#asynchronous-synchronous"><span class="nav-number">7.3.1.</span> <span class="nav-text">asynchronous &amp; synchronous</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">paopao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/paopao41" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;paopao41" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/paopao000401@gmail.com" title="E-Mail → paopao000401@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/Device%20Mapper.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-05-26 08:40:00" itemprop="dateCreated datePublished" datetime="2025-05-26T08:40:00+08:00">2025-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-06-20 08:30:51" itemprop="dateModified" datetime="2025-06-20T08:30:51+08:00">2025-06-20</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="linux的密码管理"><a href="#linux的密码管理" class="headerlink" title="linux的密码管理"></a>linux的密码管理</h1><p>在linux内核中，密码相关的头文件在 include crypto下，相关概念大致有加密 块加密 异步块加密 哈希 分组加密模式等等。</p>
+<h2 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h2><p><strong>算法</strong>：</p>
+<p><strong>AEAD算法</strong>：一种带有认证功能的加密方式。拆分为认证和加密两部分。常见的有GCM和CCM，</p>
+<p><strong>对称加密算法</strong>： 使用同一个密钥进行加密和解密。这意味着加密方和解密方必须事先共享同一个密钥，并且保证这个密钥的安全。 </p>
+<p>AES：AES-128 AES-256等，后个字段对应密钥长度。密钥越长，安全性能越高，加密时间越长。</p>
+<p>DES，3DES等。</p>
+<p><strong>非对称加密算法</strong>： 使用一对密钥，一个公开密钥（公钥）用于加密，一个私有密钥（私钥）用于解密。公钥可以公开分享，而私钥必须保持私密。 </p>
+<p><strong>模式</strong>：</p>
+<p>实现不同的算法有几种模式：</p>
+<p>主要有ECB CBC CFB OFB 和 CTR等这几种。</p>
+<p>不同模式的区分如下：</p>
+<p>ECB模式： ECB是最简单的块密码加密模式，加密前根据加密块大小（如AES为128位）分成若干块，之后将每块使用相同的密钥单独加密，解密同理。</p>
+<p>CBC模式： CBC模式对于每个待加密的密码块在加密前会先与前一个密码块的密文异或然后再用加密器加密。第一个明文块与一个叫初始化向量的数据块异或。</p>
+<p>CFB模式： 与ECB和CBC模式只能够加密块数据不同，CFB能够将块密文（Block Cipher）转换为流密文（Stream Cipher）。</p>
+<p>OFB模式： OFB是先用块加密器生成密钥流（Keystream），然后再将密钥流与明文流异或得到密文流，解密是先用块加密器生成密钥流，再将密钥流与密文流异或得到明文，由于异或操作的对称性所以加密和解密的流程是完全一样的。</p>
+<p>CTR模式：  CTR模式是一种通过将逐次累加的计数器进行加密生成密钥流的流密码。</p>
+<h3 id="加密算法在内核中的形式"><a href="#加密算法在内核中的形式" class="headerlink" title="加密算法在内核中的形式"></a>加密算法在内核中的形式</h3><p>以aes加密算法为例。</p>
+<p><img src="C:\Users\29696\AppData\Roaming\Typora\typora-user-images\image-20250525215259675.png" alt="image-20250525215259675"></p>
+<p>所有的加密算法名都是xxx_alg的方式。关键成员有算法名 驱动名 算法类型 同步，异步，分组大小，上下文。加解密函数等等。</p>
+<p>在alg结构中，块加密和普通分组加密的区别就是.cra的设置。普通分组加密指定的是cipher.同步块加密指定的是blkcipher. 异步块加密指定的是ablkcipher。</p>
+<p>ctx：上下文。指的是算法执行过程中所要贯穿始终的数据结构。由每个算法自己定义。set_key encrypt decrypt这几个函数都可以从参数获得算法上下文的指针。算法上下文所占的内存空间由密码管理器来分配。注册alg的时候指定ctx大小和对其即可。ctx对齐对于一些硬件加密等。ctx的首地址可能需要在内存中4字节或者16字节对齐。</p>
+<h1 id="Device-Mapper"><a href="#Device-Mapper" class="headerlink" title="Device Mapper"></a>Device Mapper</h1><p>device mapper是linux 2.6内核中支持的逻辑卷管理的通用设备映射机制。为实现用于才能出资源管理的块设备驱动提供了一个高度模块化的内核架构。</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602154216621.png" alt="image-20250602154216621"></p>
+<p>在内核中它通过一个一个模块化的target driver实现对IO请求的过滤或者重定向。包括软raid，软加密，多路径，镜像，快照等等。device mapper用户空间相关部分主要负责配置具体的策略和控制逻辑。比如逻辑设备和哪些物理设备映射。怎么建立这些映射关系等等。而具体的过滤和重定向IO请求的工作由内核相关代码完成。整个device mapper机制由两部分组成 内核空间的device mapper驱动，用户空间的device mapper库以及他提供的dmsetup工具。</p>
+<h2 id="内核部分"><a href="#内核部分" class="headerlink" title="内核部分"></a>内核部分</h2><p>device mapper的内核相关代码在driver&#x2F;md目录中。device mapper在内核中作为一个块设备驱动被注册的，包含三个重要的对象概念，mapped device，映射表，target device。</p>
+<p>mapped device是一个逻辑抽象，是内核向外提供的逻辑设备。通过映射表描述的映射关系和target device建立映射。从mapped device 到一个 target device的映射表由一个多元组表示，该多元组由表示mappdevice逻辑的起始地址，范围，和表示在target device所在的物理设备的地址偏移量以及target类型等变量组成。以磁盘扇区为单位，512字节大小。</p>
+<p>target device表示的是mapped device所映射的物理空间段。device mapper中这三个对象和target driver一起构成了可迭代的设备树 。</p>
+<h2 id="用户空间部分"><a href="#用户空间部分" class="headerlink" title="用户空间部分"></a>用户空间部分</h2><p>Device mapper在用户空间包括device mapper库和dmsetup工具，device mapper库就是对ioctl 用户空间创建删除devicemapper逻辑设备所需必要操作的封装。dmsetup工具是一个应用层直接操作device mapper设备的命令行工具。大致包含，发现每个mapper device相关的target device，根据配置信息创建映射表，将用户空间构建好的映射表传入内核，让内核构建mapper device对应的dm table结构。</p>
+<h1 id="LUKS介绍"><a href="#LUKS介绍" class="headerlink" title="LUKS介绍"></a>LUKS介绍</h1><p>LUKS (linux unified key setup)，linux统一密钥设置。是一种高性能安全的磁盘加密方法。基于cryptsetup。使用dm-crypt作为磁盘加密后端。</p>
+<p>定义了如何安全存储加密密钥和加密元数据。支持多重密码。最多8个key slot。不需要重加密就能够更换密码。配合dm-crypt使用。实际加密使用的是内核支持的加密算法，LUKS只负责配置，封装和密钥管理。</p>
+<h2 id="LUKS结构"><a href="#LUKS结构" class="headerlink" title="LUKS结构"></a>LUKS结构</h2><p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602154231248.png" alt="image-20250602154231248"></p>
+<p>任何文件系统都可以加密，包括交换分区，加密卷的开头有一个未加密的头部。允许存储多达8个lusk1或者32个lusk2加密密钥，以及诸如密码类型和密钥大小之类的加密参数。 </p>
+<h1 id="dm-crypt"><a href="#dm-crypt" class="headerlink" title="dm crypt"></a>dm crypt</h1><p>dm crypt，内核提供的磁盘加密功能。即device mapper crypto。lucks通过dmcrypt模块使用内核设备映射器子系统。负责处理设备的加密和解密。														</p>
+<h1 id="cryptsetup"><a href="#cryptsetup" class="headerlink" title="cryptsetup"></a>cryptsetup</h1><p>命令行的前端，通过它来操作 dm crypt。创建和访问加密设备。</p>
+<h1 id="linux加密框架"><a href="#linux加密框架" class="headerlink" title="linux加密框架"></a>linux加密框架</h1><p>分成User Space layer 和 kernel Space layer。</p>
+<h2 id="kernel-space"><a href="#kernel-space" class="headerlink" title="kernel space."></a>kernel space.</h2><p>在kernel space密码学算法上。主要分成软件以及硬件运算。</p>
+<p>软件运算。主要由CPU进行密码学算法运算，不需要额外硬件，但很费CPU性能。linux kernel 原始码位于crypto subsystem下。</p>
+<p>硬件加速。由硬件辅助进行密码学运算，不需要耗费cpu性能，但需要额外硬件。</p>
+<p>SoC Component–许多ARM SoC厂商都会将硬件加解密元件放入SoC中，Linux Kernel原始码多位于drivers&#x2F;crypto底下.且设计必须遵照Linux crypto framework，不能私下修改。</p>
+<h2 id="Crypto-API-User-space-interface"><a href="#Crypto-API-User-space-interface" class="headerlink" title="Crypto API User space interface"></a>Crypto API User space interface</h2><p>主要的功能是提供界面。让user space可存取kernel space.目前主流为cryptodev以及af_alg</p>
+<h3 id="crypt-dev"><a href="#crypt-dev" class="headerlink" title="crypt dev"></a>crypt dev</h3><p>不在linux kernel中自带。开源模块。需要单独移植，并挂载kernel module。</p>
+<h3 id="ioctl"><a href="#ioctl" class="headerlink" title="ioctl"></a>ioctl</h3><p>openssl支持cryptodev。通过操作cryptdev节点来操作加密</p>
+<h3 id="af-alg"><a href="#af-alg" class="headerlink" title="af_alg"></a>af_alg</h3><h3 id="netlink"><a href="#netlink" class="headerlink" title="netlink"></a>netlink</h3><p>openssl从1.1开始支持af_alg。</p>
+<h2 id="User-Space密码学库"><a href="#User-Space密码学库" class="headerlink" title="User Space密码学库"></a>User Space密码学库</h2><p>常见的有openssl，wolfssl。</p>
+<p>openssl提供af alg以及cryptdev的engine，可以透过engine来存取crypto api。</p>
+<h1 id="PART-ONE-Crypyo-Subsystem-of-Kernel"><a href="#PART-ONE-Crypyo-Subsystem-of-Kernel" class="headerlink" title="PART ONE Crypyo Subsystem of Kernel"></a>PART ONE Crypyo Subsystem of Kernel</h1><p>介绍由应用层所发出的crypto（cryptography）request，透过system call将request传送到Linux kernel端，并经由crypto subsystem将request转发给硬件算法引擎（hardware crypto engine）的流程。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Crypto subsystem是Linux系统中负责处理crypto request的子系统，除了包含流程控制机制之外，另一个重要特色就是提供算法实作的抽象层，让各家厂商能够依据需求去客制化实作方式。</p>
+<p>其中一个常见例子就是厂商在硬件构架中加入用以加速特定算法运算效率的硬件算法引擎，并且透过crypto subsystem将驱动硬件算法引擎的流程整合进Linux系统中，供其他kernel module或是应用层使用。</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602154153605.png" alt="image-20250602154153605"></p>
+<h2 id="cryptodev-engine"><a href="#cryptodev-engine" class="headerlink" title="cryptodev engine"></a>cryptodev engine</h2><p>在Linux系统中，想要实现应用层与硬件装置的沟通，第一个想到的就是透过character&#x2F;block device driver，让应用程序开启表示此硬件装置的抽象层，并且藉由读写行为与硬件装置进行互动。</p>
+<p>而Cryptodev-linux就是负责此角色，它提供中间层的服务，接收由应用层传送过来的crypto request，再呼叫Linux kernel crypto Subsystem的crypto API将request转发给特定的硬件算法引擎。</p>
+<p>Cryptodev-linux为misc device类型的kernel module，预设路径是&#x2F;dev&#x2F;crypto，使用ioctl file operation cryptodev_ioctl来接受应用端所传递过来的数据。</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602155551995.png" alt="image-20250602155551995"></p>
+<p>应用端则是使用cryptdev.h定义好的struct crypt_op或是struct crypt_auth_op来组成指定crypto request，并呼叫ioctl system call将request送给Cryptodev-linux。</p>
+<p>simple of cryptdev linux ioctl</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602155732212.png" alt="image-20250602155732212"></p>
+<p>另外，Cryptodev-linux也提供session机制，每个crypto request对应到一个session，而session管理当前crypto request的状态。</p>
+<p>例如，目前session在initialized的状态，则表示此crypto request可执行encrypt，透过此方式来确保crypto request会在正确的流程下运作。</p>
+<h2 id="linux-kernel-crypto-subsystem"><a href="#linux-kernel-crypto-subsystem" class="headerlink" title="linux kernel crypto subsystem"></a>linux kernel crypto subsystem</h2><p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602155855933.png" alt="image-20250602155855933"></p>
+<p>首先 crypto subsystem有两个重要元素，transformation object（tfm），被称作cipher handle，transformation implementation,是transformation object底层的实作内容，又被称为crypto algo。就是crypto engine算法实作。</p>
+<p>之所以要区分成object和implementation，最主要的原因是有可能多个object会使用同一个implementation。</p>
+<p>举例来说，A和B使用者都要使用hmac-sha256算法，因此会新建立A和B两个transformation object并包含A和B各自拥有的key值，但这两个object有可能会使用同一个transformation implementation来呼叫同一个crypto engine进行算法运算。</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602160216800.png" alt="image-20250602160216800"></p>
+<p>当有crypto request进来，会先根据request中指定的算法名称，从已注册的crypto algorithm list中取出适合的crypto algorithm，并新建立transformation object。</p>
+<p>之后，transformation object会再被组成crypto subsystem所用的cipher request。cipher request有可能共享同一个transformation object，举例来说，hmac-sha256的transformation object包含了transformation implementation和一个key值，而这个transformation object可以使用在多个cipher request的messsage上进行hash算法。当cipher request完成相关设值之后，接着实际调用transformation object的transformation implementation执行算法运算。</p>
+<p>此时会出现一个问题，就是当短时间有多个request进来时，我们该如何依序地处理request？</p>
+<p>这点crypto subsystem也设计了方便的struct crypto_engine，crypto engine提供了queue管理机制，让多个request能够顺序地转发给对应的crypto engine。<br><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602160352833.png" alt="image-20250602160352833"></p>
+<p>要新增transformation implementation到crypto subsystem，最重要的就是注册<strong>transformation implementation到crypto algorithm list中。</strong></p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602160644257.png" alt="image-20250602160644257"></p>
+<p>使用crypto_register_skciphers即可完成注册。</p>
+<p>另外，cra_priority代表各算法的优先程度，优先级高的会先被采用。</p>
+<h3 id="asynchronous-synchronous"><a href="#asynchronous-synchronous" class="headerlink" title="asynchronous &amp; synchronous"></a>asynchronous &amp; synchronous</h3><p>在crypto subsystem中，crypto API分成asynchronous（异步）和synchronous（同步）两种机制。</p>
+<p>最早版本的crypto API其实只有synchronous crypto API，但随着要处理的数据量增加，运算和数据传输时间也可能大幅拉长，此时synchronous crypto API有可能让处理流程陷入较长时间的等待，因此后来引入了asynchronous crypto API，供使用者依据自己的使用场景来选择适合的机制。</p>
+<p>而asynchronous与synchronous crypto API在命名设计上有所区别，asynchronous会在前缀多加一个a字，反之synchronous则是s字，以hash为例：</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602160847088-1748851727344-1.png" alt="image-20250602160847088"></p>
+<p>synchronous api</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602202550464.png" alt="image-20250602202550464"></p>
+<p>只要顺序的呼叫对应流程的API，并且针对返回的结果进行error handling即可。</p>
+<p>在API的呼叫流程中，crypto_shash_update可以被多次呼叫，让使用者放入多组需要进行加密的message。当完成一组message后，可能有些中间状态是需要被保存起来的。这些状态就会存在state handler中。在使用者呼叫api前，会需要自己分配一块足够大小的内存，让crypto engine能够存放这些状态。在transformation implementation中会设定好crypto engine需所需的状态存储空间大小，使用者只需要呼叫特定API即可。</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602203227874.png" alt="image-20250602203227874"></p>
+<p>除了命名之外，由于两种机制的处理流程不同，因此所需的参数也会有所不同。</p>
+<p>async request</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602161801953.png" alt="image-20250602161801953"></p>
+<p>包含一个callback function crypto completion，当运算完成后，会透过此callback来通知使用者继续处理完成的流程。由于asynchronous非同步机制，因此crypto engine在处理request时，行为和流程也和synchronous同步机制有蛮大的差异，其中常见的实作方式加入request queue来管理多个request，当使用者呼叫update API发送request时，则会将request加入到queue中，并直接回传处理中（-EINPROGRESS）的状态信息。</p>
+<p>如果使用者使用asynchronous hash API，但是实际上<strong>对应的transformation implementation却是synchronous型态，crypto subsystem会主动进行相关的数据转换，因此也是可以正常运作的。</strong></p>
+<p>一般常见的方式是 crypto queue搭配worker，额外开一个kernel thread来与crypto engine进行沟通，让crypto request按照FIFO的顺序处理。</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602203532882.png" alt="image-20250602203532882"></p>
+<p>建立一个全局的crypto request list，将进来的request依序排到list中，建立一个worker（kernel thread）和对应的work queue来与hardware crypto engine进行沟通，worker的任务除了从crypto request list中取出request处理h之后，也可能会包含crypto engine的初始化和资源释放等工作。注册interrupt handler，当status interrupt举起时，呼叫user自定义的completion callback function来完成最后的流程。</p>
+<p>crypto&#x2F;engine.h中有提供接口可以直接调用。</p>
+<p><img src="D:\桌面\hexo-blog-bak\ppblog\source\image\image-20250602204408109.png" alt="image-20250602204408109"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/hwmon.html" rel="prev" title="hwmon">
+                  <i class="fa fa-angle-left"></i> hwmon
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/linux-network-1.html" rel="next" title="linux_network_1">
+                  linux_network_1 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">paopao</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">76k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:17</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/01/2023 10:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+    </div>
+  </footer>
+  
+	
+	<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+	
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/paopao41" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"paopao41/paopao41.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

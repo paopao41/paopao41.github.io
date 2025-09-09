@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Linux下网卡命名规则rename 规则1234567891011step1 依据&#x2F;usr&#x2F;lib&#x2F;udev&#x2F;rules.d&#x2F;60-net.rules， 查看是否有ifcfg-xx配置文件（路径在&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡；step2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="networkcard-cfg">
+<meta property="og:url" content="https://paopao41.github.io/networkcard-cfg.html">
+<meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
+<meta property="og:description" content="Linux下网卡命名规则rename 规则1234567891011step1 依据&#x2F;usr&#x2F;lib&#x2F;udev&#x2F;rules.d&#x2F;60-net.rules， 查看是否有ifcfg-xx配置文件（路径在&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;),是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡；step2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-28T11:25:59.000Z">
+<meta property="article:modified_time" content="2025-05-19T01:21:48.536Z">
+<meta property="article:author" content="paopao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://paopao41.github.io/networkcard-cfg.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/networkcard-cfg.html","path":"networkcard-cfg.html","title":"networkcard-cfg"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>networkcard-cfg | Bubble's little record of knowledge</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Bubble's little record of knowledge</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux%E4%B8%8B%E7%BD%91%E5%8D%A1%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">Linux下网卡命名规则</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rename-%E8%A7%84%E5%88%99"><span class="nav-number">1.1.</span> <span class="nav-text">rename 规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E5%91%BD%E5%90%8D"><span class="nav-number">1.2.</span> <span class="nav-text">传统命名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AF%E9%A2%84%E6%B5%8B%E7%9A%84%E5%91%BD%E5%90%8D"><span class="nav-number">1.3.</span> <span class="nav-text">可预测的命名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%84%E5%88%99"><span class="nav-number">1.4.</span> <span class="nav-text">自定义规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%91%BD%E5%90%8Drule-d"><span class="nav-number">1.5.</span> <span class="nav-text">命名rule.d</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#biosdevname%E5%92%8Cnet-ifnames%E4%B8%A4%E7%A7%8D%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="nav-number">1.5.1.</span> <span class="nav-text">biosdevname和net.ifnames两种命名规范</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">paopao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/paopao41" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;paopao41" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/paopao000401@gmail.com" title="E-Mail → paopao000401@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/networkcard-cfg.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="networkcard-cfg | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          networkcard-cfg
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-28 19:25:59" itemprop="dateCreated datePublished" datetime="2024-03-28T19:25:59+08:00">2024-03-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-19 09:21:48" itemprop="dateModified" datetime="2025-05-19T09:21:48+08:00">2025-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h4 id="Linux下网卡命名规则"><a href="#Linux下网卡命名规则" class="headerlink" title="Linux下网卡命名规则"></a>Linux下网卡命名规则</h4><h5 id="rename-规则"><a href="#rename-规则" class="headerlink" title="rename 规则"></a>rename 规则</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">step1 依据/usr/lib/udev/rules.d/60-net.rules， 查看是否有ifcfg-xx配置文件（路径在/etc/sysconfig/network-scripts/),</span><br><span class="line">是否有定义了指定MAC地址的配置文件（ifcfg-xx ，xx必须和配置文件的内容DEVICE一致），如果有，则命名改网卡；</span><br><span class="line"></span><br><span class="line">step2 依据/usr/lib/udev/rules.d/71-biosdevname.rules，如果biosdevname使能了（安装了biosdevname这个包，且内核启动参数显式设置为1），</span><br><span class="line">且网卡没有在step1中定义，则按照biosdevname命名规则rename网卡；（注意，如果没有安装biosdevname这个包，就没有这个文件）</span><br><span class="line"></span><br><span class="line">step3, 依据/lib/udev/rules.d/75-net-description.rules，将udev工具会根据device属性将填写网卡的属性命名，可能一个网卡会有多个维度的名称;</span><br><span class="line"></span><br><span class="line">step4，udev 根据step3中的赋值，按照指定的scheme规则，去给在step1 step2中没有命名的网卡命名;</span><br><span class="line"></span><br><span class="line">强调：这个step顺序是在我们没有自定义自己的rules的前提下，如果用户自定义了自己的rules，则用户自定义为优先级最高</span><br></pre></td></tr></table></figure>
+
+<h5 id="传统命名"><a href="#传统命名" class="headerlink" title="传统命名"></a>传统命名</h5><p>centos6之前采用的都是传统的命名方式，如eth0,1…</p>
+<h5 id="可预测的命名"><a href="#可预测的命名" class="headerlink" title="可预测的命名"></a>可预测的命名</h5><p>cenos7之后提供了可预测性的网卡命名方式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果从BIOS中能够取到可用的，板载网卡的索引号，则使用这个索引号命名，例如: eno1，如不能则尝试2</span><br><span class="line">如果从BIOS中能够取到可以用的，网卡所在的PCI-E热插拔插槽(注：pci槽位号)的索引号，则使用这个索引号命名，例如: ens1，如不能则尝试3</span><br><span class="line">如果能拿到设备所连接的物理位置（PCI总线号+槽位号？）信息，则使用这个信息命名，例如:enp2s0，如不能则尝试4</span><br><span class="line">传统的kernel命名方法，例如: eth0，这种命名方法的结果不可预知的，即可能第二块网卡对应eth0，第一块网卡对应eth1</span><br><span class="line">使用网卡的MAC地址来命名，这个方法一般不使用</span><br></pre></td></tr></table></figure>
+
+<h5 id="自定义规则"><a href="#自定义规则" class="headerlink" title="自定义规则"></a>自定义规则</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在用户没有自定义rules文件前提下，step1中的网卡命名方式也可认为是一种用户自定义的网卡命名，</span><br><span class="line">即在/etc/sysconfig/network-scripts/ifcfg-xx 文件，xx就是这个网卡名称，文件内容中体现MAC_ADDRESS、NAME，</span><br><span class="line">这种情况下，则会按照配置文件中指定的名称来命名网卡</span><br><span class="line"></span><br><span class="line">如果用户自定义了rules文件，放在/etc/udev/rules.d/目录下，则这个优先级是最高的；</span><br><span class="line">比1中ifcfg-xx方式优先级更高，但是如果两者不一致，则在重启network服务时，会依据ifcfg-xx，</span><br><span class="line">所以用户不应该同时采用里两种方式给同一个网卡命不同的名称</span><br></pre></td></tr></table></figure>
+
+<p>udevadm info &#x2F;sys&#x2F;class&#x2F;net&#x2F;网卡名</p>
+<p>可以显示此时这个网卡的pcie信息，vendor_id,idbus等等信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">root@Bai5gc:/sys/class/net/eth1# udevadm info /sys/class/net/eth1</span><br><span class="line">P: /devices/pci0000:00/0000:00:02.2/0000:03:00.0/net/eth1</span><br><span class="line">E: DEVPATH=/devices/pci0000:00/0000:00:02.2/0000:03:00.0/net/eth1</span><br><span class="line">E: ID_BUS=pci</span><br><span class="line">E: ID_MODEL_FROM_DATABASE=Ethernet Connection X552 10 GbE Backplane</span><br><span class="line">E: ID_MODEL_ID=0x15ab</span><br><span class="line">E: ID_NET_DRIVER=ixgbe</span><br><span class="line">E: ID_NET_LINK_FILE=/lib/systemd/network/99-default.link</span><br><span class="line">E: ID_NET_NAME_MAC=enxb4a9fca897e7</span><br><span class="line">E: ID_NET_NAME_ONBOARD=eno3</span><br><span class="line">E: ID_NET_NAME_PATH=enp3s0f0</span><br><span class="line">E: ID_PATH=pci-0000:03:00.0</span><br><span class="line">E: ID_PATH_TAG=pci-0000_03_00_0</span><br><span class="line">E: ID_PCI_CLASS_FROM_DATABASE=Network controller</span><br><span class="line">E: ID_PCI_SUBCLASS_FROM_DATABASE=Ethernet controller</span><br><span class="line">E: ID_VENDOR_FROM_DATABASE=Intel Corporation</span><br><span class="line">E: ID_VENDOR_ID=0x8086</span><br><span class="line">E: IFINDEX=3</span><br><span class="line">E: INTERFACE=eth1</span><br><span class="line">E: SUBSYSTEM=net</span><br><span class="line">E: SYSTEMD_ALIAS=/sys/subsystem/net/devices/eth1</span><br><span class="line">E: TAGS=:systemd:</span><br><span class="line">E: USEC_INITIALIZED=5061037</span><br><span class="line">E: net.ifnames=0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ps：解释一下pci地址</p>
+<ul>
+<li><code>/pci0000:00</code>：这是根 PCIe 控制器的地址，<code>pci0000:00</code> 表示根控制器。</li>
+<li><code>/0000:00:02.2</code>：这是连接到根控制器的第一个 PCIe 设备的地址。<code>0000:00:02.2</code> 表示这个设备的总线号、设备号和功能号。</li>
+<li><code>/0000:03:00.0</code>：这是连接到第一个 PCIe 设备的下一个 PCIe 设备的地址。<code>0000:03:00.0</code> 表示新设备的总线号、设备号和功能号。</li>
+</ul>
+</blockquote>
+<h5 id="命名rule-d"><a href="#命名rule-d" class="headerlink" title="命名rule.d"></a>命名rule.d</h5><h6 id="biosdevname和net-ifnames两种命名规范"><a href="#biosdevname和net-ifnames两种命名规范" class="headerlink" title="biosdevname和net.ifnames两种命名规范"></a>biosdevname和net.ifnames两种命名规范</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">net.ifnames的命名规范为:设备类型+设备位置+数字</span><br><span class="line"></span><br><span class="line">设备类型：</span><br><span class="line"></span><br><span class="line">en 表示Ethernet</span><br><span class="line">wl 表示WLAN</span><br><span class="line">ww 表示无线广域网WWAN</span><br><span class="line"></span><br><span class="line">实际的例子:</span><br><span class="line"></span><br><span class="line">eno1 板载网卡</span><br><span class="line">enp0s2  pci网卡</span><br><span class="line">ens33   pci网卡</span><br><span class="line">wlp3s0  PCI无线网卡</span><br><span class="line">wwp0s29f7u2i2   4G modem</span><br><span class="line">wlp0s2f1u4u1   连接在USB Hub上的无线网卡</span><br><span class="line">enx78e7d1ea46da pci网卡</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">biosdevname的命名规范为: 要么是em开头，要么是p开头</span><br><span class="line">实际的例子:</span><br><span class="line"></span><br><span class="line">em1 板载网卡</span><br><span class="line">p3p4 pci网卡</span><br><span class="line">p3p4_1 虚拟网卡</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/linux-cmd.html" rel="prev" title="linux-cmd">
+                  <i class="fa fa-angle-left"></i> linux-cmd
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/linux-udev.html" rel="next" title="linux-udev">
+                  linux-udev <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">paopao</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">76k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:17</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/01/2023 10:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+    </div>
+  </footer>
+  
+	
+	<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+	
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/paopao41" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"paopao41/paopao41.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

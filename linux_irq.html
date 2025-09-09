@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="linux irqGIC控制器Generic Interrupt Controller。ARM提供的通用中断控制器。接受硬件中断信号，并经过一定处理后，分发给对应的CPU进行处理。分为V1-V4， GICV2GIC是联系外设中断和CPU的桥梁，也是各CPU之间中断互联的通道，负责检测，管理，分发中断。  123456主要负责使能&#x2F;禁止中断。把中断分组到group0还是group1，0作为安全模式使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bubble&#39;s little record of knowledge">
+<meta property="og:url" content="https://paopao41.github.io/linux_irq.html">
+<meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
+<meta property="og:description" content="linux irqGIC控制器Generic Interrupt Controller。ARM提供的通用中断控制器。接受硬件中断信号，并经过一定处理后，分发给对应的CPU进行处理。分为V1-V4， GICV2GIC是联系外设中断和CPU的桥梁，也是各CPU之间中断互联的通道，负责检测，管理，分发中断。  123456主要负责使能&#x2F;禁止中断。把中断分组到group0还是group1，0作为安全模式使">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250714085007704.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250715092053150.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250714093922084.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250715092647205.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250908200427062.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250909090703297.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250909093354426.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250909094325638.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250909102119846.png">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250908161618848.png">
+<meta property="article:published_time" content="2025-07-10T01:21:11.477Z">
+<meta property="article:modified_time" content="2025-09-09T02:22:34.133Z">
+<meta property="article:author" content="paopao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://paopao41.github.io/image/image-20250714085007704.png">
+
+
+<link rel="canonical" href="https://paopao41.github.io/linux_irq.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/linux_irq.html","path":"linux_irq.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Bubble's little record of knowledge</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Bubble's little record of knowledge</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux-irq"><span class="nav-number">1.</span> <span class="nav-text">linux irq</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GIC%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">GIC控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GICV2"><span class="nav-number">1.1.1.</span> <span class="nav-text">GICV2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#distributor"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">distributor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cpu-interface"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">cpu interface</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#virtual-cpu-interface"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">virtual cpu interface</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gic%E4%B8%AD%E6%96%AD%E7%B1%BB%E5%88%AB"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">gic中断类别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gic%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">gic中断处理流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gic%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">1.1.1.6.</span> <span class="nav-text">gic中断优先级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E7%8A%B6%E6%80%81%E5%92%8C%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.1.7.</span> <span class="nav-text">中断状态和处理流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E6%A1%86%E6%9E%B6"><span class="nav-number">1.1.2.</span> <span class="nav-text">软件框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E8%AE%BE%E5%A4%87%E6%A0%91"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">中断设备树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E5%99%A8code"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">中断控制器code</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E9%83%A8%E5%88%86%E7%9A%84%E5%A4%84%E7%90%86%E6%89%8B%E6%AE%B5"><span class="nav-number">1.2.</span> <span class="nav-text">中断上下部分的处理手段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.2.1.</span> <span class="nav-text">上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B4%E7%95%8C"><span class="nav-number">1.2.2.</span> <span class="nav-text">临界</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B4%E7%95%8C%E8%B5%84%E6%BA%90"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">临界资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B4%E7%95%8C%E5%8C%BA"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">临界区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">上下文类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="nav-number">1.2.2.3.1.</span> <span class="nav-text">进程上下文切换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="nav-number">1.2.2.3.2.</span> <span class="nav-text">线程上下文切换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="nav-number">1.2.2.3.3.</span> <span class="nav-text">中断上下文切换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A2%E5%8D%A0%E8%AE%A1%E6%95%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">抢占计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#softirq"><span class="nav-number">1.2.4.</span> <span class="nav-text">softirq</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91softirq"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">触发softirq</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8Csoftirq"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">执行softirq</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tasklet"><span class="nav-number">1.2.5.</span> <span class="nav-text">tasklet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#workqueue"><span class="nav-number">1.2.6.</span> <span class="nav-text">workqueue</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#api"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">api</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%99%AE%E9%80%9Awork"><span class="nav-number">1.2.6.1.1.</span> <span class="nav-text">普通work</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#init"><span class="nav-number">1.2.6.1.1.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#schedule"><span class="nav-number">1.2.6.1.1.2.</span> <span class="nav-text">schedule</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.6.1.1.3.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89work"><span class="nav-number">1.2.6.1.2.</span> <span class="nav-text">自定义work</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#cancle"><span class="nav-number">1.2.6.1.2.1.</span> <span class="nav-text">cancle</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#flushed"><span class="nav-number">1.2.6.1.2.2.</span> <span class="nav-text">flushed</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#create"><span class="nav-number">1.2.6.1.2.3.</span> <span class="nav-text">create</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#add"><span class="nav-number">1.2.6.1.2.4.</span> <span class="nav-text">add</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="nav-number">1.2.6.1.2.5.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9"><span class="nav-number">1.2.7.</span> <span class="nav-text">如何选择</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">paopao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/paopao41" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;paopao41" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/paopao000401@gmail.com" title="E-Mail → paopao000401@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux_irq.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-07-10 09:21:11" itemprop="dateCreated datePublished" datetime="2025-07-10T09:21:11+08:00">2025-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-09 10:22:34" itemprop="dateModified" datetime="2025-09-09T10:22:34+08:00">2025-09-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>21 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="linux-irq"><a href="#linux-irq" class="headerlink" title="linux irq"></a>linux irq</h1><h2 id="GIC控制器"><a href="#GIC控制器" class="headerlink" title="GIC控制器"></a>GIC控制器</h2><p>Generic Interrupt Controller。ARM提供的通用中断控制器。接受硬件中断信号，并经过一定处理后，分发给对应的CPU进行处理。分为V1-V4，</p>
+<h3 id="GICV2"><a href="#GICV2" class="headerlink" title="GICV2"></a>GICV2</h3><p>GIC是联系外设中断和CPU的桥梁，也是各CPU之间中断互联的通道，负责检测，管理，分发中断。</p>
+<p><img src="/../image/image-20250714085007704.png" alt="image-20250714085007704"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">主要负责</span><br><span class="line">使能/禁止中断。</span><br><span class="line">把中断分组到group0还是group1，0作为安全模式使用连接FIQ,1作为非安全模式，连接IRQ.</span><br><span class="line">多核系统中将中断分配到不同处理器上。</span><br><span class="line">设置电平的触发方式。</span><br><span class="line">虚拟化扩展。</span><br></pre></td></tr></table></figure>
+
+<p>ARM CPU对外的连接只有2个中断，IRQ &amp; FIQ，相对应的处理模式分别是 IRQ 一般中断处理模式 和 FIQ 快速中断处理模式，所以GIC最后要把中断汇集成2条线，与CPU对接。</p>
+<p>在GICV2中，gic由两个大模块distributor和interface组成。</p>
+<h4 id="distributor"><a href="#distributor" class="headerlink" title="distributor"></a>distributor</h4><p>主要负责中断源的管理，优先级，中断使能，中断屏蔽等。中断分发，对于PPI，SGI是各个core独有的中断，不参与目的core的仲裁，SPI 是所有 core 共享的，根据配置决定中断发往的core。中断优先级的处理，将最高优先级的中断发送给cpu interface。寄存器使用GICD作为前缀，一个gic中，只有一个GICD。</p>
+<p>主要的作用是检测各个中断源的状态，控制各个中断源的行为，分发各个中断源产生的中断事件到指定的一个&#x2F;多个CPU接口上。虽然分发器可以管理多个中断源，但是它总是把优先级最高的那个中断请求送往CPU接口。分发器对中断的控制包括：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">打开或关闭每个中断，Distributor对中断的控制分成两个级别，一个是全局中断的控制(GIC_DIST_CTRL),一旦关闭了全局中断，那么任何的中断源产生的中断事件都不会被传递到cpu interface。另一个级别是针对各个中断源进行控制，(GIC_DIST_ENABLE_CLEAR)，关闭一个中断源会导致该中断事件不会分发到CPU interface，但不影响其他中断源产生中断事件的分发。</span><br><span class="line">控制将当前优先级最高的中断事件分发到一个或者一组CPU interface，当一个中断事件分发到多个CPU interface的时候，GIC的内部逻辑应该只保证assert一个CPU。</span><br><span class="line">优先级控制</span><br><span class="line">interrupt属性设定。电平触发，边缘触发等等。</span><br><span class="line">interrupt group设定。设置每个中断的group。</span><br><span class="line">将SGI中断分发到目标CPU上。</span><br><span class="line">每个中断状态可见。</span><br><span class="line">提供软件机制来设置和清楚外设终端的pending状态。</span><br></pre></td></tr></table></figure>
+
+<h4 id="cpu-interface"><a href="#cpu-interface" class="headerlink" title="cpu interface"></a>cpu interface</h4><p>用于连接器，与处理器进行交互，将GICD发送的中断信息，通过IRQ，FIQ等管脚，传输给core。寄存器使用GICC作为前缀，每一个core，有一个cpu interface。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">打开或关闭cpu interface 向连接的CPU assert中断事件，对于arm，cpu interface和cpu之间的中断信号线是nIRQCPU 和 nFIQCPU, 如果关闭了中断，即便是distributor分发了一个中断事件到CPU interface，也不会assert指定的IRQ或者FIQ通知core。</span><br><span class="line">中断的确认。core会向cpu interface应答中断，应答当前优先级最高的那个中断，中断一旦被应答，distributor就会把该中断的状态从pending修改为active。ack了之后，cpu就会deassert nirqcpu和nfiqcpu信号线。</span><br><span class="line">中断处理完毕的通知。当interruput handler处理完了一个中断的时候，会向写CPU interface的寄存器通知GIC CPU已经处理完该中断，做这个动作一方面是通知 Distributor 将中断状态修改为 deactive，另外一方面，CPU interface 会 priority drop，从而允许其他的 pending 的中断向 CPU 提交。</span><br><span class="line">为 CPU 设置中断优先级掩码。通过 priority mask，可以 mask 掉一些优先级比较低的中断，这些中断不会通知到 CPU。</span><br><span class="line">设置中断抢占策略。</span><br><span class="line">在多个中断同时到来的时候，选择一个优先级最高的通知CPU。</span><br></pre></td></tr></table></figure>
+
+<h4 id="virtual-cpu-interface"><a href="#virtual-cpu-interface" class="headerlink" title="virtual cpu interface"></a>virtual cpu interface</h4><p>将GICD发送的虚拟中断信息，通过VIRQ，VFIQ管脚，传输给core，每一个core，有一个virtual cpu interface，而在这个virtual cpu interface中，又包含以下两个组件，virtual interface control，virtual cpu interface。</p>
+<h4 id="gic中断类别"><a href="#gic中断类别" class="headerlink" title="gic中断类别"></a>gic中断类别</h4><p>gicv2，将中断，分成了group0，安全，FIQ 和group1,非安全，IRQ。</p>
+<p>支持三种类型的中断。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GICV2:</span><br><span class="line"></span><br><span class="line">SGI software generated interrupt。软件触发的中断，件可以通过写 GICD_SGIR 寄存器来触发一个中断事件，一般用于核间通信，内核中的 IPI：inter-processor interrupts 就是基于 SGI。</span><br><span class="line">PPI private peripheral interrupt。私有外设中断，是每个核心私有的中断，PPI会送达到指定的cpu上，应用场景有CPU的本地时钟。</span><br><span class="line">SPI Shared peripheral interrupt。公用的外部设备中断，也定义为共享中断。中断产生后，可以分发到某一CPU上，中断号ID32 - ID1019用于SPI，ID1020 - ID1023保留用于特殊用途；</span><br><span class="line"></span><br><span class="line">GICV3：</span><br><span class="line"></span><br><span class="line">SGI,SPI, LPI（locality spicific peripheral interrupt）GICV3中引入，是基于消息的中断，他们的配置保存在表中而不是寄存器。</span><br></pre></td></tr></table></figure>
+
+<p>GICV3的组成部分，GICV3中，主要由Distributor，cpu interface，redistributor，its，GICV3中，将cpu interface从GIC中抽离，放入到了cpu中，cpu interface通过AXI Stream，与gic进行通信。 当GIC要发送中断，GIC通过AXI stream接口，给cpu interface发送中断命令，cpu interface收到中断命令后，根据中断线映射配置，决定是通过IRQ还是FIQ管脚，向cpu发送中断。</p>
+<p><img src="/../image/image-20250715092053150.png" alt="image-20250715092053150"></p>
+<p><img src="/../image/image-20250714093922084.png" alt="image-20250714093922084"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@root:~# cat /proc/interrupts </span><br><span class="line"></span><br><span class="line">虚拟中断号                                                 硬件中断号    </span><br><span class="line">           CPU0       CPU1       CPU2       CPU3       </span><br><span class="line"> 10:          1          0          0          0     GICv2  84 Level     CC_IRQ</span><br><span class="line"> 12:     356258     361084     352728     352728     GICv2  30 Level     arch_timer   (本地时钟)</span><br><span class="line"> 15:          0          0          0          0     GICv2 225 Level     clocksource@2,f0106000</span><br><span class="line"> 16:          0          0          0          0     GICv2 340 Level     arm-pmu</span><br></pre></td></tr></table></figure>
+
+<h4 id="gic中断处理流程"><a href="#gic中断处理流程" class="headerlink" title="gic中断处理流程"></a>gic中断处理流程</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GIC决定每个中断的 使能 状态，不使能的中断，是不能发送中断的</span><br><span class="line">如果某个中断的中断源有效，GIC将该中断的状态设置为pending状态，然后判断该中断的目标core</span><br><span class="line">对于每一个core，GIC将当前处于pending状态的优先级最高的中断，发送给该core的cpu interface</span><br><span class="line">cpu interface接收GIC发送的中断请求，判断优先级是否满足要求，如果满足，就将中断通过nFIQ或nIRQ管脚，发送给core。</span><br><span class="line">core响应该中断，通过读取 GICC_IAR 寄存器，来认可该中断。读取该寄存器，如果是软中断，返回源处理器ID，否则返回中断号。</span><br><span class="line">当core认可该中断后，GIC将该中断的状态，修改为active状态</span><br><span class="line">当core完成该中断后，通过写 EOIR （end of interrupt register）来实现优先级重置，写 GICC_DIR 寄存器，来无效该中断。</span><br></pre></td></tr></table></figure>
+
+<h4 id="gic中断优先级"><a href="#gic中断优先级" class="headerlink" title="gic中断优先级"></a>gic中断优先级</h4><p>gicv2，支持最小16个，最大256个中断优先级。</p>
+<h4 id="中断状态和处理流程"><a href="#中断状态和处理流程" class="headerlink" title="中断状态和处理流程"></a>中断状态和处理流程</h4><p><img src="/../image/image-20250715092647205.png" alt="image-20250715092647205"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">每个中断都维护了一个状态机。</span><br><span class="line"></span><br><span class="line">inactive: 无中断状态，没有pending也没有active。</span><br><span class="line">pending：硬件或软件触发了中断，该中断事件已经通过硬件信号通知到了GIC，等待GIC分配的CPU进行处理，在电平触发模式下，产生中断的同时保持pengding状态。</span><br><span class="line">Active：cpu已经应答该中断请求，并且正在处理中。</span><br><span class="line">Active and pending：当一个中断源处于Active时，同一中断源又触发了中断，进入pending状态，挂起来状态。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="软件框架"><a href="#软件框架" class="headerlink" title="软件框架"></a>软件框架</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">主要分为四部分：</span><br><span class="line"></span><br><span class="line">1.硬件无关代码</span><br><span class="line">2.cpu架构相关的中断处理</span><br><span class="line">3.中断控制器代码</span><br><span class="line">4.普通其他驱动</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">常见术语</span><br><span class="line"></span><br><span class="line">irq number 软件定义，和硬件无关，CPU需要为每一个外设中断编号，</span><br><span class="line">irq domain,irq域，将某一类资源划分成不同的领域，相同的域下共享一些共同的属性。irq domain负责GIC中hwirq到 虚拟irq的映射。</span><br><span class="line">中断上半部/下半部：中断上半部处理简单的紧急的功能，清楚中断处理标志。大部分任务放到下半部处理。</span><br></pre></td></tr></table></figure>
+
+<h4 id="中断设备树"><a href="#中断设备树" class="headerlink" title="中断设备树"></a>中断设备树</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">gic: interrupt-controller@fd400000 &#123;</span><br><span class="line">           compatible = &quot;arm,gic-v3&quot;;</span><br><span class="line">           #interrupt-cells = &lt;3&gt;;		  // 参数个数</span><br><span class="line">           #address-cells = &lt;2&gt;;</span><br><span class="line">           #size-cells = &lt;2&gt;;</span><br><span class="line">           ranges;</span><br><span class="line">           interrupt-controller;</span><br><span class="line"></span><br><span class="line">           reg = &lt;0x0 0xfd400000 0 0x10000&gt;, /* GICD */</span><br><span class="line">                 &lt;0x0 0xfd460000 0 0xc0000&gt;; /* GICR */</span><br><span class="line">           interrupts = &lt;GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH&gt;;</span><br><span class="line">           its: interrupt-controller@fd440000 &#123;		// 在gic设备节点下，有一个子设备节点its，ITS设备用于将消息信号中断(MSI)路由到cpu</span><br><span class="line">                   compatible = &quot;arm,gic-v3-its&quot;;</span><br><span class="line">                   msi-controller;</span><br><span class="line">                   #msi-cells = &lt;1&gt;; // MSI设备的DeviceID</span><br><span class="line">                   reg = &lt;0x0 0xfd440000 0x0 0x20000&gt;; /*ITS寄存器的物理地址*/</span><br><span class="line">           &#125;;</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="中断控制器code"><a href="#中断控制器code" class="headerlink" title="中断控制器code"></a>中断控制器code</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">IRQCHIP_DECLARE(gic_v3, &quot;arm,gic-v3&quot;, gicv3_of_init);  //初始化一个struct of_device_id的静态常量，并放置在__irqchip_of_table中</span><br><span class="line"></span><br><span class="line">drivers/irqchip/irq-gic.c </span><br><span class="line">IRQCHIP_DECLARE(cortex_a7_gic, &quot;arm,cortex-a7-gic&quot;, gic_of_init);</span><br><span class="line">--&gt; gic_of_init</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">init/main.c asmlinkage __visible void __init __no_sanitize_address start_kernel(void)</span><br><span class="line">    --&gt; early_irq_init(); init_IRQ();</span><br><span class="line">      --&gt; arch/arm64/kernel/irq.c --&gt; irqchip_init();</span><br><span class="line">          --&gt; driver/irqchip/irqchip.c --&gt; of_irq_init(__irqchip_of_table);</span><br><span class="line">            --&gt; drivers/of/irq.c ????</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://doc.embedfire.com/linux/rk356x/driver/zh/latest/linux_driver/subsystem_interrupt.html</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="中断上下部分的处理手段"><a href="#中断上下部分的处理手段" class="headerlink" title="中断上下部分的处理手段"></a>中断上下部分的处理手段</h2><h3 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h3><p>上下文信息，既包含虚拟内存，栈，全局变量等用户态的资源，也包括内核堆栈，寄存器资源，不同类型的上下文切换，会涉及到不同类型的资源切换。</p>
+<h3 id="临界"><a href="#临界" class="headerlink" title="临界"></a>临界</h3><h4 id="临界资源"><a href="#临界资源" class="headerlink" title="临界资源"></a>临界资源</h4><p> 临界资源是一次仅允许一个进程使用的共享资源。各进程采取互斥的方式，实现共享的资源称作临界资源。</p>
+<h4 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h4><p>每个进程中访问临界资源的那段代码称为临界区（criticalsection），每次只允许一个进程进入临界区，进入后，不允许其他进程进入。显然，若能保证进程互斥地进入自己的临界区，便可实现诸进程对临界资源的互斥访问。</p>
+<h4 id="上下文类型"><a href="#上下文类型" class="headerlink" title="上下文类型"></a>上下文类型</h4><h5 id="进程上下文切换"><a href="#进程上下文切换" class="headerlink" title="进程上下文切换"></a>进程上下文切换</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">某个进程时间片耗尽，会被系统挂起，切换到其他等待 CPU 的进程。</span><br><span class="line">进程所需系统资源不足，需要等到资源满足时才可运行，此时会被挂起，其他进程会被调度。</span><br><span class="line">进程通过 sleep 方法主动挂起，其他进程就有机会被调度。</span><br><span class="line">有更高优先级的进程，当前进程会被挂起，高优先级进程会被调度。</span><br><span class="line">硬件中断时，CPU 上的进程会被中断挂起，转而执行内核中的中断服务程序。</span><br></pre></td></tr></table></figure>
+
+<h5 id="线程上下文切换"><a href="#线程上下文切换" class="headerlink" title="线程上下文切换"></a>线程上下文切换</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">同一进程内线程切换：由于线程共享进程的虚拟内存和大部分资源，调度器只需切换线程私有的寄存器、内核栈和调度信息，而不需要切换虚拟内存，因此开销较小、</span><br><span class="line"></span><br><span class="line">不同进程间切换：由于不共享虚拟内存和资源，切换时除了保存/恢复寄存器等线程上下文，还需要切换虚拟内存（mm_struct/CR3），这就是完整的进程上下文切换。</span><br></pre></td></tr></table></figure>
+
+<h5 id="中断上下文切换"><a href="#中断上下文切换" class="headerlink" title="中断上下文切换"></a>中断上下文切换</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">中断上下文切换指的是为了响应硬件的事件，中断处理会打断进程的正常调度和执行，转而调用中断处理程序，响应设备事件。而在打断其他进程时，就需要将当前的状态保存下来。这样在中断结束后，进程仍然可以从原来的状态恢复运行。</span><br><span class="line">中断上下文切换，并不需要保存和恢复进程的虚拟内存等用户态资源，只需要处理 CPU 寄存器、内核堆栈等内核态的资源即可。</span><br></pre></td></tr></table></figure>
+
+<p>运行在进程上下文的内核代码是可抢占的，但中断上下文会一直运行到结束，不会被抢占。所以中断处理程序代码要受到一些限制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">中断代码不能：</span><br><span class="line">睡眠/放弃CPU，因为内核在进入中断前会 关闭进程调度，一旦睡眠/放弃CPU，这时内核无法调度别的进程来执行，系统就会死掉。</span><br><span class="line">尝试获得信号量，如果获得不到信号量，代码就会睡眠，导致如上的结果。</span><br><span class="line">执行耗时的任务，中断处理应该尽可能快，如果一个处理程序是IRQF_DISABLE类型，它执行的时候会禁止所有中断。</span><br><span class="line">访问用户空间的虚拟地址，因为中断允许在内核空间。</span><br></pre></td></tr></table></figure>
+
+<h3 id="抢占计数"><a href="#抢占计数" class="headerlink" title="抢占计数"></a>抢占计数</h3><p>Linux配置打开了CONFIG_PREEMPT表示允许高优先级的任务抢占低优先级任务，但是在spin lock，中断&#x2F;软中断上下文中依旧不允许抢占的。在linux系统中使用了一个Per-CPU的32位变量来标识一些特殊场景，如下</p>
+<p><img src="/../image/image-20250908200427062.png" alt="image-20250908"></p>
+<h3 id="softirq"><a href="#softirq" class="headerlink" title="softirq"></a>softirq</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">enum &#123;</span><br><span class="line">    HI_SOFTIRQ = 0, /* 优先级高的tasklets */</span><br><span class="line">    TIMER_SOFTIRQ, /* 定时器的下半部 */</span><br><span class="line">    NET_TX_SOFTIRQ, /* 发送网络数据包 */</span><br><span class="line">    NET_RX_SOFTIRQ, /* 接收网络数据包 */</span><br><span class="line">    BLOCK_SOFTIRQ, /* BLOCK装置 */</span><br><span class="line">    BLOCK_IOPOLL_SOFTIRQ,</span><br><span class="line">    TASKLET_SOFTIRQ, /* 正常优先级的tasklets */</span><br><span class="line">    SCHED_SOFTIRQ, /* 调度程序 */</span><br><span class="line">    HRTIMER_SOFTIRQ, /* 高分辨率定时器 */</span><br><span class="line">    RCU_SOFTIRQ, /* RCU锁定 */</span><br><span class="line">    NR_SOFTIRQS /* 10 */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>一个软中断不会抢占另一个软中断</li>
+<li>唯一可以抢占软中断的是中断处理程序</li>
+<li>不同软中断可以在不同处理器同时执行</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// raise_softirq 触发软中断</span></span><br><span class="line"><span class="comment">// 触发事件 --&gt; 硬中断代码返回处 ksofirq内核线程中 执行软中断处理代码中，eg network。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// do_sofrirq 执行软中断</span></span><br><span class="line">do_softirq --&gt; <span class="keyword">if</span> (in_interrupt()) <span class="keyword">return</span>; </span><br><span class="line">如果检测到有 (HARDIRQ_MASK | SOFTIRQ_MASK | NMI_MASK)在这些中断中。会直接返回。不执行。</span><br><span class="line">PREEMPT_MASK (<span class="number">0x000000ff</span>): 表示抢占计数，用于跟踪内核抢占状态</span><br><span class="line">SOFTIRQ_MASK (<span class="number">0x0000ff00</span>): 表示软中断计数，用于跟踪软中断执行状态</span><br><span class="line">HARDIRQ_MASK (<span class="number">0x000f0000</span>): 表示硬中断计数，用于跟踪硬中断处理状态</span><br><span class="line">NMI_MASK (<span class="number">0x00f00000</span>): 表示不可屏蔽中断(NMI)计数</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">硬中断发生的时候，cpu会自动禁用中孤单。并跳转到中断处理程序。</span></span><br><span class="line"><span class="comment">硬件中断本身不会禁用软中断，但会通过增加 preempt_count 中的 HARDIRQ_MASK 位来标记当前处于硬中断上下文中。</span></span><br><span class="line"><span class="comment">硬中断可以被另一个优先级比自己高的硬中断 中断，不能被同/低 级的硬中断中断。更不能被软中断中断。 </span></span><br><span class="line"><span class="comment">软中断可以被硬中断中断，但不会被另一个软中断中断，在一个CPU上。软中断总是串行执行的。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="触发softirq"><a href="#触发softirq" class="headerlink" title="触发softirq"></a>触发softirq</h4><p><img src="/../image/image-20250909090703297.png" alt="image-20250909090703297"></p>
+<h4 id="执行softirq"><a href="#执行softirq" class="headerlink" title="执行softirq"></a>执行softirq</h4><p><img src="/../image/image-20250909093354426.png" alt="image-20250909093354426"></p>
+<p>软中断执行时机分为三种，中断退出时检测是否有软中断执行，进程上下文中主动执行，spin_unlock_bh后执行。</p>
+<p><img src="/../image/image-20250909094325638.png" alt="image-20250909094325638"></p>
+<p>进程被中断打断后进入到中断上下文中，进入中断后cpu硬件会自动关闭cpu本地中断响应，处理中断完成后在执行irq_exit中断退出时，当检测到有软中断pending时执行软中断；如果软中断是在中断上下文执行时，在软中断处理中会调用local_irq_enable打开CPU本地中断响应再处理软中断程序，如果是触发的软中断线程，硬中断已经完成退出也会使能本地中断。因此在软中断执行过程中打开了中断响应，所以可能会再次进入硬中断上下文。</p>
+<p><img src="/../image/image-20250909102119846.png" alt="image-20250909102119846"></p>
+<p>在一个task中处理一个变量此时被硬件中断打断进行中断处理函数，在中断处理快结束时如果有软中断pending将会先处理软中断，如果软中断中也访问了该变量，那么就出现竞态异常，因此为了处理进程和软中断的竞态，调用spin_lock_bh和spin_unlock_bh进行保护，在硬件中断处理完要进入软中断将会被禁止，硬件中断会被直接退出，继而task可以继续运行，当task再执行spin_unlock_bh时会触发执行软中断。另外如果软中断处理函数中的竞态可能在多核直接发生，为了保护多核的临界处理在软中断中只需要调用spin_lock和spin_unlock即可，不需要调用spin_lock_bh和spin_unlock_bh，因为每个cpu上只有一个软中断可以运行不需要做软中断之间的临界保护。总结就是在进程上下文中要避免软中断和多核的竞态保护就调用spin_lock_bh和spin_unlock_bh，软中断中避免多核的竞态保护就调用spin_lock和spin_unlock即可。</p>
+<h3 id="tasklet"><a href="#tasklet" class="headerlink" title="tasklet"></a>tasklet</h3><p>tasklet（小任务机制）是利用软中断实现的下半部机制。是softirq的特殊实现。Tasklet则是自身串行化的，同一时间只能有一个特定的tasklet在运行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">open_softirq(TASKLET_SOFTIRQ, tasklet_action);</span><br><span class="line">tasklet_action_common中Tasklet确保同一时间只有一个特定的tasklet实例在运行，避免了竞争条件：</span><br></pre></td></tr></table></figure>
+
+<p>软中断和tasklet都是运行在中断上下文中，它们与任一进程无关，没有支持的进程完成重新调度。所以软中断和tasklet不能睡眠、不能阻塞，它们的代码中不能含有导致睡眠的动作，如减少信号量、从用户空间拷贝数据或手工分配内存等。也正是由于它们运行在中断上下文中，所以它们在同一个CPU上的执行是串行的，这样就不利于实时多媒体任务的优先处理。</p>
+<h3 id="workqueue"><a href="#workqueue" class="headerlink" title="workqueue"></a>workqueue</h3><p>将下半部工作推迟，给一个<strong>内核线程</strong>去执行 ——<code>work</code> 总是运行于<strong>进程上下文</strong>.可以睡眠。允许被重新调度。</p>
+<h4 id="api"><a href="#api" class="headerlink" title="api"></a>api</h4><h5 id="普通work"><a href="#普通work" class="headerlink" title="普通work"></a>普通work</h5><h6 id="init"><a href="#init" class="headerlink" title="init"></a>init</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">声明且初始化</span><br><span class="line">DECLARE_WORK(name , void (*function)(struct work_struct *));</span><br><span class="line">DECLARE_DELAYED_WORK(name, void(*function)(struct work_struct *));</span><br><span class="line">EG:</span><br><span class="line">void my_work_handler(struct work_struct *work);</span><br><span class="line">DECLARE_WORK(my_work, my_work_handler);</span><br><span class="line"></span><br><span class="line">初始化一个已经声明的工作队列</span><br><span class="line">INIT_WORK(struct work_struct *work, void(*function)(struct work_struct *));</span><br><span class="line">INIT_DELAYED_WORK(struct delayed_work *work, void(*function)(struct work_struct *));</span><br><span class="line">EG:</span><br><span class="line">void my_work_handler(struct work_struct * work);</span><br><span class="line">struct work_struct my_work;</span><br><span class="line">INIT_WORK(&amp;my_work, my_work_handler);</span><br></pre></td></tr></table></figure>
+
+<h6 id="schedule"><a href="#schedule" class="headerlink" title="schedule"></a>schedule</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">schedule_work(struct work_struct *work);</span><br><span class="line">schedule_delayed_work(struct delayed_work *work, unsigned long delay);</span><br><span class="line"></span><br><span class="line">将work提交到系统默认的global workqueue，true 成功入队，false 已经在队列中。不需要自己控制 workqueue 的亲和性</span><br></pre></td></tr></table></figure>
+
+<h6 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">普通 work</span><br><span class="line">static void my_work_func(struct work_struct *work)</span><br><span class="line">&#123;</span><br><span class="line">    pr_info(&quot;work executed\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static DECLARE_WORK(my_work, my_work_func);</span><br><span class="line"></span><br><span class="line">void test(void)</span><br><span class="line">&#123;</span><br><span class="line">    schedule_work(&amp;my_work);  // 提交到系统 workqueue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">延迟 work</span><br><span class="line">static void my_delayed_work_func(struct work_struct *work)</span><br><span class="line">&#123;</span><br><span class="line">    struct delayed_work *dwork = to_delayed_work(work);</span><br><span class="line">    pr_info(&quot;delayed work executed\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static DECLARE_DELAYED_WORK(my_dwork, my_delayed_work_func);</span><br><span class="line"></span><br><span class="line">void test(void)</span><br><span class="line">&#123;</span><br><span class="line">    schedule_delayed_work(&amp;my_dwork, msecs_to_jiffies(1000)); // 1s 后执行</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="自定义work"><a href="#自定义work" class="headerlink" title="自定义work"></a>自定义work</h5><h6 id="cancle"><a href="#cancle" class="headerlink" title="cancle"></a>cancle</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 取消work 模块卸载退出时使用</span><br><span class="line">int cancel_work_sync(struct delayed_work *work);</span><br><span class="line">int cancel_delayed_work_sync(struct delayed_work *work);</span><br></pre></td></tr></table></figure>
+
+<h6 id="flushed"><a href="#flushed" class="headerlink" title="flushed"></a>flushed</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 等待队列执行完成。常用于 模块退出时，确保没有遗留 work 在运行。</span><br><span class="line">void flush_scheduled_work(void);</span><br><span class="line">int schedule_delayed_work_on(int cpu, struct delayed_work *work, unsigned long delay);</span><br><span class="line">int schedule_on_each_cpu(void(*function)(struct work_struct *));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>不能在中断上下文里 flush&#x2F;cancel work</strong>，否则可能死锁</p>
+</blockquote>
+<h6 id="create"><a href="#create" class="headerlink" title="create"></a>create</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 自定义workqueue</span><br><span class="line">// uses one thread for each processor in the system;</span><br><span class="line">struct workqueue_struct *create_workqueue(const char *name);  </span><br><span class="line">// uses a single thread.</span><br><span class="line">struct workqueue_struct *create_singlethread_workqueue(const char *name);</span><br><span class="line"></span><br><span class="line">WQ_UNBOUND 不绑定CPU</span><br><span class="line">WQ_HIGHPRI 高优先级</span><br><span class="line">WQ_MEM_RECLAIM 允许内存回收路径</span><br></pre></td></tr></table></figure>
+
+<h6 id="add"><a href="#add" class="headerlink" title="add"></a>add</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 提交work到自定义的队列 区别于 schedule_work：可选择具体的 workqueue。</span><br><span class="line">int queue_work(struct workqueue_struct * queue, struct work_struct *work);</span><br><span class="line">int queue_delayed_work(struct workqueue_struct *queue,</span><br><span class="line">struct delayed_work * work , unsigned long delay);</span><br></pre></td></tr></table></figure>
+
+<h6 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">static struct workqueue_struct *my_wq;</span><br><span class="line">static DECLARE_WORK(my_work, my_work_func);</span><br><span class="line"></span><br><span class="line">int init_module(void)</span><br><span class="line">&#123;</span><br><span class="line">    my_wq = alloc_workqueue(&quot;my_wq&quot;, WQ_UNBOUND | WQ_MEM_RECLAIM, 1);</span><br><span class="line">    queue_work(my_wq, &amp;my_work);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void cleanup_module(void)</span><br><span class="line">&#123;</span><br><span class="line">    flush_workqueue(my_wq);</span><br><span class="line">    destroy_workqueue(my_wq);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>只有当无法向系统工作队列提交新的工作项时，才去创建额外的工作队列。因为每个新的工作队列都会花费可观的内存占用。如果新工作队列中的工作项无法与系统工作队列中已存在的工作项共存时，可以调整新的工作队列。例如，新的工作项执行了阻塞操作导致其它系统工作队列被延迟到一个不可接受的程序。</p>
+</blockquote>
+<h3 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果推后执行的任务需要睡眠，那么就选择工作队列；如果推后执行的任务不需要睡眠，那么就选择tasklet。</span><br><span class="line">另外，如果需要用一个可以重新调度的实体来执行你的下半部处理，也应该使用工作队列。它是唯一能在进程上下文运行的下半部实现的机制，也只有它才可以睡眠。这意味着在需要获得大量的内存时、在需要获取信号量时，在需要执行阻塞式的I/O操作时，它都会非常有用。如果不需要用一个内核线程来推后执行工作，那么就考虑使用tasklet。</span><br><span class="line">  一般，不要轻易的去使用工作队列，因为每当创建一条工作队列，内核就会为这条工作队列创建一条内核线程。工作队列位于进程上下文，与软中断，tasklet有所区别，工作队列里允许延时，睡眠操作，而软中断，tasklet位于中断上下文，不允许睡眠和延时操作。</span><br></pre></td></tr></table></figure>
+
+<p> 为什么linux不是实时操作系统</p>
+<p>进入中断处理时，cpu就关闭了本地中断响应，没法再响应其他中断，即linux的中断是没法嵌套的，即使有在高优先级的中断也是没法处理。另外软中断的处理要比任何进程优先级高，因为软中断也是可以在中断上下文中运行。除了中断，软中断外，spinlock在处理过程中是关闭抢占调度的，所以在spinlock期间也是没法调度的。</p>
+<p><img src="/../image/image-20250908161618848.png" alt="image-20250908161618848"></p>
+<ul>
+<li>T0时刻 normal task执行系统调用进入内核</li>
+<li>T1时刻 获取到spin lock，进入临界区保护阶段</li>
+<li>T2时刻 产生了IRQ1中断，进而进行处理IRQ1中断</li>
+<li>T3时刻 唤醒了高优先级的RT task，但此时系统处于中断中无法进行调度</li>
+<li>T4时刻 IRQ1中断处理结束 但接着又触发了IRQ2中断，进入IRQ2中断处理。</li>
+<li>T5时刻 IRQ2中断处理结束 但仍处于spin lock临界区 无法调度RT task</li>
+<li>T6时刻 spin lock释放，高优先级的RT task得到调度运行</li>
+<li>T7时刻 RT task运行结束 normal task继续运行</li>
+<li>T8时刻 从内核态返回用户态</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/algorithm.html" rel="prev" title="">
+                  <i class="fa fa-angle-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/os_lock.html" rel="next" title="">
+                   <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">paopao</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">76k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:17</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/01/2023 10:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+    </div>
+  </footer>
+  
+	
+	<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+	
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/paopao41" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"paopao41/paopao41.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

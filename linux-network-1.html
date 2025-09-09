@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="socket的创建12345678910111213SYSCALL_DEFINE3(socket, int, family, int, type, int, protocol)&amp;#123;	return __sys_socket(family, type, protocol);&amp;#125;--&gt; __sys_socket_create  --&gt; sock_create    --&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux_network_1">
+<meta property="og:url" content="https://paopao41.github.io/linux-network-1.html">
+<meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
+<meta property="og:description" content="socket的创建12345678910111213SYSCALL_DEFINE3(socket, int, family, int, type, int, protocol)&amp;#123;	return __sys_socket(family, type, protocol);&amp;#125;--&gt; __sys_socket_create  --&gt; sock_create    --&amp;gt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://paopao41.github.io/image/image-20250630084205169.png">
+<meta property="article:published_time" content="2025-06-19T15:00:16.000Z">
+<meta property="article:modified_time" content="2025-06-30T09:30:29.223Z">
+<meta property="article:author" content="paopao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://paopao41.github.io/image/image-20250630084205169.png">
+
+
+<link rel="canonical" href="https://paopao41.github.io/linux-network-1.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/linux-network-1.html","path":"linux-network-1.html","title":"linux_network_1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>linux_network_1 | Bubble's little record of knowledge</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Bubble's little record of knowledge</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#socket%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">socket的创建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E5%92%8C%E7%94%A8%E6%88%B7%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E9%98%BB%E5%A1%9E"><span class="nav-number"></span> <span class="nav-text">内核和用户进程之间阻塞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9E-recvfrom"><span class="nav-number">1.</span> <span class="nav-text">同步阻塞&#x2F;recvfrom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8epoll"><span class="nav-number">2.</span> <span class="nav-text">多路复用epoll</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E-%E9%9D%9E%E9%98%BB%E5%A1%9E"><span class="nav-number">3.</span> <span class="nav-text">阻塞 非阻塞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E6%98%AF%E5%A6%82%E4%BD%95%E5%8F%91%E9%80%81%E7%BD%91%E7%BB%9C%E5%8C%85%E7%9A%84%EF%BC%9F"><span class="nav-number"></span> <span class="nav-text">内核是如何发送网络包的？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%8C%85%E5%8F%91%E9%80%81%E8%BF%87%E7%A8%8B%E6%80%BB%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">网络包发送过程总览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E5%8D%A1%E5%90%AF%E5%8A%A8%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">网卡启动准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%8E%E7%94%A8%E6%88%B7%E8%BF%9B%E7%A8%8B%E5%88%B0%E7%BD%91%E5%8D%A1%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">数据从用户进程到网卡的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#send%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.</span> <span class="nav-text">send系统调用实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82%E5%A4%84%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">传输层处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8F%91%E9%80%81%E5%A4%84%E7%90%86"><span class="nav-number">3.3.</span> <span class="nav-text">网络层发送处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E5%B1%85%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.4.</span> <span class="nav-text">邻居子系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.5.</span> <span class="nav-text">linux网络设备子系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E8%A7%88"><span class="nav-number">4.</span> <span class="nav-text">总览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TX"><span class="nav-number">4.1.</span> <span class="nav-text">TX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RX"><span class="nav-number">4.2.</span> <span class="nav-text">RX</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">paopao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/paopao41" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;paopao41" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/paopao000401@gmail.com" title="E-Mail → paopao000401@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux-network-1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="linux_network_1 | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux_network_1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-19 23:00:16" itemprop="dateCreated datePublished" datetime="2025-06-19T23:00:16+08:00">2025-06-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-06-30 17:30:29" itemprop="dateModified" datetime="2025-06-30T17:30:29+08:00">2025-06-30</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="socket的创建"><a href="#socket的创建" class="headerlink" title="socket的创建"></a>socket的创建</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE3(socket, <span class="type">int</span>, family, <span class="type">int</span>, type, <span class="type">int</span>, protocol)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> __sys_socket(family, type, protocol);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">--&gt; __sys_socket_create</span><br><span class="line">  --&gt; sock_create</span><br><span class="line">    --&gt; __sock_create</span><br><span class="line">     --&gt; sock_alloc </span><br><span class="line">      --&gt; <span class="comment">// 获得每个协议族的操作表 rcu_dereference(net_families[family]);</span></span><br><span class="line">       --&gt; pf-&gt;create 调用对应的协议栈创建函数</span><br><span class="line">        --&gt; eg:AF_INET inet_create 对sock一些回调函数中=做绑定 对sock对象进行初始化</span><br><span class="line">         --&gt; 绑定回调函数，当软中断收到数据包会调用sk_data_ready通知用户。</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="内核和用户进程之间阻塞"><a href="#内核和用户进程之间阻塞" class="headerlink" title="内核和用户进程之间阻塞"></a>内核和用户进程之间阻塞</h1><h2 id="同步阻塞-recvfrom"><a href="#同步阻塞-recvfrom" class="headerlink" title="同步阻塞&#x2F;recvfrom"></a>同步阻塞&#x2F;recvfrom</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">同步阻塞的开销主要有：</span><br><span class="line"></span><br><span class="line">进程通过recv系统调用接收一个socket上的数据时，如果数据没有到达，进程就被从CPU上拿下来，然后再换上另一个进程。这导致一次进程上下文切换的开销。</span><br><span class="line">当连接上的数据就绪的时候，睡眠的进程又会被唤醒，又是一次进程切换的开销。</span><br><span class="line">一个进程同时只能等待一条连接，如果有很多并发，则需要很多进程，每个进程都将占用几MB的内存。</span><br><span class="line">从CPU开销角度来看，一次同步阻塞网络IO将导致两次进程上下文切换开销，每一次大约3-5us。另外一个进程同一时间只能处理一个socket。太差。</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="多路复用epoll"><a href="#多路复用epoll" class="headerlink" title="多路复用epoll"></a>多路复用epoll</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">epoll_create</span><br><span class="line">epoll_ctl</span><br><span class="line">epoll_wait</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">本质上是 极大程序的减少了无用的进程上下文切换，让进程更专注处理网络请求。</span><br><span class="line">在内核的硬，软</span><br><span class="line">中断上下文中，包从网卡接收过来进行处理，然后放到socket的接收队列，再找到socket关联的epitem，并加入到epoll对象的就绪链表中。</span><br><span class="line">在用户进程中，通过调用epoll wait来查看就绪链表中是否有事件到达，如果有，直接取走做处理。处理完毕再次调用epoll wait。至于红黑树，仅仅是提高了epoll查找，添加，删除socket时的效率而已。不算根本原因。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">epoll也是阻塞的。没有请求处理的时候，也会让出CPU。阻塞不会导致低性能。过多的阻塞才会。W</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="阻塞-非阻塞"><a href="#阻塞-非阻塞" class="headerlink" title="阻塞 非阻塞"></a>阻塞 非阻塞</h2><p>阻塞指的是进程因为等待某个事件而主动让出CPU挂起的操作。在网络IO中。当进程等待socket上的数据时，如果数据还没有到来，那就把当前状态从TASK_RUNNING修改为TASK_INTERRUPTIBLE。然后主动让出CPU，由调度器来调度下一个就绪状态的进程来执行。</p>
+<p>所以，以后分析是否阻塞就看是否让出CPU。</p>
+<h1 id="内核是如何发送网络包的？"><a href="#内核是如何发送网络包的？" class="headerlink" title="内核是如何发送网络包的？"></a>内核是如何发送网络包的？</h1><h2 id="网络包发送过程总览"><a href="#网络包发送过程总览" class="headerlink" title="网络包发送过程总览"></a>网络包发送过程总览</h2><p>用户进程在用户态通过send系统调用接口进入内核态，send通过内存拷贝skb，进程协议处理进入驱动ring buffer，通过pci总线发送后，产生中断通知发送完成，并清理ring buffer。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">send </span><br><span class="line">--&gt; SYSCALL_DEFINE6 sendto</span><br><span class="line"> --&gt; sock_sendmsg 															系统调用</span><br><span class="line">  --&gt; sock-&gt;ops-&gt;sendmsg</span><br><span class="line">    --&gt; sk-&gt;sk_prot-&gt;sendmsg									 			 协议栈</span><br><span class="line">     --&gt; tcp_send_msg- 封装tcp头，调用网络层发送接口 queue_xmit        			  传输层</span><br><span class="line">      --&gt; ip_local_out(skb) 									 			 网络层</span><br><span class="line">       --&gt; dst_ngigh_output</span><br><span class="line">        --&gt; dev_queue_xmit(skb) 调用网卡驱动中俄发送回调函数 将数据包传递给网卡设备   网络设备子系统--&gt; 硬件</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+
+<p>数据发送完毕后，释放缓存 队列等内存。在网卡发送完毕后，给CPU发送一个硬中断来通知cpu。实际是触发了 NET_RX_SOFTIRQ 。所以服务器中proc softirqs里面NET_TX要比RX大很多。</p>
+<h2 id="网卡启动准备"><a href="#网卡启动准备" class="headerlink" title="网卡启动准备"></a>网卡启动准备</h2><p>网卡启动最重要的任务之一就是分配和初始化RingBuffer。在对应的驱动程序的open函数中，对于ringbuffer进行分配。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">igb_setup_all_tx_resources</span><br><span class="line">igb_setup_all_rx_resources</span><br><span class="line">netif_tx_start_all_queues 开启全部队列</span><br></pre></td></tr></table></figure>
+
+<p>为什么要用环形队列?好处是什么</p>
+<table>
+<thead>
+<tr>
+<th>特性&#x2F;对比点</th>
+<th><strong>环形队列（Ring Buffer）</strong></th>
+<th><strong>普通 FIFO 队列（如链表）</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>内存分配方式</strong></td>
+<td>预分配，连续内存块</td>
+<td>动态分配，每个节点独立分配</td>
+</tr>
+<tr>
+<td><strong>缓存命中率</strong></td>
+<td>高（连续内存 + 局部性好）</td>
+<td>低（指针跳转 + 内存分散）</td>
+</tr>
+<tr>
+<td><strong>指针操作复杂度</strong></td>
+<td>简单，仅需要 head 和 tail</td>
+<td>操作复杂，涉及节点申请&#x2F;释放</td>
+</tr>
+<tr>
+<td><strong>支持无锁操作</strong></td>
+<td>易于 lockless 实现，尤其单生产者&#x2F;单消费者模型</td>
+<td>难，容易涉及竞态和锁</td>
+</tr>
+<tr>
+<td><strong>空间使用效率</strong></td>
+<td>高，数组固定大小，空间紧凑</td>
+<td>较低，节点指针额外开销</td>
+</tr>
+<tr>
+<td><strong>硬件 DMA 支持</strong></td>
+<td>很多硬件直接支持环形 DMA 描述符结构</td>
+<td>不适用于 DMA 映射</td>
+</tr>
+<tr>
+<td><strong>数据结构大小固定性</strong></td>
+<td>是，数组固定大小，易于调优和估算</td>
+<td>否，链表大小动态变化，管理麻烦</td>
+</tr>
+<tr>
+<td><strong>实现难度</strong></td>
+<td>结构简单，逻辑清晰</td>
+<td>相对复杂，需要考虑链表指针等各种异常处理</td>
+</tr>
+</tbody></table>
+<h2 id="数据从用户进程到网卡的过程"><a href="#数据从用户进程到网卡的过程" class="headerlink" title="数据从用户进程到网卡的过程"></a>数据从用户进程到网卡的过程</h2><h3 id="send系统调用实现"><a href="#send系统调用实现" class="headerlink" title="send系统调用实现"></a>send系统调用实现</h3><p><img src="/../image/image-20250630084205169.png" alt="image-20250630084205169"></p>
+<p>sendto中 构造 找到sock，构造msg后 通过 __sock_sendmsg 发送，到sock_sendmsg_nosec中，通过 inet6_sendmsg 调用进入协议栈。</p>
+<h3 id="传输层处理"><a href="#传输层处理" class="headerlink" title="传输层处理"></a>传输层处理</h3><p>在进入协议栈后，会找到具体的发送函数。对tcp来说是 tcp_sendmsg –&gt; tcp_sendmsg_locked。 tcp_write_queue_tail获取发送队列的最后一个skb。把用户内存里的数据拷贝到内核态，涉及到1次&#x2F;几次内存拷贝的开销。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (forced_push(tp)) &#123;</span><br><span class="line">    tcp_mark_push(tp, skb);</span><br><span class="line">    __tcp_push_pending_frames(sk, mss_now, TCP_NAGLE_PUSH);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (skb == tcp_send_head(sk))</span><br><span class="line">    tcp_push_one(sk, mss_now);</span><br></pre></td></tr></table></figure>
+
+<p>调用tcp_push_one &#x2F; __tcp_push_pending_frames 将数据包发送出去。</p>
+<p>最终会调用到。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Send _single_ skb sitting at the send head. This function requires</span></span><br><span class="line"><span class="comment"> * true push pending frames to setup probe timer etc.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">tcp_push_one</span><span class="params">(<span class="keyword">struct</span> sock *sk, <span class="type">unsigned</span> <span class="type">int</span> mss_now)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sk_buff</span> *<span class="title">skb</span> =</span> tcp_send_head(sk);</span><br><span class="line"></span><br><span class="line">	BUG_ON(!skb || skb-&gt;len &lt; mss_now);</span><br><span class="line"></span><br><span class="line">	tcp_write_xmit(sk, mss_now, TCP_NAGLE_PUSH, <span class="number">1</span>, sk-&gt;sk_allocation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络层发送处理"><a href="#网络层发送处理" class="headerlink" title="网络层发送处理"></a>网络层发送处理</h3><p>tcp_write_xmit内部处理了传输层的拥塞控制，滑动窗口相关的工作，满足窗口要求的时候，设置TCP头然后将skb传到更低的网络层进行处理。</p>
+<p>tcp_transmit_skb开启真正的发送函数。clone新的tcp出来，封装tcp的头.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Build TCP header and checksum it. */</span></span><br><span class="line">	th = (<span class="keyword">struct</span> tcphdr *)skb-&gt;data;</span><br><span class="line">	th-&gt;source		= inet-&gt;inet_sport;</span><br><span class="line">	th-&gt;dest		= inet-&gt;inet_dport;</span><br><span class="line">	th-&gt;seq			= htonl(tcb-&gt;seq);</span><br><span class="line">	th-&gt;ack_seq		= htonl(rcv_nxt);</span><br><span class="line">	*(((__be16 *)th) + <span class="number">6</span>)	= htons(((tcp_header_.....</span><br><span class="line">	</span><br><span class="line">err = icsk-&gt;icsk_af_ops-&gt;queue_xmit(sk, skb, &amp;inet-&gt;cork.fl);调用网络层发送接口.</span><br></pre></td></tr></table></figure>
+
+<p>为什么要进行clone? tcp支持超时重传, 在收到对方的ACK之前,这个skb’不能被删除.等收到ACK后再次删除.</p>
+<p>tcp_options_write中对TCP头进行设置, skb中包含了网络协议中的所有头,在设置TCP的头的时候,只需要把指针指向skb的合适位置,后面设置IP头的时候,指针在挪一挪即可.避免频繁的内存申请拷贝.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">queue_xmit 在 ipv4中 实际值得是.</span><br><span class="line">.queue_xmit	   = ip_queue_xmit 进入 网络层</span><br><span class="line">主要处理路由表项的查找,IP头设置,netfilter过滤,大于MTU时的skb切片,</span><br><span class="line"></span><br><span class="line">__ip_local_out执行netfilter过滤, 如果使用iptables设置了一些规则,那么这里将检测是否命中,如果设置的规则非常复杂,那么这里将导致CPU开销大增.</span><br><span class="line">ip_finish_output2</span><br><span class="line">ip_finish_output中,对大于MTU的包进行分片后调用 ip_finish_output2</span><br><span class="line"></span><br><span class="line">根据下一条IP地址查找邻居项,找不到就创建一个.继续向邻居子系统传递.</span><br><span class="line">nexthop = (__force u32) rt_nexthop(rt, ip_hdr(skb)-&gt;daddr);</span><br><span class="line">neigh_output</span><br></pre></td></tr></table></figure>
+
+<h3 id="邻居子系统"><a href="#邻居子系统" class="headerlink" title="邻居子系统"></a>邻居子系统</h3><p>位于网络层和数据链路层中间的一个系统, 为网络层提供一个下层的封装, 让网络层不必关心下层的地址信息, 让下层决定发送到哪个MAC地址. 主要查找&#x2F;创建邻居项,在创建邻居项的时候,可能会发出实际的ARP请求,然后封装MAC头,将发送过程传递到更下层的网络设备子系统.</p>
+<p>调用 neigh_resolve_output 发出,有可能触发arp请求.</p>
+<p>最后调用 dev_queue_xmit 将skb传递给Linux网络设备子系统</p>
+<h3 id="linux网络设备子系统"><a href="#linux网络设备子系统" class="headerlink" title="linux网络设备子系统"></a>linux网络设备子系统</h3><p>__dev_queue_xmit()<br>    └── __dev_queue_xmit_xmit()<br>           └── dev_hard_start_xmit()<br>                  └── xmit_one()<br>                         └── dev-&gt;netdev_ops-&gt;ndo_start_xmit()</p>
+<h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><h3 id="TX"><a href="#TX" class="headerlink" title="TX"></a>TX</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">// 1.分配 sk_buff，复制用户数据</span><br><span class="line">// net/ipv4/ip_output.c</span><br><span class="line">struct sk_buff *ip_make_skb(struct sock *sk,</span><br><span class="line">			    struct flowi4 *fl4,</span><br><span class="line">			    int getfrag(void *from, char *to, int offset,</span><br><span class="line">					int len, int odd, struct sk_buff *skb),</span><br><span class="line">			    void *from, int length, int transhdrlen,</span><br><span class="line">			    struct ipcm_cookie *ipc, struct rtable **rtp,</span><br><span class="line">			    struct inet_cork *cork, unsigned int flags)</span><br><span class="line">&#123;</span><br><span class="line">	// 管理 sk_buff 双链表</span><br><span class="line">	struct sk_buff_head queue;</span><br><span class="line">	__skb_queue_head_init(&amp;queue);</span><br><span class="line">	// ...</span><br><span class="line">	// NOTE: 具体分配sk_buffer的地方</span><br><span class="line">	err = __ip_append_data(sk, fl4, &amp;queue, cork,</span><br><span class="line">			       &amp;current-&gt;task_frag, getfrag,</span><br><span class="line">			       from, length, transhdrlen, flags);</span><br><span class="line">	// 给IP协议头赋值</span><br><span class="line">	return __ip_make_skb(sk, fl4, &amp;queue, cork);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 具体分配sk_buffer</span><br><span class="line">static int __ip_append_data(struct sock *sk,</span><br><span class="line">			    struct flowi4 *fl4,</span><br><span class="line">			    struct sk_buff_head *queue,</span><br><span class="line">			    struct inet_cork *cork,</span><br><span class="line">			    struct page_frag *pfrag,</span><br><span class="line">			    int getfrag(void *from, char *to, int offset,</span><br><span class="line">					int len, int odd, struct sk_buff *skb),</span><br><span class="line">			    void *from, int length, int transhdrlen,</span><br><span class="line">			    unsigned int flags)</span><br><span class="line">&#123;</span><br><span class="line">		// 拿到队列尾部的skb</span><br><span class="line">		skb = skb_peek_tail(queue);</span><br><span class="line">		// 分配 sk_buff</span><br><span class="line">		if (!skb)</span><br><span class="line">			goto alloc_new_skb;</span><br><span class="line">		//...</span><br><span class="line">alloc_new_skb:</span><br><span class="line">		//...</span><br><span class="line">		// 分配新 sk_buff</span><br><span class="line">		skb = sock_alloc_send_skb(sk, alloclen,</span><br><span class="line">				(flags &amp; MSG_DONTWAIT), &amp;err);</span><br><span class="line">		//...</span><br><span class="line">		// ip 协议头长度</span><br><span class="line">		fragheaderlen = sizeof(struct iphdr) + (opt ? opt-&gt;optlen : 0);</span><br><span class="line">		//...</span><br><span class="line">		// sk_buff 放入数据的地方，设置了网络层头、传输层头</span><br><span class="line">		// L3层链路层的协议头，在后续处理</span><br><span class="line">		data = skb_put(skb, fraglen + exthdrlen - pagedlen);</span><br><span class="line">		skb_set_network_header(skb, exthdrlen);</span><br><span class="line">		skb-&gt;transport_header = (skb-&gt;network_header +</span><br><span class="line">					 fragheaderlen);</span><br><span class="line">		// ...</span><br><span class="line">		// 从 from 复制copy数量的数据到 data+transhdrlen</span><br><span class="line">		// transhdrlen 是在调用ip_make_skb是计算的udp协议头大小</span><br><span class="line">		// 也就是说把用户数据复制到udp数据报的数据部分</span><br><span class="line">		if (copy &gt; 0 &amp;&amp; getfrag(from, data + transhdrlen, offset, copy, fraggap, skb) &lt; 0) &#123;</span><br><span class="line">		// ...</span><br><span class="line">		// NOTE: 将 sk_buff 放入队列</span><br><span class="line">		__skb_queue_tail(queue, skb);</span><br><span class="line">		// ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 设置ip协议头</span><br><span class="line">struct sk_buff *__ip_make_skb(struct sock *sk,</span><br><span class="line">			      struct flowi4 *fl4,</span><br><span class="line">			      struct sk_buff_head *queue,</span><br><span class="line">			      struct inet_cork *cork)</span><br><span class="line">&#123;</span><br><span class="line">	// ... </span><br><span class="line">	skb = __skb_dequeue(queue); // NOTE: 从队列中获取一个skb</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line">	// NOTE: 设置 IP协议头：版本、源IP地址、目标IP地址</span><br><span class="line">	iph = ip_hdr(skb);</span><br><span class="line">	iph-&gt;version = 4;</span><br><span class="line">	//...</span><br><span class="line">	ip_copy_addrs(iph, fl4); // NOTE: 设置ip地址</span><br><span class="line">	//...</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2. 给协议头复制，发往下一层</span><br><span class="line">// net/ipv4/udp.c</span><br><span class="line">// NOTE: 这里获取了skb 的 UDP 协议头，进行赋值</span><br><span class="line">static int udp_send_skb(struct sk_buff *skb, struct flowi4 *fl4,</span><br><span class="line">			struct inet_cork *cork)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	struct udphdr *uh;</span><br><span class="line">	uh = udp_hdr(skb); </span><br><span class="line">	// NOTE 设置udp协议头：源端口、目标端口</span><br><span class="line">	uh-&gt;source = inet-&gt;inet_sport;</span><br><span class="line">	uh-&gt;dest = fl4-&gt;fl4_dport;</span><br><span class="line"></span><br><span class="line">	// 往下一层发送 skb</span><br><span class="line">	err = ip_send_skb(sock_net(sk), skb);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// include/net/neighbour.h</span><br><span class="line">static inline int neigh_output(struct neighbour *n, struct sk_buff *skb,</span><br><span class="line">			       bool skip_cache)</span><br><span class="line">&#123;</span><br><span class="line">	// ...</span><br><span class="line">	return neigh_hh_output(hh, skb); // NOTE: 使用缓存的硬件地址发送，也就是mac地址，hh里包含协议头</span><br><span class="line">	// ...</span><br><span class="line">&#125;</span><br><span class="line">static inline int neigh_hh_output(const struct hh_cache *hh, struct sk_buff *skb)</span><br><span class="line">&#123;</span><br><span class="line">	// ...</span><br><span class="line">		hh_len = READ_ONCE(hh-&gt;hh_len); // NOTE: 获取头长度</span><br><span class="line">		memcpy(skb-&gt;data - HH_DATA_MOD, hh-&gt;hh_data,</span><br><span class="line">		       HH_DATA_MOD);            // NOTE: skb-&gt;data 指针上移，放置 hh-&gt;hh_data 协议头</span><br><span class="line">	// ...</span><br><span class="line">	return dev_queue_xmit(skb);             // NOTE: 发往网络设备子系统处理</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="RX"><a href="#RX" class="headerlink" title="RX"></a>RX</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">1. 软中断</span><br><span class="line">// net/core/dev.c</span><br><span class="line">__napi_poll(n-&gt;poll,网卡初始化时注册的igb_poll)</span><br><span class="line">// drivers/net/ethernet/intel/igb/igb_main.c</span><br><span class="line">igb_poll -&gt; igb_clean_rx_irq -&gt; napi_gro_receive(skb 结构体已包含可用的 L2 数据)</span><br><span class="line"></span><br><span class="line">2. gro: Generic Receive Offloading</span><br><span class="line">// net/core/gro.c</span><br><span class="line">napi_gro_receive -&gt; napi_skb_finish -&gt; gro_normal_one</span><br><span class="line">// include/net/gro.h</span><br><span class="line">gro_normal_one -&gt; gro_normal_list -&gt; netif_receive_skb_list_internal</span><br><span class="line"></span><br><span class="line">// net/core/dev.c</span><br><span class="line">netif_receive_skb_list_internal -&gt; __netif_receive_skb_list -&gt; __netif_receive_skb_list_core -&gt; __netif_receive_skb_core</span><br><span class="line">-&gt; deliver_ptype_list_skb -&gt; deliver_skb(pt_prev-&gt;func指向ip_rcv,通过dev_add_pack注册ip_packet_type)</span><br><span class="line"></span><br><span class="line">// NOTE: 再进行Linux网络栈处理</span><br><span class="line"></span><br><span class="line">// 1. IP 网络层</span><br><span class="line">// net/ipv4/ip_input.c</span><br><span class="line">ip_rcv -&gt; ip_rcv_finish -&gt; dst_input</span><br><span class="line">// 1.1 路由</span><br><span class="line">// include/net/dst.h</span><br><span class="line">dst_input -&gt; ip_local_deliver</span><br><span class="line">// net/ipv4/ip_input.c</span><br><span class="line">ip_local_deliver -&gt; ip_local_deliver_finish -&gt; ip_protocol_deliver_rcu -&gt; udp_rcv</span><br><span class="line"></span><br><span class="line">// 2. 传输层</span><br><span class="line">// net/ipv4/udp.c</span><br><span class="line">udp_rcv -&gt; __udp4_lib_rcv -&gt; udp_unicast_rcv_skb -&gt; udp_queue_rcv_skb -&gt; udp_queue_rcv_one_skb -&gt; __udp_queue_rcv_skb </span><br><span class="line">-&gt; __udp_enqueue_schedule_skb -k __skb_queue_tail -&gt; sk_data_ready/sock_def_readable</span><br><span class="line"></span><br><span class="line">// 3. 用户/系统调用层</span><br><span class="line">// net/core/sock.c</span><br><span class="line">sock_def_readable -&gt; sk_wake_async_rcu</span><br><span class="line">// include/net/sock.h</span><br><span class="line">sk_wake_async_rcu -&gt; sock_wake_async</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>参考资料 </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44260459/article/details/121480230">https://blog.csdn.net/weixin_44260459/article/details/121480230</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Device%20Mapper.html" rel="prev" title="">
+                  <i class="fa fa-angle-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/linux_platform.html" rel="next" title="">
+                   <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">paopao</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">76k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:17</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/01/2023 10:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+    </div>
+  </footer>
+  
+	
+	<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+	
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/paopao41" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"paopao41/paopao41.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
