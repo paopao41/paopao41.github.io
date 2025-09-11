@@ -21,32 +21,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="原码补码反码移码反码：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；        补码：解决负数加法运算正负零问题，弥补了反码的不足。 总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，不管是正整数还是正小数，原码，反码，补码都全部相同。 总结：  正数的原码、补码、反码均为其本身； 负数（二进制）的原码、补码、反码公式：反码 &#x3D; 原码（除符号位外）每位">
+    <meta name="description" content="实时操作系统，它通过调度和资源管理，保证实时任务在规定的时间限制内完成。 linux不是实时操作系统，主要是因为： 123456存在关中断机制，低优先级的进程如果关闭了中断（进入临界区等），高优先级的进程中断发生也无法响应。内核禁止抢占，进程进入内核，直到系统调用结束&#x2F;被阻塞，高优先级进程无法被调度。调度策略，分为实时任务和普通任务，只意味着谁优先被CPU调度，而没有保证完成时间。虚拟内存机制通过">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test_1">
-<meta property="og:url" content="https://paopao41.github.io/test-1.html">
+<meta property="og:title" content="Bubble&#39;s little record of knowledge">
+<meta property="og:url" content="https://paopao41.github.io/real_time_os.html">
 <meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
-<meta property="og:description" content="原码补码反码移码反码：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；        补码：解决负数加法运算正负零问题，弥补了反码的不足。 总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，不管是正整数还是正小数，原码，反码，补码都全部相同。 总结：  正数的原码、补码、反码均为其本身； 负数（二进制）的原码、补码、反码公式：反码 &#x3D; 原码（除符号位外）每位">
+<meta property="og:description" content="实时操作系统，它通过调度和资源管理，保证实时任务在规定的时间限制内完成。 linux不是实时操作系统，主要是因为： 123456存在关中断机制，低优先级的进程如果关闭了中断（进入临界区等），高优先级的进程中断发生也无法响应。内核禁止抢占，进程进入内核，直到系统调用结束&#x2F;被阻塞，高优先级进程无法被调度。调度策略，分为实时任务和普通任务，只意味着谁优先被CPU调度，而没有保证完成时间。虚拟内存机制通过">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://paopao41.github.io/image/image-20240418103809734.png">
-<meta property="og:image" content="https://paopao41.github.io/image/image-20240418103855822.png">
-<meta property="og:image" content="https://paopao41.github.io/image/image-20240418103948295.png">
-<meta property="og:image" content="https://paopao41.github.io/image/image-20240418104000114.png">
-<meta property="article:published_time" content="2024-04-16T01:00:52.000Z">
-<meta property="article:modified_time" content="2025-05-19T01:21:48.542Z">
+<meta property="article:published_time" content="2025-09-10T01:05:49.360Z">
+<meta property="article:modified_time" content="2025-09-10T09:24:35.277Z">
 <meta property="article:author" content="paopao">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://paopao41.github.io/image/image-20240418103809734.png">
 
 
-<link rel="canonical" href="https://paopao41.github.io/test-1.html">
+<link rel="canonical" href="https://paopao41.github.io/real_time_os.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/test-1.html","path":"test-1.html","title":"test_1"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/real_time_os.html","path":"real_time_os.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>test_1 | Bubble's little record of knowledge</title>
+<title> | Bubble's little record of knowledge</title>
   
 
 
@@ -105,7 +100,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -118,7 +113,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%A0%81%E8%A1%A5%E7%A0%81%E5%8F%8D%E7%A0%81%E7%A7%BB%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">原码补码反码移码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8F%AF%E9%9D%A0%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">计算机可靠性模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%B2%E8%81%94%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.0.1.</span> <span class="nav-text">串联系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E8%81%94%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.0.2.</span> <span class="nav-text">并联系统</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -172,7 +166,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/test-1.html">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/real_time_os.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,12 +179,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="test_1 | Bubble's little record of knowledge">
+      <meta itemprop="name" content=" | Bubble's little record of knowledge">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          test_1
+          
         </h1>
 
         <div class="post-meta-container">
@@ -200,24 +194,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-04-16 09:00:52" itemprop="dateCreated datePublished" datetime="2024-04-16T09:00:52+08:00">2024-04-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-05-19 09:21:48" itemprop="dateModified" datetime="2025-05-19T09:21:48+08:00">2025-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/software-test/" itemprop="url" rel="index"><span itemprop="name">software_test</span></a>
-        </span>
+      <time title="创建时间：2025-09-10 09:05:49 / 修改时间：17:24:35" itemprop="dateCreated datePublished" datetime="2025-09-10T09:05:49+08:00">2025-09-10</time>
     </span>
 
   
@@ -234,7 +213,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>262</span>
+      <span>566</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -251,17 +230,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h3 id="原码补码反码移码"><a href="#原码补码反码移码" class="headerlink" title="原码补码反码移码"></a>原码补码反码移码</h3><p><strong>反码</strong>：解决负数加法运算问题，将减法运算转换为加法运算，从而简化运算规则；<br>        <strong>补码</strong>：解决负数加法运算正负零问题，弥补了反码的不足。</p>
-<p>总之，反码与补码都是为了解决负数运算问题，跟正数没关系，因此，<strong>不管是正整数还是正小数，原码，反码，补码都全部相同。</strong></p>
-<p><strong>总结：</strong></p>
-<ul>
-<li>正数的原码、补码、反码均为其本身；</li>
-<li>负数（二进制）的原码、补码、反码公式：<br>反码 &#x3D; 原码（除符号位外）每位取反<br>补码 &#x3D; 反码 + 1<br>反码 &#x3D; 补码  - 1<br>移码 &#x3D; 补码符号位取反</li>
-</ul>
-<h3 id="计算机可靠性模型"><a href="#计算机可靠性模型" class="headerlink" title="计算机可靠性模型"></a>计算机可靠性模型</h3><h5 id="串联系统"><a href="#串联系统" class="headerlink" title="串联系统"></a>串联系统</h5><p>系统可靠性<img src="/../image/image-20240418103809734.png" alt="image-20240418103809734"></p>
-<p>系统失效率<img src="/../image/image-20240418103855822.png" alt="image-20240418103855822"></p>
-<h5 id="并联系统"><a href="#并联系统" class="headerlink" title="并联系统"></a>并联系统</h5><p>系统可靠性<img src="/../image/image-20240418103948295.png" alt="image-20240418103948295"></p>
-<p>系统失效率<img src="/../image/image-20240418104000114.png" alt="image-20240418104000114"></p>
+    <div class="post-body" itemprop="articleBody"><p>实时操作系统，它通过调度和资源管理，保证实时任务在规定的时间限制内完成。</p>
+<p>linux不是实时操作系统，主要是因为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">存在关中断机制，低优先级的进程如果关闭了中断（进入临界区等），高优先级的进程中断发生也无法响应。</span><br><span class="line">内核禁止抢占，进程进入内核，直到系统调用结束/被阻塞，高优先级进程无法被调度。</span><br><span class="line">调度策略，分为实时任务和普通任务，只意味着谁优先被CPU调度，而没有保证完成时间。</span><br><span class="line">虚拟内存机制通过 swap 可能让进程访问内存的时间不可预测。</span><br><span class="line">高优先级的进程不能抢占低优先级进程的资源。如果高优先级的进程要使用低优先级进程正在使用的资源时，它必须等待低优先级的进程释放资源，容易产生优先级倒置；</span><br><span class="line">Linux的周期模式定时器频率仅为100Hz，远不能满足多种实时应用的要求</span><br></pre></td></tr></table></figure>
+
+<p>RTlinux，后演变为preempt_rt，在linux的基础上打补丁，增加了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">中断线程化：把传统硬中断 top-half 的大部分逻辑移到内核线程里运行。可以被调度，减少CPU被不可抢占硬中断占用的时间。</span><br><span class="line">开启可抢占RCU配置。</span><br><span class="line">当低优先级任务（持锁）阻塞高优先级任务时，临时提升持锁低优先级任务的优先级，防止中等优先级任务抢占，缩短高优先级任务的等待时间。</span><br><span class="line">使用rt_mutex替代spin lock，可抢占。支持优先级继承。</span><br><span class="line">使用hwtimer替代jeffies等等。</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -275,14 +250,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/hisi3519AV200-debug.html" rel="prev" title="hisi3519AV200_debug">
-                  <i class="fa fa-angle-left"></i> hisi3519AV200_debug
+                <a href="/fpu.html" rel="prev" title="">
+                  <i class="fa fa-angle-left"></i> 
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/mcu-voltage.html" rel="next" title="mcu-voltage">
-                  mcu-voltage <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
