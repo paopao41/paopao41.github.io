@@ -191,15 +191,6 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/uart-speed.html</loc>
-    
-    <lastmod>2025-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://paopao41.github.io/test-1.html</loc>
     
     <lastmod>2025-05-19</lastmod>
@@ -209,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/step-motor.html</loc>
+    <loc>https://paopao41.github.io/uart-speed.html</loc>
     
     <lastmod>2025-05-19</lastmod>
     
@@ -219,6 +210,15 @@
   
   <url>
     <loc>https://paopao41.github.io/syslog.html</loc>
+    
+    <lastmod>2025-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://paopao41.github.io/step-motor.html</loc>
     
     <lastmod>2025-05-19</lastmod>
     
@@ -290,7 +290,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/netlink.html</loc>
+    <loc>https://paopao41.github.io/networkcard-cfg.html</loc>
     
     <lastmod>2025-05-19</lastmod>
     
@@ -299,7 +299,7 @@
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/networkcard-cfg.html</loc>
+    <loc>https://paopao41.github.io/netlink.html</loc>
     
     <lastmod>2025-05-19</lastmod>
     
@@ -571,14 +571,14 @@
 
   
   <url>
-    <loc>https://paopao41.github.io/categories/misc/</loc>
+    <loc>https://paopao41.github.io/categories/network/</loc>
     <lastmod>2025-09-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://paopao41.github.io/categories/network/</loc>
+    <loc>https://paopao41.github.io/categories/misc/</loc>
     <lastmod>2025-09-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

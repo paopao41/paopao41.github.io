@@ -19,10 +19,10 @@ https://paopao41.github.io/categories/index.html
 https://paopao41.github.io/archives/index.html
 https://paopao41.github.io/usb_pcie_bus.html
 https://paopao41.github.io/about/index.html
-https://paopao41.github.io/uart-speed.html
 https://paopao41.github.io/test-1.html
-https://paopao41.github.io/step-motor.html
+https://paopao41.github.io/uart-speed.html
 https://paopao41.github.io/syslog.html
+https://paopao41.github.io/step-motor.html
 https://paopao41.github.io/small-knowledge.html
 https://paopao41.github.io/spi.html
 https://paopao41.github.io/python-parser.html
@@ -30,8 +30,8 @@ https://paopao41.github.io/shc.html
 https://paopao41.github.io/pcie_ltssm.html
 https://paopao41.github.io/pll.html
 https://paopao41.github.io/padmux.html
-https://paopao41.github.io/netlink.html
 https://paopao41.github.io/networkcard-cfg.html
+https://paopao41.github.io/netlink.html
 https://paopao41.github.io/mcu-voltage.html
 https://paopao41.github.io/mma.html
 https://paopao41.github.io/mcu-option-byte.html
@@ -61,8 +61,8 @@ https://paopao41.github.io/Category-of-IP-address-ABCDE.html
 https://paopao41.github.io/Photographic-learning.html
 https://paopao41.github.io/Bloom-filter.html
 https://paopao41.github.io/
-https://paopao41.github.io/categories/misc/
 https://paopao41.github.io/categories/network/
+https://paopao41.github.io/categories/misc/
 https://paopao41.github.io/categories/server/
 https://paopao41.github.io/categories/mcu-misc/
 https://paopao41.github.io/categories/dsp-hisi-misc/
