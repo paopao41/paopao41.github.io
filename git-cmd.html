@@ -21,15 +21,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"paopao41.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="git 常用命令修改最近提交的信息1git commit --amend  撤销当前提交但保留改动123git reset --soft HEAD~1HEAD~1表示上一个提交。--soft选项会将改动保留在暂存区，可以直接修改后重新提交。  撤销并移除暂存区的修改1git reset --mixed HEAD~1  撤销并丢弃所有改动1git reset --hard HEAD~1">
+    <meta name="description" content="git 常用命令修改最近提交的信息1git commit --amend  撤销当前提交但保留改动123git reset --soft HEAD~1HEAD~1表示上一个提交。--soft选项会将改动保留在暂存区，可以直接修改后重新提交。  撤销并移除暂存区的修改1git reset --mixed HEAD~1  撤销并丢弃所有改动1git reset --hard HEAD~1    mer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git_cmd">
 <meta property="og:url" content="https://paopao41.github.io/git-cmd.html">
 <meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
-<meta property="og:description" content="git 常用命令修改最近提交的信息1git commit --amend  撤销当前提交但保留改动123git reset --soft HEAD~1HEAD~1表示上一个提交。--soft选项会将改动保留在暂存区，可以直接修改后重新提交。  撤销并移除暂存区的修改1git reset --mixed HEAD~1  撤销并丢弃所有改动1git reset --hard HEAD~1">
+<meta property="og:description" content="git 常用命令修改最近提交的信息1git commit --amend  撤销当前提交但保留改动123git reset --soft HEAD~1HEAD~1表示上一个提交。--soft选项会将改动保留在暂存区，可以直接修改后重新提交。  撤销并移除暂存区的修改1git reset --mixed HEAD~1  撤销并丢弃所有改动1git reset --hard HEAD~1    mer">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-04T06:59:37.000Z">
-<meta property="article:modified_time" content="2025-05-19T01:21:48.529Z">
+<meta property="article:modified_time" content="2025-09-25T13:42:36.322Z">
 <meta property="article:author" content="paopao">
 <meta name="twitter:card" content="summary">
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">git 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%9C%80%E8%BF%91%E6%8F%90%E4%BA%A4%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">修改最近提交的信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E5%BD%93%E5%89%8D%E6%8F%90%E4%BA%A4%E4%BD%86%E4%BF%9D%E7%95%99%E6%94%B9%E5%8A%A8"><span class="nav-number">1.0.0.0.0.2.</span> <span class="nav-text">撤销当前提交但保留改动</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E5%B9%B6%E7%A7%BB%E9%99%A4%E6%9A%82%E5%AD%98%E5%8C%BA%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="nav-number">1.0.0.0.0.3.</span> <span class="nav-text">撤销并移除暂存区的修改</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E5%B9%B6%E4%B8%A2%E5%BC%83%E6%89%80%E6%9C%89%E6%94%B9%E5%8A%A8"><span class="nav-number">1.0.0.0.0.4.</span> <span class="nav-text">撤销并丢弃所有改动</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">git 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%9C%80%E8%BF%91%E6%8F%90%E4%BA%A4%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">修改最近提交的信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E5%BD%93%E5%89%8D%E6%8F%90%E4%BA%A4%E4%BD%86%E4%BF%9D%E7%95%99%E6%94%B9%E5%8A%A8"><span class="nav-number">1.0.0.0.0.2.</span> <span class="nav-text">撤销当前提交但保留改动</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E5%B9%B6%E7%A7%BB%E9%99%A4%E6%9A%82%E5%AD%98%E5%8C%BA%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="nav-number">1.0.0.0.0.3.</span> <span class="nav-text">撤销并移除暂存区的修改</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E5%B9%B6%E4%B8%A2%E5%BC%83%E6%89%80%E6%9C%89%E6%94%B9%E5%8A%A8"><span class="nav-number">1.0.0.0.0.4.</span> <span class="nav-text">撤销并丢弃所有改动</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#merge-vs-rebase-vs-cherry-pick"><span class="nav-number">2.</span> <span class="nav-text">merge vs rebase vs cherry-pick</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Git-merge"><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">Git merge</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%B2%E7%AA%81"><span class="nav-number">2.0.0.0.1.1.</span> <span class="nav-text">冲突</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Git-rebase"><span class="nav-number">2.0.0.0.2.</span> <span class="nav-text">Git rebase</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%B2%E7%AA%81-1"><span class="nav-number">2.0.0.0.2.1.</span> <span class="nav-text">冲突</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cherry-pick"><span class="nav-number">2.0.0.0.3.</span> <span class="nav-text">cherry-pick</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%B2%E7%AA%81-2"><span class="nav-number">2.0.0.0.3.1.</span> <span class="nav-text">冲突</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -203,7 +203,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-05-19 09:21:48" itemprop="dateModified" datetime="2025-05-19T09:21:48+08:00">2025-05-19</time>
+      <time title="修改时间：2025-09-25 21:42:36" itemprop="dateModified" datetime="2025-09-25T21:42:36+08:00">2025-09-25</time>
     </span>
 
   
@@ -220,14 +220,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>175</span>
+      <span>881</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -245,6 +245,18 @@
 
 <h6 id="撤销并丢弃所有改动"><a href="#撤销并丢弃所有改动" class="headerlink" title="撤销并丢弃所有改动"></a>撤销并丢弃所有改动</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
 
+
+
+<h1 id="merge-vs-rebase-vs-cherry-pick"><a href="#merge-vs-rebase-vs-cherry-pick" class="headerlink" title="merge vs rebase vs cherry-pick"></a>merge vs rebase vs cherry-pick</h1><h5 id="Git-merge"><a href="#Git-merge" class="headerlink" title="Git merge"></a>Git merge</h5><p>将两个分支合并到一起，并生成一个新的commit记录，新生成的commit节点会有两个父节点。</p>
+<p>在 master 分支上，使用 <code>git merge bugFix</code> 将 bugFix 分支合并到 master 分支。</p>
+<h6 id="冲突"><a href="#冲突" class="headerlink" title="冲突"></a>冲突</h6><p>merge 解决冲突时内容是基于两个分支的所有的 commit.</p>
+<h5 id="Git-rebase"><a href="#Git-rebase" class="headerlink" title="Git rebase"></a><strong>Git rebase</strong></h5><p>rebase也可以合并分支，会取出一系列的commit记录，然后在目标分支逐个放下去，rebase可以保持线性的提交历史，使历史更加清晰。</p>
+<p>在bugfix上，使用git rebase master分支，会将bugfix分支上的commit记录复制到master分支，并保证提交历史是线性的。</p>
+<p>rebase除了在合并时使用，还可以用来整理commit记录。</p>
+<h6 id="冲突-1"><a href="#冲突-1" class="headerlink" title="冲突"></a>冲突</h6><p> 正如它的中文名字“变基操作”一样，会将所在分支新添加的内容，增加到目的分支，并保证了 <strong>commit 提交记录的串行性。</strong>简单来说就是，会以<strong>目的分支（一般是 master）为基础</strong>，逐一的将当前分支的 <em>commit</em> 记录应用。需要注意的是，在应用时并不是直接应用在 master 分支，而是将 master 分支整体拷贝，然后将当前 commit 应用在拷贝后的分支上。</p>
+<h5 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a><strong>cherry-pick</strong></h5><p>cherry pick 是将一些commit复制到当前分支的HEAD上，和rebase相比，更加灵活，可以随意的选择commit进行复制。</p>
+<p>通过 <code>git cherry-pick c3 c4 c7</code> 将其他分支上的 3 个 commit 复制到当前的 master.</p>
+<h6 id="冲突-2"><a href="#冲突-2" class="headerlink" title="冲突"></a>冲突</h6><p> rebase 操作正好相反，<strong>会以当前的分支为基础</strong>，然后将 commit 一个个的拿过来应用。形成的 commit 记录也是串行的。</p>
 
     </div>
 
@@ -298,14 +310,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">76k</span>
+    <span title="站点总字数">77k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:18</span>
+    <span title="站点阅读时长">2:20</span>
   </span>
 </div>
 <div class="busuanzi-count">

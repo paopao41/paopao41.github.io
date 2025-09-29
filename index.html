@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/real_time_os.html" class="post-title-link" itemprop="url">未命名</a>
+          <a href="/real_time_os.html" class="post-title-link" itemprop="url">real time OS</a>
         </h2>
 
         <div class="post-meta-container">
@@ -189,9 +189,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-09-10 09:05:49 / 修改时间：17:24:35" itemprop="dateCreated datePublished" datetime="2025-09-10T09:05:49+08:00">2025-09-10</time>
+      <time title="创建时间：2025-09-10 14:52:38" itemprop="dateCreated datePublished" datetime="2025-09-10T14:52:38+08:00">2025-09-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-29 08:43:00" itemprop="dateModified" datetime="2025-09-29T08:43:00+08:00">2025-09-29</time>
     </span>
 
   
@@ -252,815 +258,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/fpu.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/fpu.html" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-09-02 08:42:49 / 修改时间：08:47:45" itemprop="dateCreated datePublished" datetime="2025-09-02T08:42:49+08:00">2025-09-02</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>266</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>大多数MCU都没有FPU 硬件浮点单元。如果用float double运算，编译器会调用软件库函数来模拟浮点加减乘除。需要分解成一系列整数操作，移位，比较，循环，效率非常低。可能要几十到上百条指令。</p>
-<p>定点运算用的就是普通的整数运算单元。MCU内核天然支持整数加减乘除移位，一条指令就可以完成。</p>
-<p><strong>CPU如何进行浮点运算</strong></p>
-<p>IEEE754标准。浮点数分为 符号位，指数，尾数部分。没有FPU的MCU运算过程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">取出指数和尾数。</span><br><span class="line">对齐指数（移位操作）。</span><br><span class="line">尾数执行整数加减/乘除。</span><br><span class="line">结果归一化（调整指数和尾数）。</span><br><span class="line">处理溢出/舍入/NaN/无穷大等特殊情况。</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux_network_youhua.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux_network_youhua.html" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-09-01 08:52:46 / 修改时间：12:10:50" itemprop="dateCreated datePublished" datetime="2025-09-01T08:52:46+08:00">2025-09-01</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.7k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="linux下监控网卡时可用的工具"><a href="#linux下监控网卡时可用的工具" class="headerlink" title="linux下监控网卡时可用的工具"></a>linux下监控网卡时可用的工具</h1><h2 id="ethtool"><a href="#ethtool" class="headerlink" title="ethtool"></a>ethtool</h2><p>真正实现都是在网卡驱动中，所以这个工具较为重要。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-i 显示网卡驱动的信息，名称，版本等</span><br><span class="line">-S 查看收发包统计情况</span><br><span class="line">-g/-G 查看或修改RingBuffer的大小</span><br><span class="line">-l/-L 查看或修改网卡队列数</span><br><span class="line">-c/-C 查看或修改硬中断合并策略</span><br></pre></td></tr></table></figure>
-
-<h2 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h2><p>包含了一些网卡统计信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RX packets：接收的总包数</span><br><span class="line">RX bytes：接收的字节数</span><br><span class="line">RX errors：表示总的收包的错误数量</span><br><span class="line">RX dropped：数据包已经进入了 Ring Buffer，但是由于其它原因导致的丢包</span><br><span class="line">RX overruns：表示了 fifo 的 overruns，这是由于 Ring Buffer不足导致的丢包</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/proc/net/dev 下有节点可以统计网卡工作数据</span><br><span class="line">/sys/class/net/eth0/statistics 下也包含了网卡的统计信息</span><br></pre></td></tr></table></figure>
-
-<h1 id="RingBuffer的监控与调优"><a href="#RingBuffer的监控与调优" class="headerlink" title="RingBuffer的监控与调优"></a>RingBuffer的监控与调优</h1><p>当数据帧到达网卡，第一站即为RingBuffer,网卡通过DMA机制将数据帧送到RingBuffer中。因此第一个要监控和调优的就是网卡的RingBuffer.</p>
-<p>ethtool -g eth0 可以查看Ringbuffer的大小。</p>
-<p>在Linux的整个网络栈中，RingBuffer起到一个任务的收发中转站的角色。对于接收过程来讲，网卡负责往RingBuffer中写入收到的数据帧，ksoftirqd内核线程负责从中取走处理。只要ksoftirqd线程工作的足够快，RingBuffer这个中转站就不会出现问题。但是我们设想一下，假如某一时刻，瞬间来了特别多的包，而ksoftirqd处理不过来了，会发生什么？这时RingBuffer可能瞬间就被填满了，后面再来的包网卡直接就会丢弃，不做任何处理！</p>
-<p>ethtool -S xx 或者 ifconfig xx都可以查看是否是因为这个原因丢包。</p>
-<p>rx_fifo_errors如果不为0的话（在 ifconfig 中体现为 overruns 指标增长），就表示有包因为RingBuffer装不下而被丢弃了。那么怎么解决这个问题呢？很自然首先我们想到的是，加大RingBuffer这个“中转仓库”的大小。通过ethtool就可以修改。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ethtool -G eth1 rx 4096 tx 4096</span><br></pre></td></tr></table></figure>
-
-<p>这样网卡会被分配更大一点的”中转站“，可以解决偶发的瞬时的丢包。不过这种方法有个小副作用，那就是排队的包过多会增加处理网络包的延时。所以另外一种解决思路更好，那就是让内核处理网络包的速度更快一些，而不是让网络包傻傻地在RingBuffer中排队。</p>
-<h1 id="硬中断监控与调优"><a href="#硬中断监控与调优" class="headerlink" title="硬中断监控与调优"></a>硬中断监控与调优</h1><p>在数据被接收到RingBuffer之后，下一个执行的就是硬中断的发起。</p>
-<h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2><p>硬中断的情况 cat &#x2F;proc&#x2F;interrupts</p>
-<p>对于收包情况，硬中断的总次数 不等于 Linux收包总数。因为，第一网卡可以设置中断合并，多个网络帧只可以发起一次中断，第二NAPI运行时 会关闭硬中断，通过poll来收包。</p>
-<h2 id="多队列网卡调优"><a href="#多队列网卡调优" class="headerlink" title="多队列网卡调优"></a>多队列网卡调优</h2><p>目前主流网卡基本都是支持多队列的，可以通过将不同队列分为不同的CPU来处理，加快处理网络包的速度。（最为有用的一个优化手段）</p>
-<p>每一个队列都有一个中断号，可以独立向某个CPU核心发起硬中断请求，让CPU来<code>poll</code>包。通过将接收进来的包被放到不同的内存队列里，多个CPU就可以同时分别向不同的队列发起消费了。这个特性叫做RSS（Receive Side Scaling，接收端扩展）。通过<code>ethtool</code>工具可以查看网卡的队列情况。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -l eth0</span><br></pre></td></tr></table></figure>
-
-<p><strong>如果你想提高内核收包的能力，直接简单加大队列数就可以了，这比加大RingBuffer更为有用。因为加大RingBuffer只是给个更大的空间让网络帧能继续排队，而加大队列数则能让包更早地被内核处理。</strong><code>ethtool</code>修改队列数量方法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -L eth0 combined 32</span><br></pre></td></tr></table></figure>
-
-<h2 id="硬中断合并"><a href="#硬中断合并" class="headerlink" title="硬中断合并"></a>硬中断合并</h2><p>对于CPU来讲也是一样，CPU要做一件新的事情之前，要加载该进程的地址空间，load进程代码，读取进程数据，各级别cache要慢慢热身。因此如果能适当降低中断的频率，多攒几个包一起发出中断，对提升CPU的工作效率是有帮助的。所以，网卡允许我们对硬中断进行合并。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ethtool -c eth0</span><br><span class="line"></span><br><span class="line">Adaptive RX: 自适应中断合并，网卡驱动自己判断啥时候该合并啥时候不合并</span><br><span class="line">rx-usecs：当过这么长时间过后，一个RX interrupt就会被产生</span><br><span class="line">rx-frames：当累计接收到这么多个帧后，一个RX interrupt就会被产生</span><br><span class="line"></span><br><span class="line">ethtool -C eth0 adaptive-rx on可以直接修改。</span><br></pre></td></tr></table></figure>
-
-<h1 id="软中断监控与调优"><a href="#软中断监控与调优" class="headerlink" title="软中断监控与调优"></a>软中断监控与调优</h1><p>在硬中断之后，再接下来的处理过程就是ksoftirqd内核线程中处理的软中断了。之前我们说过，软中断和它对应的硬中断是在同一个核心上处理的。因此，前面硬中断分散到多核上处理的时候，软中断的优化其实也就跟着做了，也会被多核处理。不过软中断也还有自己的可优化选项。</p>
-<h2 id="监控设置"><a href="#监控设置" class="headerlink" title="监控设置"></a>监控设置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/softirqs 可以查看软中断信息</span><br><span class="line">cat /proc/sys/net/core/netdev_budget 内核参数 </span><br></pre></td></tr></table></figure>
-
-<p>这个的意思说的是，ksoftirqd一次最多处理300个包，处理够了就会把CPU主动让出来，以便Linux上其它的任务可以得到处理。那么假如说，我们现在就是想提高内核处理网络包的效率。那就可以让ksoftirqd进程多干一会儿网络包的接收，再让出CPU。至于怎么提高，直接修改不这个参数的值就好了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w net.core.netdev_budget=600</span><br><span class="line">（static struct ctl_table xxx注册后 就可以通过 sysctl -w xxx 来赋值）</span><br></pre></td></tr></table></figure>
-
-<p>如果要保证重启仍然生效，需要将这个配置写到&#x2F;etc&#x2F;sysctl.conf</p>
-<h2 id="软中断GRO合并"><a href="#软中断GRO合并" class="headerlink" title="软中断GRO合并"></a>软中断GRO合并</h2><p>GRO和硬中断合并的思想很类似，不过阶段不同。硬中断合并是在中断发起之前，而GRO已经到了软中断上下文中了。</p>
-<p>如果应用中是大文件的传输，大部分包都是一段数据，不用GRO的话，会每次都将一个小包传送到协议栈（IP接收函数、TCP接收）函数中进行处理。开启GRO的话，Linux就会智能进行包的合并，之后将一个大包传给协议处理函数。这样CPU的效率也是就提高了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ethtool -k eth0 | grep generic-receive-offload</span><br><span class="line">generic-receive-offload: on</span><br><span class="line">ethtool -K eth0 gro on </span><br><span class="line">GRO说的仅仅只是包的接收阶段的优化方式，对于发送来说是GSO。</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux%20performance%20observability%20Tools.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux%20performance%20observability%20Tools.html" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-08-19 08:53:18" itemprop="dateCreated datePublished" datetime="2025-08-19T08:53:18+08:00">2025-08-19</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/cmake.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/cmake.html" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-08-15 11:50:50" itemprop="dateCreated datePublished" datetime="2025-08-15T11:50:50+08:00">2025-08-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-19 08:52:14" itemprop="dateModified" datetime="2025-08-19T08:52:14+08:00">2025-08-19</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>cmake</p>
-<p>官方教程地址 </p>
-<p><a target="_blank" rel="noopener" href="https://modern-cmake-cn.github.io/Modern-CMake-zh_CN/chapters/intro/running.html">https://modern-cmake-cn.github.io/Modern-CMake-zh_CN/chapters/intro/running.html</a></p>
-<p>生成Makefile的工具。需要攥写的是CMakeLists.txt。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">add_executable(one two.cpp three.h)     	生成一个one可执行文件</span><br><span class="line">add_library(one STATIC two.cpp three.h)		生成一个库</span><br><span class="line">STATIC,SHARED, 或者MODULE、BUILD_SHARED_LIBS</span><br><span class="line">target_include_directories(one PUBLIC include) 添加包含目录，public，任何链接到这个目标的库都必须包含这个目录，PRIVATE 只影响当前，不影响依赖。INTERFACE，之影响依赖。</span><br><span class="line">target_link_libraries(another PUBLIC one) 指定目标another。</span><br><span class="line">set(MY_VARIABLE &quot;value&quot;)  声明本地变量 变量名全部大写 变量值跟在后面 声明后，只能在它的作用域内访问这个变量。可以在 变量声明末尾加PARENT_SCOPE来将它的作用域置定为当前的上一级作用域。</span><br><span class="line"></span><br><span class="line">set(MY_CACHE_VARIABLE &quot;VALUE&quot; CACHE STRING &quot;&quot; FORCE)</span><br><span class="line">mark_as_advanced(MY_CACHE_VARIABLE)</span><br><span class="line">将缓存的变量作为临时的全局变量</span><br><span class="line"></span><br><span class="line">set(ENV&#123;variable_name&#125; value) 和 $ENV&#123;variable_name&#125; 设置/获取环境变量</span><br><span class="line">CmakeCache.txt是缓存。当运行Cmake构建目录的时候会创建它。</span><br><span class="line"></span><br><span class="line">set_property(TARGET TargetName PROPERTY CXX_STANDARD 11)     设置属性</span><br><span class="line">get_property(ResultVariable TARGET TargetName PROPERTY CXX_STANDARD)  获取属性</span><br><span class="line">             </span><br><span class="line">if(variable)</span><br><span class="line">else()</span><br><span class="line">endif()</span><br><span class="line"></span><br><span class="line">function()</span><br><span class="line">	xxx</span><br><span class="line">endfunction()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">记得在任何使用目标的地方都指定关键字PUBLIC PRIVATE INTERFACE，那么就不会有问题</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<p>debug命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--trace 选项能够打印出运行的 CMake 的每一行。</span><br><span class="line">CMake 3.7 添加了 --trace-source=&quot;filename&quot; 选项，这让你可以打印出你想看的特定文件运行时执行的每一行。</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/kbuild.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/kbuild.html" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-08-13 08:49:54" itemprop="dateCreated datePublished" datetime="2025-08-13T08:49:54+08:00">2025-08-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-15 11:50:37" itemprop="dateModified" datetime="2025-08-15T11:50:37+08:00">2025-08-15</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>326</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="kbuild"><a href="#kbuild" class="headerlink" title="kbuild"></a>kbuild</h1><h2 id="definition"><a href="#definition" class="headerlink" title="definition"></a>definition</h2><p>递归make。通过将源文件划分为不同的模块，组件。每个组件都由自己的makefile管理。开始构建时，顶级的makefile以正确的调用顺序调用每个组件的makefile。</p>
-<p>kbuild指向到不同类型的makefile</p>
-<ul>
-<li>makefile位于源代码目录的顶级makefile</li>
-<li>.config是内核配置文件。</li>
-<li>arch&#x2F;$(ARCH)&#x2F;Makefile 是架构的makefile，它用于补充顶级makefile。</li>
-<li>scripts&#x2F;Makefile.*描述所有的kbuild makefile通用规则</li>
-</ul>
-<p>Kbuild是linux的内核专用构建系统。依赖内核顶层Makefile和一堆构建脚本。单独拿出来几乎没意义。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux_pressure.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux_pressure.html" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-07-30 09:01:21" itemprop="dateCreated datePublished" datetime="2025-07-30T09:01:21+08:00">2025-07-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-31 21:26:36" itemprop="dateModified" datetime="2025-07-31T21:26:36+08:00">2025-07-31</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>901</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在看linux的代码的时候，看到了很多关于backlog的说法，进而了解到linux下的back pressure机制。故在此记录下。</p>
-<p>Applying Back Pressure When Overload，系统持续过载的处理手段，核心观点，限制队列长度。从而为队列中的任务维持系统高吞吐率和良好的响应时间。</p>
-<p>在linux内核中。backlog是一个在多个子系统（网络协议栈，加密模块，块设备子系统）中的通用概念。本质上表示 “任务积压队列”或者“待处理任务的缓冲区”。虽然出现在不同的子系统中，但核心思想类似，都是当资源暂时不可用&#x2F;系统无法立即处理即时任务时，将任务缓存在backlog中等待稍后处理。</p>
-<h1 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h1><p>backlog是一个临时存储结构，处理以下情况</p>
-<ul>
-<li>当前任务 不可立即完成，如资源竞争，锁冲突等。</li>
-<li>当前任务 执行上下文（中断、软中断）不适合执行较重操作</li>
-<li>有限处理能力暂时无法跟上任务到达速度</li>
-<li>为了更好地资源调度和并发控制。</li>
-</ul>
-<p>通常，backlog会配合异步处理机制（软中断，工作队列）一起使用。</p>
-<h1 id="crypto中的backlog"><a href="#crypto中的backlog" class="headerlink" title="crypto中的backlog"></a>crypto中的backlog</h1><p>crypto api 中的 backlog 更多是异步请求的概念。</p>
-<ul>
-<li>当当前算法驱动忙碌（无法立即处理请求），请求会被挂到backlog中。</li>
-<li>当驱动空闲时，通过crypt_dequeue_request将请求取出处理。</li>
-<li>一般结合软中断，tasklet，workqueue等延迟调度机制来实现。</li>
-</ul>
-<h1 id="通用机制"><a href="#通用机制" class="headerlink" title="通用机制"></a>通用机制</h1><p>backlog一般具备以下机制。</p>
-<table>
-<thead>
-<tr>
-<th>机制组成</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>队列结构</strong></td>
-<td>通常为链表，如 <code>list_head</code>，或环形缓冲区等</td>
-</tr>
-<tr>
-<td><strong>入队操作</strong></td>
-<td>当不能立即处理请求时，调用 <code>enqueue()</code> 将请求加入</td>
-</tr>
-<tr>
-<td><strong>出队处理</strong></td>
-<td>某个异步事件（如软中断、tasklet、workqueue）触发处理</td>
-</tr>
-<tr>
-<td><strong>并发控制</strong></td>
-<td>多用自旋锁或 RCU 保证并发安全</td>
-</tr>
-<tr>
-<td><strong>队列限流</strong></td>
-<td>使用最大队列长度（<code>max_backlog</code>）限制，防止 OOM 或 DoS</td>
-</tr>
-</tbody></table>
-<h1 id="为什么用？"><a href="#为什么用？" class="headerlink" title="为什么用？"></a>为什么用？</h1><ul>
-<li>性能优化： 在高并发场景下。避免阻塞上下文，提高整体吞吐。</li>
-<li>上下文切换控制：中断上下文不可以睡眠，将请求延时处理。</li>
-<li>资源争用时做缓冲：eg socket锁不可获取，不是立即失败，而是放入缓冲区。</li>
-<li>防止请求丢失：部分场景下避免因为临时资源短缺而丢失的请求。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/file_operations.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/file_operations.html" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-07-29 08:28:25" itemprop="dateCreated datePublished" datetime="2025-07-29T08:28:25+08:00">2025-07-29</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/os_lock.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="paopao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/os_lock.html" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-07-22 08:24:04" itemprop="dateCreated datePublished" datetime="2025-07-22T08:24:04+08:00">2025-07-22</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux_irq.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1079,7 +276,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/linux_irq.html" class="post-title-link" itemprop="url">未命名</a>
+          <a href="/linux_irq.html" class="post-title-link" itemprop="url">Linux irq</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1090,14 +287,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-07-10 09:21:11" itemprop="dateCreated datePublished" datetime="2025-07-10T09:21:11+08:00">2025-07-10</time>
+      <time title="创建时间：2025-09-09 14:52:38" itemprop="dateCreated datePublished" datetime="2025-09-09T14:52:38+08:00">2025-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-09 10:22:34" itemprop="dateModified" datetime="2025-09-09T10:22:34+08:00">2025-09-09</time>
+      <time title="修改时间：2025-09-29 08:43:20" itemprop="dateModified" datetime="2025-09-29T08:43:20+08:00">2025-09-29</time>
     </span>
 
   
@@ -1260,6 +457,843 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux_network_youhua.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux_network_youhua.html" class="post-title-link" itemprop="url">Linux network optimization</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-09-09 14:52:38" itemprop="dateCreated datePublished" datetime="2025-09-09T14:52:38+08:00">2025-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-29 08:44:32" itemprop="dateModified" datetime="2025-09-29T08:44:32+08:00">2025-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="linux下监控网卡时可用的工具"><a href="#linux下监控网卡时可用的工具" class="headerlink" title="linux下监控网卡时可用的工具"></a>linux下监控网卡时可用的工具</h1><h2 id="ethtool"><a href="#ethtool" class="headerlink" title="ethtool"></a>ethtool</h2><p>真正实现都是在网卡驱动中，所以这个工具较为重要。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-i 显示网卡驱动的信息，名称，版本等</span><br><span class="line">-S 查看收发包统计情况</span><br><span class="line">-g/-G 查看或修改RingBuffer的大小</span><br><span class="line">-l/-L 查看或修改网卡队列数</span><br><span class="line">-c/-C 查看或修改硬中断合并策略</span><br></pre></td></tr></table></figure>
+
+<h2 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h2><p>包含了一些网卡统计信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RX packets：接收的总包数</span><br><span class="line">RX bytes：接收的字节数</span><br><span class="line">RX errors：表示总的收包的错误数量</span><br><span class="line">RX dropped：数据包已经进入了 Ring Buffer，但是由于其它原因导致的丢包</span><br><span class="line">RX overruns：表示了 fifo 的 overruns，这是由于 Ring Buffer不足导致的丢包</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/proc/net/dev 下有节点可以统计网卡工作数据</span><br><span class="line">/sys/class/net/eth0/statistics 下也包含了网卡的统计信息</span><br></pre></td></tr></table></figure>
+
+<h1 id="RingBuffer的监控与调优"><a href="#RingBuffer的监控与调优" class="headerlink" title="RingBuffer的监控与调优"></a>RingBuffer的监控与调优</h1><p>当数据帧到达网卡，第一站即为RingBuffer,网卡通过DMA机制将数据帧送到RingBuffer中。因此第一个要监控和调优的就是网卡的RingBuffer.</p>
+<p>ethtool -g eth0 可以查看Ringbuffer的大小。</p>
+<p>在Linux的整个网络栈中，RingBuffer起到一个任务的收发中转站的角色。对于接收过程来讲，网卡负责往RingBuffer中写入收到的数据帧，ksoftirqd内核线程负责从中取走处理。只要ksoftirqd线程工作的足够快，RingBuffer这个中转站就不会出现问题。但是我们设想一下，假如某一时刻，瞬间来了特别多的包，而ksoftirqd处理不过来了，会发生什么？这时RingBuffer可能瞬间就被填满了，后面再来的包网卡直接就会丢弃，不做任何处理！</p>
+<p>ethtool -S xx 或者 ifconfig xx都可以查看是否是因为这个原因丢包。</p>
+<p>rx_fifo_errors如果不为0的话（在 ifconfig 中体现为 overruns 指标增长），就表示有包因为RingBuffer装不下而被丢弃了。那么怎么解决这个问题呢？很自然首先我们想到的是，加大RingBuffer这个“中转仓库”的大小。通过ethtool就可以修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ethtool -G eth1 rx 4096 tx 4096</span><br></pre></td></tr></table></figure>
+
+<p>这样网卡会被分配更大一点的”中转站“，可以解决偶发的瞬时的丢包。不过这种方法有个小副作用，那就是排队的包过多会增加处理网络包的延时。所以另外一种解决思路更好，那就是让内核处理网络包的速度更快一些，而不是让网络包傻傻地在RingBuffer中排队。</p>
+<h1 id="硬中断监控与调优"><a href="#硬中断监控与调优" class="headerlink" title="硬中断监控与调优"></a>硬中断监控与调优</h1><p>在数据被接收到RingBuffer之后，下一个执行的就是硬中断的发起。</p>
+<h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2><p>硬中断的情况 cat &#x2F;proc&#x2F;interrupts</p>
+<p>对于收包情况，硬中断的总次数 不等于 Linux收包总数。因为，第一网卡可以设置中断合并，多个网络帧只可以发起一次中断，第二NAPI运行时 会关闭硬中断，通过poll来收包。</p>
+<h2 id="多队列网卡调优"><a href="#多队列网卡调优" class="headerlink" title="多队列网卡调优"></a>多队列网卡调优</h2><p>目前主流网卡基本都是支持多队列的，可以通过将不同队列分为不同的CPU来处理，加快处理网络包的速度。（最为有用的一个优化手段）</p>
+<p>每一个队列都有一个中断号，可以独立向某个CPU核心发起硬中断请求，让CPU来<code>poll</code>包。通过将接收进来的包被放到不同的内存队列里，多个CPU就可以同时分别向不同的队列发起消费了。这个特性叫做RSS（Receive Side Scaling，接收端扩展）。通过<code>ethtool</code>工具可以查看网卡的队列情况。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -l eth0</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果你想提高内核收包的能力，直接简单加大队列数就可以了，这比加大RingBuffer更为有用。因为加大RingBuffer只是给个更大的空间让网络帧能继续排队，而加大队列数则能让包更早地被内核处理。</strong><code>ethtool</code>修改队列数量方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -L eth0 combined 32</span><br></pre></td></tr></table></figure>
+
+<h2 id="硬中断合并"><a href="#硬中断合并" class="headerlink" title="硬中断合并"></a>硬中断合并</h2><p>对于CPU来讲也是一样，CPU要做一件新的事情之前，要加载该进程的地址空间，load进程代码，读取进程数据，各级别cache要慢慢热身。因此如果能适当降低中断的频率，多攒几个包一起发出中断，对提升CPU的工作效率是有帮助的。所以，网卡允许我们对硬中断进行合并。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ethtool -c eth0</span><br><span class="line"></span><br><span class="line">Adaptive RX: 自适应中断合并，网卡驱动自己判断啥时候该合并啥时候不合并</span><br><span class="line">rx-usecs：当过这么长时间过后，一个RX interrupt就会被产生</span><br><span class="line">rx-frames：当累计接收到这么多个帧后，一个RX interrupt就会被产生</span><br><span class="line"></span><br><span class="line">ethtool -C eth0 adaptive-rx on可以直接修改。</span><br></pre></td></tr></table></figure>
+
+<h1 id="软中断监控与调优"><a href="#软中断监控与调优" class="headerlink" title="软中断监控与调优"></a>软中断监控与调优</h1><p>在硬中断之后，再接下来的处理过程就是ksoftirqd内核线程中处理的软中断了。之前我们说过，软中断和它对应的硬中断是在同一个核心上处理的。因此，前面硬中断分散到多核上处理的时候，软中断的优化其实也就跟着做了，也会被多核处理。不过软中断也还有自己的可优化选项。</p>
+<h2 id="监控设置"><a href="#监控设置" class="headerlink" title="监控设置"></a>监控设置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/softirqs 可以查看软中断信息</span><br><span class="line">cat /proc/sys/net/core/netdev_budget 内核参数 </span><br></pre></td></tr></table></figure>
+
+<p>这个的意思说的是，ksoftirqd一次最多处理300个包，处理够了就会把CPU主动让出来，以便Linux上其它的任务可以得到处理。那么假如说，我们现在就是想提高内核处理网络包的效率。那就可以让ksoftirqd进程多干一会儿网络包的接收，再让出CPU。至于怎么提高，直接修改不这个参数的值就好了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w net.core.netdev_budget=600</span><br><span class="line">（static struct ctl_table xxx注册后 就可以通过 sysctl -w xxx 来赋值）</span><br></pre></td></tr></table></figure>
+
+<p>如果要保证重启仍然生效，需要将这个配置写到&#x2F;etc&#x2F;sysctl.conf</p>
+<h2 id="软中断GRO合并"><a href="#软中断GRO合并" class="headerlink" title="软中断GRO合并"></a>软中断GRO合并</h2><p>GRO和硬中断合并的思想很类似，不过阶段不同。硬中断合并是在中断发起之前，而GRO已经到了软中断上下文中了。</p>
+<p>如果应用中是大文件的传输，大部分包都是一段数据，不用GRO的话，会每次都将一个小包传送到协议栈（IP接收函数、TCP接收）函数中进行处理。开启GRO的话，Linux就会智能进行包的合并，之后将一个大包传给协议处理函数。这样CPU的效率也是就提高了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ethtool -k eth0 | grep generic-receive-offload</span><br><span class="line">generic-receive-offload: on</span><br><span class="line">ethtool -K eth0 gro on </span><br><span class="line">GRO说的仅仅只是包的接收阶段的优化方式，对于发送来说是GSO。</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/fpu.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/fpu.html" class="post-title-link" itemprop="url">MCU FPU</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-09-02 14:52:38" itemprop="dateCreated datePublished" datetime="2025-09-02T14:52:38+08:00">2025-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-29 08:43:48" itemprop="dateModified" datetime="2025-09-29T08:43:48+08:00">2025-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>266</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>大多数MCU都没有FPU 硬件浮点单元。如果用float double运算，编译器会调用软件库函数来模拟浮点加减乘除。需要分解成一系列整数操作，移位，比较，循环，效率非常低。可能要几十到上百条指令。</p>
+<p>定点运算用的就是普通的整数运算单元。MCU内核天然支持整数加减乘除移位，一条指令就可以完成。</p>
+<p><strong>CPU如何进行浮点运算</strong></p>
+<p>IEEE754标准。浮点数分为 符号位，指数，尾数部分。没有FPU的MCU运算过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">取出指数和尾数。</span><br><span class="line">对齐指数（移位操作）。</span><br><span class="line">尾数执行整数加减/乘除。</span><br><span class="line">结果归一化（调整指数和尾数）。</span><br><span class="line">处理溢出/舍入/NaN/无穷大等特殊情况。</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/cmake.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/cmake.html" class="post-title-link" itemprop="url">cmake</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-19 14:52:38" itemprop="dateCreated datePublished" datetime="2025-08-19T14:52:38+08:00">2025-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-29 08:45:38" itemprop="dateModified" datetime="2025-09-29T08:45:38+08:00">2025-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>cmake</p>
+<p>官方教程地址 </p>
+<p><a target="_blank" rel="noopener" href="https://modern-cmake-cn.github.io/Modern-CMake-zh_CN/chapters/intro/running.html">https://modern-cmake-cn.github.io/Modern-CMake-zh_CN/chapters/intro/running.html</a></p>
+<p>生成Makefile的工具。需要攥写的是CMakeLists.txt。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">add_executable(one two.cpp three.h)     	生成一个one可执行文件</span><br><span class="line">add_library(one STATIC two.cpp three.h)		生成一个库</span><br><span class="line">STATIC,SHARED, 或者MODULE、BUILD_SHARED_LIBS</span><br><span class="line">target_include_directories(one PUBLIC include) 添加包含目录，public，任何链接到这个目标的库都必须包含这个目录，PRIVATE 只影响当前，不影响依赖。INTERFACE，之影响依赖。</span><br><span class="line">target_link_libraries(another PUBLIC one) 指定目标another。</span><br><span class="line">set(MY_VARIABLE &quot;value&quot;)  声明本地变量 变量名全部大写 变量值跟在后面 声明后，只能在它的作用域内访问这个变量。可以在 变量声明末尾加PARENT_SCOPE来将它的作用域置定为当前的上一级作用域。</span><br><span class="line"></span><br><span class="line">set(MY_CACHE_VARIABLE &quot;VALUE&quot; CACHE STRING &quot;&quot; FORCE)</span><br><span class="line">mark_as_advanced(MY_CACHE_VARIABLE)</span><br><span class="line">将缓存的变量作为临时的全局变量</span><br><span class="line"></span><br><span class="line">set(ENV&#123;variable_name&#125; value) 和 $ENV&#123;variable_name&#125; 设置/获取环境变量</span><br><span class="line">CmakeCache.txt是缓存。当运行Cmake构建目录的时候会创建它。</span><br><span class="line"></span><br><span class="line">set_property(TARGET TargetName PROPERTY CXX_STANDARD 11)     设置属性</span><br><span class="line">get_property(ResultVariable TARGET TargetName PROPERTY CXX_STANDARD)  获取属性</span><br><span class="line">             </span><br><span class="line">if(variable)</span><br><span class="line">else()</span><br><span class="line">endif()</span><br><span class="line"></span><br><span class="line">function()</span><br><span class="line">	xxx</span><br><span class="line">endfunction()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">记得在任何使用目标的地方都指定关键字PUBLIC PRIVATE INTERFACE，那么就不会有问题</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>debug命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--trace 选项能够打印出运行的 CMake 的每一行。</span><br><span class="line">CMake 3.7 添加了 --trace-source=&quot;filename&quot; 选项，这让你可以打印出你想看的特定文件运行时执行的每一行。</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/kbuild.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/kbuild.html" class="post-title-link" itemprop="url">kbuild</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-19 14:52:38" itemprop="dateCreated datePublished" datetime="2025-08-19T14:52:38+08:00">2025-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-29 08:45:16" itemprop="dateModified" datetime="2025-09-29T08:45:16+08:00">2025-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>326</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="kbuild"><a href="#kbuild" class="headerlink" title="kbuild"></a>kbuild</h1><h2 id="definition"><a href="#definition" class="headerlink" title="definition"></a>definition</h2><p>递归make。通过将源文件划分为不同的模块，组件。每个组件都由自己的makefile管理。开始构建时，顶级的makefile以正确的调用顺序调用每个组件的makefile。</p>
+<p>kbuild指向到不同类型的makefile</p>
+<ul>
+<li>makefile位于源代码目录的顶级makefile</li>
+<li>.config是内核配置文件。</li>
+<li>arch&#x2F;$(ARCH)&#x2F;Makefile 是架构的makefile，它用于补充顶级makefile。</li>
+<li>scripts&#x2F;Makefile.*描述所有的kbuild makefile通用规则</li>
+</ul>
+<p>Kbuild是linux的内核专用构建系统。依赖内核顶层Makefile和一堆构建脚本。单独拿出来几乎没意义。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux%20performance%20observability%20Tools.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux%20performance%20observability%20Tools.html" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-19 08:53:18" itemprop="dateCreated datePublished" datetime="2025-08-19T08:53:18+08:00">2025-08-19</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>0</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux_platform.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux_platform.html" class="post-title-link" itemprop="url">linux_platform</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-07-31 14:52:38" itemprop="dateCreated datePublished" datetime="2025-07-31T14:52:38+08:00">2025-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-29 08:47:06" itemprop="dateModified" datetime="2025-09-29T08:47:06+08:00">2025-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>占位</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/linux_pressure.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux_pressure.html" class="post-title-link" itemprop="url">linux_pressure</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-07-31 14:52:38" itemprop="dateCreated datePublished" datetime="2025-07-31T14:52:38+08:00">2025-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-29 08:45:59" itemprop="dateModified" datetime="2025-09-29T08:45:59+08:00">2025-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>901</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在看linux的代码的时候，看到了很多关于backlog的说法，进而了解到linux下的back pressure机制。故在此记录下。</p>
+<p>Applying Back Pressure When Overload，系统持续过载的处理手段，核心观点，限制队列长度。从而为队列中的任务维持系统高吞吐率和良好的响应时间。</p>
+<p>在linux内核中。backlog是一个在多个子系统（网络协议栈，加密模块，块设备子系统）中的通用概念。本质上表示 “任务积压队列”或者“待处理任务的缓冲区”。虽然出现在不同的子系统中，但核心思想类似，都是当资源暂时不可用&#x2F;系统无法立即处理即时任务时，将任务缓存在backlog中等待稍后处理。</p>
+<h1 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h1><p>backlog是一个临时存储结构，处理以下情况</p>
+<ul>
+<li>当前任务 不可立即完成，如资源竞争，锁冲突等。</li>
+<li>当前任务 执行上下文（中断、软中断）不适合执行较重操作</li>
+<li>有限处理能力暂时无法跟上任务到达速度</li>
+<li>为了更好地资源调度和并发控制。</li>
+</ul>
+<p>通常，backlog会配合异步处理机制（软中断，工作队列）一起使用。</p>
+<h1 id="crypto中的backlog"><a href="#crypto中的backlog" class="headerlink" title="crypto中的backlog"></a>crypto中的backlog</h1><p>crypto api 中的 backlog 更多是异步请求的概念。</p>
+<ul>
+<li>当当前算法驱动忙碌（无法立即处理请求），请求会被挂到backlog中。</li>
+<li>当驱动空闲时，通过crypt_dequeue_request将请求取出处理。</li>
+<li>一般结合软中断，tasklet，workqueue等延迟调度机制来实现。</li>
+</ul>
+<h1 id="通用机制"><a href="#通用机制" class="headerlink" title="通用机制"></a>通用机制</h1><p>backlog一般具备以下机制。</p>
+<table>
+<thead>
+<tr>
+<th>机制组成</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>队列结构</strong></td>
+<td>通常为链表，如 <code>list_head</code>，或环形缓冲区等</td>
+</tr>
+<tr>
+<td><strong>入队操作</strong></td>
+<td>当不能立即处理请求时，调用 <code>enqueue()</code> 将请求加入</td>
+</tr>
+<tr>
+<td><strong>出队处理</strong></td>
+<td>某个异步事件（如软中断、tasklet、workqueue）触发处理</td>
+</tr>
+<tr>
+<td><strong>并发控制</strong></td>
+<td>多用自旋锁或 RCU 保证并发安全</td>
+</tr>
+<tr>
+<td><strong>队列限流</strong></td>
+<td>使用最大队列长度（<code>max_backlog</code>）限制，防止 OOM 或 DoS</td>
+</tr>
+</tbody></table>
+<h1 id="为什么用？"><a href="#为什么用？" class="headerlink" title="为什么用？"></a>为什么用？</h1><ul>
+<li>性能优化： 在高并发场景下。避免阻塞上下文，提高整体吞吐。</li>
+<li>上下文切换控制：中断上下文不可以睡眠，将请求延时处理。</li>
+<li>资源争用时做缓冲：eg socket锁不可获取，不是立即失败，而是放入缓冲区。</li>
+<li>防止请求丢失：部分场景下避免因为临时资源短缺而丢失的请求。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://paopao41.github.io/file_operations.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="paopao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bubble's little record of knowledge">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/file_operations.html" class="post-title-link" itemprop="url">file_operations</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-07-29 14:52:38" itemprop="dateCreated datePublished" datetime="2025-07-29T14:52:38+08:00">2025-07-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-29 08:46:22" itemprop="dateModified" datetime="2025-09-29T08:46:22+08:00">2025-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>占位  </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1284,14 +1318,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">76k</span>
+    <span title="站点总字数">77k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:18</span>
+    <span title="站点阅读时长">2:20</span>
   </span>
 </div>
 <div class="busuanzi-count">

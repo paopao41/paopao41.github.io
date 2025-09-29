@@ -23,13 +23,13 @@
 
     <meta name="description" content="在看linux的代码的时候，看到了很多关于backlog的说法，进而了解到linux下的back pressure机制。故在此记录下。 Applying Back Pressure When Overload，系统持续过载的处理手段，核心观点，限制队列长度。从而为队列中的任务维持系统高吞吐率和良好的响应时间。 在linux内核中。backlog是一个在多个子系统（网络协议栈，加密模块，块设备子系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Bubble&#39;s little record of knowledge">
+<meta property="og:title" content="linux_pressure">
 <meta property="og:url" content="https://paopao41.github.io/linux_pressure.html">
 <meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
 <meta property="og:description" content="在看linux的代码的时候，看到了很多关于backlog的说法，进而了解到linux下的back pressure机制。故在此记录下。 Applying Back Pressure When Overload，系统持续过载的处理手段，核心观点，限制队列长度。从而为队列中的任务维持系统高吞吐率和良好的响应时间。 在linux内核中。backlog是一个在多个子系统（网络协议栈，加密模块，块设备子系统">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-07-30T01:01:21.105Z">
-<meta property="article:modified_time" content="2025-07-31T13:26:36.574Z">
+<meta property="article:published_time" content="2025-07-31T06:52:38.000Z">
+<meta property="article:modified_time" content="2025-09-29T00:45:59.644Z">
 <meta property="article:author" content="paopao">
 <meta name="twitter:card" content="summary">
 
@@ -38,10 +38,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/linux_pressure.html","path":"linux_pressure.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/linux_pressure.html","path":"linux_pressure.html","title":"linux_pressure"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title> | Bubble's little record of knowledge</title>
+<title>linux_pressure | Bubble's little record of knowledge</title>
   
 
 
@@ -180,12 +180,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Bubble's little record of knowledge">
+      <meta itemprop="name" content="linux_pressure | Bubble's little record of knowledge">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          linux_pressure
         </h1>
 
         <div class="post-meta-container">
@@ -196,14 +196,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-07-30 09:01:21" itemprop="dateCreated datePublished" datetime="2025-07-30T09:01:21+08:00">2025-07-30</time>
+      <time title="创建时间：2025-07-31 14:52:38" itemprop="dateCreated datePublished" datetime="2025-07-31T14:52:38+08:00">2025-07-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-31 21:26:36" itemprop="dateModified" datetime="2025-07-31T21:26:36+08:00">2025-07-31</time>
+      <time title="修改时间：2025-09-29 08:45:59" itemprop="dateModified" datetime="2025-09-29T08:45:59+08:00">2025-09-29</time>
     </span>
 
   
@@ -302,13 +302,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/file_operations.html" rel="prev" title="">
-                  <i class="fa fa-angle-left"></i> 
+                <a href="/file_operations.html" rel="prev" title="file_operations">
+                  <i class="fa fa-angle-left"></i> file_operations
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/kbuild.html" rel="next" title="">
-                   <i class="fa fa-angle-right"></i>
+                <a href="/linux_platform.html" rel="next" title="linux_platform">
+                  linux_platform <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -342,14 +342,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">76k</span>
+    <span title="站点总字数">77k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:18</span>
+    <span title="站点阅读时长">2:20</span>
   </span>
 </div>
 <div class="busuanzi-count">

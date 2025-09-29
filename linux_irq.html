@@ -23,7 +23,7 @@
 
     <meta name="description" content="linux irqGIC控制器Generic Interrupt Controller。ARM提供的通用中断控制器。接受硬件中断信号，并经过一定处理后，分发给对应的CPU进行处理。分为V1-V4， GICV2GIC是联系外设中断和CPU的桥梁，也是各CPU之间中断互联的通道，负责检测，管理，分发中断。  123456主要负责使能&#x2F;禁止中断。把中断分组到group0还是group1，0作为安全模式使">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Bubble&#39;s little record of knowledge">
+<meta property="og:title" content="Linux irq">
 <meta property="og:url" content="https://paopao41.github.io/linux_irq.html">
 <meta property="og:site_name" content="Bubble&#39;s little record of knowledge">
 <meta property="og:description" content="linux irqGIC控制器Generic Interrupt Controller。ARM提供的通用中断控制器。接受硬件中断信号，并经过一定处理后，分发给对应的CPU进行处理。分为V1-V4， GICV2GIC是联系外设中断和CPU的桥梁，也是各CPU之间中断互联的通道，负责检测，管理，分发中断。  123456主要负责使能&#x2F;禁止中断。把中断分组到group0还是group1，0作为安全模式使">
@@ -38,8 +38,8 @@
 <meta property="og:image" content="https://paopao41.github.io/image/image-20250909094325638.png">
 <meta property="og:image" content="https://paopao41.github.io/image/image-20250909102119846.png">
 <meta property="og:image" content="https://paopao41.github.io/image/image-20250908161618848.png">
-<meta property="article:published_time" content="2025-07-10T01:21:11.477Z">
-<meta property="article:modified_time" content="2025-09-09T02:22:34.133Z">
+<meta property="article:published_time" content="2025-09-09T06:52:38.000Z">
+<meta property="article:modified_time" content="2025-09-29T00:43:20.325Z">
 <meta property="article:author" content="paopao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://paopao41.github.io/image/image-20250714085007704.png">
@@ -49,10 +49,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/linux_irq.html","path":"linux_irq.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://paopao41.github.io/linux_irq.html","path":"linux_irq.html","title":"Linux irq"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title> | Bubble's little record of knowledge</title>
+<title>Linux irq | Bubble's little record of knowledge</title>
   
 
 
@@ -191,12 +191,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Bubble's little record of knowledge">
+      <meta itemprop="name" content="Linux irq | Bubble's little record of knowledge">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          Linux irq
         </h1>
 
         <div class="post-meta-container">
@@ -207,14 +207,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-07-10 09:21:11" itemprop="dateCreated datePublished" datetime="2025-07-10T09:21:11+08:00">2025-07-10</time>
+      <time title="创建时间：2025-09-09 14:52:38" itemprop="dateCreated datePublished" datetime="2025-09-09T14:52:38+08:00">2025-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-09 10:22:34" itemprop="dateModified" datetime="2025-09-09T10:22:34+08:00">2025-09-09</time>
+      <time title="修改时间：2025-09-29 08:43:20" itemprop="dateModified" datetime="2025-09-29T08:43:20+08:00">2025-09-29</time>
     </span>
 
   
@@ -378,13 +378,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/algorithm.html" rel="prev" title="">
-                  <i class="fa fa-angle-left"></i> 
+                <a href="/linux_network_youhua.html" rel="prev" title="Linux network optimization">
+                  <i class="fa fa-angle-left"></i> Linux network optimization
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/os_lock.html" rel="next" title="">
-                   <i class="fa fa-angle-right"></i>
+                <a href="/real_time_os.html" rel="next" title="real time OS">
+                  real time OS <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -418,14 +418,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">76k</span>
+    <span title="站点总字数">77k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:18</span>
+    <span title="站点阅读时长">2:20</span>
   </span>
 </div>
 <div class="busuanzi-count">
